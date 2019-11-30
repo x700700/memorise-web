@@ -6,6 +6,16 @@
         display: flex;
         justify-content: space-between;
 
+        @media (min-width: 600px) {
+            width: 320px;
+            margin: 0 auto;
+        }
+
+        button {
+            background-color: inherit;
+            border: none;
+            outline: none;
+        }
         i {
             font-size: 48px;
         }
