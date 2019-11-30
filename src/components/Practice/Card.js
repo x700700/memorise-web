@@ -16,7 +16,7 @@ const Card = forwardRef(({ q, a }, ref) => {
 
     useImperativeHandle(ref, () => ({
         rotate() {
-            console.warn(`click ==> showFront=[${showFront}] - showBack=[${showBack}]`);
+            // console.warn(`click ==> showFront=[${showFront}] - showBack=[${showBack}]`);
             gameCardInRotate = true;
             if (showFront) setShowFront(false);
             if (showBack) setShowBack(false);
@@ -24,32 +24,30 @@ const Card = forwardRef(({ q, a }, ref) => {
     }));
 
     const setNextCard = () => {
-        console.warn('anime ended ', gameCardInSwitch, gameCardInFade);
         if (gameCardInSwitch && !gameCardInFade) {
-            console.warn('set in fade')
+            console.warn('in switch')
             gameCardInFade = true;
             setInFade(true);
             setShowFront(true);
             setShowBack(false);
-            console.warn('nextQQQQQ = ', nextQ);
             setCurrQ(nextQ);
             setCurrA(nextA);
 
         } else if (gameCardInFade) {
-            console.warn('set out fade')
+            console.warn('in fade')
             gameCardInSwitch = false;
             gameCardInFade = false;
             setInFade(false);
         } else {
+            console.warn('in what?')
             gameCardInSwitch = false;
         }
     };
 
     useEffect(() => {
-        if (true) {
-            console.warn('card replaced - ', q, a);
-            setNextQ(q);
-            setNextA(a);
+        setNextQ(q);
+        setNextA(a);
+        if (currQ !== q) { // If it's not the 1st mount then it's a card switch
             gameCardInSwitch = true;
         }
     }, [q, a]);
@@ -62,7 +60,6 @@ const Card = forwardRef(({ q, a }, ref) => {
     }, [gameCardInSwitch, gameCardInFade, nextQ, nextA]);
 
     useEffect(() => {
-        console.warn('******* loading')
         document.getElementById("game-card-front").addEventListener("transitionend", () => {
             if (gameCardInRotate) {
                 gameCardInRotate = false;
