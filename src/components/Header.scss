@@ -1,7 +1,9 @@
+@import "../common/colors";
+
 .header {
     width: 100%;
-    background-color: darkgrey;
-    color: white;
+    background-color: $grey1;
+    color: $grey6;
     font-weight: 600;
 
     .header-row {
