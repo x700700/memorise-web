@@ -6,18 +6,18 @@ let inSwitch = false;
 let switchQ, switchA;
 
 const Card = forwardRef(({ q, a }, ref) => {
-    const [front, setFront] = useState(true);
-    const [back, setBack] = useState(false);
     const [currQ, setCurrQ] = useState(q);
     const [currA, setCurrA] = useState(a);
+    const [showFront, setShowFront] = useState(true);
+    const [showBack, setShowBack] = useState(false);
     const [inFade, setInFade] = useState(false);
 
     useImperativeHandle(ref, () => ({
         rotate() {
-            // console.warn(`click ==> front=[${front}] - back=[${back}]`);
+            // console.warn(`click ==> showFront=[${showFront}] - showBack=[${showBack}]`);
             inRotate = true;
-            if (front) setFront(false);
-            if (back) setBack(false);
+            if (showFront) setShowFront(false);
+            if (showBack) setShowBack(false);
         },
         switch(q, a) {
             console.warn('card replaced');
@@ -37,21 +37,21 @@ const Card = forwardRef(({ q, a }, ref) => {
         document.getElementById("game-card-front").addEventListener("transitionend", () => {
             if (inRotate) {
                 inRotate = false;
-                setBack(true);
+                setShowBack(true);
             }
         });
         document.getElementById("game-card-back").addEventListener("transitionend", () => {
             if (inRotate) {
                 inRotate = false;
-                setFront(true);
+                setShowFront(true);
             }
         });
         document.getElementById("game-card-in").addEventListener("transitionend", () => {
             if (inSwitch && !inFade) {
                 console.warn('set in fade')
                 setInFade(true);
-                setFront(true);
-                setBack(false);
+                setShowFront(true);
+                setShowBack(false);
                 setCurrQ(switchQ);
                 setCurrA(switchA);
             } else if (inFade) {
@@ -65,10 +65,10 @@ const Card = forwardRef(({ q, a }, ref) => {
     return (
         <div className="card-container">
             <div className="card-placeholder">
-                <div id="game-card-front" className={`card ${!front ? 'card-hide' : ''} ${inSwitch ? 'no-rotate-anim' : ''}`}>
+                <div id="game-card-front" className={`card ${!showFront ? 'card-hide' : ''} ${inSwitch ? 'no-rotate-anim' : ''}`}>
                     <p>{currQ}</p>
                 </div>
-                <div id="game-card-back" className={`card card-back ${!back ? 'card-hide' : ''} ${inSwitch ? 'no-rotate-anim' : ''}`}>
+                <div id="game-card-back" className={`card card-back ${!showBack ? 'card-hide' : ''} ${inSwitch ? 'no-rotate-anim' : ''}`}>
                     <p>{currA}</p>
                 </div>
             </div>
