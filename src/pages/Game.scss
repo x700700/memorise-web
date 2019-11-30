@@ -1,11 +1,19 @@
 .game {
     text-align: center;
 
-    .rotate-icon {
-        margin-top: 1rem;
+    .game-buttons {
+        margin: 1rem .5rem 0 .5rem;
+        display: flex;
+        justify-content: space-between;
 
         i {
             font-size: 48px;
+        }
+        .btn-good i {
+            color: mediumblue;
+        }
+        .btn-bad i {
+            color: darkred;
         }
     }
 }
