@@ -60,7 +60,7 @@ const Card = forwardRef(({ q, a }, ref) => {
                 setInFade(false);
             }
         });
-    });
+    }, [inFade]);
 
     return (
         <div className="card-container">
