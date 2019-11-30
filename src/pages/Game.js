@@ -28,7 +28,6 @@ const Game = (props) => {
 
     const replaceCard = () => {
         const next = cardNum < game.length - 1 ? cardNum + 1 : 0;
-        refGame.current.switch(game[next].q, game[next].a);
         setCardNum(next);
     };
     const respGood = () => {
@@ -42,7 +41,6 @@ const Game = (props) => {
 
     const currQ = game[cardNum].q;
     const currA = game[cardNum].a;
-
     return (
         <div className="game">
             <Card ref={refGame} q={currQ} a={currA}/>
