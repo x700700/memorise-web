@@ -2,7 +2,6 @@ import React, { forwardRef, useImperativeHandle, useState, useEffect } from 'rea
 import './Card.scss';
 
 let gameCardInRotate = false;
-let gameCardInFade = false;
 
 const Card = forwardRef(({ q, a }, ref) => {
     const [currQ, setCurrQ] = useState(q);
@@ -24,23 +23,15 @@ const Card = forwardRef(({ q, a }, ref) => {
     }));
 
     const setNextCard = () => {
-        if (inSwitch && !gameCardInFade) {
-            console.warn('in switch')
-            gameCardInFade = true;
+        if (inSwitch && !inFade) {
             setInFade(true);
             setShowFront(true);
             setShowBack(false);
             setCurrQ(nextQ);
             setCurrA(nextA);
-
-        } else if (gameCardInFade) {
-            console.warn('in fade')
+        } else if (inFade) {
             setInSwitch(false);
-            gameCardInFade = false;
             setInFade(false);
-        } else {
-            console.warn('in what?')
-            setInSwitch(false);
         }
     };
 
@@ -57,7 +48,7 @@ const Card = forwardRef(({ q, a }, ref) => {
         return () => {
             document.getElementById("game-card-in").removeEventListener("transitionend", setNextCard);
         }
-    }, [inSwitch, gameCardInFade, nextQ, nextA]);
+    }, [inSwitch, inFade, nextQ, nextA]);
 
     useEffect(() => {
         document.getElementById("game-card-front").addEventListener("transitionend", () => {
