@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.scss';
 
-function Header() {
+const Header = (props) => {
     return (
         <div className="header">
             <div className="header-row">
@@ -12,6 +12,6 @@ function Header() {
             </div>
         </div>
     );
-}
+};
 
 export default Header;

@@ -1,15 +1,32 @@
-import React from 'react';
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import './Card.scss';
 
-function Card(props) {
-    const { q } = props;
+const sideQ = 0;
+const sideA = 1;
+
+const Card = forwardRef((props, ref) => {
+    const { q, a } = props;
+    const [side, setSide] = useState(sideQ);
+
+    useImperativeHandle(ref, () => ({
+        rotate() {
+            setSide(side === sideQ ? sideA : sideQ);
+        }
+    }));
+
+
     return (
         <div className="card-container">
             <div className="card">
-                <p>{q}</p>
+                {side === sideQ &&
+                    <p>{q}</p>
+                }
+                {side === sideA &&
+                    <p>{a}</p>
+                }
             </div>
         </div>
     );
-}
+});
 
 export default Card;
