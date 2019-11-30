@@ -5,7 +5,7 @@
     display: flex;
     justify-content: center;
 
-    .card-placeholder {
+    .card-placeholder, .next-card-placeholder {
         width: 95%;
         height: 80vh;
         position: relative;
@@ -27,6 +27,19 @@
         .card-back {
             background-color: lightgoldenrodyellow;
         }
+    }
+    .next-card-placeholder {
+        position: absolute;
+        box-shadow: 4px 4px 14px 0px $grey4;
+        transform: translateX(-110%);
+        transition: transform 0.5s ease-in-out, opacity 0.3s linear;
+    }
+    .next-card-in {
+        transform: translateX(0);
+        // transition: transform 0s linear, opacity 0.3s ease-in-out;
+    }
+    .next-card-fade {
+        opacity: 0;
     }
 
     .card-hide {
