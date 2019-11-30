@@ -5,7 +5,7 @@ import Card from "../components/Practice/Card";
 function Game() {
     return (
         <div className="game">
-            <Card/>
+            <Card q="Many"/>
             <h1>Rotate</h1>
         </div>
     );

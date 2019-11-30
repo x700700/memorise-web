@@ -1,11 +1,12 @@
 import React from 'react';
 import './Card.scss';
 
-function Card() {
+function Card(props) {
+    const { q } = props;
     return (
         <div className="card-container">
             <div className="card">
-                <p>Question</p>
+                <p>{q}</p>
             </div>
         </div>
     );
