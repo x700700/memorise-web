@@ -48,13 +48,14 @@ const Card = forwardRef(({ q, a }, ref) => {
         });
         document.getElementById("game-card-in").addEventListener("transitionend", () => {
             if (inSwitch && !inFade) {
-                console.warn('=====> replacing values - ', q);
+                console.warn('set in fade')
                 setInFade(true);
                 setFront(true);
                 setBack(false);
                 setCurrQ(switchQ);
                 setCurrA(switchA);
             } else if (inFade) {
+                console.warn('set out fade')
                 inSwitch = false;
                 setInFade(false);
             }
@@ -64,10 +65,10 @@ const Card = forwardRef(({ q, a }, ref) => {
     return (
         <div className="card-container">
             <div className="card-placeholder">
-                <div id="game-card-front" className={`card ${!front ? 'card-hide' : ''}`}>
+                <div id="game-card-front" className={`card ${!front ? 'card-hide' : ''} ${inSwitch ? 'no-rotate-anim' : ''}`}>
                     <p>{currQ}</p>
                 </div>
-                <div id="game-card-back" className={`card card-back ${!back ? 'card-hide' : ''}`}>
+                <div id="game-card-back" className={`card card-back ${!back ? 'card-hide' : ''} ${inSwitch ? 'no-rotate-anim' : ''}`}>
                     <p>{currA}</p>
                 </div>
             </div>
