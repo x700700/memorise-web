@@ -2,7 +2,6 @@ import React, { forwardRef, useImperativeHandle, useState, useEffect } from 'rea
 import './Card.scss';
 
 let gameCardInRotate = false;
-let gameCardInSwitch = false;
 let gameCardInFade = false;
 
 const Card = forwardRef(({ q, a }, ref) => {
@@ -12,6 +11,7 @@ const Card = forwardRef(({ q, a }, ref) => {
     const [nextA, setNextA] = useState(a);
     const [showFront, setShowFront] = useState(true);
     const [showBack, setShowBack] = useState(false);
+    const [inSwitch, setInSwitch] = useState(false);
     const [inFade, setInFade] = useState(false);
 
     useImperativeHandle(ref, () => ({
@@ -24,7 +24,7 @@ const Card = forwardRef(({ q, a }, ref) => {
     }));
 
     const setNextCard = () => {
-        if (gameCardInSwitch && !gameCardInFade) {
+        if (inSwitch && !gameCardInFade) {
             console.warn('in switch')
             gameCardInFade = true;
             setInFade(true);
@@ -35,12 +35,12 @@ const Card = forwardRef(({ q, a }, ref) => {
 
         } else if (gameCardInFade) {
             console.warn('in fade')
-            gameCardInSwitch = false;
+            setInSwitch(false);
             gameCardInFade = false;
             setInFade(false);
         } else {
             console.warn('in what?')
-            gameCardInSwitch = false;
+            setInSwitch(false);
         }
     };
 
@@ -48,7 +48,7 @@ const Card = forwardRef(({ q, a }, ref) => {
         setNextQ(q);
         setNextA(a);
         if (currQ !== q) { // If it's not the 1st mount then it's a card switch
-            gameCardInSwitch = true;
+            setInSwitch(true);
         }
     }, [q, a]);
 
@@ -57,7 +57,7 @@ const Card = forwardRef(({ q, a }, ref) => {
         return () => {
             document.getElementById("game-card-in").removeEventListener("transitionend", setNextCard);
         }
-    }, [gameCardInSwitch, gameCardInFade, nextQ, nextA]);
+    }, [inSwitch, gameCardInFade, nextQ, nextA]);
 
     useEffect(() => {
         document.getElementById("game-card-front").addEventListener("transitionend", () => {
@@ -77,14 +77,14 @@ const Card = forwardRef(({ q, a }, ref) => {
     return (
         <div className="card-container">
             <div className="card-placeholder">
-                <div id="game-card-front" className={`card ${!showFront ? 'card-hide' : ''} ${gameCardInSwitch ? 'no-rotate-anim' : ''}`}>
+                <div id="game-card-front" className={`card ${!showFront ? 'card-hide' : ''} ${inSwitch ? 'no-rotate-anim' : ''}`}>
                     <p>{currQ}</p>
                 </div>
-                <div id="game-card-back" className={`card card-back ${!showBack ? 'card-hide' : ''} ${gameCardInSwitch ? 'no-rotate-anim' : ''}`}>
+                <div id="game-card-back" className={`card card-back ${!showBack ? 'card-hide' : ''} ${inSwitch ? 'no-rotate-anim' : ''}`}>
                     <p>{currA}</p>
                 </div>
             </div>
-            <div id="game-card-in" className={`next-card-placeholder ${gameCardInSwitch ? 'next-card-in' : ''} ${inFade ? 'next-card-fade' : ''}`}>
+            <div id="game-card-in" className={`next-card-placeholder ${inSwitch ? 'next-card-in' : ''} ${inFade ? 'next-card-fade' : ''}`}>
                 <div id="game-card-front" className="card">
                     <p>{q}</p>
                 </div>
