@@ -4,6 +4,12 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    position: relative;
+
+    .card-placeholder {
+        width: 95%;
+        height: 80vh;
+    }
 
     .card {
         width: 95%;
@@ -15,5 +21,16 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
+        position: absolute;
+        transition: transform 0.3s linear;
+    }
+
+    .card-back {
+        background-color: lightgoldenrodyellow;
+    }
+
+    .card-hide {
+        transform: rotateY(90deg);
     }
 }

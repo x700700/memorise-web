@@ -7,7 +7,6 @@ const Game = (props) => {
     const refGame = useRef();
 
     const rotateCard = () => {
-        console.warn('rotate card');
         refGame.current.rotate();
     };
 
