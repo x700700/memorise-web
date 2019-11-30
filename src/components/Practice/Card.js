@@ -18,13 +18,13 @@ const Card = forwardRef((props, ref) => {
     }));
 
     useEffect(() => {
-        document.getElementById("card-front").addEventListener("transitionend", () => {
+        document.getElementById("game-card-front").addEventListener("transitionend", () => {
             if (inRotate) {
                 inRotate = false;
                 setBack(true);
             }
         });
-        document.getElementById("card-back").addEventListener("transitionend", () => {
+        document.getElementById("game-card-back").addEventListener("transitionend", () => {
             if (inRotate) {
                 inRotate = false;
                 setFront(true);
@@ -34,12 +34,13 @@ const Card = forwardRef((props, ref) => {
 
     return (
         <div className="card-container">
-            <div className="card-placeholder"></div>
-            <div id="card-front" className={`card ${!front ? 'card-hide' : ''}`}>
-                <p>{q}</p>
-            </div>
-            <div id="card-back" className={`card card-back ${!back ? 'card-hide' : ''}`}>
-                <p>{a}</p>
+            <div className="card-placeholder">
+                <div id="game-card-front" className={`card ${!front ? 'card-hide' : ''}`}>
+                    <p>{q}</p>
+                </div>
+                <div id="game-card-back" className={`card card-back ${!back ? 'card-hide' : ''}`}>
+                    <p>{a}</p>
+                </div>
             </div>
         </div>
     );
