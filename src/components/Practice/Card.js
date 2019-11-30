@@ -2,6 +2,7 @@ import React, { forwardRef, useImperativeHandle, useState, useEffect } from 'rea
 import './Card.scss';
 
 let inRotate = false;
+let noRotate = false;
 
 const Card = forwardRef((props, ref) => {
     const { q, a } = props;
@@ -16,6 +17,11 @@ const Card = forwardRef((props, ref) => {
             if (back) setBack(false);
         }
     }));
+    useEffect(() => {
+        console.warn('card replaced');
+        setFront(true);
+        setBack(false);
+    }, [q, a]);
 
     useEffect(() => {
         document.getElementById("game-card-front").addEventListener("transitionend", () => {
