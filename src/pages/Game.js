@@ -1,11 +1,12 @@
 import React from 'react';
 import './Game.scss';
+import Card from "../components/Practice/Card";
 
 function Game() {
     return (
-        <div className="Game">
-            <h1>hellow</h1>
-            <h2>world</h2>
+        <div className="game">
+            <h1>Hello</h1>
+            <Card/>
         </div>
     );
 }
