@@ -29,7 +29,11 @@ export default class cardsDeck {
       deckFinished = true;
     } else {
       deckFinished = false;
-      this.nextDeck.unshift(this.currentDeck.splice(0, 1)[0]);
+      if (right) {
+          this.currentDeck.splice(0, 1);
+      } else {
+          this.nextDeck.unshift(this.currentDeck.splice(0, 1)[0]);
+      }
       if (this.currentDeck.length === 0) {
         this.currentDeck = _.cloneDeep(this.nextDeck);
         this.currentDeck = _.shuffle(this.currentDeck.slice(1));

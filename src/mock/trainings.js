@@ -12,38 +12,21 @@ export default {
         "lastTrainedAt": null
     },
     "exercises": {
-        "5de409f93ba76144f8585781": {
-            "id": "5de409f93ba76144f8585781",
-            "trainingId": "5de409300b5b97447c4c2e53",
+        "off-exc-001": {
             "q": "Home",
             "a": "בית",
-            "played": 0,
-            "wrongs": 0,
-            "shouldReloadSampleExercises": true,
-            "info": {
-                "created": "2019-12-01T18:44:09.631Z",
-                "modified": "2019-12-01T19:47:35.859Z",
-                "lastTrainedAt": null
-            }
         },
-        "5de418ad15e26e458f915e8f": {
-            "id": "5de418ad15e26e458f915e8f",
-            "trainingId": "5de409300b5b97447c4c2e53",
+        "off-exc-002": {
             "q": "Bedroom",
             "a": "חדר שינה",
-            "played": 0,
-            "wrongs": 0,
-            "shouldReloadSampleExercises": true,
-            "info": {
-                "created": "2019-12-01T19:46:53.093Z",
-                "modified": "2019-12-01T19:47:35.859Z",
-                "lastTrainedAt": null
-            }
         },
         "off-exc-003": {
-            "id": "off-exc-003",
             "q": "Kitchen",
             "a": "מטבח",
-        }
+        },
+        "off-exc-004": {
+            "q": "Toilet",
+            "a": "שירותים",
+        },
     }
 };

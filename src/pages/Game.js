@@ -17,7 +17,7 @@ const Game = (props) => {
     };
 
     const replaceCard = (good) => {
-        cardsDeck.nextCard();
+        cardsDeck.nextCard(good);
         const top = cardsDeck.top();
         setTopCard(top);
     };
