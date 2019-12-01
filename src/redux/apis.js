@@ -1,14 +1,18 @@
-import axios from 'axios';
+import Axios from 'axios';
 import consts from '../common/consts';
 
+const axios = Axios.create({
+    timeout: 10 * 1000,
+    headers: {
+        'Authorization': `Bearer ${consts.temp.bearer}`,
+        'Content-Type': 'application/json',
+    },
+});
+
 export const auth = ({ bearer }) => {
-    return axios.get(`${consts.urls.api}/auth/check`, {
-        headers: {
-            'Authorization': `Bearer ${consts.temp.bearer}`,
-            'Content-Type': 'application/json',
-        }
-    }).then(response => {
-        console.warn('hey 1 - ', response);
-        return response.data;
-    });
+    return axios.get(`${consts.urls.api}/auth/check`)
+        .then(response => {
+            console.warn('hey 1 - ', response);
+            return response.data;
+        });
 };
