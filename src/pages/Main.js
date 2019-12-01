@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { appAuth } from './redux/actions/app';
-// import * as types from './redux/actionsTypes';
+import { appAuth } from '../redux/actions/app';
 import './Main.scss';
-import Game from "./pages/Game";
-import Header from "./components/Header";
+import Game from './Game';
+import Header from '../components/Header';
+// import * as types from './redux/actionsTypes';
 
 
 function Main() {

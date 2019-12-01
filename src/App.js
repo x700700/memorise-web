@@ -5,7 +5,7 @@ import saga from './redux/sagas';
 import { sagaMiddleware } from './middlewares/saga';
 
 import './App.scss';
-import Main from "./Main";
+import Main from "./pages/Main";
 
 function App() {
     return (

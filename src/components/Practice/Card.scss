@@ -62,7 +62,7 @@
         transform: translateX(-110%);
     }
     .next-card-shadow {
-        box-shadow: 4px 4px 14px 0px $grey4;
+        box-shadow: 5px 5px 14px -4px $grey4;
     }
 
     .game-card-in {
@@ -73,7 +73,7 @@
     }
     .next-card-fade {
         opacity: 0;
-        transition: opacity 0.2s ease-in-out;
+        transition: opacity 0.3s linear;
     }
 
     .card-hide {
