@@ -5,16 +5,24 @@ import Card from "../components/Practice/Card";
 
 const game = [
     {
-        q: "Many",
-        a: "הרבה",
-    },
-    {
         q: "Home",
         a: "בית",
     },
     {
-        q: "Antilope",
-        a: "אנטילופה",
+        q: "Kitchen",
+        a: "מטבח",
+    },
+    {
+        q: "Bedroom",
+        a: "חדר שינה",
+    },
+    {
+        q: "Bathroom",
+        a: "חדר אמבטיה",
+    },
+    {
+        q: "Toilet",
+        a: "שירותים",
     },
 ];
 
