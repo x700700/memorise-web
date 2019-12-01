@@ -1,7 +1,7 @@
 
 export default {
     urls: {
-        api: 'http://localhost:4044/api',
+        api: 'http://dev.memorise.com:4044/api',
     },
     tabName: {
         practice: 'practice',
