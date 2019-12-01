@@ -1,0 +1,2 @@
+
+export const APP_SET_CURRENT_PAGE = 'app.APP_SET_CURRENT_PAGE';
