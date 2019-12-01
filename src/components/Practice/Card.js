@@ -22,20 +22,6 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
         },
     }));
 
-    const setNextCard = () => {
-        if (inSwitch && !inFade) {
-            setInFade(true);
-            setShowFront(true);
-            setShowBack(false);
-            setCurrQ(nextQ);
-            setCurrA(nextA);
-        } else if (inFade) {
-            setInSwitch(false);
-            setInFade(false);
-            setCardInMove(false);
-        }
-    };
-
     useEffect(() => {
         setNextQ(q);
         setNextA(a);
@@ -43,16 +29,30 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
             setCardInMove(true);
             setInSwitch(true);
         }
-    }, [q, a]);
+    }, [q, a, currQ, setCardInMove]);
 
+
+    const setCardMoveEnded = useCallback(() => setCardInMove(false), [setCardInMove]);
     useEffect(() => {
+        const setNextCard = () => {
+            if (inSwitch && !inFade) {
+                setInFade(true);
+                setShowFront(true);
+                setShowBack(false);
+                setCurrQ(nextQ);
+                setCurrA(nextA);
+            } else if (inFade) {
+                setInSwitch(false);
+                setInFade(false);
+                setCardMoveEnded();
+            }
+        };
         document.getElementById("game-card-in").addEventListener("transitionend", setNextCard);
         return () => {
             document.getElementById("game-card-in").removeEventListener("transitionend", setNextCard);
         }
-    }, [inSwitch, inFade, nextQ, nextA, setNextCard]);
+    }, [inSwitch, inFade, nextA, nextQ, setCardMoveEnded]);
 
-    const setCardMoveEnded = useCallback(() => setCardInMove(false), [setCardInMove]);
     useEffect(() => {
         const rotateCard = (side) => {
             if (inRotate) {
