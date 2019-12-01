@@ -1,51 +1,70 @@
 @import "/../common/colors";
 
-.game {
-    text-align: center;
-    padding-top: 0.3rem;
-    border: $grey4 2px solid;
+.game-container {
+    height: 100%;
 
-    @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max) {
-        flex-grow: 1;
-    }
     @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+        height: unset;
         width: fit-content;
-        align-self: center;
-        padding: 0 1rem;
-        margin-top: 0.3rem;
+        margin: 0 auto;
     }
 
-    .game-buttons {
-        margin: 1rem .5rem 0 .5rem;
-        display: flex;
-        justify-content: space-between;
+    .game {
+        height: 98%;
+        text-align: center;
+        padding-top: 0.3rem;
+        border: $grey4 2px solid;
 
+        @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max) {
+            flex-grow: 1;
+        }
+        @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
+        and (orientation: landscape) {
+            height: 97%;
+        }
         @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
-            width: 320px;
-            margin: 0 auto .5rem auto;
+            width: fit-content;
+            align-self: center;
+            padding: 0 1rem;
+            margin-top: 0.3rem;
         }
 
-        button {
-            background-color: unset;
-            border: none;
-            outline: none;
-        }
-        i {
-            font-size: 48px;
-        }
-        .btn-good i {
-            color: mediumblue;
-        }
-        .btn-bad i {
-            color: darkred;
-        }
-    }
-    .buttons-disable {
-        button {
-            pointer-events: none;
+        .game-buttons {
+            margin: 1rem .5rem 0 .5rem;
+            display: flex;
+            justify-content: space-between;
+
+            @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+                width: 320px;
+                margin: 0 auto .5rem auto;
+            }
+
+            button {
+                background-color: unset;
+                border: none;
+                outline: none;
+            }
 
             i {
-                color: $grey6!important;
+                font-size: 48px;
+            }
+
+            .btn-good i {
+                color: mediumblue;
+            }
+
+            .btn-bad i {
+                color: darkred;
+            }
+        }
+
+        .buttons-disable {
+            button {
+                pointer-events: none;
+
+                i {
+                    color: $grey6 !important;
+                }
             }
         }
     }

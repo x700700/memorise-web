@@ -1,33 +1,13 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './Game.scss';
 import Card from "../components/Practice/Card";
+import CardsDeck from '../components/Practice/cardsDeck';
+import mockTraining from '../mock/trainings';
 // import Rotate90DegreesCcwTwoToneIcon from '@material-ui/icons/Rotate90DegreesCcwTwoTone';
 
-const game = [
-    {
-        q: "Home",
-        a: "בית",
-    },
-    {
-        q: "Kitchen",
-        a: "מטבח",
-    },
-    {
-        q: "Bedroom",
-        a: "חדר שינה",
-    },
-    {
-        q: "Bathroom",
-        a: "חדר אמבטיה",
-    },
-    {
-        q: "Toilet",
-        a: "שירותים",
-    },
-];
-
 const Game = (props) => {
-    const [cardNum, setCardNum] = useState(0);
+    const [cardsDeck, setCardsDeck] = useState(null);
+    const [, setTopCard] = useState(null);
     const [cardInMove, setCardInMove] = useState(false);
 
     const refGame = useRef();
@@ -36,29 +16,40 @@ const Game = (props) => {
         refGame.current.rotate();
     };
 
-    const replaceCard = () => {
-        const next = cardNum < game.length - 1 ? cardNum + 1 : 0;
-        setCardNum(next);
+    const replaceCard = (good) => {
+        cardsDeck.nextCard();
+        const top = cardsDeck.top();
+        setTopCard(top);
     };
     const respGood = () => {
-        console.warn('good');
-        replaceCard();
+        // console.warn('good');
+        replaceCard(true);
     };
     const respBad = () => {
-        console.warn('bad');
-        replaceCard();
+        // console.warn('bad');
+        replaceCard(false);
     };
 
-    const currQ = game[cardNum].q;
-    const currA = game[cardNum].a;
+    useEffect(() => {
+        console.warn('loading cards deck on mount');
+        const newDeck = new CardsDeck(mockTraining);
+        setCardsDeck(newDeck);
+    }, []);
+
+    const top = cardsDeck && cardsDeck.top();
+    const currQ = (top || {}).q || '';
+    const currA = (top || {}).a || '';
     return (
-        <div className="game">
-            <Card ref={refGame} q={currQ} a={currA} setCardInMove={setCardInMove}/>
-            <div className={`game-buttons ${cardInMove ? 'buttons-disable' : ''}`}>
-                <button onClick={respBad} className="btn btn-bad"><i className="fas fa-times"></i></button>
-                <button onClick={rotateCard} className="btn"><i className="fas fa-sync-alt"></i></button>
-                <button onClick={respGood} className="btn btn-good"><i className="fas fa-check"></i></button>
-            </div>
+        <div className="game-container">
+            {currQ &&
+            <div className="game">
+                <Card ref={refGame} q={currQ} a={currA} setCardInMove={setCardInMove}/>
+                <div className={`game-buttons ${cardInMove ? 'buttons-disable' : ''}`}>
+                    <button onClick={respBad} className="btn btn-bad"><i className="fas fa-times"></i></button>
+                    <button onClick={rotateCard} className="btn"><i className="fas fa-sync-alt"></i></button>
+                    <button onClick={respGood} className="btn btn-good"><i className="fas fa-check"></i></button>
+                </div>
+            </div>}
         </div>
     );
 };
