@@ -52,23 +52,21 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
         }
     }, [inSwitch, inFade, nextQ, nextA]);
 
-    const rotateFront = () => {
+    const rotateCard = (side) => {
         if (inRotate) {
             setInRotate(false);
-            setShowBack(true);
+            side === 'front' && setShowBack(true);
+            side === 'back' && setShowFront(true);
         } else {
             // rotate animation totally ended
             setCardInMove(false);
         }
     };
+    const rotateFront = () => {
+        rotateCard('front');
+    };
     const rotateBack = () => {
-        if (inRotate) {
-            setInRotate(false);
-            setShowFront(true);
-        } else {
-            // rotate animation totally ended
-            setCardInMove(false);
-        }
+        rotateCard('back');
     };
     useEffect(() => {
         document.getElementById("game-card-front").addEventListener("transitionend", rotateFront);
