@@ -13,6 +13,17 @@
         padding: 0 .9rem;
         margin-top: .3rem;
 
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            margin-top: -7px;
+
+            .user-name {
+                margin: 0 auto;
+                padding-left: 7px;
+            }
+        }
+
         button {
             background-color: unset;
             border: none;

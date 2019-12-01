@@ -8,7 +8,7 @@ import Header from '../components/Header';
 
 
 function Main() {
-    const userName = useSelector(state => state.app.name);
+    const userName = useSelector(state => state.app.userName);
     const authCheckStarted = useSelector(state => state.app.authCheckStarted);
     const authCheckEnded = useSelector(state => state.app.authCheckEnded);
 
