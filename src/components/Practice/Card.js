@@ -50,9 +50,9 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
         return () => {
             document.getElementById("game-card-in").removeEventListener("transitionend", setNextCard);
         }
-    }, [inSwitch, inFade, nextQ, nextA]);
+    }, [inSwitch, inFade, nextQ, nextA, setNextCard]);
 
-    const setCardMoveEnded = useCallback(() => setCardInMove(false), [inRotate]);
+    const setCardMoveEnded = useCallback(() => setCardInMove(false), [setCardInMove]);
     useEffect(() => {
         const rotateCard = (side) => {
             if (inRotate) {
