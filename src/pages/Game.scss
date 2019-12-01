@@ -2,15 +2,27 @@
 
 .game {
     text-align: center;
+    padding-top: 0.3rem;
+    border: $grey4 2px solid;
+
+    @media only screen and (max-width: $width-mobile-max) {
+        flex-grow: 1;
+    }
+    @media (min-width: $width-desktop-min) {
+        width: fit-content;
+        align-self: center;
+        padding: 0 1rem;
+        margin-top: 0.3rem;
+    }
 
     .game-buttons {
         margin: 1rem .5rem 0 .5rem;
         display: flex;
         justify-content: space-between;
 
-        @media (min-width: 600px) {
+        @media (min-width: $width-desktop-min) {
             width: 320px;
-            margin: 0 auto;
+            margin: 0 auto .5rem auto;
         }
 
         button {

@@ -7,7 +7,7 @@
     overflow-x: hidden;
     position: relative;
 
-    @media (min-width: 600px) {
+    @media (min-width: $width-desktop-min) {
         width: fit-content;
         margin: 0 auto;
     }
@@ -16,8 +16,9 @@
         width: 95%;
         height: 80vh;
         position: relative;
+        overflow: hidden;
 
-        @media (min-width: 600px) {
+        @media (min-width: $width-desktop-min) {
             margin-top: 1rem;
             margin-bottom: 1rem;
             width: 320px;
