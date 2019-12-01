@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import * as types from '../actionsTypes';
-import * as api from './api';
+import * as api from '../api';
 import consts from '../../common/consts';
 
 

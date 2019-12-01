@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux'
-import store from './redux/store';
+import store from './middlewares/store';
 import saga from './redux/sagas';
 import { sagaMiddleware } from './middlewares/saga';
 
