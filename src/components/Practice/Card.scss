@@ -17,7 +17,7 @@
         height: 70vh;
         position: relative;
 
-        @media only screen and (min-device-width: 320px) and (max-device-width: 812px)
+        @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
         and (orientation: landscape) {
             height: 58vh;
         }
