@@ -19,7 +19,6 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
             setInRotate(true);
             if (showFront) setShowFront(false);
             if (showBack) setShowBack(false);
-            setTimeout(() => {setCardInMove(false);}, 666);
         },
     }));
 
@@ -33,13 +32,15 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
         } else if (inFade) {
             setInSwitch(false);
             setInFade(false);
+            setCardInMove(false);
         }
     };
 
     useEffect(() => {
         setNextQ(q);
         setNextA(a);
-        if (currQ !== q) { // If it's not the 1st mount then it's a card switch
+        if (currQ !== q) { // Card switch (Only on 1st mount currQ and q are euqal)
+            setCardInMove(true);
             setInSwitch(true);
         }
     }, [q, a]);
@@ -55,12 +56,18 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
         if (inRotate) {
             setInRotate(false);
             setShowBack(true);
+        } else {
+            // rotate animation totally ended
+            setCardInMove(false);
         }
     };
     const rotateBack = () => {
         if (inRotate) {
             setInRotate(false);
             setShowFront(true);
+        } else {
+            // rotate animation totally ended
+            setCardInMove(false);
         }
     };
     useEffect(() => {
