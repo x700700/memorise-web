@@ -25,7 +25,7 @@ const Header = (props) => {
                 <img className="logo" src={logo} alt="logo" width="32" height="32"/>
             </div>
             {error &&
-            <div>
+            <div className="error">
                 {error}
             </div>}
         </div>

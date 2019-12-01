@@ -6,6 +6,16 @@
     color: $grey6;
     font-weight: 600;
 
+    .error {
+        position: absolute;
+        background-color: #faa;
+        z-index: 9;
+        color: black;
+        bottom: 0rem;
+        margin-left: 1rem;
+        padding: .1rem .3rem;
+    }
+
     .header-row {
         display: flex;
         justify-content: space-between;
