@@ -86,7 +86,7 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
                 </div>
             </div>
             <div id="game-card-in" className={`next-card-placeholder ${inSwitch ? 'next-card-in' : ''} ${inFade ? 'next-card-fade' : ''}`}>
-                <div id="game-card-front" className="card">
+                <div id="game-card-front" className="card next-card-shadow">
                     <p>{q}</p>
                 </div>
             </div>

@@ -16,7 +16,6 @@
         width: 95%;
         height: 80vh;
         position: relative;
-        overflow: hidden;
 
         @media (min-width: $width-desktop-min) {
             margin-top: 1rem;
@@ -27,7 +26,7 @@
 
         .card {
             width: 100%;
-            height: 100%;
+            height: 98%;
             background-color: white;
             border: $grey6 1px solid;
 
@@ -54,9 +53,11 @@
     }
     .next-card-placeholder {
         position: absolute;
-        box-shadow: 4px 4px 14px 0px $grey4;
         opacity: 1;
         transform: translateX(-110%);
+    }
+    .next-card-shadow {
+        box-shadow: 4px 4px 14px 0px $grey4;
     }
 
     .game-card-in {
