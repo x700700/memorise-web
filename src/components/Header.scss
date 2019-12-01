@@ -8,10 +8,36 @@
 
     .header-row {
         display: flex;
-        height: 2rem;
+        justify-content: space-between;
+        height: 3rem;
+        padding: 0 .9rem;
+        margin-top: .3rem;
 
-        .tab-container {
-            min-width: 5rem;
+        button {
+            background-color: unset;
+            border: none;
+            outline: none;
+
+            margin: 0 .3rem;
+            i {
+                font-size: 28px;
+                color: $grey3;
+            }
+        }
+        .btn-menu {
+            margin-right: -7px;
+            align-self: center;
+            i {
+                font-size: 43px;
+                color: $grey10;
+            }
+        }
+        .tabs {
+            margin-top: .4rem;
+        }
+        .logo {
+            align-self: center;
+            margin-top: -2px;
         }
     }
 }

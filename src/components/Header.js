@@ -1,14 +1,18 @@
 import React from 'react';
 import './Header.scss';
+import logo from '../logo-64.png';
 
 const Header = (props) => {
     return (
         <div className="header">
             <div className="header-row">
-                <div className="tab-container">Trainings</div>
-                <div className="tab-container">Exercises</div>
-                <div className="tab-container">Train</div>
-                <div className="tab-container">Test</div>
+                <button className="btn btn-menu"><i className="fas fa-chevron-down"/></button>
+                <div className="tabs">
+                    <button className="btn"><i className="fas fa-book-open"/></button>
+                    <button className="btn"><i className="fas fa-edit"/></button>
+                    <button className="btn"><i className="fas fa-running"/></button>
+                </div>
+                <img className="logo" src={logo} width="32" height="32"/>
             </div>
         </div>
     );
