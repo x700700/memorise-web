@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import './Game.scss';
 import Card from "../components/Practice/Card";
 import CardsDeck from '../components/Practice/cardsDeck';
-import mockTraining from '../mock/trainings';
+import mockTraining from '../mock/training-multiply';
 // import Rotate90DegreesCcwTwoToneIcon from '@material-ui/icons/Rotate90DegreesCcwTwoTone';
 
 const Game = (props) => {
@@ -37,12 +37,17 @@ const Game = (props) => {
     }, []);
 
     const top = cardsDeck && cardsDeck.top();
+    const size = cardsDeck && cardsDeck.sizeStart();
+    const curr = cardsDeck && cardsDeck.sizeCurr();
     const currQ = (top || {}).q || '';
     const currA = (top || {}).a || '';
     return (
         <div className="game-container">
             {currQ &&
             <div className="game">
+                <div className="cards-left">
+                    {curr} / {size}
+                </div>
                 <Card ref={refGame} q={currQ} a={currA} setCardInMove={setCardInMove}/>
                 <div className={`game-buttons ${cardInMove ? 'buttons-disable' : ''}`}>
                     <button onClick={respBad} className="btn btn-bad"><i className="fas fa-times"></i></button>

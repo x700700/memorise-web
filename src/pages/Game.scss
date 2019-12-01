@@ -29,6 +29,15 @@
             margin-top: 0.3rem;
         }
 
+        .cards-left {
+            position: absolute;
+            z-index: 9;
+            margin-left: 1.2rem;
+            margin-top: 0.3rem;
+            background-color: $grey7;
+            padding: .1rem .3rem;
+        }
+
         .game-buttons {
             margin: 1rem .5rem 0 .5rem;
             display: flex;
