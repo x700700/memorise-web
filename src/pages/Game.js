@@ -20,6 +20,8 @@ const game = [
 
 const Game = (props) => {
     const [cardNum, setCardNum] = useState(0);
+    const [cardInMove, setCardInMove] = useState(false);
+
     const refGame = useRef();
 
     const rotateCard = () => {
@@ -38,13 +40,14 @@ const Game = (props) => {
         console.warn('bad');
         replaceCard();
     };
+    const foo = status => setCardInMove(status);
 
     const currQ = game[cardNum].q;
     const currA = game[cardNum].a;
     return (
         <div className="game">
-            <Card ref={refGame} q={currQ} a={currA}/>
-            <div className="game-buttons">
+            <Card ref={refGame} q={currQ} a={currA} setCardInMove={setCardInMove}/>
+            <div className={`game-buttons ${cardInMove ? 'buttons-disable' : ''}`}>
                 <button onClick={respBad} className="btn btn-bad"><i className="fas fa-times"></i></button>
                 <button onClick={rotateCard} className="btn"><i className="fas fa-sync-alt"></i></button>
                 <button onClick={respGood} className="btn btn-good"><i className="fas fa-check"></i></button>

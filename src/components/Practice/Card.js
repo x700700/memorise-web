@@ -1,7 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useState, useEffect } from 'react';
 import './Card.scss';
 
-const Card = forwardRef(({ q, a }, ref) => {
+const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
     const [currQ, setCurrQ] = useState(q);
     const [currA, setCurrA] = useState(a);
     const [nextQ, setNextQ] = useState(q);
@@ -15,9 +15,11 @@ const Card = forwardRef(({ q, a }, ref) => {
     useImperativeHandle(ref, () => ({
         rotate() {
             // console.warn(`click ==> showFront=[${showFront}] - showBack=[${showBack}]`);
+            setCardInMove(true);
             setInRotate(true);
             if (showFront) setShowFront(false);
             if (showBack) setShowBack(false);
+            setTimeout(() => {setCardInMove(false);}, 666);
         },
     }));
 

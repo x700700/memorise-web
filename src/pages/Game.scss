@@ -1,3 +1,5 @@
+@import "/../common/colors";
+
 .game {
     text-align: center;
 
@@ -24,6 +26,15 @@
         }
         .btn-bad i {
             color: darkred;
+        }
+    }
+    .buttons-disable {
+        button {
+            pointer-events: none;
+
+            i {
+                color: $grey6!important;
+            }
         }
     }
 }
