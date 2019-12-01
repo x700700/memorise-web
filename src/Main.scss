@@ -1,8 +1,8 @@
 @import "./common/colors";
 
-.App {
+.app-main {
     min-height: 100%;
     height: 100%;
-    text-align: center;
-    background-color: $purple7;
+    display: flex;
+    flex-direction: column;
 }

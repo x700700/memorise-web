@@ -3,7 +3,9 @@ import consts from '../../common/consts';
 
 
 const appReducer = (  state = {
-                          userId: null,
+                          authCheckStarted: false,
+                          authCheckEnded: false,
+                          name: null,
                           error: null,
                           currentPage: consts.tabName.practice,
                           editedTrainingId: null,
@@ -12,6 +14,27 @@ const appReducer = (  state = {
                       action) => {
 
     switch (action.type) {
+
+        case types.APP_AUTH_STARTED:
+            return {
+                ...state,
+                authCheckStarted: true,
+                authCheckEnded: false,
+            };
+        case types.APP_AUTH_SUCCEED:
+            return {
+                ...state,
+                authCheckEnded: true,
+                name: action.name,
+            };
+        case types.APP_AUTH_FAILED:
+            console.warn('auth failed: ', action.message);
+            return {
+                ...state,
+                authCheckEnded: true,
+                error: action.message,
+                name: null,
+            };
 
         case types.APP_SET_CURRENT_PAGE:
             return {
