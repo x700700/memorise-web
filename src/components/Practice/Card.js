@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle, useState, useEffect } from 'react';
+import React, { forwardRef, useImperativeHandle, useState, useEffect, useCallback } from 'react';
 import './Card.scss';
 
 const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
@@ -52,30 +52,28 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
         }
     }, [inSwitch, inFade, nextQ, nextA]);
 
-    const rotateCard = (side) => {
-        if (inRotate) {
-            setInRotate(false);
-            side === 'front' && setShowBack(true);
-            side === 'back' && setShowFront(true);
-        } else {
-            // rotate animation totally ended
-            setCardInMove(false);
-        }
-    };
-    const rotateFront = () => {
-        rotateCard('front');
-    };
-    const rotateBack = () => {
-        rotateCard('back');
-    };
+    const setCardMoveEnded = useCallback(() => setCardInMove(false), [inRotate]);
     useEffect(() => {
+        const rotateCard = (side) => {
+            if (inRotate) {
+                setInRotate(false);
+                side === 'front' && setShowBack(true);
+                side === 'back' && setShowFront(true);
+            } else {
+                // rotate animation totally ended
+                setCardMoveEnded();
+            }
+        };
+        const rotateFront = () => rotateCard('front');
+        const rotateBack = () => rotateCard('back');
+
         document.getElementById("game-card-front").addEventListener("transitionend", rotateFront);
         document.getElementById("game-card-back").addEventListener("transitionend", rotateBack);
         return () => {
             document.getElementById("game-card-front").removeEventListener("transitionend", rotateFront);
             document.getElementById("game-card-back").removeEventListener("transitionend", rotateBack);
         }
-    }, [inRotate]);
+    }, [inRotate, setCardMoveEnded]);
 
     return (
         <div className="card-container">

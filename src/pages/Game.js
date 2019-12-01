@@ -40,7 +40,6 @@ const Game = (props) => {
         console.warn('bad');
         replaceCard();
     };
-    const foo = status => setCardInMove(status);
 
     const currQ = game[cardNum].q;
     const currA = game[cardNum].a;
