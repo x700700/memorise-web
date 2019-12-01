@@ -1,0 +1,30 @@
+@import "../../common/colors";
+
+.game-sum-container {
+    height: 100%;
+    font-size: 18px;
+    font-weight: 600;
+
+    .sum-col {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .stats {
+            margin-bottom: 1rem;
+        }
+        .btns-container {
+            flex-grow: 1;
+
+            .btns-replay {
+                margin-top: 33%;
+
+                @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
+                and (orientation: landscape) {
+                    margin-top: 3%;
+                }
+
+            }
+        }
+    }
+}
