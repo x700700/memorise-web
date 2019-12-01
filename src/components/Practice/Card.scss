@@ -14,10 +14,15 @@
 
     .card-placeholder, .next-card-placeholder, .card-placeholder-bg {
         width: 95%;
-        height: 80vh;
+        height: 70vh;
         position: relative;
 
-        @media (min-width: $width-desktop-min) {
+        @media only screen and (min-device-width: 320px) and (max-device-width: 812px)
+        and (orientation: landscape) {
+            height: 58vh;
+        }
+
+        @media (min-width: $width-desktop-min) and (min-height: $height-desktop-min) {
             margin-top: 1rem;
             margin-bottom: 1rem;
             width: 320px;
