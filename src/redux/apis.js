@@ -11,8 +11,5 @@ const axios = Axios.create({
 
 export const auth = ({ bearer }) => {
     return axios.get(`${consts.urls.api}/auth/check`)
-        .then(response => {
-            console.warn('hey 1 - ', response);
-            return response.data;
-        });
+        .then(response => response.data);
 };
