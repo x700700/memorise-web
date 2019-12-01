@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import consts from '../common/consts';
+import consts from '../../common/consts';
 
 const axios = Axios.create({
     timeout: 10 * 1000,
