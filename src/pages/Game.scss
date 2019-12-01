@@ -5,10 +5,10 @@
     padding-top: 0.3rem;
     border: $grey4 2px solid;
 
-    @media only screen and (max-width: $width-mobile-max) {
+    @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max) {
         flex-grow: 1;
     }
-    @media (min-width: $width-desktop-min) {
+    @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
         width: fit-content;
         align-self: center;
         padding: 0 1rem;
@@ -20,7 +20,7 @@
         display: flex;
         justify-content: space-between;
 
-        @media (min-width: $width-desktop-min) {
+        @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
             width: 320px;
             margin: 0 auto .5rem auto;
         }
