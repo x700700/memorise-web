@@ -1,8 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useState, useEffect } from 'react';
 import './Card.scss';
 
-let gameCardInRotate = false;
-
 const Card = forwardRef(({ q, a }, ref) => {
     const [currQ, setCurrQ] = useState(q);
     const [currA, setCurrA] = useState(a);
@@ -10,13 +8,14 @@ const Card = forwardRef(({ q, a }, ref) => {
     const [nextA, setNextA] = useState(a);
     const [showFront, setShowFront] = useState(true);
     const [showBack, setShowBack] = useState(false);
+    const [inRotate, setInRotate] = useState(false);
     const [inSwitch, setInSwitch] = useState(false);
     const [inFade, setInFade] = useState(false);
 
     useImperativeHandle(ref, () => ({
         rotate() {
             // console.warn(`click ==> showFront=[${showFront}] - showBack=[${showBack}]`);
-            gameCardInRotate = true;
+            setInRotate(true);
             if (showFront) setShowFront(false);
             if (showBack) setShowBack(false);
         },
@@ -50,20 +49,26 @@ const Card = forwardRef(({ q, a }, ref) => {
         }
     }, [inSwitch, inFade, nextQ, nextA]);
 
+    const rotateFront = () => {
+        if (inRotate) {
+            setInRotate(false);
+            setShowBack(true);
+        }
+    };
+    const rotateBack = () => {
+        if (inRotate) {
+            setInRotate(false);
+            setShowFront(true);
+        }
+    };
     useEffect(() => {
-        document.getElementById("game-card-front").addEventListener("transitionend", () => {
-            if (gameCardInRotate) {
-                gameCardInRotate = false;
-                setShowBack(true);
-            }
-        });
-        document.getElementById("game-card-back").addEventListener("transitionend", () => {
-            if (gameCardInRotate) {
-                gameCardInRotate = false;
-                setShowFront(true);
-            }
-        });
-    }, []);
+        document.getElementById("game-card-front").addEventListener("transitionend", rotateFront);
+        document.getElementById("game-card-back").addEventListener("transitionend", rotateBack);
+        return () => {
+            document.getElementById("game-card-front").removeEventListener("transitionend", rotateFront);
+            document.getElementById("game-card-back").removeEventListener("transitionend", rotateBack);
+        }
+    }, [inRotate]);
 
     return (
         <div className="card-container">
