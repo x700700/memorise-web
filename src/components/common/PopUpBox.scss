@@ -1,0 +1,24 @@
+@import "../../common/colors";
+
+.popup-box-container {
+    position: absolute;
+    width: 90%;
+    height: 82%;
+    margin: 0 5%;
+    top: 1rem;
+    border: $purple1 2px solid;
+    border-radius: 5px;
+    background-color: $purple2;
+    color: $grey10;
+    z-index: 19;
+    transform: translateY(850px);
+    transition: transform .5s ease-in-out;
+
+    @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
+    and (orientation: landscape) {
+        height: 75%;
+    }
+}
+.popup-box-popup {
+    transform: translateY(0);
+}

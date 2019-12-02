@@ -4,6 +4,7 @@ import Card from "../components/Practice/Card";
 import CardsDeck from '../components/Practice/cardsDeck';
 import mockTraining from '../mock/training-multiply';
 import GameSum from "../components/Practice/GameSum";
+import PopUpBox from "../components/common/PopUpBox";
 // import Rotate90DegreesCcwTwoToneIcon from '@material-ui/icons/Rotate90DegreesCcwTwoTone';
 
 const Game = (props) => {
@@ -65,9 +66,9 @@ const Game = (props) => {
                     <button onClick={respGood} className="btn btn-good"><i className="fas fa-check"></i></button>
                 </div>
             </div>}
-            <div className={`sum-box ${gameEnded ? 'popup-sum' : ''}`}>
+            <PopUpBox show={gameEnded}>
                 <GameSum setStats={gameEnded} cardsNum={size} playsNum={playsNum} replayGame={() => replayGame}/>
-            </div>
+            </PopUpBox>
         </div>
     );
 };
