@@ -1,19 +1,21 @@
 @import "../../common/colors";
 
 .menu-container {
-    height: 81%;
     background-color: $purple1;
+    background: linear-gradient(180deg, rgba(34,0,102,1) 0%, rgba(9,9,121,1) 35%, rgba(238,230,255,1) 100%);
+    border: $grey1 1px solid;
     color: $grey2;
 
     @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
     and (orientation: landscape) {
-        height: 80%;
+        min-height: 220px;
     }
 
     .menu-box {
-        height: 120%;
+        min-height: 250px;
         background-color: white;
         margin: .7rem;
-        border-bottom: $purple1 .7rem solid;
+        border: $grey1 1px solid;
+        border-bottom: $purple6 .7rem solid;
     }
 }
