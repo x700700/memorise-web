@@ -7,7 +7,7 @@ const appReducer = (  state = {
                           authCheckEnded: false,
                           userName: null,
                           error: null,
-                          currentPage: consts.tabName.practice,
+                          currentPage: consts.pageName.practice,
                           editedTrainingId: null,
                           playedTrainingId: null,
                       },

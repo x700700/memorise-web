@@ -42,7 +42,7 @@
             margin: 0 .3rem;
             i {
                 font-size: 28px;
-                color: $grey3;
+                color: $grey10;
             }
         }
         .btn-menu {
@@ -55,6 +55,12 @@
         }
         .tabs {
             margin-top: .4rem;
+
+            .tab-active {
+                i {
+                    color: $purple4;
+                }
+            }
         }
         .logo {
             align-self: center;

@@ -3,11 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux'
 import './Header.scss';
 import logo from '../logo.svg';
+import consts from "../common/consts";
 
 const Header = (props) => {
     const { t } = useTranslation();
     const error = useSelector(state => state.app.error);
     const userName = useSelector(state => state.app.userName);
+    const currPage = useSelector(state => state.app.currentPage);
     const [errorStickerEnded, setErrorStickerEnded] = useState(false);
 
     useEffect(() => {
@@ -29,9 +31,9 @@ const Header = (props) => {
                     <button className="btn btn-menu"><i className="fas fa-chevron-down"/></button>
                 </div>
                 <div className="tabs">
-                    <button className="btn"><i className="fas fa-book-open"/></button>
-                    <button className="btn"><i className="fas fa-edit"/></button>
-                    <button className="btn"><i className="fas fa-running"/></button>
+                    <button className={`btn ${currPage === consts.pageName.trainings ? 'tab-active' : ''}`}><i className="fas fa-book-open"/></button>
+                    <button className={`btn ${currPage === consts.pageName.exercises ? 'tab-active' : ''}`}><i className="fas fa-edit"/></button>
+                    <button className={`btn ${currPage === consts.pageName.practice ? 'tab-active' : ''}`}><i className="fas fa-running"/></button>
                 </div>
                 <img className="logo" src={logo} alt="logo" width="32" height="32"/>
             </div>
