@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux'
 import './Header.scss';
 import logo from '../logo.svg';
 
 const Header = (props) => {
+    const { t } = useTranslation();
     const error = useSelector(state => state.app.error);
     const userName = useSelector(state => state.app.userName);
     const [errorStickerEnded, setErrorStickerEnded] = useState(false);

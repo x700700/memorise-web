@@ -1,8 +1,8 @@
 import React, {forwardRef, useEffect, useState} from 'react';
+import {useTranslation} from "react-i18next";
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { green } from '@material-ui/core/colors';
-
 import './GameSum.scss';
 
 const ColorButton = withStyles(theme => ({
@@ -22,6 +22,7 @@ const useStyles = makeStyles(theme => ({
 
 const GameSum = forwardRef(({ setStats, cardsNum, playsNum, replayGame }, ref) => {
     const classes = useStyles();
+    const { t } = useTranslation();
     const [cards, setCards] = useState(0);
     const [plays, setPlays] = useState(0);
 
@@ -42,7 +43,7 @@ const GameSum = forwardRef(({ setStats, cardsNum, playsNum, replayGame }, ref) =
                 <div className="btns-container">
                     <div className="btns-replay">
                         <ColorButton onClick={replayGame()} variant="contained" color="primary" className={classes.margin}>
-                            Replay
+                            {t('replay')}
                         </ColorButton>
                     </div>
                 </div>
