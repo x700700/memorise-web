@@ -50,12 +50,8 @@ const Header = (props) => {
             </div>
             <div className={`top-menu-box ${showMenu ? 'top-menu-pop-down' : ''}`}>
                 <div className="menu-container">
-                    {currPage === consts.pageName.practice &&
-                    <MenuGame/>
-                    }
-                    {currPage === consts.pageName.exam &&
-                    <MenuExam/>
-                    }
+                    <MenuGame hide={currPage !== consts.pageName.practice}/>
+                    <MenuExam hide={currPage !== consts.pageName.exam}/>
                 </div>
             </div>
             {error && !errorStickerEnded &&

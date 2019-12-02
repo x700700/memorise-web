@@ -8,7 +8,7 @@ import Button from "../common/Button";
 import {useTranslation} from "react-i18next";
 import * as types from "../../redux/actionsTypes";
 
-const MenuGame = (props) => {
+const MenuGame = ({ hide }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const refSlider = useRef();
@@ -25,14 +25,14 @@ const MenuGame = (props) => {
 
     const size = (cardsDeck && cardsDeck.getSizeTraining()) || 0;
     return (
-        <div className="top-menu-container">
+        <div className={`top-menu-container ${hide ? 'hide' : ''}`}>
             <TopMenu>
                 <div className="menu-col">
                     <div className="title">Practice</div>
                     <div className="size-slider-container">
                         <Slider ref={refSlider} min={consts.play.minCards} max={size} />
                     </div>
-                    <div className="footline size-slider-foot">Choose Number Of Cards to Practice</div>
+                    <div className="footline size-slider-foot">Number Of Cards to Practice</div>
                     <div className="replay-btn">
                         <Button text={t('replay')} onClick={() => replayGame} />
                     </div>

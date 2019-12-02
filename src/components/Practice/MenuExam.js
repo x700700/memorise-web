@@ -3,7 +3,7 @@ import TopMenu from "../common/TopMenu";
 // import { useSelector } from "react-redux";
 // import cardsDeck from "./cardsDeck";
 
-const MenuExam = (props) => {
+const MenuExam = ({ hide }) => {
     /*
     const storage = useSelector(state => state.app.examCardsDeck);
     let cards;
@@ -14,7 +14,7 @@ const MenuExam = (props) => {
      */
 
     return (
-        <div className="top-menu-container">
+        <div className={`top-menu-container ${hide ? 'hide' : ''}`}>
             <TopMenu>
                 <div className="menu-col">
                     <h1>EXAM Menu</h1>
