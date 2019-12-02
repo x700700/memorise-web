@@ -30,10 +30,9 @@ const Main = () => {
             <Header/>
             <Switch>
                 <Route exact path="/"><Redirect to="/practice" /></Route>
+                <Route path="/trainings/:id" component={null} />
                 <Route exact path="/practice" component={Game} />
-                <Route path="/practice/:id" component={Game} />
                 <Route exact path="/exam" component={Exam} />
-                <Route path="/exam/:id" component={Exam} />
                 <Route component={NotFound} />
             </Switch>
         </div>

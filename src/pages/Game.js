@@ -1,4 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
+import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 import * as types from '../redux/actionsTypes';
 import './Game.scss';
@@ -12,6 +13,7 @@ import PopUpBox from "../components/common/PopUpBox";
 
 const Game = (props) => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [cardsDeck, setCardsDeck] = useState(null);
     const [gameEnded, setGameEnded] = useState(false);
     const [, setTopCard] = useState(null);
@@ -37,15 +39,37 @@ const Game = (props) => {
     };
     const replayGame = () => {
         setGameEnded(false);
-        cardsDeck.reset();
+        cardsDeck.replay();
     };
 
     useEffect(() => {
+        const createNewDeck = () => {
+            return new CardsDeck(mockTraining);
+        };
+
         // console.warn('Game mount');
         dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.practice });
-        const newDeck = new CardsDeck(mockTraining);
-        setCardsDeck(newDeck);
-    }, [dispatch]);
+        let lastCardsDeck = localStorage.getItem(consts.localStorage.gameId);
+        if (!lastCardsDeck) {
+            // no storage
+            const newDeck = createNewDeck();
+            setCardsDeck(newDeck);
+        } else {
+            // storage is loaded
+            let newDeck = new CardsDeck();
+            try {
+                newDeck.setStorage(lastCardsDeck);
+                if (!newDeck.top()) {
+                    setGameEnded(true);
+                }
+            } catch (e) {
+                // storage were bad
+                localStorage.removeItem(consts.localStorage.gameId);
+                newDeck = createNewDeck();
+            }
+            setCardsDeck(newDeck);
+        }
+    }, [dispatch, history]);
 
     // const id = props.match.params.id;
 
