@@ -36,7 +36,7 @@ const MySlider = withStyles({
 
 
 const Slider = forwardRef(({ min, max }, ref) => {
-    const defaultVal = max < consts.play.defaultCardsNum ? max : consts.play.defaultCardsNum;
+    const defaultVal = max > 0 && max < consts.play.defaultCardsNum ? max : consts.play.defaultCardsNum;
     const [val, setVal] = useState(defaultVal);
     const minVal = min >= max ? 1 : min;
 
@@ -53,7 +53,8 @@ const Slider = forwardRef(({ min, max }, ref) => {
 
     return (
         <div>
-            <MySlider onChangeCommitted={valueChanged} valueLabelDisplay="auto" aria-label="pretto slider" min={minVal} max={max} defaultValue={defaultVal} />
+            <MySlider onChangeCommitted={valueChanged} valueLabelDisplay="auto" aria-label="pretto slider"
+                      min={minVal} max={max} defaultValue={defaultVal}/>
         </div>
     );
 
