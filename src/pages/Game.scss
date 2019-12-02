@@ -3,18 +3,19 @@
 .game-container {
     height: 100%;
     position: relative;
+    border: $grey4 2px solid;
+    overflow-y: hidden;
 
     @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
-        height: unset;
-        width: fit-content;
         margin: 0 auto;
+        width: 35%;
+        height: 600px; // Todo - remove when '.game' is not removed from dom but only hidden
     }
 
     .game {
         height: 98%;
         text-align: center;
         padding-top: 0.3rem;
-        border: $grey4 2px solid;
 
         @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max) {
             flex-grow: 1;
