@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, {forwardRef, useEffect, useState} from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { green } from '@material-ui/core/colors';
@@ -20,15 +20,24 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const GameSum = forwardRef(({ cardsNum, playsNum, replayGame }, ref) => {
+const GameSum = forwardRef(({ setStats, cardsNum, playsNum, replayGame }, ref) => {
     const classes = useStyles();
+    const [cards, setCards] = useState(0);
+    const [plays, setPlays] = useState(0);
+
+    useEffect(() => {
+        if (setStats) {
+            setCards(cardsNum);
+            setPlays(playsNum);
+        }
+    }, [setStats, cardsNum, playsNum]);
 
     return (
         <div className="game-sum-container">
             <div className="sum-col">
                 <div className="stats">
-                    <p>{cardsNum} cards played</p>
-                    <p>{playsNum - cardsNum} flips flew</p>
+                    <p>{cards} cards played</p>
+                    <p>{plays - cards} misses done</p>
                 </div>
                 <div className="btns-container">
                     <div className="btns-replay">

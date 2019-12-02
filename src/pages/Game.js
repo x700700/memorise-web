@@ -65,7 +65,7 @@ const Game = (props) => {
                 </div>
             </div>}
             <div className={`sum-box ${gameEnded ? 'popup-sum' : ''}`}>
-                <GameSum cardsNum={size} playsNum={playsNum} replayGame={() => replayGame}/>
+                <GameSum setStats={gameEnded} cardsNum={size} playsNum={playsNum} replayGame={() => replayGame}/>
             </div>
         </div>
     );
