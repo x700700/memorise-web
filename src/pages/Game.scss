@@ -6,12 +6,6 @@
     border: $grey4 2px solid;
     overflow-y: hidden;
 
-    @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
-        margin: 0 auto;
-        width: 34%;
-        height: 600px; // Todo - remove when '.game' is not removed from dom but only hidden
-    }
-
     .game {
         height: 98%;
         text-align: center;
@@ -24,12 +18,6 @@
         and (orientation: landscape) {
             height: 97%;
         }
-        @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
-            width: fit-content;
-            align-self: center;
-            padding: 0 1rem;
-            margin-top: 0.3rem;
-        }
 
         .cards-left {
             position: absolute;
@@ -41,6 +29,7 @@
 
             @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
                 margin-top: 1.5rem;
+                margin-left: 29%;
             }
         }
 
