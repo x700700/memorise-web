@@ -8,8 +8,8 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
     const [nextA, setNextA] = useState(a);
     const [showFront, setShowFront] = useState(true);
     const [showBack, setShowBack] = useState(false);
-    const [inRotate, setInRotate] = useState(false);
-    const [inRotateFull, setInRotateFull] = useState(false);
+    const [inRotate, setInRotate] = useState(false); // started rotate
+    const [inRotateFull, setInRotateFull] = useState(false); // ended rotate
     const [inSwitch, setInSwitch] = useState(false);
     const [inFade, setInFade] = useState(false);
 
