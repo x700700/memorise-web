@@ -1,9 +1,17 @@
 @import "../../common/colors";
 
 .menu-container {
+    height: 81%;
     background-color: $purple1;
+    color: $grey2;
+
+    @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
+    and (orientation: landscape) {
+        height: 80%;
+    }
 
     .menu-box {
+        height: 120%;
         background-color: white;
         margin: .7rem;
         border-bottom: $purple1 .7rem solid;

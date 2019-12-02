@@ -12,12 +12,13 @@ const MenuGame = (props) => {
         cards.setStorage(storage);
     }
 
-    const q = ((cards && cards.top()) || {}).q || '';
+    const size = cards && cards.sizeStart();
     return (
         <div className="top-menu-container">
             <TopMenu>
                 <div className="menu-col">
-                    <h1>Game Menu - [{q}]</h1>
+                    <div className="title">Practice</div>
+                    <div># of Cards: {size}</div>
                 </div>
             </TopMenu>
         </div>

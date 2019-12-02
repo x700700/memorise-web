@@ -1,7 +1,17 @@
 @import "../../common/colors";
 
 .top-menu-container {
+    height: 100%;
+    text-align: start;
+
     .menu-col {
+        height: 100%;
+        padding: .3rem;
+
+        .title {
+            color: $grey6;
+            margin-bottom: 1rem;
+        }
 
     }
 }
