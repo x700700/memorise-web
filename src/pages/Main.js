@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { appAuth } from '../redux/actions/app';
 import './Main.scss';

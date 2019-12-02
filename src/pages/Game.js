@@ -44,6 +44,8 @@ const Game = (props) => {
         setCardsDeck(newDeck);
     }, []);
 
+    // const id = props.match.params.id;
+
     const top = cardsDeck && cardsDeck.top();
     const size = cardsDeck && cardsDeck.sizeStart();
     const playsNum = cardsDeck && cardsDeck.playsNum();
