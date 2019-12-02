@@ -33,17 +33,10 @@
                 padding-left: 7px;
             }
         }
-
         button {
             background-color: unset;
             border: none;
             outline: none;
-
-            margin: 0 .3rem;
-            i {
-                font-size: 28px;
-                color: $grey10;
-            }
         }
         .btn-menu {
             margin-left: -.3rem;
@@ -53,9 +46,17 @@
                 color: $grey10;
             }
         }
+
         .tabs {
             margin-top: .4rem;
 
+            .btn {
+                margin: 0 .7rem;
+                i {
+                    font-size: 28px;
+                    color: $grey10;
+                }
+            }
             .tab-active {
                 i {
                     color: $purple4;
