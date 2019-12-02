@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { appAuth } from '../redux/actions/app';
 import './Main.scss';
 import Game from './Game';
 import Header from '../components/Header';
+import NotFound from "./NotFound";
 // import * as types from './redux/actionsTypes';
 
 
-function Main() {
+const Main = () => {
     const userName = useSelector(state => state.app.userName);
     const authCheckStarted = useSelector(state => state.app.authCheckStarted);
     const authCheckEnded = useSelector(state => state.app.authCheckEnded);
@@ -27,9 +29,12 @@ function Main() {
     return (
         <div className="app-main">
             <Header/>
-            <Game/>
+            <Switch>
+                <Route exact path="/" component={Game} />
+                <Route path="/practice" component={Game} />
+                <Route component={NotFound} />
+            </Switch>
         </div>
     );
-}
-
+};
 export default Main;

@@ -7,7 +7,7 @@ import { sagaMiddleware } from './middlewares/saga';
 import './App.scss';
 import Main from "./pages/Main";
 
-function App() {
+const App = () => {
     return (
         <Provider store={store}>
             <div className="App">
@@ -15,7 +15,7 @@ function App() {
             </div>
         </Provider>
     );
-}
+};
 export default App;
 
 sagaMiddleware.run(saga);
