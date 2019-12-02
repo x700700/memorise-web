@@ -37,7 +37,7 @@ const GameSum = forwardRef(({ setStats, cardsNum, playsNum, replayGame }, ref) =
             <div className="sum-col">
                 <div className="stats">
                     <p>{cards} cards played</p>
-                    <p>{plays - cards} misses done</p>
+                    <p>{plays - cards} misses</p>
                 </div>
                 <div className="btns-container">
                     <div className="btns-replay">

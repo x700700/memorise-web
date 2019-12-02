@@ -52,13 +52,15 @@ const Game = (props) => {
     const currA = (top || {}).a || '';
     return (
         <div className="game-container">
-            {currQ &&
+            {(currQ || gameEnded) &&
             <div className="game">
+                {currQ &&
                 <div className="cards-left">
                     {curr} / {size}
                 </div>
+                }
                 <Card ref={refGame} q={currQ} a={currA} setCardInMove={setCardInMove}/>
-                <div className={`game-buttons ${cardInMove ? 'buttons-disable' : ''}`}>
+                <div className={`game-buttons ${cardInMove || gameEnded ? 'buttons-disable' : ''}`}>
                     <button onClick={respBad} className="btn btn-bad"><i className="fas fa-times"></i></button>
                     <button onClick={rotateCard} className="btn"><i className="fas fa-sync-alt"></i></button>
                     <button onClick={respGood} className="btn btn-good"><i className="fas fa-check"></i></button>

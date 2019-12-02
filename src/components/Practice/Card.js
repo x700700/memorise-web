@@ -78,7 +78,7 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
     return (
         <div className="card-container">
             <div className="card-placeholder">
-                <div id="game-card-front" className={`card ${!showFront ? 'card-hide' : ''} ${inSwitch ? 'no-rotate-anim' : ''}`}>
+                <div id="game-card-front" className={`card ${!showFront ? 'card-hide' : ''} ${inSwitch ? 'no-rotate-anim' : ''} ${!currQ ? 'end-card' : ''}`}>
                     <p>{currQ}</p>
                 </div>
                 <div id="game-card-back" className={`card card-back ${!showBack ? 'card-hide' : ''} ${inSwitch ? 'no-rotate-anim' : ''}`}>
@@ -86,7 +86,7 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
                 </div>
             </div>
             <div id="game-card-in" className={`next-card-placeholder ${inSwitch ? 'next-card-in' : ''} ${inFade ? 'next-card-fade' : ''}`}>
-                <div id="game-card-front" className="card next-card-shadow">
+                <div id="game-card-front" className={`card next-card-shadow ${!q ? 'end-card' : ''}`}>
                     <p>{q}</p>
                 </div>
             </div>
