@@ -48,7 +48,9 @@ const Game = (props) => {
     useEffect(() => {
         // console.warn('Game mount');
         dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.practice });
-        dispatch({ type: types.APP_SHOW_MENU, show: false });
+        if (showMenu) {
+            dispatch({type: types.APP_SHOW_MENU, show: false});
+        }
 
         const createNewDeck = () => {
             return new CardsDeck(mockTraining);

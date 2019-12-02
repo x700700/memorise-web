@@ -16,6 +16,7 @@ const Header = (props) => {
     const currPage = useSelector(state => state.app.currentPage);
     const showMenu = useSelector(state => state.app.showMenu);
     const [errorStickerEnded, setErrorStickerEnded] = useState(false);
+    const [timingCurrPage, setTimingCurrPage] = useState(currPage);
 
     useEffect(() => {
         if (error) {
@@ -24,6 +25,16 @@ const Header = (props) => {
             }, 5000);
         }
     }, [error, setErrorStickerEnded]);
+
+    useEffect(() => {
+        if (showMenu) {
+            setTimingCurrPage(currPage);
+        } else {
+            setTimeout(() => {
+                setTimingCurrPage(currPage);
+            }, 300);
+        }
+    }, [currPage, showMenu]);
 
     const setShowMenu = (show) => {
         dispatch({ type: types.APP_SHOW_MENU, show: show });
@@ -50,8 +61,8 @@ const Header = (props) => {
             </div>
             <div className={`top-menu-box ${showMenu ? 'top-menu-pop-down' : ''}`}>
                 <div className="menu-container">
-                    <MenuGame hide={currPage !== consts.pageName.practice}/>
-                    <MenuExam hide={currPage !== consts.pageName.exam}/>
+                    <MenuGame hide={timingCurrPage !== consts.pageName.practice}/>
+                    <MenuExam hide={timingCurrPage !== consts.pageName.exam}/>
                 </div>
             </div>
             {error && !errorStickerEnded &&
