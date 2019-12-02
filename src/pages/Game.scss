@@ -36,10 +36,6 @@
                 margin-top: 1.5%;
                 background-color: $grey7;
                 padding: .1rem .3rem;
-
-                @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
-                    margin-top: calc(1.5% + 1rem);
-                }
             }
 
             .game-buttons {
