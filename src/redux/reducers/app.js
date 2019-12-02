@@ -1,4 +1,5 @@
 import * as types from '../actionsTypes';
+import consts from "../../common/consts";
 
 const appReducer = (  state = {
                           authCheckStarted: false,
@@ -7,6 +8,7 @@ const appReducer = (  state = {
                           error: null,
                           currentPage: null,
                           gameCardsDeck: null,
+                          gameDefaultDeckSize: consts.play.defaultCardsNum,
                           isGameEnded: false,
                           showMenu: false,
                       },
@@ -55,8 +57,11 @@ const appReducer = (  state = {
             return {
                 ...state,
                 isGameEnded: action.ended,
-
-
+            };
+        case types.APP_SET_GAME_DEFAULT_DECK_SIZE:
+            return {
+                ...state,
+                gameDefaultDeckSize: action.size,
             };
 
         default:

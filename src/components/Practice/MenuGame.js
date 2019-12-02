@@ -16,11 +16,11 @@ const MenuGame = (props) => {
 
     const replayGame = () => {
         const size = refSlider.current.value();
-        console.warn('Replay with # of cards = ', size);
         cardsDeck.replay(size);
         dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: cardsDeck });
         dispatch({ type: types.APP_SHOW_MENU, show: false });
         dispatch({ type: types.APP_SET_GAME_ENDED, ended: false });
+        dispatch({ type: types.APP_SET_GAME_DEFAULT_DECK_SIZE, size: size });
     };
 
     const size = (cardsDeck && cardsDeck.getSizeTraining()) || 0;

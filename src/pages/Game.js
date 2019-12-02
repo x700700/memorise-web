@@ -19,6 +19,7 @@ const Game = (props) => {
     const showMenu = useSelector(state => state.app.showMenu);
     const cardsDeck = useSelector(state => state.app.gameCardsDeck);
     const gameEnded = useSelector(state => state.app.isGameEnded);
+    const defaultDeckSize = useSelector(state => state.app.gameDefaultDeckSize);
 
     const refGame = useRef();
 
@@ -40,7 +41,7 @@ const Game = (props) => {
     };
     const replayGame = () => {
         dispatch({ type: types.APP_SET_GAME_ENDED, ended: false });
-        cardsDeck.replay(consts.play.defaultCardsNum);
+        cardsDeck.replay(defaultDeckSize);
         dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: cardsDeck });
     };
 

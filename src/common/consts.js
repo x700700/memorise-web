@@ -10,8 +10,8 @@ export default {
         exam: 'exam',
     },
     play: {
-        minCards: 5,
-        defaultCardsNum: 10,
+        minCards: 2,
+        defaultCardsNum: 20,
     },
     localStorage: {
         gameId: 'memoBool.gameId',

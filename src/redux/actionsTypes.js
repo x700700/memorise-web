@@ -8,6 +8,7 @@ export const APP_SHOW_MENU = 'app.APP_SHOW_MENU';
 
 export const APP_SET_GAME_CARDSDECK = 'app.APP_SET_GAME_CARDSDECK';
 export const APP_SET_GAME_ENDED = 'app.APP_SET_GAME_ENDED';
+export const APP_SET_GAME_DEFAULT_DECK_SIZE = 'app.APP_SET_GAME_DEFAULT_DECK_SIZE';
 
 
 export const saga = {
