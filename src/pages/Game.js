@@ -6,6 +6,7 @@ import './Game.scss';
 import consts from "../common/consts";
 import Card from "../components/Practice/Card";
 import CardsDeck from '../components/Practice/cardsDeck';
+import { loadPlay } from "../common/playUtils";
 import mockTraining from '../mock/training-multiply';
 import GameSum from "../components/Practice/GameSum";
 import PopUpBox from "../components/common/PopUpBox";
@@ -54,26 +55,10 @@ const Game = (props) => {
             return new CardsDeck(mockTraining);
         };
 
-        let lastCardsDeck = localStorage.getItem(consts.localStorage.gameId);
-        let newDeck;
-        if (!lastCardsDeck) {
-            // no storage
-            newDeck = createNewDeck();
-        } else {
-            // storage is loaded
-            newDeck = new CardsDeck();
-            try {
-                newDeck.setStorage(lastCardsDeck);
-                if (!newDeck.top()) {
-                    dispatch({ type: types.APP_SET_GAME_ENDED, ended: true });
-                }
-            } catch (e) {
-                // storage were bad
-                localStorage.removeItem(consts.localStorage.gameId);
-                newDeck = createNewDeck();
-            }
-        }
-        dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: newDeck });
+        loadPlay(consts.localStorage.gameId, createNewDeck,
+                    () => dispatch({ type: types.APP_SET_GAME_ENDED, ended: true }),
+                    (newDeck) => dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: newDeck }));
+
     }, [dispatch, history]);
 
     // const id = props.match.params.id;

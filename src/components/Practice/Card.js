@@ -9,16 +9,23 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
     const [showFront, setShowFront] = useState(true);
     const [showBack, setShowBack] = useState(false);
     const [inRotate, setInRotate] = useState(false);
+    const [inRotateFull, setInRotateFull] = useState(false);
     const [inSwitch, setInSwitch] = useState(false);
     const [inFade, setInFade] = useState(false);
 
-    useImperativeHandle(ref, () => ({
-        rotate() {
-            // console.warn(`click ==> showFront=[${showFront}] - showBack=[${showBack}]`);
+    const _rotate = () => {
+        // console.warn(`click ==> showFront=[${showFront}] - showBack=[${showBack}]`);
+        if (!inRotateFull) {
             setCardInMove(true);
             setInRotate(true);
+            setInRotateFull(true);
             if (showFront) setShowFront(false);
             if (showBack) setShowBack(false);
+        }
+    };
+    useImperativeHandle(ref, () => ({
+        rotate() {
+            _rotate();
         },
     }));
 
@@ -61,6 +68,7 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
                 side === 'back' && setShowFront(true);
             } else {
                 // rotate animation totally ended
+                setInRotateFull(false);
                 setCardMoveEnded();
             }
         };
@@ -78,7 +86,7 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
     return (
         <div className="card-desktop-container">
             <div className="card-container">
-                <div className="card-placeholder">
+                <div className={`card-placeholder ${inRotateFull ? 'disable-pointer' : ''}`} onClick={() => _rotate()}>
                     <div id="game-card-front" className={`card ${!showFront ? 'card-hide' : ''} ${inSwitch ? 'no-rotate-anim' : ''} ${!currQ ? 'end-card' : ''}`}>
                         <p>{currQ}</p>
                     </div>

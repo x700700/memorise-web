@@ -23,3 +23,6 @@ code {
 .hide {
     display: none;
 }
+.disable-pointer {
+    pointer-events: none;
+}
