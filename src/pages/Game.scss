@@ -8,7 +8,7 @@
 
     @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
         margin: 0 auto;
-        width: 35%;
+        width: 34%;
         height: 600px; // Todo - remove when '.game' is not removed from dom but only hidden
     }
 
@@ -87,7 +87,7 @@
     .sum-box {
         position: absolute;
         width: 90%;
-        height: 85%;
+        height: 82%;
         margin: 0 5%;
         top: 1rem;
         border: $purple1 2px solid;
@@ -95,8 +95,13 @@
         background-color: $purple2;
         color: $grey10;
         z-index: 19;
-        transform: translateY(600px);
+        transform: translateY(850px);
         transition: transform .5s ease-in-out;
+
+        @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
+        and (orientation: landscape) {
+            height: 75%;
+        }
     }
     .popup-sum {
         transform: translateY(0);
