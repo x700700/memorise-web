@@ -12,17 +12,17 @@ export default class cardsDeck {
         } else {
             this.initialDeck = [];
         }
-        this.reset(training);
+        this.reset(training, consts.play.defaultCardsNum);
         if (training) {
             this.validate();
         }
     }
 
-    reset = (shouldSaveToStorage) => {
+    reset = (shouldSaveToStorage, cardsNum) => {
         this.currentDeck = _.cloneDeep(this.initialDeck.filter(x => x.q && x.a));
-        this.currentDeck = (_.shuffle(this.currentDeck)).splice(0, 5);
-        // this.currentDeck = _.shuffle(this.currentDeck);
-        this.size = this.currentDeck.length;
+        this.sizeTraining = this.currentDeck.length;
+        this.currentDeck = (_.shuffle(this.currentDeck)).splice(0, cardsNum);
+        this.sizeDeck = this.currentDeck.length;
         this.plays = 0;
         this.wrongsDeck = [];
         if (shouldSaveToStorage) {
@@ -40,7 +40,8 @@ export default class cardsDeck {
             initialDeck: this.initialDeck,
             currentDeck: this.currentDeck,
             wrongsDeck: this.wrongsDeck,
-            size: this.size,
+            sizeTraining: this.sizeTraining,
+            sizeDeck: this.sizeDeck,
             plays: this.plays,
         };
         const json = JSON.stringify(mem);
@@ -51,17 +52,19 @@ export default class cardsDeck {
         this.initialDeck = mem.initialDeck;
         this.currentDeck = mem.currentDeck;
         this.wrongsDeck = mem.wrongsDeck;
-        this.size = mem.size;
+        this.sizeTraining = mem.sizeTraining;
+        this.sizeDeck = mem.sizeDeck;
         this.plays = mem.plays;
     };
 
     top = () => this.currentDeck[0] || null;
-    sizeStart = () => this.size;
+    getSizeTraining = () => this.sizeTraining;
+    getSizeDeck = () => this.sizeDeck;
     sizeCurr = () => this.currentDeck.length + this.wrongsDeck.length;
     playsNum = () => this.plays;
 
-    replay = () => {
-        this.reset(true);
+    replay = (cardsNum) => {
+        this.reset(true, cardsNum);
     };
     nextCard = (right) => {
         let deckFinished = false;

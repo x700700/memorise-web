@@ -11,7 +11,7 @@ export default {
     },
     play: {
         minCards: 5,
-        defaultVal: 10,
+        defaultCardsNum: 10,
     },
     localStorage: {
         gameId: 'memoBool.gameId',

@@ -17,12 +17,13 @@ const MenuGame = (props) => {
     const replayGame = () => {
         const size = refSlider.current.value();
         console.warn('Replay with # of cards = ', size);
-        cardsDeck.replay();
+        cardsDeck.replay(size);
         dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: cardsDeck });
         dispatch({ type: types.APP_SHOW_MENU, show: false });
+        dispatch({ type: types.APP_SET_GAME_ENDED, ended: false });
     };
 
-    const size = (cardsDeck && cardsDeck.sizeStart()) || 0;
+    const size = (cardsDeck && cardsDeck.getSizeTraining()) || 0;
     return (
         <div className="top-menu-container">
             <TopMenu>

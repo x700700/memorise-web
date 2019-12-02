@@ -7,6 +7,7 @@ const appReducer = (  state = {
                           error: null,
                           currentPage: null,
                           gameCardsDeck: null,
+                          isGameEnded: false,
                           showMenu: false,
                       },
                       action) => {
@@ -49,6 +50,13 @@ const appReducer = (  state = {
             return {
                 ...state,
                 gameCardsDeck: action.cardsDeck,
+            };
+        case types.APP_SET_GAME_ENDED:
+            return {
+                ...state,
+                isGameEnded: action.ended,
+
+
             };
 
         default:

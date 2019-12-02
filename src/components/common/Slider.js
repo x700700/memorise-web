@@ -36,7 +36,7 @@ const MySlider = withStyles({
 
 
 const Slider = forwardRef(({ min, max }, ref) => {
-    const defaultVal = max < consts.play.defaultVal ? max : consts.play.defaultVal;
+    const defaultVal = max < consts.play.defaultCardsNum ? max : consts.play.defaultCardsNum;
     const [val, setVal] = useState(defaultVal);
     const minVal = min >= max ? 1 : min;
 

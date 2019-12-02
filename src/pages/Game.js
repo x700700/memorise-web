@@ -14,11 +14,11 @@ import PopUpBox from "../components/common/PopUpBox";
 const Game = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const [gameEnded, setGameEnded] = useState(false);
     const [, setTopCard] = useState(null);
     const [cardInMove, setCardInMove] = useState(false);
     const showMenu = useSelector(state => state.app.showMenu);
     const cardsDeck = useSelector(state => state.app.gameCardsDeck);
+    const gameEnded = useSelector(state => state.app.isGameEnded);
 
     const refGame = useRef();
 
@@ -28,7 +28,7 @@ const Game = (props) => {
 
     const replaceCard = (good) => {
         const ended = cardsDeck.nextCard(good);
-        ended && setGameEnded(ended);
+        ended && dispatch({ type: types.APP_SET_GAME_ENDED, ended: true });
         const top = cardsDeck.top();
         setTopCard(top);
     };
@@ -39,8 +39,8 @@ const Game = (props) => {
         replaceCard(false);
     };
     const replayGame = () => {
-        setGameEnded(false);
-        cardsDeck.replay();
+        dispatch({ type: types.APP_SET_GAME_ENDED, ended: false });
+        cardsDeck.replay(consts.play.defaultCardsNum);
         dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: cardsDeck });
     };
 
@@ -64,7 +64,7 @@ const Game = (props) => {
             try {
                 newDeck.setStorage(lastCardsDeck);
                 if (!newDeck.top()) {
-                    setGameEnded(true);
+                    dispatch({ type: types.APP_SET_GAME_ENDED, ended: true });
                 }
             } catch (e) {
                 // storage were bad
@@ -78,7 +78,7 @@ const Game = (props) => {
     // const id = props.match.params.id;
 
     const top = cardsDeck && cardsDeck.top();
-    const size = cardsDeck && cardsDeck.sizeStart();
+    const size = cardsDeck && cardsDeck.getSizeDeck();
     const playsNum = cardsDeck && cardsDeck.playsNum();
     const curr = cardsDeck && cardsDeck.sizeCurr();
     const currQ = (top || {}).q || '';
