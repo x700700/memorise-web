@@ -1,13 +1,11 @@
 import * as types from '../actionsTypes';
-import consts from '../../common/consts';
-
 
 const appReducer = (  state = {
                           authCheckStarted: false,
                           authCheckEnded: false,
                           userName: null,
                           error: null,
-                          currentPage: consts.pageName.practice,
+                          currentPage: null,
                           editedTrainingId: null,
                           playedTrainingId: null,
                       },

@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { appAuth } from '../redux/actions/app';
 import './Main.scss';
-import Game from './Game';
 import Header from '../components/Header';
 import NotFound from "./NotFound";
-// import * as types from './redux/actionsTypes';
+import Game from './Game';
+import Exam from "./Exam";
 
 
 const Main = () => {
@@ -17,22 +17,23 @@ const Main = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         console.warn('App started');
-        // dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: 'plup' })
-        // dispatch(setCurrentPage('olle'));
         dispatch(appAuth());
     }, [dispatch]);
 
     useEffect(() => {
-        authCheckStarted && authCheckEnded && console.warn(`*** Hello ${userName} ***`);
+        authCheckStarted && authCheckEnded && userName && console.warn(`*** Hello ${userName} ***`);
+        authCheckStarted && authCheckEnded && !userName && console.warn(`*** Not Signed In ***`);
     }, [userName, authCheckEnded, authCheckStarted]);
 
     return (
         <div className="app-main">
             <Header/>
             <Switch>
-                <Route exact path="/" component={Game} />
+                <Route exact path="/"><Redirect to="/practice" /></Route>
                 <Route exact path="/practice" component={Game} />
                 <Route path="/practice/:id" component={Game} />
+                <Route exact path="/exam" component={Exam} />
+                <Route path="/exam/:id" component={Exam} />
                 <Route component={NotFound} />
             </Switch>
         </div>

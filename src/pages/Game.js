@@ -1,5 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
+import { useDispatch } from 'react-redux'
+import * as types from '../redux/actionsTypes';
 import './Game.scss';
+import consts from "../common/consts";
 import Card from "../components/Practice/Card";
 import CardsDeck from '../components/Practice/cardsDeck';
 import mockTraining from '../mock/training-multiply';
@@ -8,6 +11,7 @@ import PopUpBox from "../components/common/PopUpBox";
 // import Rotate90DegreesCcwTwoToneIcon from '@material-ui/icons/Rotate90DegreesCcwTwoTone';
 
 const Game = (props) => {
+    const dispatch = useDispatch();
     const [cardsDeck, setCardsDeck] = useState(null);
     const [gameEnded, setGameEnded] = useState(false);
     const [, setTopCard] = useState(null);
@@ -26,11 +30,9 @@ const Game = (props) => {
         setTopCard(top);
     };
     const respGood = () => {
-        // console.warn('good');
         replaceCard(true);
     };
     const respBad = () => {
-        // console.warn('bad');
         replaceCard(false);
     };
     const replayGame = () => {
@@ -39,10 +41,11 @@ const Game = (props) => {
     };
 
     useEffect(() => {
-        console.warn('loading cards deck on mount');
+        // console.warn('Game mount');
+        dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.practice });
         const newDeck = new CardsDeck(mockTraining);
         setCardsDeck(newDeck);
-    }, []);
+    }, [dispatch]);
 
     // const id = props.match.params.id;
 

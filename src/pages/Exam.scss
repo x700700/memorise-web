@@ -1,0 +1,76 @@
+@import "/../common/colors";
+
+.exam-desktop-container {
+    height: 100%;
+    border: $grey4 2px solid;
+
+    @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+        width: 480px;
+        height: fit-content;
+        margin: .3rem auto;
+        padding: .3rem;
+    }
+
+    .exam-container {
+        height: 100%;
+        position: relative;
+        overflow-y: hidden;
+
+        .exam {
+            height: 98%;
+            text-align: center;
+            padding-top: 0.3rem;
+
+            @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max) {
+                flex-grow: 1;
+            }
+            @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
+            and (orientation: landscape) {
+                height: 97%;
+            }
+
+            .cards-left {
+                position: absolute;
+                z-index: 9;
+                margin-left: 4%;
+                margin-top: 1.5%;
+                background-color: $grey7;
+                padding: .1rem .3rem;
+            }
+
+            .exam-buttons {
+                margin: 1rem .5rem 0 .5rem;
+                display: flex;
+                justify-content: space-between;
+
+                button {
+                    background-color: unset;
+                    border: none;
+                    outline: none;
+                }
+
+                i {
+                    font-size: 48px;
+                }
+
+                .btn-good i {
+                    color: mediumblue;
+                }
+
+                .btn-bad i {
+                    color: darkred;
+                }
+            }
+
+            .buttons-disable {
+                button {
+                    pointer-events: none;
+
+                    i {
+                        color: $grey6 !important;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux'
 import './Header.scss';
 import logo from '../logo.svg';
 import consts from "../common/consts";
 
 const Header = (props) => {
-    const { t } = useTranslation();
+    // const { t } = useTranslation();
     const error = useSelector(state => state.app.error);
     const userName = useSelector(state => state.app.userName);
     const currPage = useSelector(state => state.app.currentPage);
@@ -35,6 +35,7 @@ const Header = (props) => {
                     <Link to="/"><span className={`btn ${currPage === consts.pageName.trainings ? 'tab-active' : ''}`}><i className="fas fa-book-open"/></span></Link>
                     <Link to="/trainings"><span className={`btn ${currPage === consts.pageName.exercises ? 'tab-active' : ''}`}><i className="fas fa-edit"/></span></Link>
                     <Link to="/practice"><span className={`btn ${currPage === consts.pageName.practice ? 'tab-active' : ''}`}><i className="fas fa-running"/></span></Link>
+                    <Link to="/exam"><span className={`btn ${currPage === consts.pageName.exam ? 'tab-active' : ''}`}><i className="fas fa-grin-beam-sweat"/></span></Link>
                 </div>
                 <img className="logo" src={logo} alt="logo" width="32" height="32"/>
             </div>
