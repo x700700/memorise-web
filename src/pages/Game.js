@@ -14,11 +14,11 @@ import PopUpBox from "../components/common/PopUpBox";
 const Game = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const [cardsDeck, setCardsDeck] = useState(null);
     const [gameEnded, setGameEnded] = useState(false);
     const [, setTopCard] = useState(null);
     const [cardInMove, setCardInMove] = useState(false);
     const showMenu = useSelector(state => state.app.showMenu);
+    const cardsDeck = useSelector(state => state.app.gameCardsDeck);
 
     const refGame = useRef();
 
@@ -41,7 +41,7 @@ const Game = (props) => {
     const replayGame = () => {
         setGameEnded(false);
         cardsDeck.replay();
-        dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: cardsDeck.getStorage() });
+        dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: cardsDeck });
     };
 
     useEffect(() => {
@@ -72,8 +72,7 @@ const Game = (props) => {
                 newDeck = createNewDeck();
             }
         }
-        setCardsDeck(newDeck);
-        dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: newDeck.getStorage() });
+        dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: newDeck });
     }, [dispatch, history]);
 
     // const id = props.match.params.id;

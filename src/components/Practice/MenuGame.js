@@ -1,30 +1,28 @@
 import React, {useRef} from 'react';
-import {useSelector} from "react-redux";
-import cardsDeck from "./cardsDeck";
+import { useDispatch, useSelector } from "react-redux";
 import './MenuGame.scss';
 import TopMenu from "../common/TopMenu";
 import Slider from "../common/Slider";
 import consts from "../../common/consts";
 import Button from "../common/Button";
 import {useTranslation} from "react-i18next";
+import * as types from "../../redux/actionsTypes";
 
 const MenuGame = (props) => {
     const { t } = useTranslation();
+    const dispatch = useDispatch();
     const refSlider = useRef();
-    const storeCardsDeck = useSelector(state => state.app.gameCardsDeck);
-
-    let cards;
-    if (storeCardsDeck) {
-        cards = new cardsDeck();
-        cards.setStorage(storeCardsDeck);
-    }
+    const cardsDeck = useSelector(state => state.app.gameCardsDeck);
 
     const replayGame = () => {
         const size = refSlider.current.value();
         console.warn('Replay with # of cards = ', size);
+        cardsDeck.replay();
+        dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: cardsDeck });
+        dispatch({ type: types.APP_SHOW_MENU, show: false });
     };
 
-    const size = (cards && cards.sizeStart()) || 0;
+    const size = (cardsDeck && cardsDeck.sizeStart()) || 0;
     return (
         <div className="top-menu-container">
             <TopMenu>
