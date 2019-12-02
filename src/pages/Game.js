@@ -33,7 +33,6 @@ const Game = (props) => {
         replaceCard(false);
     };
     const replayGame = () => {
-        console.warn('replay');
         setGameEnded(false);
         cardsDeck.reset();
     };

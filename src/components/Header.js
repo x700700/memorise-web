@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { useSelector } from 'react-redux'
 import './Header.scss';
 import logo from '../logo.svg';
@@ -6,6 +6,15 @@ import logo from '../logo.svg';
 const Header = (props) => {
     const error = useSelector(state => state.app.error);
     const userName = useSelector(state => state.app.userName);
+    const [errorStickerEnded, setErrorStickerEnded] = useState(false);
+
+    useEffect(() => {
+        if (error) {
+            setTimeout(() => {
+                setErrorStickerEnded(true);
+            }, 5000);
+        }
+    }, [error, setErrorStickerEnded]);
 
     return (
         <div className="header">
@@ -24,7 +33,7 @@ const Header = (props) => {
                 </div>
                 <img className="logo" src={logo} alt="logo" width="32" height="32"/>
             </div>
-            {error &&
+            {error && !errorStickerEnded &&
             <div className="error">
                 {error}
             </div>}
