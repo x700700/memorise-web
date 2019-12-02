@@ -8,9 +8,14 @@
         padding: .3rem;
 
         .title {
-            color: $grey6;
+            color: $grey5;
             margin-bottom: 1rem;
         }
 
+        .headline {
+            color: $grey2;
+            font-size: 85%;
+            font-weight: 400;
+        }
     }
 }

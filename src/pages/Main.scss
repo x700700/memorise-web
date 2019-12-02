@@ -1,8 +1,11 @@
 @import "../common/colors";
 
 .app-main {
-    min-height: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
+
+    .app-body-area {
+        height: calc(100% - 3.3rem);
+        display: flex;
+        flex-direction: column;
+    }
 }

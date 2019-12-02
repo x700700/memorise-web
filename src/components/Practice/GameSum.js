@@ -42,7 +42,7 @@ const GameSum = forwardRef(({ setStats, cardsNum, playsNum, replayGame }, ref) =
                 </div>
                 <div className="btns-container">
                     <div className="btns-replay">
-                        <ColorButton onClick={replayGame()} variant="contained" color="primary" className={classes.margin}>
+                        <ColorButton onClick={replayGame()} variant="contained" color="primary" size="medium" fullWidth={true} className={classes.margin}>
                             {t('replay')}
                         </ColorButton>
                     </div>

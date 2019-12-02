@@ -18,7 +18,7 @@ const MenuGame = (props) => {
             <TopMenu>
                 <div className="menu-col">
                     <div className="title">Practice</div>
-                    <div># of Cards: {size}</div>
+                    <div className="headline">Choose Number Of Cards to Practice:</div>
                 </div>
             </TopMenu>
         </div>

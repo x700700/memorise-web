@@ -17,7 +17,8 @@
             flex-grow: 1;
 
             .btns-replay {
-                margin-top: 33%;
+                width: 50%;
+                margin: 33% auto;
 
                 @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
                 and (orientation: landscape) {

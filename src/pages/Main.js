@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
+import * as types from '../redux/actionsTypes';
 import { appAuth } from '../redux/actions/app';
 import './Main.scss';
 import Header from '../components/Header';
@@ -25,16 +26,22 @@ const Main = () => {
         authCheckStarted && authCheckEnded && !userName && console.warn(`*** Not Signed In ***`);
     }, [userName, authCheckEnded, authCheckStarted]);
 
+    const closeHeaderMenu = () => {
+        dispatch({ type: types.APP_SHOW_MENU, show: false });
+    };
+
     return (
         <div className="app-main">
             <Header/>
-            <Switch>
-                <Route exact path="/"><Redirect to="/practice" /></Route>
-                <Route path="/trainings/:id" component={null} />
-                <Route exact path="/practice" component={Game} />
-                <Route exact path="/exam" component={Exam} />
-                <Route component={NotFound} />
-            </Switch>
+            <div className="app-body-area" onClick={() => closeHeaderMenu()}>
+                <Switch>
+                    <Route exact path="/"><Redirect to="/practice" /></Route>
+                    <Route path="/trainings/:id" component={null} />
+                    <Route exact path="/practice" component={Game} />
+                    <Route exact path="/exam" component={Exam} />
+                    <Route component={NotFound} />
+                </Switch>
+            </div>
         </div>
     );
 };

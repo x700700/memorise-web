@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import { useHistory } from "react-router-dom";
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as types from '../redux/actionsTypes';
 import './Game.scss';
 import consts from "../common/consts";
