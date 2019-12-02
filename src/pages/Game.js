@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import * as types from '../redux/actionsTypes';
@@ -48,9 +48,7 @@ const Game = (props) => {
     useEffect(() => {
         // console.warn('Game mount');
         dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.practice });
-        if (showMenu) {
-            dispatch({type: types.APP_SHOW_MENU, show: false});
-        }
+        dispatch({type: types.APP_SHOW_MENU, show: false});
 
         const createNewDeck = () => {
             return new CardsDeck(mockTraining);

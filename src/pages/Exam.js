@@ -1,5 +1,5 @@
-import React, {useEffect/*, useState*/} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import React, { useEffect /*, useState*/} from 'react';
+import { useDispatch } from "react-redux";
 import * as types from "../redux/actionsTypes";
 import './Exam.scss';
 import consts from "../common/consts";
@@ -8,7 +8,6 @@ import consts from "../common/consts";
 
 const Exam = (props) => {
     const dispatch = useDispatch();
-    const showMenu = useSelector(state => state.app.showMenu);
     // const [cardsDeck, setCardsDeck] = useState(null);
     // const [gameEnded, setGameEnded] = useState(false);
     // const [, setTopCard] = useState(null);
@@ -16,9 +15,8 @@ const Exam = (props) => {
     useEffect(() => {
         // console.warn('Exam mount');
         dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.exam });
-        if (showMenu) {
-            dispatch({type: types.APP_SHOW_MENU, show: false});
-        }
+        dispatch({type: types.APP_SHOW_MENU, show: false})
+
         // const newDeck = new CardsDeck(mockTraining);
         // setCardsDeck(newDeck);
     }, [dispatch]);
