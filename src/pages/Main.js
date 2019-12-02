@@ -31,7 +31,8 @@ const Main = () => {
             <Header/>
             <Switch>
                 <Route exact path="/" component={Game} />
-                <Route path="/practice" component={Game} />
+                <Route exact path="/practice" component={Game} />
+                <Route path="/practice/:id" component={Game} />
                 <Route component={NotFound} />
             </Switch>
         </div>
