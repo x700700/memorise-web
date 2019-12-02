@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import { useHistory } from "react-router-dom";
-import { useDispatch } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import * as types from '../redux/actionsTypes';
 import './Game.scss';
 import consts from "../common/consts";
@@ -18,6 +18,7 @@ const Game = (props) => {
     const [gameEnded, setGameEnded] = useState(false);
     const [, setTopCard] = useState(null);
     const [cardInMove, setCardInMove] = useState(false);
+    const showMenu = useSelector(state => state.app.showMenu);
 
     const refGame = useRef();
 
@@ -40,23 +41,26 @@ const Game = (props) => {
     const replayGame = () => {
         setGameEnded(false);
         cardsDeck.replay();
+        dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: cardsDeck.getStorage() });
     };
 
     useEffect(() => {
+        // console.warn('Game mount');
+        dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.practice });
+        dispatch({ type: types.APP_SHOW_MENU, show: false });
+
         const createNewDeck = () => {
             return new CardsDeck(mockTraining);
         };
 
-        // console.warn('Game mount');
-        dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.practice });
         let lastCardsDeck = localStorage.getItem(consts.localStorage.gameId);
+        let newDeck;
         if (!lastCardsDeck) {
             // no storage
-            const newDeck = createNewDeck();
-            setCardsDeck(newDeck);
+            newDeck = createNewDeck();
         } else {
             // storage is loaded
-            let newDeck = new CardsDeck();
+            newDeck = new CardsDeck();
             try {
                 newDeck.setStorage(lastCardsDeck);
                 if (!newDeck.top()) {
@@ -67,8 +71,9 @@ const Game = (props) => {
                 localStorage.removeItem(consts.localStorage.gameId);
                 newDeck = createNewDeck();
             }
-            setCardsDeck(newDeck);
         }
+        setCardsDeck(newDeck);
+        dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: newDeck.getStorage() });
     }, [dispatch, history]);
 
     // const id = props.match.params.id;
@@ -90,7 +95,7 @@ const Game = (props) => {
                     </div>
                     }
                     <Card ref={refGame} q={currQ} a={currA} setCardInMove={setCardInMove}/>
-                    <div className={`game-buttons ${cardInMove || gameEnded ? 'buttons-disable' : ''}`}>
+                    <div className={`game-buttons ${cardInMove || gameEnded || showMenu ? 'buttons-disable' : ''}`}>
                         <button onClick={respBad} className="btn btn-bad"><i className="fas fa-times"></i></button>
                         <button onClick={rotateCard} className="btn"><i className="fas fa-sync-alt"></i></button>
                         <button onClick={respGood} className="btn btn-good"><i className="fas fa-check"></i></button>

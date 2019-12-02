@@ -15,6 +15,7 @@ const Exam = (props) => {
     useEffect(() => {
         // console.warn('Exam mount');
         dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.exam });
+        dispatch({ type: types.APP_SHOW_MENU, show: false });
         // const newDeck = new CardsDeck(mockTraining);
         // setCardsDeck(newDeck);
     }, [dispatch]);

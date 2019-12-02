@@ -1,0 +1,11 @@
+@import "../../common/colors";
+
+.menu-container {
+    background-color: $purple1;
+
+    .menu-box {
+        background-color: white;
+        margin: .7rem;
+        border-bottom: $purple1 .7rem solid;
+    }
+}

@@ -6,8 +6,8 @@ const appReducer = (  state = {
                           userName: null,
                           error: null,
                           currentPage: null,
-                          editedTrainingId: null,
-                          playedTrainingId: null,
+                          gameCardsDeck: null,
+                          showMenu: false,
                       },
                       action) => {
 
@@ -37,7 +37,18 @@ const appReducer = (  state = {
         case types.APP_SET_CURRENT_PAGE:
             return {
                 ...state,
-                currentPage: action.currentPage
+                currentPage: action.currentPage,
+            };
+        case types.APP_SHOW_MENU:
+            return {
+                ...state,
+                showMenu: action.show,
+            };
+
+        case types.APP_SET_GAME_CARDSDECK:
+            return {
+                ...state,
+                gameCardsDeck: action.cardsDeck,
             };
 
         default:
