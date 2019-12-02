@@ -1,27 +1,9 @@
 import React, {forwardRef, useEffect, useState} from 'react';
 import {useTranslation} from "react-i18next";
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import { green } from '@material-ui/core/colors';
+import Button from "../common/Button";
 import './GameSum.scss';
 
-const ColorButton = withStyles(theme => ({
-    root: {
-        color: theme.palette.getContrastText(green[500]),
-        backgroundColor: green[500],
-        '&:hover': {
-            backgroundColor: green[700],
-        },
-    },
-}))(Button);
-const useStyles = makeStyles(theme => ({
-    margin: {
-        margin: theme.spacing(1),
-    },
-}));
-
 const GameSum = forwardRef(({ setStats, cardsNum, playsNum, replayGame }, ref) => {
-    const classes = useStyles();
     const { t } = useTranslation();
     const [cards, setCards] = useState(0);
     const [plays, setPlays] = useState(0);
@@ -42,9 +24,7 @@ const GameSum = forwardRef(({ setStats, cardsNum, playsNum, replayGame }, ref) =
                 </div>
                 <div className="btns-container">
                     <div className="btns-replay">
-                        <ColorButton onClick={replayGame()} variant="contained" color="primary" size="medium" fullWidth={true} className={classes.margin}>
-                            {t('replay')}
-                        </ColorButton>
+                        <Button text={t('replay')} onClick={replayGame} />
                     </div>
                 </div>
             </div>

@@ -9,6 +9,10 @@ export default {
         practice: 'practice',
         exam: 'exam',
     },
+    play: {
+        minCards: 5,
+        defaultVal: 10,
+    },
     localStorage: {
         gameId: 'memoBool.gameId',
     },

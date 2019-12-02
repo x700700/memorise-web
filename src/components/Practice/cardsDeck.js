@@ -20,7 +20,8 @@ export default class cardsDeck {
 
     reset = (shouldSaveToStorage) => {
         this.currentDeck = _.cloneDeep(this.initialDeck.filter(x => x.q && x.a));
-        this.currentDeck = (_.shuffle(this.currentDeck)).splice(0, 2); // Todo - cut just to keep small
+        this.currentDeck = (_.shuffle(this.currentDeck)).splice(0, 5);
+        // this.currentDeck = _.shuffle(this.currentDeck);
         this.size = this.currentDeck.length;
         this.plays = 0;
         this.wrongsDeck = [];

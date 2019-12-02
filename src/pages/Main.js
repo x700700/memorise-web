@@ -11,11 +11,12 @@ import Exam from "./Exam";
 
 
 const Main = () => {
+    const dispatch = useDispatch();
     const userName = useSelector(state => state.app.userName);
     const authCheckStarted = useSelector(state => state.app.authCheckStarted);
     const authCheckEnded = useSelector(state => state.app.authCheckEnded);
+    const isMenuShown = useSelector(state => state.app.showMenu);
 
-    const dispatch = useDispatch();
     useEffect(() => {
         console.warn('App started');
         dispatch(appAuth());
@@ -27,7 +28,7 @@ const Main = () => {
     }, [userName, authCheckEnded, authCheckStarted]);
 
     const closeHeaderMenu = () => {
-        dispatch({ type: types.APP_SHOW_MENU, show: false });
+        if (isMenuShown) dispatch({ type: types.APP_SHOW_MENU, show: false });
     };
 
     return (
