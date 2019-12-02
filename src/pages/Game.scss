@@ -1,73 +1,78 @@
 @import "/../common/colors";
 
-.game-container {
+.game-desktop-container {
     height: 100%;
-    position: relative;
     border: $grey4 2px solid;
-    overflow-y: hidden;
 
-    .game {
-        height: 98%;
-        text-align: center;
-        padding-top: 0.3rem;
+    @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+        width: 480px;
+        height: fit-content;
+        margin: .3rem auto;
+        padding: .3rem;
+    }
 
-        @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max) {
-            flex-grow: 1;
-        }
-        @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
-        and (orientation: landscape) {
-            height: 97%;
-        }
+    .game-container {
+        height: 100%;
+        position: relative;
+        overflow-y: hidden;
 
-        .cards-left {
-            position: absolute;
-            z-index: 9;
-            margin-left: 1.2rem;
-            margin-top: 0.3rem;
-            background-color: $grey7;
-            padding: .1rem .3rem;
+        .game {
+            height: 98%;
+            text-align: center;
+            padding-top: 0.3rem;
 
-            @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
-                margin-top: 1.5rem;
-                margin-left: 29%;
+            @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max) {
+                flex-grow: 1;
             }
-        }
-
-        .game-buttons {
-            margin: 1rem .5rem 0 .5rem;
-            display: flex;
-            justify-content: space-between;
-
-            @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
-                width: 320px;
-                margin: 0 auto .5rem auto;
+            @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
+            and (orientation: landscape) {
+                height: 97%;
             }
 
-            button {
-                background-color: unset;
-                border: none;
-                outline: none;
+            .cards-left {
+                position: absolute;
+                z-index: 9;
+                margin-left: 4%;
+                margin-top: 1.5%;
+                background-color: $grey7;
+                padding: .1rem .3rem;
+
+                @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+                    margin-top: calc(1.5% + 1rem);
+                }
             }
 
-            i {
-                font-size: 48px;
-            }
+            .game-buttons {
+                margin: 1rem .5rem 0 .5rem;
+                display: flex;
+                justify-content: space-between;
 
-            .btn-good i {
-                color: mediumblue;
-            }
-
-            .btn-bad i {
-                color: darkred;
-            }
-        }
-
-        .buttons-disable {
-            button {
-                pointer-events: none;
+                button {
+                    background-color: unset;
+                    border: none;
+                    outline: none;
+                }
 
                 i {
-                    color: $grey6 !important;
+                    font-size: 48px;
+                }
+
+                .btn-good i {
+                    color: mediumblue;
+                }
+
+                .btn-bad i {
+                    color: darkred;
+                }
+            }
+
+            .buttons-disable {
+                button {
+                    pointer-events: none;
+
+                    i {
+                        color: $grey6 !important;
+                    }
                 }
             }
         }

@@ -3,11 +3,6 @@
 .card-desktop-container {
     width: 100%;
 
-    @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
-        width: 480px;
-        margin: 0 auto;
-    }
-
     .card-container {
         width: 100%;
         display: flex;
@@ -20,7 +15,8 @@
             height: 70vh;
             position: relative;
 
-            @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max) and (orientation: landscape) {
+            @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
+            and (orientation: landscape) {
                 height: 52vh;
             }
 
