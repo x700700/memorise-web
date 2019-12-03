@@ -9,7 +9,8 @@ const ExamPage = ({ size, num, q, answers, replaceCard }) => {
             <div className="exam-page">
                 {q &&
                 <div className="cards-left">
-                    {num} ({size})
+                    <span><i className="fas fa-arrow-up"/></span>
+                    <span>{num} / {size}</span>
                 </div>
                 }
                 <div className="exam-col">
@@ -19,7 +20,7 @@ const ExamPage = ({ size, num, q, answers, replaceCard }) => {
                     <div className="answers-container">
                         <div className="answers-col">
                             {answers && answers.length > 0 && answers.map((a, i) => (
-                                <div key={i}>
+                                <div key={i} className="each-answer-container">
                                     <ExamAnswer text={a} />
                                 </div>))}
                         </div>

@@ -29,9 +29,9 @@ const ExamTable = ({ size, num, q, answers, replaceCard }) => {
     return (
         <div className="exam-table">
             <div id="exam-previous-paper" className={`exam-previous-paper-container ${showPrev ? 'prev-show' : ''}`}>
-                <ExamPage size={size} num={size - num + 1} q={currQ} answers={answers} replaceCard={replaceCard}/>
+                <ExamPage size={size} num={num} q={currQ} answers={answers} replaceCard={replaceCard}/>
             </div>
-            <ExamPage size={size} num={size-num+1} q={q} answers={answers} replaceCard={replaceCard}/>
+            <ExamPage size={size} num={num} q={q} answers={answers} replaceCard={replaceCard}/>
         </div>
     );
 };

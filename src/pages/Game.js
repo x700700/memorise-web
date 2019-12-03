@@ -75,7 +75,8 @@ const Game = (props) => {
                 <div className="game">
                     {currQ &&
                     <div className="cards-left">
-                        {curr} / {size}
+                        <span><i className="fas fa-arrow-down"/></span>
+                        <span>{curr} / {size}</span>
                     </div>
                     }
                     <Card ref={refGame} q={currQ} a={currA} setCardInMove={setCardInMove}/>
