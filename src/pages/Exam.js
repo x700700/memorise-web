@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import * as types from '../redux/actionsTypes';
@@ -9,16 +9,13 @@ import { loadPlay } from "../common/playUtils";
 import mockTraining from '../mock/training-multiply';
 import ExamSum from "../components/Practice/ExamSum";
 import PopUpBox from "../components/common/PopUpBox";
-import ExamAnswer from "../components/Practice/ExamAnswer";
-import ExamPage from "../components/Practice/ExamPage";
 import ExamTable from "../components/Practice/ExamTable";
-// import Rotate90DegreesCcwTwoToneIcon from '@material-ui/icons/Rotate90DegreesCcwTwoTone';
 
 const Exam = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [, setTopCard] = useState(null); // !! This is necessary for making the dom render on next card !!
-    const showMenu = useSelector(state => state.app.showMenu);
+    // const showMenu = useSelector(state => state.app.showMenu);
     const cardsDeck = useSelector(state => state.app.examCardsDeck);
     const examEnded = useSelector(state => state.app.isExamEnded);
     const defaultDeckSize = useSelector(state => state.app.examDefaultDeckSize);

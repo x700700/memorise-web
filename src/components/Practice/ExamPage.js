@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import './ExamPage.scss';
 import ExamAnswer from "../../components/Practice/ExamAnswer";
 
