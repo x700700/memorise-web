@@ -62,6 +62,9 @@ const Exam = (props) => {
             <div className="exam-container">
                 {(currQ || examEnded) &&
                 <div className="exam">
+                    <div className="exam-previous-paper">
+                        <ExamPage size={size} num={size-curr+1} q={currQ} answers={answers} replaceCard={replaceCard}/>
+                    </div>
                     <ExamPage size={size} num={size-curr+1} q={currQ} answers={answers} replaceCard={replaceCard}/>
                 </div>}
                 <PopUpBox show={examEnded}>

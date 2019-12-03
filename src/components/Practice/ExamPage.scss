@@ -4,39 +4,48 @@
     height: 100%;
     width: 100%;
 
-    .cards-left {
-        position: absolute;
-        z-index: 9;
-        margin-left: 4%;
-        margin-top: 1.5%;
-        background-color: $grey7;
-        padding: .1rem .3rem;
-    }
+    .exam-page {
+        height: 98%;
+        width: 97%;
+        margin: auto;
+        background-color: $grey8blueMask;
+        border: $grey6 .3px solid;
+        box-shadow: 2px 2px 8px -4px $grey4;
 
-    .exam-col {
-        margin-top: 2rem;
-        display: flex;
-        flex-direction: column;
-
-        .question {
-            font-size: 36px;
-            font-weight: 500;
+        .cards-left {
+            position: absolute;
+            z-index: 9;
+            margin-left: 4%;
+            margin-top: 1.5%;
+            background-color: $grey7;
+            padding: .1rem .3rem;
         }
 
-        .next-btn-container {
+        .exam-col {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
 
-            button {
-                i {
-                    color: $purple1;
-                    font-size: 48px;
+            .question {
+                font-size: 36px;
+                font-weight: 500;
+            }
+
+            .next-btn-container {
+
+                button {
+                    i {
+                        color: $purple1;
+                        font-size: 48px;
+                    }
                 }
             }
-        }
 
-        .answers-container {
-            .answers-col {
-                display: flex;
-                flex-direction: column;
+            .answers-container {
+                .answers-col {
+                    display: flex;
+                    flex-direction: column;
+                }
             }
         }
     }

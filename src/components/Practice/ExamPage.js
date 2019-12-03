@@ -6,25 +6,27 @@ const ExamPage = ({ size, num, q, answers, replaceCard }) => {
 
     return (
         <div className="exam-page-container">
-            {q &&
-            <div className="cards-left">
-                {num} ({size})
-            </div>
-            }
-            <div className="exam-col">
-                <div className="question">
-                    <span>{q}</span>
+            <div className="exam-page">
+                {q &&
+                <div className="cards-left">
+                    {num} ({size})
                 </div>
-                <div className="answers-container">
-                    <div className="answers-col">
-                        {answers.map((a, i) => (
-                            <div key={i}>
-                                <ExamAnswer text={i} />
-                            </div>))}
+                }
+                <div className="exam-col">
+                    <div className="question">
+                        <span>{q}</span>
                     </div>
-                </div>
-                <div className="next-btn-container">
-                    <button onClick={replaceCard} className="btn"><i className="fas fa-forward"></i></button>
+                    <div className="answers-container">
+                        <div className="answers-col">
+                            {answers.map((a, i) => (
+                                <div key={i}>
+                                    <ExamAnswer text={i} />
+                                </div>))}
+                        </div>
+                    </div>
+                    <div className="next-btn-container">
+                        <button onClick={replaceCard} className="btn"><i className="fas fa-forward"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
