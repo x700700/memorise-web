@@ -8,17 +8,17 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
     const [nextA, setNextA] = useState(a);
     const [showFront, setShowFront] = useState(true);
     const [showBack, setShowBack] = useState(false);
-    const [inRotate, setInRotate] = useState(false); // started rotate
-    const [inRotateFull, setInRotateFull] = useState(false); // ended rotate
+    const [isRotateStarted, setIsRotateStarted] = useState(false);
+    const [isRotate, setIsRotate] = useState(false);
     const [inSwitch, setInSwitch] = useState(false);
     const [inFade, setInFade] = useState(false);
 
     const _rotate = () => {
         // console.warn(`click ==> showFront=[${showFront}] - showBack=[${showBack}]`);
-        if (!inRotateFull) {
+        if (!isRotate) {
             setCardInMove(true);
-            setInRotate(true);
-            setInRotateFull(true);
+            setIsRotateStarted(true);
+            setIsRotate(true);
             if (showFront) setShowFront(false);
             if (showBack) setShowBack(false);
         }
@@ -62,13 +62,13 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
 
     useEffect(() => {
         const rotateCard = (side) => {
-            if (inRotate) {
-                setInRotate(false);
+            if (isRotateStarted) {
+                setIsRotateStarted(false);
                 side === 'front' && setShowBack(true);
                 side === 'back' && setShowFront(true);
             } else {
                 // rotate animation totally ended
-                setInRotateFull(false);
+                setIsRotate(false);
                 setCardMoveEnded();
             }
         };
@@ -81,12 +81,12 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
             document.getElementById("game-card-front").removeEventListener("transitionend", rotateFront);
             document.getElementById("game-card-back").removeEventListener("transitionend", rotateBack);
         }
-    }, [inRotate, setCardMoveEnded]);
+    }, [isRotateStarted, setCardMoveEnded]);
 
     return (
         <div className="card-desktop-container">
             <div className="card-container">
-                <div className={`card-placeholder ${inRotateFull ? 'disable-pointer' : ''}`} onClick={() => _rotate()}>
+                <div className={`card-placeholder ${isRotate ? 'disable-pointer' : ''}`} onClick={() => _rotate()}>
                     <div id="game-card-front" className={`card ${!showFront ? 'card-hide' : ''} ${inSwitch ? 'no-rotate-anim' : ''} ${!currQ ? 'end-card' : ''}`}>
                         <p>{currQ}</p>
                     </div>
