@@ -24,6 +24,7 @@ export default class cardsDeck {
         this.currentDeck = this.initialDeck.filter(x => x.q && x.a);
         this.sizeTraining = this.currentDeck.length;
         this.currentDeck = (_.shuffle(this.currentDeck)).splice(0, cardsNum);
+        this.examStartDeck = _.cloneDeep(this.currentDeck);
         this.sizeDeck = this.currentDeck.length;
         this.plays = 0;
         this.wrongsDeck = [];
@@ -42,6 +43,7 @@ export default class cardsDeck {
             localStorageKey: this.localStorageKey,
             initialDeck: this.initialDeck,
             currentDeck: this.currentDeck,
+            examStartDeck: this.examStartDeck,
             wrongsDeck: this.wrongsDeck,
             sizeTraining: this.sizeTraining,
             sizeDeck: this.sizeDeck,
@@ -56,6 +58,7 @@ export default class cardsDeck {
         this.localStorageKey = mem.localStorageKey;
         this.initialDeck = mem.initialDeck;
         this.currentDeck = mem.currentDeck;
+        this.examStartDeck = mem.examStartDeck;
         this.wrongsDeck = mem.wrongsDeck;
         this.sizeTraining = mem.sizeTraining;
         this.sizeDeck = mem.sizeDeck;
@@ -66,6 +69,19 @@ export default class cardsDeck {
     top = () => this.currentDeck[0] || null;
     topQ = () => !this.isDeckFlipped ? (this.currentDeck[0] || {}).q : (this.currentDeck[0] || {}).a || '';
     topA = () => !this.isDeckFlipped ? (this.currentDeck[0] || {}).a : (this.currentDeck[0] || {}).q || '';
+    topQAnswers = () => {
+        let answers = [];
+        if (this.examStartDeck && this.currentDeck && this.currentDeck.length > 0) {
+            const a = !this.isDeckFlipped ? 'a' : 'q';
+            const right = this.currentDeck[0];
+            answers = this.examStartDeck.slice(1).slice(0, 4);
+            answers.unshift(right);
+            answers = _.shuffle(answers);
+            answers = answers.map(x => x[a]);
+        }
+        // console.warn('------->', answers);
+        return answers
+    };
 
     getSizeTraining = () => this.sizeTraining;
     getSizeDeck = () => this.sizeDeck;

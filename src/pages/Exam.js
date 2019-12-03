@@ -54,13 +54,13 @@ const Exam = (props) => {
     const playsNum = cardsDeck && cardsDeck.playsNum();
     const curr = cardsDeck && cardsDeck.sizeCurr();
     const currQ = cardsDeck && cardsDeck.topQ();
-    const answers = ['40', '26', '81', '100', '524,781,924.346'];
+    const currA = cardsDeck && cardsDeck.topQAnswers();
     return (
         <div className="exam-desktop-container">
             <div className="exam-container">
                 {(currQ || examEnded) &&
                 <div className="exam">
-                    <ExamTable size={size} num={size-curr+1} q={currQ} answers={answers} replaceCard={replaceCard}/>
+                    <ExamTable size={size} num={size-curr+1} q={currQ} answers={currA} replaceCard={replaceCard}/>
                 </div>}
             </div>
             <PopUpBox show={examEnded}>

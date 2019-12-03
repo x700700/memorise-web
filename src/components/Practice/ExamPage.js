@@ -20,7 +20,7 @@ const ExamPage = ({ size, num, q, answers, replaceCard }) => {
                         <div className="answers-col">
                             {answers.map((a, i) => (
                                 <div key={i}>
-                                    <ExamAnswer text={i} />
+                                    <ExamAnswer text={a} />
                                 </div>))}
                         </div>
                     </div>
