@@ -4,7 +4,7 @@ import consts from "../../common/consts";
 
 export default class cardsDeck {
 
-    constructor(training) {
+    constructor(training, shouldDeckFlipped) {
         if (training) {
             const exercises = training && training.exercises && _.values(training.exercises);
             // console.warn('cardsDeck - exercises = ', exercises);
@@ -13,6 +13,7 @@ export default class cardsDeck {
             this.initialDeck = [];
         }
         this.reset(training, consts.play.defaultCardsNum);
+        this.isDeckFlipped = shouldDeckFlipped || false;
         if (training) {
             this.validate();
         }
@@ -23,7 +24,6 @@ export default class cardsDeck {
         this.sizeTraining = this.currentDeck.length;
         this.currentDeck = (_.shuffle(this.currentDeck)).splice(0, cardsNum);
         this.sizeDeck = this.currentDeck.length;
-        this.isDeckFlipped = false;
         this.plays = 0;
         this.wrongsDeck = [];
         if (shouldSaveToStorage) {
@@ -68,13 +68,14 @@ export default class cardsDeck {
     getSizeDeck = () => this.sizeDeck;
     sizeCurr = () => this.currentDeck.length + this.wrongsDeck.length;
     playsNum = () => this.plays;
+    getIsDeckFlipped = () => this.isDeckFlipped;
 
     replay = (cardsNum) => {
         this.reset(true, cardsNum);
     };
     setIsDeckFlipped = (flipped) => {
-        console.warn('Deck flip = ', flipped);
         this.isDeckFlipped = flipped;
+        localStorage.setItem(consts.localStorage.gameId, this.getStorage());
     };
     nextCard = (right) => {
         let deckFinished = false;

@@ -21,7 +21,6 @@ const Game = (props) => {
     const cardsDeck = useSelector(state => state.app.gameCardsDeck);
     const gameEnded = useSelector(state => state.app.isGameEnded);
     const defaultDeckSize = useSelector(state => state.app.gameDefaultDeckSize);
-
     const refGame = useRef();
 
     const rotateCard = () => {
@@ -50,13 +49,15 @@ const Game = (props) => {
         dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.practice });
         dispatch({type: types.APP_SHOW_MENU, show: false});
 
-        const createNewDeck = () => {
-            return new CardsDeck(mockTraining);
+        const createNewDeck = (shouldFlipped) => {
+            return new CardsDeck(mockTraining, shouldFlipped);
         };
 
+        const shouldDeckFlipped = (cardsDeck && cardsDeck.isDeckFlipped()) || false;
         loadPlay(consts.localStorage.gameId, createNewDeck,
                     () => dispatch({ type: types.APP_SET_GAME_ENDED, ended: true }),
-                    (newDeck) => dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: newDeck }));
+                    (newDeck) => dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: newDeck }),
+                     shouldDeckFlipped);
 
     }, [dispatch, history]);
 

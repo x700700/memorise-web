@@ -36,8 +36,8 @@ const ColorSwitch = withStyles(theme => ({
     },
 }))(MaterialSwitch);
 
-const Switch = forwardRef(({ label, value, onChange }, ref) => {
-    const [check, setCheck] = useState(false);
+const Switch = forwardRef(({ label, value, onChange, startValue }, ref) => {
+    const [check, setCheck] = useState(startValue);
 
     useImperativeHandle(ref, () => ({
         check() {

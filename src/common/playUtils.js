@@ -1,14 +1,14 @@
 import CardsDeck from "../components/Practice/cardsDeck";
 
-export const loadPlay = (localStorageId, createNewDeck, setPlayEnded, setCardsDeck) => {
+export const loadPlay = (localStorageId, createNewDeck, setPlayEnded, setCardsDeck, shouldDeckFlipped) => {
     let lastCardsDeck = localStorage.getItem(localStorageId);
     let newDeck;
     if (!lastCardsDeck) {
         // no storage
-        newDeck = createNewDeck();
+        newDeck = createNewDeck(shouldDeckFlipped);
     } else {
         // storage is loaded
-        newDeck = new CardsDeck();
+        newDeck = new CardsDeck(null, shouldDeckFlipped);
         try {
             newDeck.setStorage(lastCardsDeck);
             if (!newDeck.top()) {
@@ -17,7 +17,7 @@ export const loadPlay = (localStorageId, createNewDeck, setPlayEnded, setCardsDe
         } catch (e) {
             // storage were bad
             localStorage.removeItem(localStorageId);
-            newDeck = createNewDeck();
+            newDeck = createNewDeck(shouldDeckFlipped);
         }
     }
     setCardsDeck(newDeck);

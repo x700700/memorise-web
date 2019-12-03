@@ -28,21 +28,24 @@ const MenuGame = ({ hide }) => {
         dispatch({ type: types.APP_SET_GAME_DEFAULT_DECK_SIZE, size: size });
     };
     const flipDeck = (flipped) => {
-        // console.warn('Deck flip = ', flipped);
         cardsDeck.setIsDeckFlipped(flipped);
     };
 
     const size = (cardsDeck && cardsDeck.getSizeTraining()) || 0;
+    const isDeckFlipped = (cardsDeck && cardsDeck.getIsDeckFlipped()) || false;
     return (
         <TopMenu hide={hide}>
+            {cardsDeck &&
             <div className="menu-game-col">
                 <div className="title">Practice</div>
                 <div className="flip-container">
-                    <Switch label={t('flip-deck-side')} value="true" onChange={flipDeck}/>
+                    <Switch label={t('flip-deck-side')} value="flipSwitch" onChange={flipDeck}
+                            startValue={isDeckFlipped}/>
                 </div>
                 <MenuDevider/>
-                <SubMenuReplay playType={t('practice')} replayCb={replayGame} size={size} />
+                <SubMenuReplay playType={t('practice')} replayCb={replayGame} size={size}/>
             </div>
+            }
         </TopMenu>
     );
 };
