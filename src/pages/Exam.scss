@@ -38,39 +38,6 @@
                 padding: .1rem .3rem;
             }
 
-            .exam-buttons {
-                margin: 1rem .5rem 0 .5rem;
-                display: flex;
-                justify-content: space-between;
-
-                button {
-                    background-color: unset;
-                    border: none;
-                    outline: none;
-                }
-
-                i {
-                    font-size: 48px;
-                }
-
-                .btn-good i {
-                    color: mediumblue;
-                }
-
-                .btn-bad i {
-                    color: darkred;
-                }
-            }
-
-            .buttons-disable {
-                button {
-                    pointer-events: none;
-
-                    i {
-                        color: $grey6 !important;
-                    }
-                }
-            }
         }
     }
 }

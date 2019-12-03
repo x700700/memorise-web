@@ -39,8 +39,7 @@ const MenuGame = ({ hide }) => {
             <div className="menu-game-col">
                 <div className="title">Practice</div>
                 <div className="flip-container">
-                    <Switch label={t('flip-deck-side')} value="flipSwitch" onChange={flipDeck}
-                            startValue={isDeckFlipped}/>
+                    <Switch label={t('flip-deck-side')} value="gameFlipSwitch" onChange={flipDeck} startValue={isDeckFlipped}/>
                 </div>
                 <MenuDevider/>
                 <SubMenuReplay playType={t('practice')} replayCb={replayGame} size={size}/>

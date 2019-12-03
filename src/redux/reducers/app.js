@@ -7,10 +7,15 @@ const appReducer = (  state = {
                           userName: null,
                           error: null,
                           currentPage: null,
+                          showMenu: false,
+
                           gameCardsDeck: null,
                           gameDefaultDeckSize: consts.play.defaultCardsNum,
                           isGameEnded: false,
-                          showMenu: false,
+
+                          examCardsDeck: null,
+                          examDefaultDeckSize: consts.play.defaultCardsNum,
+                          isExamEnded: false,
                       },
                       action) => {
 
@@ -62,6 +67,22 @@ const appReducer = (  state = {
             return {
                 ...state,
                 gameDefaultDeckSize: action.size,
+            };
+
+        case types.APP_SET_EXAM_CARDSDECK:
+            return {
+                ...state,
+                examCardsDeck: action.cardsDeck,
+            };
+        case types.APP_SET_EXAM_ENDED:
+            return {
+                ...state,
+                isExamEnded: action.ended,
+            };
+        case types.APP_SET_EXAM_DEFAULT_DECK_SIZE:
+            return {
+                ...state,
+                examDefaultDeckSize: action.size,
             };
 
         default:

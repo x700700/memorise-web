@@ -10,6 +10,10 @@ export const APP_SET_GAME_CARDSDECK = 'app.APP_SET_GAME_CARDSDECK';
 export const APP_SET_GAME_ENDED = 'app.APP_SET_GAME_ENDED';
 export const APP_SET_GAME_DEFAULT_DECK_SIZE = 'app.APP_SET_GAME_DEFAULT_DECK_SIZE';
 
+export const APP_SET_EXAM_CARDSDECK = 'app.APP_SET_EXAM_CARDSDECK';
+export const APP_SET_EXAM_ENDED = 'app.APP_SET_EXAM_ENDED';
+export const APP_SET_EXAM_DEFAULT_DECK_SIZE = 'app.APP_SET_EXAM_DEFAULT_DECK_SIZE';
+
 
 export const saga = {
     auth: 'auth',
