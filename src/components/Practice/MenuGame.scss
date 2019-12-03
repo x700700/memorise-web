@@ -7,6 +7,8 @@
 
     .title {
         color: $grey5;
+        width: 98%;
+        margin: 0 auto;
         margin-bottom: 1rem;
     }
 
@@ -23,11 +25,11 @@
         margin-left: .3rem;
     }
 
-    .menu-devider {
-        width: 92%;
+    .menu-divider {
+        width: 98%;
         margin: 0 auto;
 
-        .devider-line {
+        .divider-line {
             height: .3rem;
             border-bottom: $grey6 1px solid;
         }

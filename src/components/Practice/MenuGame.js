@@ -7,10 +7,10 @@ import * as types from "../../redux/actionsTypes";
 import SubMenuReplay from "./SubMenuReplay";
 import Switch from "../common/Switch";
 
-const MenuDevider = () => {
+const MenuDivider = () => {
     return (
-        <div className="menu-devider">
-            <div className="devider-line"/>
+        <div className="menu-divider">
+            <div className="divider-line"/>
         </div>
     );
 };
@@ -41,7 +41,7 @@ const MenuGame = ({ hide }) => {
                 <div className="flip-container">
                     <Switch label={t('flip-deck-side')} value="gameFlipSwitch" onChange={flipDeck} startValue={isDeckFlipped}/>
                 </div>
-                <MenuDevider/>
+                <MenuDivider/>
                 <SubMenuReplay playType={t('practice')} replayCb={replayGame} size={size}/>
             </div>
             }

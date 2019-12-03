@@ -17,16 +17,23 @@
         overflow-y: hidden;
 
         .exam {
-            height: 98%;
+            height: 83%;
+            background-color: $grey8blue;
+            margin: 1rem;
             text-align: center;
             padding-top: 0.3rem;
+            border: $grey6 .3px solid;
+            box-shadow: 2px 2px 8px -4px $grey4;
 
+            @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+                height: 480px;
+            }
             @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max) {
                 flex-grow: 1;
             }
             @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
             and (orientation: landscape) {
-                height: 97%;
+                height: 73%;
             }
 
             .cards-left {
