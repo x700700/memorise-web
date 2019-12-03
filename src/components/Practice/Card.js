@@ -1,5 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useState, useEffect, useCallback } from 'react';
 import './Card.scss';
+import {useSelector} from "react-redux";
 
 const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
     const [currQ, setCurrQ] = useState(q);
@@ -12,10 +13,11 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
     const [isRotate, setIsRotate] = useState(false);
     const [inSwitch, setInSwitch] = useState(false);
     const [inFade, setInFade] = useState(false);
+    const showMenu = useSelector(state => state.app.showMenu);
 
     const _rotate = () => {
         // console.warn(`click ==> showFront=[${showFront}] - showBack=[${showBack}]`);
-        if (!isRotate) {
+        if (!isRotate && !showMenu) {
             setCardInMove(true);
             setIsRotateStarted(true);
             setIsRotate(true);
