@@ -29,7 +29,7 @@
         }
 
         .exam-col {
-            margin-top: 2rem;
+            margin-top: .1rem;
             display: flex;
             flex-direction: column;
             height: calc(100% - 2rem);
@@ -37,7 +37,7 @@
             .question {
                 font-size: 36px;
                 font-weight: 500;
-                margin-bottom: 2rem;
+                margin-bottom: 1.4rem;
             }
 
             .next-btn-container {
@@ -54,11 +54,12 @@
                 flex-grow: 1;
 
                 .answers-col {
+                    height: 100%;
                     display: flex;
                     flex-direction: column;
 
                     .each-answer-container {
-                        margin-bottom: 1rem;
+                        flex-grow: 1;
                     }
                 }
             }

@@ -1,5 +1,13 @@
 @import "../../common/colors";
 
 .exam-answer-container {
-
+    .btn-container {
+        width: 80%;
+        margin: 0 auto;
+        font-size: 24px;
+        padding: 2px 0;
+        background-color: white;
+        border: $grey6 1px solid;
+        border-radius: 8px;
+    }
 }
