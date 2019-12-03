@@ -53,7 +53,7 @@ const Game = (props) => {
             return new CardsDeck(mockTraining, shouldFlipped);
         };
 
-        const shouldDeckFlipped = (cardsDeck && cardsDeck.isDeckFlipped()) || false;
+        const shouldDeckFlipped = (cardsDeck && cardsDeck.getIsDeckFlipped()) || false;
         loadPlay(consts.localStorage.gameId, createNewDeck,
                     () => dispatch({ type: types.APP_SET_GAME_ENDED, ended: true }),
                     (newDeck) => dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: newDeck }),
