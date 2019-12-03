@@ -77,7 +77,7 @@ export default class cardsDeck {
             answers = this.examStartDeck.slice(1).slice(0, 4);
             answers.unshift(right);
             answers = _.shuffle(answers);
-            answers = answers.map(x => x[a]);
+            answers = answers.map(x => x && x[a]);
         }
         // console.warn('------->', answers);
         return answers
