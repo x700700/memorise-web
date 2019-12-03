@@ -22,7 +22,7 @@ const ExamPage = ({ size, num, q, answers, replaceCard, isPrevPage }) => {
                             {answers && answers.length > 0 && answers.map((a, i) => {
                                 return (
                                     <div key={i} className="each-answer-container">
-                                        <ExamAnswer text={a} answered={true} right={i==3} wrong={i==1} trueAnswer={i===2} />
+                                        <ExamAnswer text={a} answered={false} right={i==3} wrong={i==1} trueAnswer={i===2} />
                                     </div>
                                 );
                             })}
