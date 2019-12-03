@@ -4,7 +4,7 @@ import consts from "../../common/consts";
 
 export default class cardsDeck {
 
-    constructor(training, shouldDeckFlipped) {
+    constructor(localStorageKey, training, shouldDeckFlipped) {
         if (training) {
             const exercises = training && training.exercises && _.values(training.exercises);
             // console.warn('cardsDeck - exercises = ', exercises);
@@ -12,6 +12,7 @@ export default class cardsDeck {
         } else {
             this.initialDeck = [];
         }
+        this.localStorageKey = localStorageKey;
         this.reset(training, consts.play.defaultCardsNum);
         this.isDeckFlipped = shouldDeckFlipped || false;
         if (training) {
@@ -27,7 +28,7 @@ export default class cardsDeck {
         this.plays = 0;
         this.wrongsDeck = [];
         if (shouldSaveToStorage) {
-            localStorage.setItem(consts.localStorage.gameId, this.getStorage());
+            localStorage.setItem(this.localStorageKey, this.getStorage());
         }
     };
     validate = () => {
@@ -38,6 +39,7 @@ export default class cardsDeck {
 
     getStorage = () => {
         const mem = {
+            localStorageKey: this.localStorageKey,
             initialDeck: this.initialDeck,
             currentDeck: this.currentDeck,
             wrongsDeck: this.wrongsDeck,
@@ -51,6 +53,7 @@ export default class cardsDeck {
     };
     setStorage = (storage) => {
         const mem = JSON.parse(storage);
+        this.localStorageKey = mem.localStorageKey;
         this.initialDeck = mem.initialDeck;
         this.currentDeck = mem.currentDeck;
         this.wrongsDeck = mem.wrongsDeck;
@@ -75,7 +78,7 @@ export default class cardsDeck {
     };
     setIsDeckFlipped = (flipped) => {
         this.isDeckFlipped = flipped;
-        localStorage.setItem(consts.localStorage.gameId, this.getStorage());
+        localStorage.setItem(this.localStorageKey, this.getStorage());
     };
     nextCard = (right) => {
         let deckFinished = false;
@@ -100,7 +103,7 @@ export default class cardsDeck {
                 this.wrongsDeck = [];
             }
         }
-        localStorage.setItem(consts.localStorage.gameId, this.getStorage());
+        localStorage.setItem(this.localStorageKey, this.getStorage());
         return deckFinished;
     }
 }

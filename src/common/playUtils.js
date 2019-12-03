@@ -8,7 +8,7 @@ export const loadPlay = (localStorageId, createNewDeck, setPlayEnded, setCardsDe
         newDeck = createNewDeck(shouldDeckFlipped);
     } else {
         // storage is loaded
-        newDeck = new CardsDeck(null, shouldDeckFlipped);
+        newDeck = new CardsDeck(localStorageId, null, shouldDeckFlipped);
         try {
             newDeck.setStorage(lastCardsDeck);
             if (!newDeck.top()) {

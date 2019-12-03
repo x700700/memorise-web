@@ -50,7 +50,7 @@ const Game = (props) => {
         dispatch({type: types.APP_SHOW_MENU, show: false});
 
         const createNewDeck = (shouldFlipped) => {
-            return new CardsDeck(mockTraining, shouldFlipped);
+            return new CardsDeck(consts.localStorage.gameId, mockTraining, shouldFlipped);
         };
 
         const shouldDeckFlipped = (cardsDeck && cardsDeck.getIsDeckFlipped()) || false;

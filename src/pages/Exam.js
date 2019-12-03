@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as types from '../redux/actionsTypes';
 import './Exam.scss';
 import consts from "../common/consts";
-import Card from "../components/Practice/Card";
 import CardsDeck from '../components/Practice/cardsDeck';
 import { loadPlay } from "../common/playUtils";
 import mockTraining from '../mock/training-multiply';
 import ExamSum from "../components/Practice/ExamSum";
 import PopUpBox from "../components/common/PopUpBox";
+import ExamAnswer from "../components/Practice/ExamAnswer";
 // import Rotate90DegreesCcwTwoToneIcon from '@material-ui/icons/Rotate90DegreesCcwTwoTone';
 
 const Exam = (props) => {
@@ -20,7 +20,6 @@ const Exam = (props) => {
     const cardsDeck = useSelector(state => state.app.examCardsDeck);
     const examEnded = useSelector(state => state.app.isExamEnded);
     const defaultDeckSize = useSelector(state => state.app.examDefaultDeckSize);
-    const refExam = useRef();
 
     const replaceCard = (good) => {
         const ended = cardsDeck.nextCard(good);
@@ -39,7 +38,7 @@ const Exam = (props) => {
         dispatch({type: types.APP_SHOW_MENU, show: false});
 
         const createNewDeck = (shouldFlipped) => {
-            return new CardsDeck(mockTraining, shouldFlipped);
+            return new CardsDeck(consts.localStorage.examId, mockTraining, shouldFlipped);
         };
 
         const shouldDeckFlipped = (cardsDeck && cardsDeck.getIsDeckFlipped()) || false;
@@ -66,7 +65,21 @@ const Exam = (props) => {
                         {curr} / {size}
                     </div>
                     }
-                    <div>{currQ}</div>
+                    <div className="exam-col">
+                        <div className="question">
+                            <span>Question</span>
+                        </div>
+                        <div className="answers-container">
+                            <div className="answers-col">
+                                <ExamAnswer text="answer #1" />
+                                <ExamAnswer text="answer #2" />
+                                <ExamAnswer text="answer #2" />
+                            </div>
+                        </div>
+                        <div className="next-btn-container">
+                            <button onClick={replaceCard} className="btn"><i className="fas fa-forward"></i></button>
+                        </div>
+                    </div>
                 </div>}
                 <PopUpBox show={examEnded}>
                     <ExamSum setStats={examEnded} cardsNum={size} playsNum={playsNum} replayExam={() => replayExam}/>

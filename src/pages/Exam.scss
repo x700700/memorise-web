@@ -38,6 +38,31 @@
                 padding: .1rem .3rem;
             }
 
+            .exam-col {
+                margin-top: 2rem;
+                display: flex;
+                flex-direction: column;
+
+                .question {
+
+                }
+                .next-btn-container {
+
+                    button {
+                        i {
+                            color: $purple1;
+                            font-size: 48px;
+                        }
+                    }
+                }
+
+                .answers-container {
+                    .answers-col {
+                        display: flex;
+                        flex-direction: column;
+                    }
+                }
+            }
         }
     }
 }
