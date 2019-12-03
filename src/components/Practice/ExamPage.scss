@@ -42,6 +42,8 @@
 
             .next-btn-container {
                 align-self: flex-end;
+                opacity: 1;
+                transition: opacity 0.5s ease-in-out;
 
                 button {
                     i {
@@ -50,6 +52,11 @@
                     }
                 }
             }
+            .next-btn-disable {
+                opacity: 0;
+                transition: opacity 0s;
+            }
+
             .answers-container {
                 flex-grow: 1;
 

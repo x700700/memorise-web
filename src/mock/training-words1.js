@@ -13,18 +13,22 @@ export default {
     },
     "exercises": {
         "off-exc-001": {
+            "id": "off-exc-001",
             "q": "Home",
             "a": "בית",
         },
         "off-exc-002": {
+            "id": "off-exc-002",
             "q": "Bedroom",
             "a": "חדר שינה",
         },
         "off-exc-003": {
+            "id": "off-exc-003",
             "q": "Kitchen",
             "a": "מטבח",
         },
         "off-exc-004": {
+            "id": "off-exc-004",
             "q": "Toilet",
             "a": "שירותים",
         },

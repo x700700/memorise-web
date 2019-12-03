@@ -54,13 +54,20 @@ const Exam = (props) => {
     const playsNum = cardsDeck && cardsDeck.playsNum();
     const curr = cardsDeck && cardsDeck.sizeCurr();
     const currQ = cardsDeck && cardsDeck.topQ();
-    const currA = cardsDeck && cardsDeck.getTopQAnswers();
+
+    let currQAnswers = cardsDeck && cardsDeck.getTopQAnswers();
+    if (currQAnswers && (!Array.isArray(currQAnswers) || currQAnswers.length === 0)) {
+        console.error('local storage might be improper. deleted it. please Refresh page.');
+        currQAnswers = [];
+        localStorage.removeItem(consts.localStorage.examId);
+    }
+
     return (
         <div className="exam-desktop-container">
             <div className="exam-container">
                 {(currQ || examEnded) &&
                 <div className="exam">
-                    <ExamTable size={size} num={size-curr+1} q={currQ} answers={currA} replaceCard={replaceCard}/>
+                    <ExamTable size={size} num={size-curr+1} q={currQ} answers={currQAnswers} replaceCard={replaceCard}/>
                 </div>}
             </div>
             <PopUpBox show={examEnded}>

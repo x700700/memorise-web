@@ -18,6 +18,7 @@ let i, j, c = 0;
 for (i = 3; i < 9; i++) {
     for (j = 3; j < 9; j++) {
         foo.exercises[c++] = {
+            id: i * j,
             q: `${i} X ${j}`,
             a: `${i * j}`,
         };

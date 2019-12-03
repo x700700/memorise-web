@@ -7,7 +7,7 @@ export default class cardsDeck {
     constructor(localStorageKey, training, shouldDeckFlipped) {
         if (training) {
             const exercises = training && training.exercises && _.values(training.exercises);
-            // console.warn('cardsDeck - exercises = ', exercises);
+            // console.warn('=====> cardsDeck - exercises = ', exercises);
             this.initialDeck = _.cloneDeep(exercises);
         } else {
             this.initialDeck = [];
@@ -152,8 +152,9 @@ export default class cardsDeck {
             answers = _.shuffle(answers).slice(0, 4);
             answers.unshift(right);
             answers = _.shuffle(answers);
-            answers = answers.map(x => x && x[a]);
+            answers = answers.map(x => ({...x, examA: x[a], right: x.id && x.id === right.id}));
         }
+        // console.warn('===========>', answers);
         return answers;
     };
 }

@@ -28,10 +28,11 @@ const ExamPage = ({ size, num, q, answers, replaceCard, isPrevPage }) => {
                     </div>
                     <div className="answers-container">
                         <div className="answers-col">
-                            {answers && answers.length > 0 && answers.map((a, i) => {
+                            {answers && Array.isArray(answers) && answers.length > 0 && answers.map((a, i) => {
                                 return (
                                     <div key={i} className="each-answer-container">
-                                        <ExamAnswer text={a} answered={answered || isPrevPage} right={i==3} wrong={i==1} trueAnswer={i===2}
+                                        <ExamAnswer text={a.examA} answered={answered || isPrevPage}
+                                                    right={false} wrong={false} trueAnswer={a.right}
                                                     setPageAnswered={answeredCb}
                                         />
                                     </div>
@@ -39,7 +40,7 @@ const ExamPage = ({ size, num, q, answers, replaceCard, isPrevPage }) => {
                             })}
                         </div>
                     </div>
-                    <div className={`next-btn-container ${isPrevPage || !answered ? 'disable-prev-card' : ''}`}>
+                    <div className={`next-btn-container ${isPrevPage || !answered ? 'next-btn-disable' : ''}`}>
                         <button onClick={replaceCard} className="btn"><i className="fas fa-forward"></i></button>
                     </div>
                 </div>
