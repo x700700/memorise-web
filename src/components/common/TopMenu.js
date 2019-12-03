@@ -1,11 +1,13 @@
 import React from 'react';
 import './TopMenu.scss';
 
-const TopMenu = (props) => {
+const TopMenu = ({ children, hide }) => {
     return (
-        <div className="menu-container">
-            <div className="menu-box">
-                {props.children}
+        <div className={`top-menu-container ${hide ? 'hide' : ''}`}>
+            <div className="menu-container">
+                <div className="menu-box">
+                    {children}
+                </div>
             </div>
         </div>
     );

@@ -25,20 +25,18 @@ const MenuGame = ({ hide }) => {
 
     const size = (cardsDeck && cardsDeck.getSizeTraining()) || 0;
     return (
-        <div className={`top-menu-container ${hide ? 'hide' : ''}`}>
-            <TopMenu>
-                <div className="menu-col">
-                    <div className="title">Practice</div>
-                    <div className="size-slider-container">
-                        <Slider ref={refSlider} min={consts.play.minCards} max={size} />
-                    </div>
-                    <div className="footline size-slider-foot">Number Of Cards to Practice</div>
-                    <div className="replay-btn">
-                        <Button text={t('replay')} onClick={() => replayGame} />
-                    </div>
+        <TopMenu hide={hide}>
+            <div className="menu-game-col">
+                <div className="title">Practice</div>
+                <div className="size-slider-container">
+                    <Slider ref={refSlider} min={consts.play.minCards} max={size} />
                 </div>
-            </TopMenu>
-        </div>
+                <div className="footline size-slider-foot">Number Of Cards to Practice</div>
+                <div className="replay-btn">
+                    <Button text={t('replay')} onClick={() => replayGame} />
+                </div>
+            </div>
+        </TopMenu>
     );
 };
 export default MenuGame;

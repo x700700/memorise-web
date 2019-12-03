@@ -4,23 +4,12 @@ import TopMenu from "../common/TopMenu";
 // import cardsDeck from "./cardsDeck";
 
 const MenuExam = ({ hide }) => {
-    /*
-    const storage = useSelector(state => state.app.examCardsDeck);
-    let cards;
-    if (storage) {
-        cards = new cardsDeck();
-        cards.setStorage(storage);
-    }
-     */
-
     return (
-        <div className={`top-menu-container ${hide ? 'hide' : ''}`}>
-            <TopMenu>
-                <div className="menu-col">
-                    <h1>EXAM Menu</h1>
-                </div>
-            </TopMenu>
-        </div>
+        <TopMenu hide={hide}>
+            <div className="menu-exam-col">
+                <h1>Exam Menu</h1>
+            </div>
+        </TopMenu>
     );
 };
 export default MenuExam;
