@@ -3,12 +3,14 @@ import './ExamTable.scss';
 import ExamPage from "./ExamPage";
 
 const ExamTable = ({ size, num, q, answers, replaceCard }) => {
-    const [currQ, setCurrQ] = useState(q);
+    const [currQ, setCurrQ] = useState();
     const [showPrev, setShowPrev] = useState(false);
 
     useEffect(() => {
-        if (q !== currQ) {
+        if (currQ && currQ !== q) {
             setShowPrev(true);
+        } else {
+            setCurrQ(q);
         }
     }, [q, setShowPrev, currQ]);
 
@@ -27,7 +29,7 @@ const ExamTable = ({ size, num, q, answers, replaceCard }) => {
     return (
         <div className="exam-table">
             <div id="exam-previous-paper" className={`exam-previous-paper-container ${showPrev ? 'prev-show' : ''}`}>
-                <ExamPage size={size} num={size-num+1} q={currQ} answers={answers} replaceCard={replaceCard}/>
+                <ExamPage size={size} num={size - num + 1} q={currQ} answers={answers} replaceCard={replaceCard}/>
             </div>
             <ExamPage size={size} num={size-num+1} q={q} answers={answers} replaceCard={replaceCard}/>
         </div>
