@@ -25,6 +25,7 @@ export default class cardsDeck {
         this.examStartDeck = _.cloneDeep(this.currentDeck);
         this.sizeTraining = this.currentDeck.length;
         this.currentDeck = (_.shuffle(this.currentDeck)).splice(0, cardsNum);
+        this.topQAnswers = this.createTopQAnswers();
         this.sizeDeck = this.currentDeck.length;
         this.plays = 0;
         this.wrongsDeck = [];
@@ -42,8 +43,9 @@ export default class cardsDeck {
         const mem = {
             localStorageKey: this.localStorageKey,
             initialDeck: this.initialDeck,
-            currentDeck: this.currentDeck,
             examStartDeck: this.examStartDeck,
+            currentDeck: this.currentDeck,
+            topQAnswers: this.topQAnswers,
             wrongsDeck: this.wrongsDeck,
             sizeTraining: this.sizeTraining,
             sizeDeck: this.sizeDeck,
@@ -57,8 +59,9 @@ export default class cardsDeck {
         const mem = JSON.parse(storage);
         this.localStorageKey = mem.localStorageKey;
         this.initialDeck = mem.initialDeck;
-        this.currentDeck = mem.currentDeck;
         this.examStartDeck = mem.examStartDeck;
+        this.currentDeck = mem.currentDeck;
+        this.topQAnswers = mem.topQAnswers;
         this.wrongsDeck = mem.wrongsDeck;
         this.sizeTraining = mem.sizeTraining;
         this.sizeDeck = mem.sizeDeck;
@@ -69,21 +72,7 @@ export default class cardsDeck {
     top = () => this.currentDeck[0] || null;
     topQ = () => !this.isDeckFlipped ? (this.currentDeck[0] || {}).q : (this.currentDeck[0] || {}).a || '';
     topA = () => !this.isDeckFlipped ? (this.currentDeck[0] || {}).a : (this.currentDeck[0] || {}).q || '';
-    topQAnswers = () => {
-        let answers = [];
-        if (this.examStartDeck && this.currentDeck && this.currentDeck.length > 0) {
-            const a = !this.isDeckFlipped ? 'a' : 'q';
-            const right = this.currentDeck[0];
-            answers = this.examStartDeck.filter(x => right && x && x[a] && x[a] !== right[a]);
-            answers = _.uniqBy(answers, a);
-            answers = _.shuffle(answers);
-            answers = answers.slice(0, 4);
-            answers.unshift(right);
-            answers = _.shuffle(answers);
-            answers = answers.map(x => x && x[a]);
-        }
-        return answers
-    };
+    getTopQAnswers = () => this.topQAnswers;
 
     getSizeTraining = () => this.sizeTraining;
     getSizeDeck = () => this.sizeDeck;
@@ -120,8 +109,23 @@ export default class cardsDeck {
                 this.currentDeck.push(this.wrongsDeck[0]);
                 this.wrongsDeck = [];
             }
+            this.topQAnswers = this.createTopQAnswers();
         }
         localStorage.setItem(this.localStorageKey, this.getStorage());
         return deckFinished;
-    }
+    };
+    createTopQAnswers = () => {
+        let answers = [];
+        if (this.examStartDeck && this.currentDeck && this.currentDeck.length > 0) {
+            const a = !this.isDeckFlipped ? 'a' : 'q';
+            const right = this.currentDeck[0];
+            answers = this.examStartDeck.filter(x => right && x && x[a] && x[a] !== right[a]);
+            answers = _.uniqBy(answers, a);
+            answers = _.shuffle(answers).slice(0, 4);
+            answers.unshift(right);
+            answers = _.shuffle(answers);
+            answers = answers.map(x => x && x[a]);
+        }
+        return answers;
+    };
 }

@@ -18,7 +18,7 @@ const ExamPage = ({ size, num, q, answers, replaceCard }) => {
                     </div>
                     <div className="answers-container">
                         <div className="answers-col">
-                            {answers.map((a, i) => (
+                            {answers && answers.length > 0 && answers.map((a, i) => (
                                 <div key={i}>
                                     <ExamAnswer text={a} />
                                 </div>))}

@@ -54,7 +54,7 @@ const Exam = (props) => {
     const playsNum = cardsDeck && cardsDeck.playsNum();
     const curr = cardsDeck && cardsDeck.sizeCurr();
     const currQ = cardsDeck && cardsDeck.topQ();
-    const currA = cardsDeck && cardsDeck.topQAnswers();
+    const currA = cardsDeck && cardsDeck.getTopQAnswers();
     return (
         <div className="exam-desktop-container">
             <div className="exam-container">
