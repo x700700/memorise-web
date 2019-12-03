@@ -10,6 +10,7 @@ import mockTraining from '../mock/training-multiply';
 import ExamSum from "../components/Practice/ExamSum";
 import PopUpBox from "../components/common/PopUpBox";
 import ExamAnswer from "../components/Practice/ExamAnswer";
+import ExamPage from "../components/Practice/ExamPage";
 // import Rotate90DegreesCcwTwoToneIcon from '@material-ui/icons/Rotate90DegreesCcwTwoTone';
 
 const Exam = (props) => {
@@ -55,31 +56,13 @@ const Exam = (props) => {
     const playsNum = cardsDeck && cardsDeck.playsNum();
     const curr = cardsDeck && cardsDeck.sizeCurr();
     const currQ = cardsDeck && cardsDeck.topQ();
+    const answers = ['40', '26', '81', '100', '524,781,924.346'];
     return (
         <div className="exam-desktop-container">
             <div className="exam-container">
                 {(currQ || examEnded) &&
                 <div className="exam">
-                    {currQ &&
-                    <div className="cards-left">
-                        {curr} / {size}
-                    </div>
-                    }
-                    <div className="exam-col">
-                        <div className="question">
-                            <span>Question</span>
-                        </div>
-                        <div className="answers-container">
-                            <div className="answers-col">
-                                <ExamAnswer text="answer #1" />
-                                <ExamAnswer text="answer #2" />
-                                <ExamAnswer text="answer #2" />
-                            </div>
-                        </div>
-                        <div className="next-btn-container">
-                            <button onClick={replaceCard} className="btn"><i className="fas fa-forward"></i></button>
-                        </div>
-                    </div>
+                    <ExamPage size={size} num={size-curr+1} q={currQ} answers={answers} replaceCard={replaceCard}/>
                 </div>}
                 <PopUpBox show={examEnded}>
                     <ExamSum setStats={examEnded} cardsNum={size} playsNum={playsNum} replayExam={() => replayExam}/>
