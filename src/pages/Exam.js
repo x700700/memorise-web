@@ -11,6 +11,7 @@ import ExamSum from "../components/Practice/ExamSum";
 import PopUpBox from "../components/common/PopUpBox";
 import ExamAnswer from "../components/Practice/ExamAnswer";
 import ExamPage from "../components/Practice/ExamPage";
+import ExamTable from "../components/Practice/ExamTable";
 // import Rotate90DegreesCcwTwoToneIcon from '@material-ui/icons/Rotate90DegreesCcwTwoTone';
 
 const Exam = (props) => {
@@ -62,10 +63,7 @@ const Exam = (props) => {
             <div className="exam-container">
                 {(currQ || examEnded) &&
                 <div className="exam">
-                    <div className="exam-previous-paper">
-                        <ExamPage size={size} num={size-curr+1} q={currQ} answers={answers} replaceCard={replaceCard}/>
-                    </div>
-                    <ExamPage size={size} num={size-curr+1} q={currQ} answers={answers} replaceCard={replaceCard}/>
+                    <ExamTable size={size} num={size-curr+1} q={currQ} answers={answers} replaceCard={replaceCard}/>
                 </div>}
                 <PopUpBox show={examEnded}>
                     <ExamSum setStats={examEnded} cardsNum={size} playsNum={playsNum} replayExam={() => replayExam}/>

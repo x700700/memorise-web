@@ -1,0 +1,23 @@
+@import "../../common/colors";
+
+.exam-table {
+    width: 100%;
+    height: 100%;
+
+    .exam-previous-paper-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+
+        visibility: hidden;
+        pointer-events: none;
+
+        transform: translate(0px, 0px);
+        transition: transform .6s ease-in-out;
+    }
+
+    .prev-show {
+        visibility: visible;
+        transform: translate(110%, 0px);
+    }
+}
