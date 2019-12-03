@@ -6,7 +6,7 @@ const ExamPage = ({ size, num, q, answers, replaceCard, isPrevPage }) => {
 
     return (
         <div className="exam-page-container">
-            <div className="exam-page">
+            <div className={`exam-page ${isPrevPage ? 'prev-page-flow' : ''}`}>
                 {q &&
                 <div className={`cards-left ${isPrevPage ? 'disable-prev-card' : ''}`}>
                     <span><i className="fas fa-arrow-up"/></span>

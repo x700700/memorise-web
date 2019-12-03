@@ -11,6 +11,8 @@
         background-color: $grey8blueMask;
         border: $grey6 .3px solid;
         box-shadow: 2px 2px 8px -4px $grey4;
+        transform: scale(1);
+        transition: transform .2s linear;
 
         .cards-left {
             position: absolute;
@@ -30,13 +32,16 @@
             margin-top: 2rem;
             display: flex;
             flex-direction: column;
+            height: calc(100% - 2rem);
 
             .question {
                 font-size: 36px;
                 font-weight: 500;
+                margin-bottom: 2rem;
             }
 
             .next-btn-container {
+                align-self: flex-end;
 
                 button {
                     i {
@@ -45,14 +50,23 @@
                     }
                 }
             }
-
             .answers-container {
+                flex-grow: 1;
+
                 .answers-col {
                     display: flex;
                     flex-direction: column;
+
+                    .each-answer-container {
+                        margin-bottom: 1rem;
+                    }
                 }
             }
         }
+    }
+
+    .prev-page-flow {
+        transform: scale(1.03);
     }
 
     .disable-prev-card {
