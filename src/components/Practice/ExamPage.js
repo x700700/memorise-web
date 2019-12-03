@@ -2,13 +2,13 @@ import React from 'react';
 import './ExamPage.scss';
 import ExamAnswer from "../../components/Practice/ExamAnswer";
 
-const ExamPage = ({ size, num, q, answers, replaceCard }) => {
+const ExamPage = ({ size, num, q, answers, replaceCard, isPrevPage }) => {
 
     return (
         <div className="exam-page-container">
             <div className="exam-page">
                 {q &&
-                <div className="cards-left">
+                <div className={`cards-left ${isPrevPage ? 'disable-prev-card' : ''}`}>
                     <span><i className="fas fa-arrow-up"/></span>
                     <span>{num} / {size}</span>
                 </div>
@@ -25,7 +25,7 @@ const ExamPage = ({ size, num, q, answers, replaceCard }) => {
                                 </div>))}
                         </div>
                     </div>
-                    <div className="next-btn-container">
+                    <div className={`next-btn-container ${isPrevPage ? 'disable-prev-card' : ''}`}>
                         <button onClick={replaceCard} className="btn"><i className="fas fa-forward"></i></button>
                     </div>
                 </div>

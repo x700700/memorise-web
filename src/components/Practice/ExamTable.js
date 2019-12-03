@@ -4,6 +4,7 @@ import ExamPage from "./ExamPage";
 
 const ExamTable = ({ size, num, q, answers, replaceCard }) => {
     const [currQ, setCurrQ] = useState();
+    const [currAnswers, setCurrAnswers] = useState();
     const [showPrev, setShowPrev] = useState(false);
 
     useEffect(() => {
@@ -11,12 +12,14 @@ const ExamTable = ({ size, num, q, answers, replaceCard }) => {
             setShowPrev(true);
         } else {
             setCurrQ(q);
+            setCurrAnswers(answers);
         }
-    }, [q, setShowPrev, currQ]);
+    }, [q, answers, setShowPrev, currQ, currAnswers]);
 
     useEffect(() => {
         const prevPaperIsOut = () => {
             setCurrQ(q);
+            setCurrAnswers(answers);
             setShowPrev(false);
         };
 
@@ -24,12 +27,13 @@ const ExamTable = ({ size, num, q, answers, replaceCard }) => {
         return () => {
             document.getElementById("exam-previous-paper").removeEventListener("transitionend", prevPaperIsOut);
         }
-    }, [setShowPrev, q]);
+    }, [setShowPrev, q, answers]);
 
     return (
         <div className="exam-table">
             <div id="exam-previous-paper" className={`exam-previous-paper-container ${showPrev ? 'prev-show' : ''}`}>
-                <ExamPage size={size} num={num} q={currQ} answers={answers} replaceCard={replaceCard}/>
+                <ExamPage size={size} num={num} q={currQ} answers={currAnswers} replaceCard={replaceCard}
+                          isPrevPage={true}/>
             </div>
             <ExamPage size={size} num={num} q={q} answers={answers} replaceCard={replaceCard}/>
         </div>

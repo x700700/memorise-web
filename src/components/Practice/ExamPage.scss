@@ -54,4 +54,9 @@
             }
         }
     }
+
+    .disable-prev-card {
+        visibility: hidden;
+        pointer-events: none;
+    }
 }
