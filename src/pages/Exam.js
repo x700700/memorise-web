@@ -21,7 +21,7 @@ const Exam = (props) => {
     const defaultDeckSize = useSelector(state => state.app.examDefaultDeckSize);
 
     const replaceCard = (good) => {
-        const ended = cardsDeck.nextCard(good);
+        const ended = cardsDeck.nextQuestion(good);
         ended && dispatch({ type: types.APP_SET_EXAM_ENDED, ended: true });
         setTopCard(cardsDeck.top()); // !! This is necessary for making the dom render on next card !!
     };

@@ -28,6 +28,8 @@ export default class cardsDeck {
         this.topQAnswers = this.createTopQAnswers();
         this.sizeDeck = this.currentDeck.length;
         this.plays = 0;
+        this.rights = 0;
+        this.wrongs = 0;
         this.wrongsDeck = [];
         if (shouldSaveToStorage) {
             localStorage.setItem(this.localStorageKey, this.getStorage());
@@ -51,6 +53,8 @@ export default class cardsDeck {
             sizeDeck: this.sizeDeck,
             isDeckFlipped: this.isDeckFlipped,
             plays: this.plays,
+            rights: this.rights,
+            wrongs: this.wrongs,
         };
         const json = JSON.stringify(mem);
         return json;
@@ -67,6 +71,8 @@ export default class cardsDeck {
         this.sizeDeck = mem.sizeDeck;
         this.isDeckFlipped = mem.isDeckFlipped;
         this.plays = mem.plays;
+        this.rights = mem.rights;
+        this.wrongs = mem.wrongs;
     };
 
     top = () => this.currentDeck[0] || null;
@@ -114,6 +120,28 @@ export default class cardsDeck {
         localStorage.setItem(this.localStorageKey, this.getStorage());
         return deckFinished;
     };
+    nextQuestion = (right) => {
+        let deckFinished = false;
+        // console.warn('cards lengths ---->', this.currentDeck.length, this.wrongsDeck.length);
+        if (this.currentDeck.length === 0 && this.wrongsDeck.length === 0) {
+            deckFinished = true;
+        } else {
+            deckFinished = false;
+            if (right) {
+                this.rights++;
+                this.currentDeck.splice(0, 1);
+                if (this.currentDeck.length === 0 && this.wrongsDeck.length === 0) {
+                    deckFinished = true;
+                }
+            } else {
+                this.wrongs++;
+            }
+            this.topQAnswers = this.createTopQAnswers();
+        }
+        localStorage.setItem(this.localStorageKey, this.getStorage());
+        return deckFinished;
+    };
+
     createTopQAnswers = () => {
         let answers = [];
         if (this.examStartDeck && this.currentDeck && this.currentDeck.length > 0) {
