@@ -3,6 +3,8 @@
 .exam-desktop-container {
     height: 100%;
     border: $grey4 2px solid;
+    position: relative;
+    overflow-y: hidden;
 
     @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
         width: 480px;
@@ -14,14 +16,13 @@
     .exam-container {
         height: 100%;
         position: relative;
+        overflow: hidden;
 
         .exam {
             height: 83%;
             margin: 1rem;
             text-align: center;
             padding-top: 0.3rem;
-            position: relative;
-            overflow-x: hidden;
 
             @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
                 height: 480px;

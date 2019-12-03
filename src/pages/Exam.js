@@ -62,10 +62,10 @@ const Exam = (props) => {
                 <div className="exam">
                     <ExamTable size={size} num={size-curr+1} q={currQ} answers={answers} replaceCard={replaceCard}/>
                 </div>}
-                <PopUpBox show={examEnded}>
-                    <ExamSum setStats={examEnded} cardsNum={size} playsNum={playsNum} replayExam={() => replayExam}/>
-                </PopUpBox>
             </div>
+            <PopUpBox show={examEnded}>
+                <ExamSum setStats={examEnded} cardsNum={size} playsNum={playsNum} replayExam={() => replayExam}/>
+            </PopUpBox>
         </div>
     );
 };
