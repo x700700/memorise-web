@@ -22,9 +22,9 @@ export default class cardsDeck {
 
     reset = (shouldSaveToStorage, cardsNum) => {
         this.currentDeck = this.initialDeck.filter(x => x.q && x.a);
+        this.examStartDeck = _.cloneDeep(this.currentDeck);
         this.sizeTraining = this.currentDeck.length;
         this.currentDeck = (_.shuffle(this.currentDeck)).splice(0, cardsNum);
-        this.examStartDeck = _.cloneDeep(this.currentDeck);
         this.sizeDeck = this.currentDeck.length;
         this.plays = 0;
         this.wrongsDeck = [];
@@ -74,12 +74,14 @@ export default class cardsDeck {
         if (this.examStartDeck && this.currentDeck && this.currentDeck.length > 0) {
             const a = !this.isDeckFlipped ? 'a' : 'q';
             const right = this.currentDeck[0];
-            answers = this.examStartDeck.slice(1).slice(0, 4);
+            answers = this.examStartDeck.filter(x => right && x && x[a] && x[a] !== right[a]);
+            answers = _.uniqBy(answers, a);
+            answers = _.shuffle(answers);
+            answers = answers.slice(0, 4);
             answers.unshift(right);
             answers = _.shuffle(answers);
             answers = answers.map(x => x && x[a]);
         }
-        // console.warn('------->', answers);
         return answers
     };
 
