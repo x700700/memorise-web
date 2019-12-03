@@ -19,10 +19,13 @@ const ExamPage = ({ size, num, q, answers, replaceCard, isPrevPage }) => {
                     </div>
                     <div className="answers-container">
                         <div className="answers-col">
-                            {answers && answers.length > 0 && answers.map((a, i) => (
-                                <div key={i} className="each-answer-container">
-                                    <ExamAnswer text={a} />
-                                </div>))}
+                            {answers && answers.length > 0 && answers.map((a, i) => {
+                                return (
+                                    <div key={i} className="each-answer-container">
+                                        <ExamAnswer text={a} answered={true} right={i==3} wrong={i==1} trueAnswer={i===2} />
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
                     <div className={`next-btn-container ${isPrevPage ? 'disable-prev-card' : ''}`}>
