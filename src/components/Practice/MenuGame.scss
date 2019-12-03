@@ -18,4 +18,18 @@
     .footline {
         margin-top: -1rem;
     }
+
+    .flip-container {
+        margin-left: .3rem;
+    }
+
+    .menu-devider {
+        width: 92%;
+        margin: 0 auto;
+
+        .devider-line {
+            height: .3rem;
+            border-bottom: $grey6 1px solid;
+        }
+    }
 }

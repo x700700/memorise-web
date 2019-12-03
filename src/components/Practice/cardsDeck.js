@@ -19,10 +19,11 @@ export default class cardsDeck {
     }
 
     reset = (shouldSaveToStorage, cardsNum) => {
-        this.currentDeck = _.cloneDeep(this.initialDeck.filter(x => x.q && x.a));
+        this.currentDeck = this.initialDeck.filter(x => x.q && x.a);
         this.sizeTraining = this.currentDeck.length;
         this.currentDeck = (_.shuffle(this.currentDeck)).splice(0, cardsNum);
         this.sizeDeck = this.currentDeck.length;
+        this.isDeckFlipped = false;
         this.plays = 0;
         this.wrongsDeck = [];
         if (shouldSaveToStorage) {
@@ -42,6 +43,7 @@ export default class cardsDeck {
             wrongsDeck: this.wrongsDeck,
             sizeTraining: this.sizeTraining,
             sizeDeck: this.sizeDeck,
+            isDeckFlipped: this.isDeckFlipped,
             plays: this.plays,
         };
         const json = JSON.stringify(mem);
@@ -54,6 +56,7 @@ export default class cardsDeck {
         this.wrongsDeck = mem.wrongsDeck;
         this.sizeTraining = mem.sizeTraining;
         this.sizeDeck = mem.sizeDeck;
+        this.isDeckFlipped = mem.isDeckFlipped;
         this.plays = mem.plays;
     };
 
@@ -65,6 +68,10 @@ export default class cardsDeck {
 
     replay = (cardsNum) => {
         this.reset(true, cardsNum);
+    };
+    setIsDeckFlipped = (flipped) => {
+        console.warn('Deck flip = ', flipped);
+        this.isDeckFlipped = flipped;
     };
     nextCard = (right) => {
         let deckFinished = false;

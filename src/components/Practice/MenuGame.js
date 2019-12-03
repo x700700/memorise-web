@@ -5,6 +5,15 @@ import TopMenu from "../common/TopMenu";
 import {useTranslation} from "react-i18next";
 import * as types from "../../redux/actionsTypes";
 import SubMenuReplay from "./SubMenuReplay";
+import Switch from "../common/Switch";
+
+const MenuDevider = () => {
+    return (
+        <div className="menu-devider">
+            <div className="devider-line"/>
+        </div>
+    );
+};
 
 const MenuGame = ({ hide }) => {
     const { t } = useTranslation();
@@ -18,12 +27,20 @@ const MenuGame = ({ hide }) => {
         dispatch({ type: types.APP_SET_GAME_ENDED, ended: false });
         dispatch({ type: types.APP_SET_GAME_DEFAULT_DECK_SIZE, size: size });
     };
+    const flipDeck = (flipped) => {
+        // console.warn('Deck flip = ', flipped);
+        cardsDeck.setIsDeckFlipped(flipped);
+    };
 
     const size = (cardsDeck && cardsDeck.getSizeTraining()) || 0;
     return (
         <TopMenu hide={hide}>
             <div className="menu-game-col">
                 <div className="title">Practice</div>
+                <div className="flip-container">
+                    <Switch label={t('flip-deck-side')} value="true" onChange={flipDeck}/>
+                </div>
+                <MenuDevider/>
                 <SubMenuReplay playType={t('practice')} replayCb={replayGame} size={size} />
             </div>
         </TopMenu>

@@ -6,7 +6,10 @@ i18n.use(LanguageDetector).init({
         en: {
             translations: {
                 "hello": "Hello",
+                "practice": "Practice",
+                "exam": "Exam",
                 "replay": "Re-Play",
+                "flip-deck-side": "Flip deck side"
             }
         },
         jap: {
