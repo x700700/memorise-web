@@ -14,6 +14,8 @@ const ExamAnswer = ({ text, answered, right, wrong, trueAnswer, setPageAnswered 
     };
 
     const Answered = () => {
+        if (answered) return;
+        console.warn('answered: ', text);
         setPageAnswered();
     };
 

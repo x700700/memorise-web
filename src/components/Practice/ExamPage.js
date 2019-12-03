@@ -39,7 +39,7 @@ const ExamPage = ({ size, num, q, answers, replaceCard, isPrevPage }) => {
                             })}
                         </div>
                     </div>
-                    <div className={`next-btn-container ${isPrevPage ? 'disable-prev-card' : ''}`}>
+                    <div className={`next-btn-container ${isPrevPage || !answered ? 'disable-prev-card' : ''}`}>
                         <button onClick={replaceCard} className="btn"><i className="fas fa-forward"></i></button>
                     </div>
                 </div>
