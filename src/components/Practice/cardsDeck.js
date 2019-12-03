@@ -80,6 +80,17 @@ export default class cardsDeck {
     topA = () => !this.isDeckFlipped ? (this.currentDeck[0] || {}).a : (this.currentDeck[0] || {}).q || '';
     getTopQAnswers = () => this.topQAnswers;
 
+    setTopQAnswer = (id) => {
+        const right = this.topQAnswers.find(x => x.right);
+        console.warn('*******', right);
+        this.topQAnswers.forEach(x => {
+            if (x.id === id) {
+                x.answeredRight = x.id === right.id;
+            }
+        });
+        console.warn('=======>', this.topQAnswers);
+    };
+
     getSizeTraining = () => this.sizeTraining;
     getSizeDeck = () => this.sizeDeck;
     sizeCurr = () => this.currentDeck.length + this.wrongsDeck.length;

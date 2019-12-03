@@ -20,6 +20,10 @@ const Exam = (props) => {
     const examEnded = useSelector(state => state.app.isExamEnded);
     const defaultDeckSize = useSelector(state => state.app.examDefaultDeckSize);
 
+    const setRightWrongAnswer = (id, text) => {
+        console.warn('!!! Answered - ', text, id);
+        cardsDeck.setTopQAnswer(id);
+    };
     const replaceCard = (good) => {
         const ended = cardsDeck.nextQuestion(good);
         ended && dispatch({ type: types.APP_SET_EXAM_ENDED, ended: true });
@@ -67,7 +71,8 @@ const Exam = (props) => {
             <div className="exam-container">
                 {(currQ || examEnded) &&
                 <div className="exam">
-                    <ExamTable size={size} num={size-curr+1} q={currQ} answers={currQAnswers} replaceCard={replaceCard}/>
+                    <ExamTable size={size} num={size-curr+1} q={currQ} answers={currQAnswers}
+                               replaceCard={replaceCard} setAnswer={setRightWrongAnswer}/>
                 </div>}
             </div>
             <PopUpBox show={examEnded}>

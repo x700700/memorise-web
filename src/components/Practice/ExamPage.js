@@ -1,12 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React, {forwardRef, useEffect, useImperativeHandle, useState} from 'react';
 import './ExamPage.scss';
 import ExamAnswer from "../../components/Practice/ExamAnswer";
 
-const ExamPage = ({ size, num, q, answers, replaceCard, isPrevPage }) => {
+const ExamPage = forwardRef(({ size, num, q, answers, replaceCard, isPrevPage, setAnswer }, ref) => {
     const [answered, setAnswered] = useState(false);
 
-    const answeredCb = () => {
+    useImperativeHandle(ref, () => ({
+        setResult(id) {
+            console.warn('search id', id, answers);
+
+        },
+    }));
+
+    const answeredCb = (id, text) => {
         setAnswered(true);
+        setAnswer(id, text);
     };
 
     useEffect(() => {
@@ -29,11 +37,13 @@ const ExamPage = ({ size, num, q, answers, replaceCard, isPrevPage }) => {
                     <div className="answers-container">
                         <div className="answers-col">
                             {answers && Array.isArray(answers) && answers.length > 0 && answers.map((a, i) => {
+                                // console.warn('=-=-=-=->', a.right);
                                 return (
-                                    <div key={i} className="each-answer-container">
-                                        <ExamAnswer text={a.examA} answered={answered || isPrevPage}
-                                                    right={false} wrong={false} trueAnswer={a.right}
+                                    <div key={`answer-${i+1}`} className="each-answer-container">
+                                        <ExamAnswer id={a.id} text={a.examA} answered={answered || isPrevPage}
+                                                    trueAnswer={a.right}
                                                     setPageAnswered={answeredCb}
+                                                    right={a.answeredRight}
                                         />
                                     </div>
                                 );
@@ -47,5 +57,5 @@ const ExamPage = ({ size, num, q, answers, replaceCard, isPrevPage }) => {
             </div>
         </div>
     );
-};
+});
 export default ExamPage;

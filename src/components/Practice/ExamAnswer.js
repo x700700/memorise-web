@@ -1,23 +1,49 @@
-import React from 'react';
+import React, {forwardRef, useEffect, useImperativeHandle, useState} from 'react';
 import './ExamAnswer.scss'
 
-const ExamAnswer = ({ text, answered, right, wrong, trueAnswer, setPageAnswered }) => {
+const ExamAnswer = forwardRef(({ id, text, answered, right, wrong, trueAnswer, setPageAnswered }, ref) => {
+    const [answeredRight, setAnsweredRight] = useState(right);
+    const [answeredWrong, setAnsweredWrong] = useState(wrong);
+
+    useImperativeHandle(ref, () => ({
+        setResult(right, wrong) {
+            if (right) setAnsweredRight(true);
+            if (wrong) setAnsweredWrong(true);
+        },
+    }));
+
     let bg = 'white';
     if (answered) {
-        if (right) bg = 'forestgreen';
-        if (wrong) bg = 'brown';
-        if (trueAnswer) bg = '#e6ffcc';
+        if (answeredRight) {
+            bg = 'forestgreen';
+        } else if (trueAnswer) {
+            bg = '#e6ffcc';
+        } else if (answeredWrong) {
+            bg = 'brown';
+        }
     }
     const styleBtn = {
         backgroundColor: bg,
-        color: answered && wrong ? 'white' : 'inherit',
+        color: answered && answeredWrong ? 'white' : 'inherit',
     };
 
     const Answered = () => {
-        if (answered) return;
-        console.warn('answered: ', text);
-        setPageAnswered();
+        if (trueAnswer) {
+            console.warn('Right - ', text);
+            setAnsweredRight(true);
+        } else {
+            console.warn('Wrong - ', text);
+            setAnsweredWrong(true);
+        }
+        if (!answered) {
+            setPageAnswered(id, text);
+        }
     };
+
+    useEffect(() => {
+        setAnsweredRight(false);
+        setAnsweredWrong(false);
+    }, [text]);
 
     return (
         <div className="exam-answer-container">
@@ -27,5 +53,5 @@ const ExamAnswer = ({ text, answered, right, wrong, trueAnswer, setPageAnswered 
         </div>
     );
 
-};
+});
 export default ExamAnswer;
