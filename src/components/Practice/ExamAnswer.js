@@ -1,7 +1,7 @@
 import React from 'react';
 import './ExamAnswer.scss'
 
-const ExamAnswer = ({ text, answered, right, wrong, trueAnswer }) => {
+const ExamAnswer = ({ text, answered, right, wrong, trueAnswer, setPageAnswered }) => {
     let bg = 'white';
     if (answered) {
         if (right) bg = 'forestgreen';
@@ -12,9 +12,14 @@ const ExamAnswer = ({ text, answered, right, wrong, trueAnswer }) => {
         backgroundColor: bg,
         color: answered && wrong ? 'white' : 'inherit',
     };
+
+    const Answered = () => {
+        setPageAnswered();
+    };
+
     return (
         <div className="exam-answer-container">
-            <div className="btn-container" style={styleBtn}>
+            <div className="btn-container" style={styleBtn} onClick={() => Answered()}>
                 {text}
             </div>
         </div>
