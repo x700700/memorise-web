@@ -61,6 +61,9 @@ export default class cardsDeck {
     };
 
     top = () => this.currentDeck[0] || null;
+    topQ = () => !this.isDeckFlipped ? (this.currentDeck[0] || {}).q : (this.currentDeck[0] || {}).a || '';
+    topA = () => !this.isDeckFlipped ? (this.currentDeck[0] || {}).a : (this.currentDeck[0] || {}).q || '';
+
     getSizeTraining = () => this.sizeTraining;
     getSizeDeck = () => this.sizeDeck;
     sizeCurr = () => this.currentDeck.length + this.wrongsDeck.length;

@@ -15,7 +15,7 @@ import PopUpBox from "../components/common/PopUpBox";
 const Game = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const [, setTopCard] = useState(null);
+    const [, setTopCard] = useState(null); // !! This is necessary for making the dom render on next card !!
     const [cardInMove, setCardInMove] = useState(false);
     const showMenu = useSelector(state => state.app.showMenu);
     const cardsDeck = useSelector(state => state.app.gameCardsDeck);
@@ -31,8 +31,7 @@ const Game = (props) => {
     const replaceCard = (good) => {
         const ended = cardsDeck.nextCard(good);
         ended && dispatch({ type: types.APP_SET_GAME_ENDED, ended: true });
-        const top = cardsDeck.top();
-        setTopCard(top);
+        setTopCard(cardsDeck.top()); // !! This is necessary for making the dom render on next card !!
     };
     const respGood = () => {
         replaceCard(true);
@@ -63,12 +62,11 @@ const Game = (props) => {
 
     // const id = props.match.params.id;
 
-    const top = cardsDeck && cardsDeck.top();
     const size = cardsDeck && cardsDeck.getSizeDeck();
     const playsNum = cardsDeck && cardsDeck.playsNum();
     const curr = cardsDeck && cardsDeck.sizeCurr();
-    const currQ = (top || {}).q || '';
-    const currA = (top || {}).a || '';
+    const currQ = cardsDeck && cardsDeck.topQ();
+    const currA = cardsDeck && cardsDeck.topA();
     return (
         <div className="game-desktop-container">
             <div className="game-container">
