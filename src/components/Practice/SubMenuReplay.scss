@@ -1,0 +1,31 @@
+@import "../../common/colors";
+
+
+.sub-menu-replay {
+
+    .headline, .footline {
+        color: $grey2;
+        font-size: 85%;
+        font-weight: 400;
+    }
+    .footline {
+        margin-top: -1rem;
+    }
+
+    .size-slider-container {
+        width: 85%;
+        margin: 0 auto;
+        margin-top: 2rem;
+    }
+    .size-slider-foot {
+        width: 85%;
+        margin: 0 auto;
+        margin-top: -1rem;
+    }
+
+    .replay-btn {
+        width: 50%;
+        margin: 0 auto;
+        margin-top: 3rem;
+    }
+}
