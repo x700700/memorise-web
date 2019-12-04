@@ -3,24 +3,26 @@ import {useTranslation} from "react-i18next";
 import Button from "../common/Button";
 import './ExamSum.scss';
 
-const ExamSum = forwardRef(({ setStats, cardsNum, playsNum, replayExam }, ref) => {
+const ExamSum = forwardRef(({ setStats, cardsNum, rightsNum, replayExam }, ref) => {
     const { t } = useTranslation();
     const [cards, setCards] = useState(0);
-    const [plays, setPlays] = useState(0);
+    const [rights, setRights] = useState(0);
+    const score = Math.round(rightsNum / cardsNum * 100);
 
     useEffect(() => {
         if (setStats) {
             setCards(cardsNum);
-            setPlays(playsNum);
+            setRights(rightsNum);
         }
-    }, [setStats, cardsNum, playsNum]);
+    }, [setStats, cardsNum, rightsNum]);
 
     return (
         <div className="exam-sum-container">
             <div className="sum-col">
                 <div className="stats">
                     <p>{cards} cards played</p>
-                    <p>{plays - cards} misses</p>
+                    <br/>
+                    <div className="exam-score">Score: {score}</div>
                 </div>
                 <div className="btns-container">
                     <div className="btns-replay">

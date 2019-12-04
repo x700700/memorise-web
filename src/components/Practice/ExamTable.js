@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './ExamTable.scss';
 import ExamPage from "./ExamPage";
 
-const ExamTable = ({ size, num, q, answers, replaceCard, setAnswer, isAnswered, answeredId }) => {
+const ExamTable = ({ size, num, q, answers, nextQuestion, setAnswer, isAnswered, answeredId }) => {
     const [currQ, setCurrQ] = useState();
     const [currAnswers, setCurrAnswers] = useState();
     const [showPrev, setShowPrev] = useState(false);
@@ -29,10 +29,10 @@ const ExamTable = ({ size, num, q, answers, replaceCard, setAnswer, isAnswered, 
     return (
         <div className="exam-table">
             <div id="exam-previous-paper" className={`exam-previous-paper-container ${showPrev ? 'prev-show' : ''}`}>
-                <ExamPage size={size} num={num} q={currQ} answers={currAnswers} replaceCard={replaceCard}
+                <ExamPage size={size} num={num} q={currQ} answers={currAnswers} nextQuestion={nextQuestion}
                           isPrevPage={true} isAnswered={isAnswered}/>
             </div>
-            <ExamPage size={size} num={num} q={q} answers={answers} replaceCard={replaceCard}
+            <ExamPage size={size} num={num} q={q} answers={answers} nextQuestion={nextQuestion}
                       setAnswer={setAnswer} isAnswered={isAnswered} answeredId={answeredId}/>
         </div>
     );

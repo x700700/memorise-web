@@ -94,6 +94,7 @@ export default class cardsDeck {
     getTopQAnswers = () => this.topQAnswers;
     getIsExamPageAnswered = () => this.isExamPageAnswered;
     getTopQAnswerId = () => this.topQAnswerId;
+    getRightsNum = () => this.rights;
 
     getSizeTraining = () => this.sizeTraining;
     getSizeDeck = () => this.sizeDeck;
@@ -149,21 +150,19 @@ export default class cardsDeck {
         this.isExamPageAnswered = true;
         localStorage.setItem(this.localStorageKey, this.getStorage());
     };
-    nextQuestion = (right) => {
+    nextQuestion = () => {
         let deckFinished = false;
         this.isExamPageAnswered = false;
         if (this.currentDeck.length === 0) {
             deckFinished = true;
         } else {
             deckFinished = false;
-            if (right) {
-                this.rights++;
-                this.currentDeck.splice(0, 1);
-                if (this.currentDeck.length === 0 && this.wrongsDeck.length === 0) {
-                    deckFinished = true;
-                }
-            } else {
-                this.wrongs++;
+            const right = this.topQAnswers.find(x => x.rightAnswer).id === this.topQAnswerId;
+            right && this.rights++;
+            !right && this.wrongs++;
+            this.currentDeck.splice(0, 1);
+            if (this.currentDeck.length === 0 && this.wrongsDeck.length === 0) {
+                deckFinished = true;
             }
             this.topQAnswers = this.createTopQAnswers();
         }

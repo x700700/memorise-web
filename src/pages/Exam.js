@@ -32,8 +32,8 @@ const Exam = (props) => {
         setAnswers(cardsDeck.getTopQAnswers());
         setTopCard(cardsDeck.top()); // !! This is necessary for making the dom render on next card !!
     };
-    const replaceCard = (good) => {
-        const ended = cardsDeck.nextQuestion(good);
+    const nextQuestion = () => {
+        const ended = cardsDeck.nextQuestion();
         ended && dispatch({ type: types.APP_SET_EXAM_ENDED, ended: true });
         setIsPageAnswered(false);
         setTopQAnswerId(null);
@@ -73,7 +73,7 @@ const Exam = (props) => {
     }, [dispatch, history]);
 
     const size = cardsDeck && cardsDeck.getSizeDeck();
-    const playsNum = cardsDeck && cardsDeck.playsNum();
+    const rightsNum = cardsDeck && cardsDeck.getRightsNum();
     const curr = cardsDeck && cardsDeck.sizeCurr();
     const currQ = cardsDeck && cardsDeck.topQ();
 
@@ -84,11 +84,11 @@ const Exam = (props) => {
                 <div className="exam">
                     <ExamTable size={size} num={size-curr+1} q={currQ} answers={answers}
                                isAnswered={isPageAnswered} answeredId={topQAnswerId}
-                               replaceCard={replaceCard} setAnswer={setAnswer}/>
+                               nextQuestion={nextQuestion} setAnswer={setAnswer}/>
                 </div>}
             </div>
             <PopUpBox show={examEnded}>
-                <ExamSum setStats={examEnded} cardsNum={size} playsNum={playsNum} replayExam={() => replayExam}/>
+                <ExamSum setStats={examEnded} cardsNum={size} rightsNum={rightsNum} replayExam={() => replayExam}/>
             </PopUpBox>
         </div>
     );

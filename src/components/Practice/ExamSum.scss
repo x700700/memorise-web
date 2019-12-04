@@ -12,6 +12,12 @@
 
         .stats {
             margin-bottom: 1rem;
+
+            .exam-score {
+                margin-top: 1rem;
+                font-size: 32px;
+                font-weight: 500;
+            }
         }
         .btns-container {
             flex-grow: 1;

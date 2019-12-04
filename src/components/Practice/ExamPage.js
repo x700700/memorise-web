@@ -2,7 +2,7 @@ import React from 'react';
 import './ExamPage.scss';
 import ExamAnswer from "../../components/Practice/ExamAnswer";
 
-const ExamPage = ({ size, num, q, answers, replaceCard, isPrevPage, setAnswer, isAnswered }) => {
+const ExamPage = ({ size, num, q, answers, nextQuestion, isPrevPage, setAnswer, isAnswered }) => {
 
     return (
         <div className="exam-page-container">
@@ -33,7 +33,7 @@ const ExamPage = ({ size, num, q, answers, replaceCard, isPrevPage, setAnswer, i
                         </div>
                     </div>
                     <div className={`next-btn-container ${isPrevPage || !isAnswered ? 'next-btn-disable' : ''}`}>
-                        <button onClick={replaceCard} className="btn"><i className="fas fa-forward"></i></button>
+                        <button onClick={() => nextQuestion()} className="btn"><i className="fas fa-forward"></i></button>
                     </div>
                 </div>
             </div>
