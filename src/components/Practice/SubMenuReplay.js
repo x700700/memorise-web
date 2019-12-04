@@ -5,7 +5,7 @@ import consts from "../../common/consts";
 import Button from "../common/Button";
 import { useTranslation } from "react-i18next";
 
-const SubMenuReplay = ({ playType, replayCb, size }) => {
+const SubMenuReplay = ({ sliderTitle, replayCb, size }) => {
     const { t } = useTranslation();
     const refSlider = useRef();
 
@@ -19,7 +19,7 @@ const SubMenuReplay = ({ playType, replayCb, size }) => {
             <div className="size-slider-container">
                 <Slider ref={refSlider} min={consts.play.minCards} max={size} />
             </div>
-            <div className="footline size-slider-foot">Number Of Cards to {playType}</div>
+            <div className="footline size-slider-foot">{sliderTitle}</div>
             <div className="replay-btn">
                 <Button text={t('replay')} onClick={() => replay} />
             </div>

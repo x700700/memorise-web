@@ -24,7 +24,7 @@ const ExamSum = forwardRef(({ setStats, cardsNum, rightsNum, replayExam }, ref) 
                     <br/>
                     <div className="exam-score">
                         <div>{t("Score")}</div>
-                        <div className="score-val">{score}</div>
+                        <div className="score-val">{`${score}`}</div>
                     </div>
                 </div>
                 <div className="btns-container">
