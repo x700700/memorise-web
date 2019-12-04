@@ -72,22 +72,10 @@ const Exam = (props) => {
 
     }, [dispatch, history]);
 
-    // const id = props.match.params.id;
-
     const size = cardsDeck && cardsDeck.getSizeDeck();
     const playsNum = cardsDeck && cardsDeck.playsNum();
     const curr = cardsDeck && cardsDeck.sizeCurr();
     const currQ = cardsDeck && cardsDeck.topQ();
-
-    /*
-    let currQAnswers = cardsDeck && cardsDeck.getTopQAnswers();
-    // console.warn('currQAnswers = ', currQAnswers);
-    if (currQAnswers && (!Array.isArray(currQAnswers) || currQAnswers.length === 0)) {
-        console.error('local storage might be improper. deleted it. please Refresh page.');
-        currQAnswers = [];
-        localStorage.removeItem(consts.localStorage.examId);
-    }
-     */
 
     return (
         <div className="exam-desktop-container">
