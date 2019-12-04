@@ -1,4 +1,5 @@
 @import "../../common/colors";
+@import "~react-vis/dist/style";
 
 .exam-sum-container {
     height: 100%;
@@ -17,6 +18,10 @@
                 margin-top: 1rem;
                 font-size: 32px;
                 font-weight: 500;
+            }
+            .exam-score-pie {
+                justify-content: center;
+                display: flex;
             }
         }
         .btns-container {
