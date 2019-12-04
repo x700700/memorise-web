@@ -40,6 +40,12 @@ const Header = (props) => {
         dispatch({ type: types.APP_SHOW_MENU, show: show });
     };
 
+    const clearLocalStorage = () => {
+        console.warn('Clearing localStorage.');
+        localStorage.removeItem(consts.localStorage.gameId);
+        localStorage.removeItem(consts.localStorage.examId);
+    };
+
     return (
         <div className="header">
             <div className="header-row">
@@ -57,7 +63,7 @@ const Header = (props) => {
                     <Link to="/practice"><span className={`btn ${currPage === consts.pageName.practice ? 'tab-active' : ''}`}><i className="fas fa-running"/></span></Link>
                     <Link to="/exam"><span className={`btn ${currPage === consts.pageName.exam ? 'tab-active' : ''}`}><i className="fas fa-grin-beam-sweat"/></span></Link>
                 </div>
-                <img className="logo" src={logo} alt="logo" width="32" height="32"/>
+                <img className="logo" src={logo} alt="logo" width="32" height="32" onClick={() => clearLocalStorage()}/>
             </div>
             <div className={`top-menu-box ${showMenu ? 'top-menu-pop-down' : ''}`}>
                 <div className="menu-container">

@@ -1,13 +1,13 @@
 import React from 'react';
 import './ExamAnswer.scss'
 
-const ExamAnswer = ({ id, text, answered, right, wrong, trueAnswer, setAnswer }) => {
+const ExamAnswer = ({ id, text, answered, right, wrong, rightAnswer, setAnswer }) => {
 
     let bg = 'white';
     if (answered) {
         if (right) {
             bg = 'forestgreen';
-        } else if (trueAnswer) {
+        } else if (rightAnswer) {
             bg = '#e6ffcc';
         } else if (wrong) {
             bg = 'brown';

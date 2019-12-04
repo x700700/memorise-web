@@ -6,7 +6,7 @@ export default class cardsDeck {
 
     constructor(localStorageKey, training, shouldDeckFlipped) {
         if (training) {
-            const exercises = training && training.exercises && _.values(training.exercises);
+            const exercises = training && training.exercises && Object.values(training.exercises);
             // console.warn('=====> cardsDeck - exercises = ', exercises);
             this.initialDeck = _.cloneDeep(exercises);
         } else {
@@ -139,7 +139,7 @@ export default class cardsDeck {
     setTopQAnswer = (id) => {
         // console.warn('cardsDeck updating Answer - ', id, this.topQAnswers);
         this.topQAnswerId = id;
-        const right = this.topQAnswers.find(x => x.trueAnswer);
+        const right = this.topQAnswers.find(x => x.rightAnswer);
         this.topQAnswers.forEach((x, i) => {
             if (x.id === id) {
                 x.answeredRight = x.id === right.id;
@@ -152,7 +152,7 @@ export default class cardsDeck {
     nextQuestion = (right) => {
         let deckFinished = false;
         this.isExamPageAnswered = false;
-        if (this.currentDeck.length === 0 && this.wrongsDeck.length === 0) {
+        if (this.currentDeck.length === 0) {
             deckFinished = true;
         } else {
             deckFinished = false;
@@ -176,12 +176,14 @@ export default class cardsDeck {
         if (this.examStartDeck && this.currentDeck && this.currentDeck.length > 0) {
             const a = !this.isDeckFlipped ? 'a' : 'q';
             const right = this.currentDeck[0];
-            answers = this.examStartDeck.filter(x => right && x && x[a] && x[a] !== right[a]);
-            answers = _.uniqBy(answers, a);
-            answers = _.shuffle(answers).slice(0, 4);
-            answers.unshift(right);
-            answers = _.shuffle(answers);
-            answers = answers.map(x => ({...x, examA: x[a], trueAnswer: x.id && x.id === right.id}));
+            if (right) {
+                answers = this.examStartDeck.filter(x => right && x && x[a] && x[a] !== right[a]);
+                answers = _.uniqBy(answers, a);
+                answers = _.shuffle(answers).slice(0, 4);
+                answers.unshift(right);
+                answers = _.shuffle(answers);
+                answers = answers.map(x => ({...x, examA: x[a], rightAnswer: x.id && x.id === right.id}));
+            }
         }
         return answers;
     };

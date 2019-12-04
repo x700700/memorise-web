@@ -23,7 +23,7 @@ const ExamPage = ({ size, num, q, answers, replaceCard, isPrevPage, setAnswer, i
                                 return (
                                     <div key={`answer-${i+1}`} className="each-answer-container">
                                         <ExamAnswer id={a.id} text={a.examA}
-                                                    trueAnswer={a.trueAnswer} right={a.answeredRight} wrong={a.answeredWrong}
+                                                    rightAnswer={a.rightAnswer} right={a.answeredRight} wrong={a.answeredWrong}
                                                     answered={isAnswered || isPrevPage}
                                                     setAnswer={setAnswer}
                                         />
