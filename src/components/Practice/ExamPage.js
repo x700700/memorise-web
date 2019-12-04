@@ -1,26 +1,8 @@
-import React, {forwardRef, useEffect, useImperativeHandle, useState} from 'react';
+import React from 'react';
 import './ExamPage.scss';
 import ExamAnswer from "../../components/Practice/ExamAnswer";
 
-const ExamPage = forwardRef(({ size, num, q, answers, replaceCard, isPrevPage, setAnswer, isAnswered }, ref) => {
-    // const [answered, setAnswered] = useState(false);
-
-    useImperativeHandle(ref, () => ({
-        setResult(_answers) {
-            console.warn('SET RESULT', _answers);
-        },
-    }));
-
-    const answeredCb = (id, text) => {
-        // setAnswered(true);
-        setAnswer(id, text);
-    };
-
-    /*
-    useEffect(() => {
-        setAnswered(false);
-    }, [q, setAnswered]);
-     */
+const ExamPage = ({ size, num, q, answers, replaceCard, isPrevPage, setAnswer, isAnswered }) => {
 
     return (
         <div className="exam-page-container">
@@ -43,7 +25,7 @@ const ExamPage = forwardRef(({ size, num, q, answers, replaceCard, isPrevPage, s
                                     <div key={`answer-${i+1}`} className="each-answer-container">
                                         <ExamAnswer id={a.id} text={a.examA} answered={isAnswered || isPrevPage}
                                                     trueAnswer={a.right}
-                                                    setPageAnswered={answeredCb}
+                                                    setAnswer={setAnswer}
                                                     right={a.answeredRight}
                                         />
                                     </div>
@@ -58,5 +40,5 @@ const ExamPage = forwardRef(({ size, num, q, answers, replaceCard, isPrevPage, s
             </div>
         </div>
     );
-});
+};
 export default ExamPage;

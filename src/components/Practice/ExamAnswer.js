@@ -1,16 +1,9 @@
-import React, {forwardRef, useEffect, useImperativeHandle, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import './ExamAnswer.scss'
 
-const ExamAnswer = forwardRef(({ id, text, answered, right, wrong, trueAnswer, setPageAnswered, answeredId }, ref) => {
+const ExamAnswer = ({ id, text, answered, right, wrong, trueAnswer, setAnswer, answeredId }) => {
     const [answeredRight, setAnsweredRight] = useState(right);
     const [answeredWrong, setAnsweredWrong] = useState(wrong);
-
-    useImperativeHandle(ref, () => ({
-        setResult(right, wrong) {
-            if (right) setAnsweredRight(true);
-            if (wrong) setAnsweredWrong(true);
-        },
-    }));
 
     let bg = 'white';
     if (answered) {
@@ -28,24 +21,10 @@ const ExamAnswer = forwardRef(({ id, text, answered, right, wrong, trueAnswer, s
     };
 
     const Answered = () => {
-        /*
-        if (trueAnswer) {
-            console.warn('Right - ', text);
-            setAnsweredRight(true);
-        } else {
-            console.warn('Wrong - ', text);
-            setAnsweredWrong(true);
-        }
-         */
         if (!answered) {
-            setPageAnswered(id, text);
+            setAnswer(id, text);
         }
     };
-
-    useEffect(() => {
-        setAnsweredRight(false);
-        setAnsweredWrong(false);
-    }, [text]);
 
     useEffect(() => {
         console.warn('answerID CHANGED')
@@ -67,5 +46,5 @@ const ExamAnswer = forwardRef(({ id, text, answered, right, wrong, trueAnswer, s
         </div>
     );
 
-});
+};
 export default ExamAnswer;
