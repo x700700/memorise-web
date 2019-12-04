@@ -19,7 +19,7 @@ const Exam = (props) => {
     const [topQAnswerId, setTopQAnswerId] = useState(null);
     const [answers, setAnswers] = useState(null);
 
-    // const showMenu = useSelector(state => state.app.showMenu);
+    const showMenu = useSelector(state => state.app.showMenu);
     const cardsDeck = useSelector(state => state.app.examCardsDeck);
     const examEnded = useSelector(state => state.app.isExamEnded);
     const defaultDeckSize = useSelector(state => state.app.examDefaultDeckSize);
@@ -53,7 +53,7 @@ const Exam = (props) => {
             setTopQAnswerId(cardsDeck.getTopQAnswerId());
             setAnswers(cardsDeck.getTopQAnswers());
         }
-    }, [cardsDeck, setIsPageAnswered, setAnswers, topQAnswerId, answers]);
+    }, [cardsDeck, setIsPageAnswered, setAnswers, topQAnswerId, answers, examEnded, showMenu]);
 
     useEffect(() => {
         // console.warn('Exam mount');
