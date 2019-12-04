@@ -14,6 +14,7 @@ const ExamAnswer = ({ id, text, answered, right, wrong, rightAnswer, setAnswer }
         }
     }
     const styleBtn = {
+        transition: `background-color ${answered ? '.2s' : '0s'} linear`,
         backgroundColor: bg,
         color: answered && wrong ? 'white' : 'inherit',
     };
