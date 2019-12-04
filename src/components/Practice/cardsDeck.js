@@ -137,7 +137,7 @@ export default class cardsDeck {
     };
 
     setTopQAnswer = (id) => {
-        console.warn('cardsDeck updating Answer - ', id, this.topQAnswers);
+        // console.warn('cardsDeck updating Answer - ', id, this.topQAnswers);
         this.topQAnswerId = id;
         const right = this.topQAnswers.find(x => x.trueAnswer);
         this.topQAnswers.forEach((x, i) => {
@@ -148,12 +148,10 @@ export default class cardsDeck {
         });
         this.isExamPageAnswered = true;
         localStorage.setItem(this.localStorageKey, this.getStorage());
-        // console.warn('2 =======>', this.topQAnswers);
     };
     nextQuestion = (right) => {
         let deckFinished = false;
         this.isExamPageAnswered = false;
-        // console.warn('cards lengths ---->', this.currentDeck.length, this.wrongsDeck.length);
         if (this.currentDeck.length === 0 && this.wrongsDeck.length === 0) {
             deckFinished = true;
         } else {
@@ -185,7 +183,6 @@ export default class cardsDeck {
             answers = _.shuffle(answers);
             answers = answers.map(x => ({...x, examA: x[a], trueAnswer: x.id && x.id === right.id}));
         }
-        // console.warn('===========>', answers);
         return answers;
     };
 }
