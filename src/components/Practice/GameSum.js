@@ -21,7 +21,7 @@ const GameSum = forwardRef(({ setStats, cardsNum, playsNum, replayGame }, ref) =
             <div className="sum-col">
                 <div className="stats">
                     <p>{cards} {t("cards played")}</p>
-                    <p>{plays - cards} {t("misses")}</p>
+                    <p className="stats-misses">{plays - cards} {t("misses")}</p>
                 </div>
                 {false &&
                 <div className="exam-score-pie">

@@ -81,7 +81,7 @@ const Game = (props) => {
                     }
                     <Card ref={refGame} q={currQ} a={currA} setCardInMove={setCardInMove}/>
                     <div className={`game-buttons ${cardInMove || gameEnded || showMenu ? 'buttons-disable' : ''}`}>
-                        <button onClick={respBad} className="btn btn-bad"><i className="fas fa-times"></i></button>
+                        <button onClick={respBad} className={`btn btn-bad ${curr ===1 ? 'disable-bad-button' : ''}`}><i className="fas fa-times"></i></button>
                         <button onClick={rotateCard} className="btn"><i className="fas fa-sync-alt"></i></button>
                         <button onClick={respGood} className="btn btn-good"><i className="fas fa-check"></i></button>
                     </div>

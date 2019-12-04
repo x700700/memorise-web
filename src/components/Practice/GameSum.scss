@@ -12,6 +12,11 @@
 
         .stats {
             margin-bottom: 1rem;
+            font-size: 28px;
+
+            .stats-misses {
+                color: darkred;
+            }
         }
         .btns-container {
             flex-grow: 1;

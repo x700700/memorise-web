@@ -55,9 +55,14 @@
                 .btn-good i {
                     color: mediumblue;
                 }
-
                 .btn-bad i {
                     color: darkred;
+                }
+                .disable-bad-button {
+                    pointer-events: none;
+                    i {
+                        color: #ccc;
+                    }
                 }
             }
 
