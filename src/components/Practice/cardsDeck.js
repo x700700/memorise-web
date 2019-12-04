@@ -26,6 +26,8 @@ export default class cardsDeck {
         this.sizeTraining = this.currentDeck.length;
         this.currentDeck = (_.shuffle(this.currentDeck)).splice(0, cardsNum);
         this.topQAnswers = this.createTopQAnswers();
+        this.isExamPageAnswered = false;
+        this.topQAnswerId = null;
         this.sizeDeck = this.currentDeck.length;
         this.plays = 0;
         this.rights = 0;
@@ -48,6 +50,8 @@ export default class cardsDeck {
             examStartDeck: this.examStartDeck,
             currentDeck: this.currentDeck,
             topQAnswers: this.topQAnswers,
+            isExamPageAnswered: this.isExamPageAnswered,
+            topQAnswerId: this.topQAnswerId,
             wrongsDeck: this.wrongsDeck,
             sizeTraining: this.sizeTraining,
             sizeDeck: this.sizeDeck,
@@ -66,6 +70,8 @@ export default class cardsDeck {
         this.examStartDeck = mem.examStartDeck;
         this.currentDeck = mem.currentDeck;
         this.topQAnswers = mem.topQAnswers;
+        this.isExamPageAnswered = mem.isExamPageAnswered;
+        this.topQAnswerId = mem.topQAnswerId;
         this.wrongsDeck = mem.wrongsDeck;
         this.sizeTraining = mem.sizeTraining;
         this.sizeDeck = mem.sizeDeck;
@@ -79,16 +85,21 @@ export default class cardsDeck {
     topQ = () => !this.isDeckFlipped ? (this.currentDeck[0] || {}).q : (this.currentDeck[0] || {}).a || '';
     topA = () => !this.isDeckFlipped ? (this.currentDeck[0] || {}).a : (this.currentDeck[0] || {}).q || '';
     getTopQAnswers = () => this.topQAnswers;
+    getIsExamPageAnswered = () => this.isExamPageAnswered;
+    getTopQAnswerId = () => this.topQAnswerId;
 
     setTopQAnswer = (id) => {
+        // console.warn('1 =======>', this.topQAnswers);
+        this.topQAnswerId = id;
         const right = this.topQAnswers.find(x => x.right);
-        console.warn('*******', right);
         this.topQAnswers.forEach(x => {
             if (x.id === id) {
                 x.answeredRight = x.id === right.id;
             }
         });
-        console.warn('=======>', this.topQAnswers);
+        this.isExamPageAnswered = true;
+        localStorage.setItem(this.localStorageKey, this.getStorage());
+        // console.warn('2 =======>', this.topQAnswers);
     };
 
     getSizeTraining = () => this.sizeTraining;

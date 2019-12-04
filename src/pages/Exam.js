@@ -15,25 +15,46 @@ const Exam = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [, setTopCard] = useState(null); // !! This is necessary for making the dom render on next card !!
+    const [isPageAnswered, setIsPageAnswered] = useState();
+    const [topQAnswerId, setTopQAnswerId] = useState(null);
+    const [answers, setAnswers] = useState(null);
+
     // const showMenu = useSelector(state => state.app.showMenu);
     const cardsDeck = useSelector(state => state.app.examCardsDeck);
     const examEnded = useSelector(state => state.app.isExamEnded);
     const defaultDeckSize = useSelector(state => state.app.examDefaultDeckSize);
 
+
     const setRightWrongAnswer = (id, text) => {
         console.warn('!!! Answered - ', text, id);
         cardsDeck.setTopQAnswer(id);
+        setIsPageAnswered(cardsDeck.getIsExamPageAnswered());
+        setTopQAnswerId(id);
+        setAnswers(cardsDeck.getTopQAnswers());
+        setTopCard(cardsDeck.top()); // !! This is necessary for making the dom render on next card !!
     };
     const replaceCard = (good) => {
         const ended = cardsDeck.nextQuestion(good);
         ended && dispatch({ type: types.APP_SET_EXAM_ENDED, ended: true });
-        setTopCard(cardsDeck.top()); // !! This is necessary for making the dom render on next card !!
+        setIsPageAnswered(false);
+        setTopQAnswerId(null);
+        setAnswers(cardsDeck.getTopQAnswers());
     };
     const replayExam = () => {
         dispatch({ type: types.APP_SET_EXAM_ENDED, ended: false });
         cardsDeck.replay(defaultDeckSize);
         dispatch({ type: types.APP_SET_EXAM_CARDSDECK, cardsDeck: cardsDeck });
     };
+
+    useEffect(() => {
+        if (cardsDeck) {
+            console.warn('**** hey *****')
+            const isAnswered = cardsDeck.getIsExamPageAnswered();
+            setIsPageAnswered(isAnswered);
+            setTopQAnswerId(cardsDeck.getTopQAnswerId())
+            setAnswers(cardsDeck.getTopQAnswers());
+        }
+    }, [cardsDeck, setIsPageAnswered, setAnswers]);
 
     useEffect(() => {
         // console.warn('Exam mount');
@@ -59,19 +80,23 @@ const Exam = (props) => {
     const curr = cardsDeck && cardsDeck.sizeCurr();
     const currQ = cardsDeck && cardsDeck.topQ();
 
+    /*
     let currQAnswers = cardsDeck && cardsDeck.getTopQAnswers();
+    // console.warn('currQAnswers = ', currQAnswers);
     if (currQAnswers && (!Array.isArray(currQAnswers) || currQAnswers.length === 0)) {
         console.error('local storage might be improper. deleted it. please Refresh page.');
         currQAnswers = [];
         localStorage.removeItem(consts.localStorage.examId);
     }
+     */
 
     return (
         <div className="exam-desktop-container">
             <div className="exam-container">
-                {(currQ || examEnded) &&
+                {(currQ || examEnded || isPageAnswered) &&
                 <div className="exam">
-                    <ExamTable size={size} num={size-curr+1} q={currQ} answers={currQAnswers}
+                    <ExamTable size={size} num={size-curr+1} q={currQ} answers={answers}
+                               isAnswered={isPageAnswered} answeredId={topQAnswerId}
                                replaceCard={replaceCard} setAnswer={setRightWrongAnswer}/>
                 </div>}
             </div>

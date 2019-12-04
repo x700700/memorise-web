@@ -2,24 +2,25 @@ import React, {forwardRef, useEffect, useImperativeHandle, useState} from 'react
 import './ExamPage.scss';
 import ExamAnswer from "../../components/Practice/ExamAnswer";
 
-const ExamPage = forwardRef(({ size, num, q, answers, replaceCard, isPrevPage, setAnswer }, ref) => {
-    const [answered, setAnswered] = useState(false);
+const ExamPage = forwardRef(({ size, num, q, answers, replaceCard, isPrevPage, setAnswer, isAnswered }, ref) => {
+    // const [answered, setAnswered] = useState(false);
 
     useImperativeHandle(ref, () => ({
-        setResult(id) {
-            console.warn('search id', id, answers);
-
+        setResult(_answers) {
+            console.warn('SET RESULT', _answers);
         },
     }));
 
     const answeredCb = (id, text) => {
-        setAnswered(true);
+        // setAnswered(true);
         setAnswer(id, text);
     };
 
+    /*
     useEffect(() => {
         setAnswered(false);
     }, [q, setAnswered]);
+     */
 
     return (
         <div className="exam-page-container">
@@ -40,7 +41,7 @@ const ExamPage = forwardRef(({ size, num, q, answers, replaceCard, isPrevPage, s
                                 // console.warn('=-=-=-=->', a.right);
                                 return (
                                     <div key={`answer-${i+1}`} className="each-answer-container">
-                                        <ExamAnswer id={a.id} text={a.examA} answered={answered || isPrevPage}
+                                        <ExamAnswer id={a.id} text={a.examA} answered={isAnswered || isPrevPage}
                                                     trueAnswer={a.right}
                                                     setPageAnswered={answeredCb}
                                                     right={a.answeredRight}
@@ -50,7 +51,7 @@ const ExamPage = forwardRef(({ size, num, q, answers, replaceCard, isPrevPage, s
                             })}
                         </div>
                     </div>
-                    <div className={`next-btn-container ${isPrevPage || !answered ? 'next-btn-disable' : ''}`}>
+                    <div className={`next-btn-container ${isPrevPage || !isAnswered ? 'next-btn-disable' : ''}`}>
                         <button onClick={replaceCard} className="btn"><i className="fas fa-forward"></i></button>
                     </div>
                 </div>

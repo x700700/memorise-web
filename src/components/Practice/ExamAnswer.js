@@ -1,7 +1,7 @@
 import React, {forwardRef, useEffect, useImperativeHandle, useState} from 'react';
 import './ExamAnswer.scss'
 
-const ExamAnswer = forwardRef(({ id, text, answered, right, wrong, trueAnswer, setPageAnswered }, ref) => {
+const ExamAnswer = forwardRef(({ id, text, answered, right, wrong, trueAnswer, setPageAnswered, answeredId }, ref) => {
     const [answeredRight, setAnsweredRight] = useState(right);
     const [answeredWrong, setAnsweredWrong] = useState(wrong);
 
@@ -28,6 +28,7 @@ const ExamAnswer = forwardRef(({ id, text, answered, right, wrong, trueAnswer, s
     };
 
     const Answered = () => {
+        /*
         if (trueAnswer) {
             console.warn('Right - ', text);
             setAnsweredRight(true);
@@ -35,6 +36,7 @@ const ExamAnswer = forwardRef(({ id, text, answered, right, wrong, trueAnswer, s
             console.warn('Wrong - ', text);
             setAnsweredWrong(true);
         }
+         */
         if (!answered) {
             setPageAnswered(id, text);
         }
@@ -45,10 +47,22 @@ const ExamAnswer = forwardRef(({ id, text, answered, right, wrong, trueAnswer, s
         setAnsweredWrong(false);
     }, [text]);
 
+    useEffect(() => {
+        console.warn('answerID CHANGED')
+        if (id === answeredId) {
+            if (trueAnswer) {
+                setAnsweredRight(true);
+            }
+            else {
+                setAnsweredWrong(true);
+            }
+        }
+    }, [id, answeredId, setAnsweredRight, setAnsweredWrong]);
+
     return (
         <div className="exam-answer-container">
             <div className="btn-container" style={styleBtn} onClick={() => Answered()}>
-                {text}
+                {text} - [{trueAnswer}]
             </div>
         </div>
     );
