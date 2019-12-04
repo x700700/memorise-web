@@ -88,20 +88,6 @@ export default class cardsDeck {
     getIsExamPageAnswered = () => this.isExamPageAnswered;
     getTopQAnswerId = () => this.topQAnswerId;
 
-    setTopQAnswer = (id) => {
-        // console.warn('1 =======>', this.topQAnswers);
-        this.topQAnswerId = id;
-        const right = this.topQAnswers.find(x => x.right);
-        this.topQAnswers.forEach(x => {
-            if (x.id === id) {
-                x.answeredRight = x.id === right.id;
-            }
-        });
-        this.isExamPageAnswered = true;
-        localStorage.setItem(this.localStorageKey, this.getStorage());
-        // console.warn('2 =======>', this.topQAnswers);
-    };
-
     getSizeTraining = () => this.sizeTraining;
     getSizeDeck = () => this.sizeDeck;
     sizeCurr = () => this.currentDeck.length + this.wrongsDeck.length;
@@ -142,6 +128,21 @@ export default class cardsDeck {
         localStorage.setItem(this.localStorageKey, this.getStorage());
         return deckFinished;
     };
+
+    setTopQAnswer = (id) => {
+        console.warn('cardsDeck updating Answer - ', id, this.topQAnswers);
+        this.topQAnswerId = id;
+        const right = this.topQAnswers.find(x => x.trueAnswer);
+        this.topQAnswers.forEach((x, i) => {
+            if (x.id === id) {
+                x.answeredRight = x.id === right.id;
+                x.answeredWrong = x.id !== right.id;
+            }
+        });
+        this.isExamPageAnswered = true;
+        localStorage.setItem(this.localStorageKey, this.getStorage());
+        // console.warn('2 =======>', this.topQAnswers);
+    };
     nextQuestion = (right) => {
         let deckFinished = false;
         // console.warn('cards lengths ---->', this.currentDeck.length, this.wrongsDeck.length);
@@ -174,7 +175,7 @@ export default class cardsDeck {
             answers = _.shuffle(answers).slice(0, 4);
             answers.unshift(right);
             answers = _.shuffle(answers);
-            answers = answers.map(x => ({...x, examA: x[a], right: x.id && x.id === right.id}));
+            answers = answers.map(x => ({...x, examA: x[a], trueAnswer: x.id && x.id === right.id}));
         }
         // console.warn('===========>', answers);
         return answers;

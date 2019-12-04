@@ -20,13 +20,12 @@ const ExamPage = ({ size, num, q, answers, replaceCard, isPrevPage, setAnswer, i
                     <div className="answers-container">
                         <div className="answers-col">
                             {answers && Array.isArray(answers) && answers.length > 0 && answers.map((a, i) => {
-                                // console.warn('=-=-=-=->', a.right);
                                 return (
                                     <div key={`answer-${i+1}`} className="each-answer-container">
-                                        <ExamAnswer id={a.id} text={a.examA} answered={isAnswered || isPrevPage}
-                                                    trueAnswer={a.right}
+                                        <ExamAnswer id={a.id} text={a.examA}
+                                                    trueAnswer={a.trueAnswer} right={a.answeredRight} wrong={a.answeredWrong}
+                                                    answered={isAnswered || isPrevPage}
                                                     setAnswer={setAnswer}
-                                                    right={a.answeredRight}
                                         />
                                     </div>
                                 );

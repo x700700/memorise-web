@@ -48,13 +48,13 @@ const Exam = (props) => {
 
     useEffect(() => {
         if (cardsDeck) {
-            console.warn('**** hey *****')
-            const isAnswered = cardsDeck.getIsExamPageAnswered();
-            setIsPageAnswered(isAnswered);
-            setTopQAnswerId(cardsDeck.getTopQAnswerId())
+            console.warn('**** Exam is updating *****');
+            // const isAnswered = cardsDeck.getIsExamPageAnswered();
+            // setIsPageAnswered(isAnswered);
+            setTopQAnswerId(cardsDeck.getTopQAnswerId());
             setAnswers(cardsDeck.getTopQAnswers());
         }
-    }, [cardsDeck, setIsPageAnswered, setAnswers]);
+    }, [cardsDeck, setIsPageAnswered, setAnswers, topQAnswerId, answers]);
 
     useEffect(() => {
         // console.warn('Exam mount');
@@ -93,7 +93,7 @@ const Exam = (props) => {
     return (
         <div className="exam-desktop-container">
             <div className="exam-container">
-                {(currQ || examEnded || isPageAnswered) &&
+                {(currQ || examEnded) &&
                 <div className="exam">
                     <ExamTable size={size} num={size-curr+1} q={currQ} answers={answers}
                                isAnswered={isPageAnswered} answeredId={topQAnswerId}

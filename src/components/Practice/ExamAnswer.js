@@ -1,23 +1,21 @@
-import React, { useEffect, useState} from 'react';
+import React from 'react';
 import './ExamAnswer.scss'
 
-const ExamAnswer = ({ id, text, answered, right, wrong, trueAnswer, setAnswer, answeredId }) => {
-    const [answeredRight, setAnsweredRight] = useState(right);
-    const [answeredWrong, setAnsweredWrong] = useState(wrong);
+const ExamAnswer = ({ id, text, answered, right, wrong, trueAnswer, setAnswer }) => {
 
     let bg = 'white';
     if (answered) {
-        if (answeredRight) {
+        if (right) {
             bg = 'forestgreen';
         } else if (trueAnswer) {
             bg = '#e6ffcc';
-        } else if (answeredWrong) {
+        } else if (wrong) {
             bg = 'brown';
         }
     }
     const styleBtn = {
         backgroundColor: bg,
-        color: answered && answeredWrong ? 'white' : 'inherit',
+        color: answered && wrong ? 'white' : 'inherit',
     };
 
     const Answered = () => {
@@ -25,18 +23,6 @@ const ExamAnswer = ({ id, text, answered, right, wrong, trueAnswer, setAnswer, a
             setAnswer(id, text);
         }
     };
-
-    useEffect(() => {
-        console.warn('answerID CHANGED')
-        if (id === answeredId) {
-            if (trueAnswer) {
-                setAnsweredRight(true);
-            }
-            else {
-                setAnsweredWrong(true);
-            }
-        }
-    }, [id, answeredId, setAnsweredRight, setAnsweredWrong]);
 
     return (
         <div className="exam-answer-container">
