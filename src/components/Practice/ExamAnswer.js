@@ -27,7 +27,7 @@ const ExamAnswer = ({ id, text, answered, right, wrong, trueAnswer, setAnswer })
     return (
         <div className="exam-answer-container">
             <div className="btn-container" style={styleBtn} onClick={() => Answered()}>
-                {text} - [{trueAnswer}]
+                {text}
             </div>
         </div>
     );

@@ -21,6 +21,7 @@ export default class cardsDeck {
     }
 
     reset = (shouldSaveToStorage, cardsNum) => {
+        console.warn('cardsDeck reset isExamPageAnswered');
         this.currentDeck = this.initialDeck.filter(x => x.q && x.a);
         this.examStartDeck = _.cloneDeep(this.currentDeck);
         this.sizeTraining = this.currentDeck.length;
@@ -145,6 +146,7 @@ export default class cardsDeck {
     };
     nextQuestion = (right) => {
         let deckFinished = false;
+        this.isExamPageAnswered = false;
         // console.warn('cards lengths ---->', this.currentDeck.length, this.wrongsDeck.length);
         if (this.currentDeck.length === 0 && this.wrongsDeck.length === 0) {
             deckFinished = true;

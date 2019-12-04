@@ -24,7 +24,6 @@ const Exam = (props) => {
     const examEnded = useSelector(state => state.app.isExamEnded);
     const defaultDeckSize = useSelector(state => state.app.examDefaultDeckSize);
 
-
     const setAnswer = (id, text) => {
         console.warn('!!! Answered - ', text, id);
         cardsDeck.setTopQAnswer(id);
@@ -48,9 +47,9 @@ const Exam = (props) => {
 
     useEffect(() => {
         if (cardsDeck) {
-            console.warn('**** Exam is updating *****');
-            // const isAnswered = cardsDeck.getIsExamPageAnswered();
-            // setIsPageAnswered(isAnswered);
+            const isAnswered = cardsDeck.getIsExamPageAnswered();
+            console.warn('**** Exam is updating ***** isAnswered = ', isAnswered);
+            setIsPageAnswered(isAnswered);
             setTopQAnswerId(cardsDeck.getTopQAnswerId());
             setAnswers(cardsDeck.getTopQAnswers());
         }
