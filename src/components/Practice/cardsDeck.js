@@ -81,11 +81,13 @@ export default class cardsDeck {
         this.rights = mem.rights;
         this.wrongs = mem.wrongs;
 
+        /*
         if (this.topQAnswers && (!Array.isArray(this.topQAnswers) || this.topQAnswers.length === 0)) {
             console.error('*** local storage might be improper. deleted it. please Refresh page.');
             localStorage.removeItem(consts.localStorage.examId);
             this.topQAnswers = [];
         }
+         */
     };
 
     top = () => this.currentDeck[0] || null;

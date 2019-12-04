@@ -9,7 +9,10 @@ i18n.use(LanguageDetector).init({
                 "practice": "Practice",
                 "exam": "Exam",
                 "replay": "Re-Play",
-                "flip-deck-side": "Flip deck side"
+                "flip-deck-side": "Flip deck side",
+                "cards played": "cards played",
+                "misses": "misses",
+                "Score": "Score:",
             }
         },
         jap: {

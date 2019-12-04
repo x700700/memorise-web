@@ -15,9 +15,18 @@
             margin-bottom: 1rem;
 
             .exam-score {
+                color: $grey6;
                 margin-top: 1rem;
                 font-size: 32px;
                 font-weight: 500;
+
+
+                .score-val {
+                    margin-top: .8rem;
+                    color: $grey10;
+                    font-size: 96px;
+                    font-weight: 700;
+                }
             }
             .exam-score-pie {
                 justify-content: center;
