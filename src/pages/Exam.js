@@ -79,7 +79,7 @@ const Exam = (props) => {
 
     return (
         <div className="exam-desktop-container">
-            <div className="exam-container">
+            <div className={`exam-container ${showMenu ? 'disable-pointer' : ''}`}>
                 {(currQ || examEnded) &&
                 <div className="exam">
                     <ExamTable size={size} num={size-curr+1} q={currQ} answers={answers}

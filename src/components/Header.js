@@ -10,13 +10,13 @@ import MenuExam from "./Practice/MenuExam";
 
 const Header = (props) => {
     const dispatch = useDispatch();
-    // const { t } = useTranslation();
     const error = useSelector(state => state.app.error);
-    // const userName = useSelector(state => state.app.userName);
     const currPage = useSelector(state => state.app.currentPage);
-    const showMenu = useSelector(state => state.app.showMenu);
-    const [errorStickerEnded, setErrorStickerEnded] = useState(false);
     const [timingCurrPage, setTimingCurrPage] = useState(currPage);
+    const [errorStickerEnded, setErrorStickerEnded] = useState(false);
+
+    const appShowMenu = useSelector(state => state.app.showMenu);
+    const [showMenu, setShowMenu] = useState(appShowMenu);
 
     useEffect(() => {
         if (error) {
@@ -27,16 +27,27 @@ const Header = (props) => {
     }, [error, setErrorStickerEnded]);
 
     useEffect(() => {
-        if (showMenu) {
+        if (appShowMenu) {
             setTimingCurrPage(currPage);
         } else {
+            // So when switching tab when menu is on - It goes up with the old tab menu and not new one:
             setTimeout(() => {
                 setTimingCurrPage(currPage);
             }, 300);
         }
-    }, [currPage, showMenu]);
+    }, [currPage, appShowMenu]);
 
-    const setShowMenu = (show) => {
+    useEffect(() => {
+        const menuTransEnded = () => {
+            setShowMenu(appShowMenu);
+        };
+        document.getElementById("top-header-menu").addEventListener("transitionend", menuTransEnded);
+        return () => {
+            document.getElementById("top-header-menu").removeEventListener("transitionend", menuTransEnded);
+        }
+    }, [setShowMenu, appShowMenu]);
+
+    const menuClicked = (show) => {
         dispatch({ type: types.APP_SHOW_MENU, show: show });
     };
 
@@ -46,15 +57,16 @@ const Header = (props) => {
         localStorage.removeItem(consts.localStorage.examId);
     };
 
+    const isMenuBtnDisable = showMenu !== appShowMenu;
     return (
         <div className="header">
             <div className="header-row">
                 <div className="header-left">
                     {!showMenu &&
-                    <button onClick={() => setShowMenu(true)} className="btn btn-menu"><i className="fas fa-chevron-down"/></button>
+                    <button onClick={() => menuClicked(true)} className={`btn btn-menu ${isMenuBtnDisable ? 'disable-pointer' : ''}`}><i className="fas fa-chevron-down"/></button>
                     }
                     {showMenu &&
-                    <button onClick={() => setShowMenu(false)} className="btn btn-menu"><i className="fas fa-chevron-up"/></button>
+                    <button onClick={() => menuClicked(false)} className={`btn btn-menu ${isMenuBtnDisable ? 'disable-pointer' : ''}`}><i className="fas fa-chevron-up"/></button>
                     }
                 </div>
                 <div className="tabs">
@@ -65,7 +77,7 @@ const Header = (props) => {
                 </div>
                 <img className="logo" src={logo} alt="logo" width="32" height="32" onClick={() => clearLocalStorage()}/>
             </div>
-            <div className={`top-menu-box ${showMenu ? 'top-menu-pop-down' : ''}`}>
+            <div id="top-header-menu" className={`top-menu-box ${appShowMenu ? 'top-menu-pop-down' : ''}`}>
                 <div className="menu-container">
                     <MenuGame hide={timingCurrPage !== consts.pageName.practice}/>
                     <MenuExam hide={timingCurrPage !== consts.pageName.exam}/>
