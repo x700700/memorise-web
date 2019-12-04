@@ -20,7 +20,7 @@ const ExamSum = forwardRef(({ setStats, cardsNum, rightsNum, replayExam }, ref) 
         <div className="exam-sum-container">
             <div className="sum-col">
                 <div className="stats">
-                    <p>{rights} of {cards} {t("questions were answered right.")}</p>
+                    <p>{rights} of {cards} {t("questions answered right")}</p>
                     <br/>
                     <div className="exam-score">
                         <div>{t("Score")}</div>
