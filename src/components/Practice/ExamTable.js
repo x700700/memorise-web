@@ -14,9 +14,6 @@ const ExamTable = ({ size, num, q, answers, replaceCard, setAnswer, isAnswered, 
             setCurrQ(q);
             setCurrAnswers(answers);
         }
-    }, [q, answers, setShowPrev, currQ, currAnswers]);
-
-    useEffect(() => {
         const prevPaperIsOut = () => {
             setCurrQ(q);
             setCurrAnswers(answers);
@@ -27,7 +24,7 @@ const ExamTable = ({ size, num, q, answers, replaceCard, setAnswer, isAnswered, 
         return () => {
             document.getElementById("exam-previous-paper").removeEventListener("transitionend", prevPaperIsOut);
         }
-    }, [setShowPrev, q, answers]);
+    }, [q, answers, setShowPrev, currQ, currAnswers]);
 
     return (
         <div className="exam-table">

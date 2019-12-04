@@ -11,8 +11,8 @@
         background-color: $grey8blueMask;
         border: $grey6 .3px solid;
         box-shadow: 2px 2px 8px -4px $grey4;
+        transition: transform .2s ease-in-out;
         transform: scale(1);
-        transition: transform .2s linear;
 
         .cards-left {
             position: absolute;
@@ -75,7 +75,7 @@
     }
 
     .prev-page-flow {
-        transform: scale(1.03);
+        transform: scale(1.05);
     }
 
     .disable-prev-card {
