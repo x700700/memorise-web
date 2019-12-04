@@ -42,7 +42,11 @@
             i {
                 font-size: 43px;
                 color: $grey10;
-                //transform: rotateX(45deg);
+                transition: transform .5s linear;
+                transform: rotateX(0deg);
+            }
+            .btn-menu-opened {
+                transform: rotateX(180deg);
             }
         }
 

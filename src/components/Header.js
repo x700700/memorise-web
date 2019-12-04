@@ -58,16 +58,12 @@ const Header = (props) => {
     };
 
     const isMenuBtnDisable = showMenu !== appShowMenu;
+    const menuBtnStatusClass = appShowMenu ? 'btn-menu-opened' : '';
     return (
         <div className="header">
             <div className="header-row">
                 <div className="header-left">
-                    {!showMenu &&
-                    <button onClick={() => menuClicked(true)} className={`btn btn-menu ${isMenuBtnDisable ? 'disable-pointer' : ''}`}><i className="fas fa-chevron-down"/></button>
-                    }
-                    {showMenu &&
-                    <button onClick={() => menuClicked(false)} className={`btn btn-menu ${isMenuBtnDisable ? 'disable-pointer' : ''}`}><i className="fas fa-chevron-up"/></button>
-                    }
+                    <button onClick={() => menuClicked(!appShowMenu)} className={`btn btn-menu ${isMenuBtnDisable ? 'disable-pointer' : ''}`}><i className={`fas fa-chevron-down ${menuBtnStatusClass}`}/></button>
                 </div>
                 <div className="tabs">
                     <Link to="/"><span className={`btn ${currPage === consts.pageName.trainings ? 'tab-active' : ''}`}><i className="fas fa-book-open"/></span></Link>
