@@ -21,7 +21,8 @@ export default class cardsDeck {
     }
 
     reset = (shouldSaveToStorage, cardsNum) => {
-        console.warn('cardsDeck reset isExamPageAnswered');
+        // console.warn('cardsDeck reset isExamPageAnswered');
+        if (this.isNextDeckFlipped) this.isDeckFlipped = this.isNextDeckFlipped === 2;
         this.currentDeck = this.initialDeck.filter(x => x.q && x.a);
         this.examStartDeck = _.cloneDeep(this.currentDeck);
         this.sizeTraining = this.currentDeck.length;
@@ -53,6 +54,7 @@ export default class cardsDeck {
             topQAnswers: this.topQAnswers,
             isExamPageAnswered: this.isExamPageAnswered,
             topQAnswerId: this.topQAnswerId,
+            isNextDeckFlipped: this.isNextDeckFlipped,
             wrongsDeck: this.wrongsDeck,
             sizeTraining: this.sizeTraining,
             sizeDeck: this.sizeDeck,
@@ -73,6 +75,7 @@ export default class cardsDeck {
         this.topQAnswers = mem.topQAnswers;
         this.isExamPageAnswered = mem.isExamPageAnswered;
         this.topQAnswerId = mem.topQAnswerId;
+        this.isNextDeckFlipped = mem.isNextDeckFlipped;
         this.wrongsDeck = mem.wrongsDeck;
         this.sizeTraining = mem.sizeTraining;
         this.sizeDeck = mem.sizeDeck;
@@ -109,6 +112,10 @@ export default class cardsDeck {
     };
     setIsDeckFlipped = (flipped) => {
         this.isDeckFlipped = flipped;
+        localStorage.setItem(this.localStorageKey, this.getStorage());
+    };
+    setIsNextDeckFlipped = (flipped) => {
+        this.isNextDeckFlipped = !flipped ? 1 : 2;
         localStorage.setItem(this.localStorageKey, this.getStorage());
     };
     nextCard = (right) => {

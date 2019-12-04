@@ -5,7 +5,7 @@ import TopMenu from "../common/TopMenu";
 import {useTranslation} from "react-i18next";
 import * as types from "../../redux/actionsTypes";
 import SubMenuReplay from "./SubMenuReplay";
-import Switch from "../common/Switch";
+import SwitchYellow from "../common/SwitchYellow";
 
 const MenuDivider = () => {
     return (
@@ -39,7 +39,7 @@ const MenuGame = ({ hide }) => {
             <div className="menu-game-col">
                 <div className="title">{t("practice")}</div>
                 <div className="flip-container">
-                    <Switch label={t('flip-deck-side')} value="gameFlipSwitch" onChange={flipDeck} startValue={isDeckFlipped}/>
+                    <SwitchYellow label={t('flip-deck-side')} value="gameFlipSwitch" onChange={flipDeck} startValue={isDeckFlipped}/>
                 </div>
                 <MenuDivider/>
                 <SubMenuReplay playType="practice" sliderTitle={t("cards num to practice")} replayCb={replayGame} size={size}/>

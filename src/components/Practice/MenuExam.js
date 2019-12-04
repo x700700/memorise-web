@@ -5,7 +5,7 @@ import TopMenu from "../common/TopMenu";
 import {useTranslation} from "react-i18next";
 import * as types from "../../redux/actionsTypes";
 import SubMenuReplay from "./SubMenuReplay";
-import Switch from "../common/Switch";
+import SwitchGreen from "../common/SwitchGreen";
 
 
 const MenuExam = ({ hide }) => {
@@ -21,7 +21,7 @@ const MenuExam = ({ hide }) => {
         dispatch({ type: types.APP_SET_EXAM_DEFAULT_DECK_SIZE, size: size });
     };
     const flipDeck = (flipped) => {
-        cardsDeck.setIsDeckFlipped(flipped);
+        cardsDeck.setIsNextDeckFlipped(flipped);
     };
 
     const size = (cardsDeck && cardsDeck.getSizeTraining()) || 0;
@@ -31,10 +31,10 @@ const MenuExam = ({ hide }) => {
             {cardsDeck &&
             <div className="menu-exam-col">
                 <div className="title">Exam</div>
-                <SubMenuReplay playType="exam" sliderTitle={t('questions num for exam')} replayCb={replayExam} size={size}/>
                 <div className="flip-container">
-                    <Switch label={t('flip-exam-side')} value="examFlipSwitch" onChange={flipDeck} startValue={isDeckFlipped}/>
+                    <SwitchGreen label={t('flip-exam-side')} value="examFlipSwitch" onChange={flipDeck} startValue={isDeckFlipped}/>
                 </div>
+                <SubMenuReplay playType="exam" sliderTitle={t('questions num for exam')} replayCb={replayExam} size={size}/>
             </div>
             }
         </TopMenu>
