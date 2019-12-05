@@ -19,6 +19,10 @@ const EditTraining = (props) => {
     const exercisesMap = isLoaded && training && training.exercises;
     const exercisesList = exercisesMap && Object.values(exercisesMap);
 
+    const edit = (exercise) => {
+        console.warn('Edit Exercise - ', exercise.id);
+    };
+
     // const getEditTrainingCb = useCallback((id) => dispatch(getEditTraining(id)), [getEditTraining]);
     useEffect(() => {
         if (currPage !== consts.pageName.edit) {
@@ -39,7 +43,7 @@ const EditTraining = (props) => {
                     {exercisesList && exercisesList.map((x,i) => {
                         return (
                             <div key={`edit-training-exercise-${i}`} className="exercise-container">
-                                <Exercise exercise={x}/>
+                                <Exercise exercise={x} onClick={edit}/>
                             </div>);
                     })}
                 </div>
