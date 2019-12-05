@@ -7,7 +7,7 @@ import consts from "../common/consts";
 import Card from "../components/Practice/Card";
 import CardsDeck from '../components/Practice/cardsDeck';
 import { loadPlay } from "../common/playUtils";
-import mockTraining from '../mock/training-multiply';
+import training from '../mock/training-words1';
 import GameSum from "../components/Practice/GameSum";
 import PopUpBox from "../components/common/PopUpBox";
 // import Rotate90DegreesCcwTwoToneIcon from '@material-ui/icons/Rotate90DegreesCcwTwoTone';
@@ -50,7 +50,7 @@ const Game = (props) => {
         dispatch({type: types.APP_SHOW_MENU, show: false});
 
         const createNewDeck = (shouldFlipped) => {
-            return new CardsDeck(consts.localStorage.gameId, mockTraining, shouldFlipped);
+            return new CardsDeck(consts.localStorage.gameId, training, shouldFlipped);
         };
 
         const shouldDeckFlipped = (cardsDeck && cardsDeck.getIsDeckFlipped()) || false;

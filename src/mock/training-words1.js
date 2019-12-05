@@ -12,6 +12,12 @@ export default {
         "lastTrainedAt": null
     },
     "exercises": {
+        "off-exc-000": {
+            "id": "off-exc-000",
+            "q": "Highly very long sentence to break the 1st line",
+            "a": "משפט ארוך שישבור את השורה",
+        },
+        /*
         "off-exc-001": {
             "id": "off-exc-001",
             "q": "Home",
@@ -32,5 +38,36 @@ export default {
             "q": "Toilet",
             "a": "שירותים",
         },
+        "off-exc-005": {
+            "id": "off-exc-005",
+            "q": "Living Room",
+            "a": "סלון",
+        },
+        "off-exc-006": {
+            "id": "off-exc-006",
+            "q": "Oven",
+            "a": "תנור חימום",
+        },
+        "off-exc-007": {
+            "id": "off-exc-007",
+            "q": "Sink",
+            "a": "כיור",
+        },
+        "off-exc-008": {
+            "id": "off-exc-008",
+            "q": "Elevator",
+            "a": "מעלית",
+        },
+        "off-exc-009": {
+            "id": "off-exc-009",
+            "q": "Stairs",
+            "a": "מדרגות",
+        },
+        "off-exc-010": {
+            "id": "off-exc-010",
+            "q": "Balcony",
+            "a": "מרפסת",
+        },
+        /* */
     }
 };

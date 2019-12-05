@@ -34,6 +34,10 @@
 
                 position: absolute;
                 transition: transform 0.3s linear;
+
+                > p {
+                    padding: 1rem;
+                }
             }
 
             .card-back {

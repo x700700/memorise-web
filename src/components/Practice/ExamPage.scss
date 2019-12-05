@@ -35,9 +35,15 @@
             height: calc(100% - .2rem);
 
             .question {
-                font-size: 36px;
-                font-weight: 500;
-                margin-bottom: 1.4rem;
+                width: fit-content;
+                margin: 0 auto;
+                font-size: 24px;
+                padding: .5rem;
+                font-weight: 700;
+                margin-bottom: 1.5rem;
+                margin-top: 1.5rem;
+                padding-bottom: 0;
+                border-bottom: $grey5 2px solid;
             }
 
             .next-btn-container {

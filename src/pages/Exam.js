@@ -6,7 +6,7 @@ import './Exam.scss';
 import consts from "../common/consts";
 import CardsDeck from '../components/Practice/cardsDeck';
 import { loadPlay } from "../common/playUtils";
-import mockTraining from '../mock/training-multiply';
+import training from '../mock/training-multiply';
 import ExamSum from "../components/Practice/ExamSum";
 import PopUpBox from "../components/common/PopUpBox";
 import ExamTable from "../components/Practice/ExamTable";
@@ -61,7 +61,7 @@ const Exam = (props) => {
         dispatch({type: types.APP_SHOW_MENU, show: false});
 
         const createNewDeck = (shouldFlipped) => {
-            return new CardsDeck(consts.localStorage.examId, mockTraining, shouldFlipped);
+            return new CardsDeck(consts.localStorage.examId, training, shouldFlipped);
         };
 
         const shouldDeckFlipped = (cardsDeck && cardsDeck.getIsDeckFlipped()) || false;
