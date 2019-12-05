@@ -1,9 +1,11 @@
 import React, {useEffect} from "react";
+import './TrainingsList.scss';
 import {useDispatch, useSelector} from "react-redux";
 import * as types from "../redux/actionsTypes";
 import {useHistory} from "react-router-dom";
 import consts from "../common/consts";
 import { trainingsGetList } from '../redux/actions';
+import Training from "../components/TrainingsList/Training";
 
 const TrainingsList = (props) => {
     const dispatch = useDispatch();
@@ -33,7 +35,7 @@ const TrainingsList = (props) => {
                     {trainingsList && trainingsList.map((x, i) => {
                         return (
                             <div key={`training-${i}`}>
-                                {x.name}
+                                <Training training={x}/>
                             </div>);
                     })}
                 </div>

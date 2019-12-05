@@ -2,5 +2,26 @@
 
 
 .training-container {
+    margin: .7rem 0;
+    background-color: white;
+    border: $grey5 .5px solid;
+    border-radius: 5px;
 
+    .training-row {
+        display: flex;
+        flex-wrap: nowrap;
+
+        .name {
+            width: 35%;
+        }
+
+        .sample-exercises-container {
+            flex-grow: 1;
+
+            .exercises-row {
+                display: flex;
+                flex-wrap: nowrap;
+            }
+        }
+    }
 }
