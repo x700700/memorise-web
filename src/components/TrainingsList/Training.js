@@ -16,7 +16,7 @@ const Training = ({ training }) => {
                 <div className="sample-exercises-container">
                     <div className="exercises-row">
                         {training.sampleExercise &&
-                        <div key={`sample-exercise-`}>
+                        <div key={`sample-exercise-`} style={{ width: '100%' }}>
                             <SampleExercise q={training.sampleExercise.q} a={training.sampleExercise.a}/>
                         </div>
                         }

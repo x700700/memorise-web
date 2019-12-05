@@ -2,11 +2,27 @@
 
 
 .sample-exercise-container {
+    margin: .2rem 0;
+
     .sample-exercise-col {
         text-align: left;
+        display: flex;
+        flex-direction: column;
 
-        .sample-q {}
-        .sample-a {}
+        > div {
+            flex-grow: 1;
+            min-height: 30px;
+            max-height: 30px;
+            overflow: hidden;
+            padding: .1em;
+            font-size: 80%;
+        }
+        .sample-q {
+            background-color: palevioletred;
+        }
+        .sample-a {
+            background-color: cornflowerblue;
+        }
     }
 
 }

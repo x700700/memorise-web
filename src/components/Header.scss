@@ -1,18 +1,23 @@
 @import "../common/colors";
 
 .header {
+    position: fixed;
+    top: 0;
+    z-index: 39;
     width: 100%;
     color: $grey6;
     font-weight: 600;
+    min-height: 55px;
 
     .error {
         position: absolute;
         background-color: #faa;
         z-index: 9;
         color: black;
-        bottom: 0rem;
-        margin-left: 1rem;
-        padding: .1rem .3rem;
+        margin-top: 30px;
+        margin-left: .3rem;
+        padding: .3rem 1rem;
+        border: black 1px solid;
     }
 
     .header-row {

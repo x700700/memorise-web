@@ -1,6 +1,10 @@
 import React from "react";
 import './SampleExercise.scss';
 
+const Divider = ({ width }) => {
+
+};
+
 const SampleExercise = ({ q, a }) => {
     return (
         <div className="sample-exercise-container">

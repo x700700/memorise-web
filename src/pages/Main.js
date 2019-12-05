@@ -34,6 +34,7 @@ const Main = () => {
 
     return (
         <div className="app-main">
+            <div className="header-space-holder" style={{ minHeight: '53px' }}></div>
             <Header/>
             <div className="app-body-area" onClick={() => closeHeaderMenu()}>
                 <Switch>
