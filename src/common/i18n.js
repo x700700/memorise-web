@@ -15,7 +15,7 @@ i18n.use(LanguageDetector).init({
                 "flip-exam-side": "Flip Exam's Q/A",
                 "cards played": "cards played",
                 "misses": "misses",
-                "questions answered right": "questions were answered right.",
+                "questions answered right": "questions were answered right",
                 "Score": "Score",
             }
         },
