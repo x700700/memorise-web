@@ -17,6 +17,7 @@
     "babel-preset-react-app": "^9.0.2",
     "camelcase": "^5.2.0",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
+    "chart.js": "^2.9.3",
     "css-loader": "2.1.1",
     "dotenv": "6.2.0",
     "dotenv-expand": "5.1.0",
@@ -50,12 +51,14 @@
     "postcss-safe-parser": "4.0.1",
     "react": "^16.12.0",
     "react-app-polyfill": "^1.0.4",
+    "react-chartkick": "^0.4.0",
     "react-dev-utils": "^9.1.0",
     "react-dom": "^16.12.0",
     "react-i18next": "^11.2.5",
     "react-redux": "^7.1.3",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
+    "react-vis": "^1.11.7",
     "redux": "^4.0.4",
     "redux-form": "^8.2.6",
     "redux-logger": "^3.0.6",
@@ -71,8 +74,7 @@
     "webpack": "4.41.0",
     "webpack-dev-server": "3.2.1",
     "webpack-manifest-plugin": "2.1.1",
-    "workbox-webpack-plugin": "4.3.1",
-    "react-vis": "^1.11.7"
+    "workbox-webpack-plugin": "4.3.1"
   },
   "devDependencies": {
     "node-sass": "^4.13.0",

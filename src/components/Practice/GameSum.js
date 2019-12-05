@@ -2,7 +2,8 @@ import React, {forwardRef, useEffect, useState} from 'react';
 import {useTranslation} from "react-i18next";
 import Button from "../common/Button";
 import './GameSum.scss';
-import {RadialChart} from "react-vis";
+import { PieChart } from 'react-chartkick';
+import 'chart.js'
 
 const GameSum = forwardRef(({ setStats, cardsNum, playsNum, replayGame }, ref) => {
     const { t } = useTranslation();
@@ -16,23 +17,19 @@ const GameSum = forwardRef(({ setStats, cardsNum, playsNum, replayGame }, ref) =
         }
     }, [setStats, cardsNum, playsNum]);
 
+    const rights = cards;
+    const wrongs = plays - cards;
     return (
         <div className="game-sum-container">
             <div className="sum-col">
                 <div className="stats">
-                    <p>{cards} {t("cards played")}</p>
-                    <p className="stats-misses">{plays - cards} {t("misses")}</p>
+                    <div>{cards} {t("cards played")}</div>
+                    {/*<div className="stats-misses">{plays - cards} {t("misses")}</div>*/}
                 </div>
-                {false &&
                 <div className="exam-score-pie">
-                    <RadialChart
-                        width={170}
-                        height={170}
-                        data={[{angle: 3, radius: 50}, {angle: 8, radius: 14}]}
-                    >
-                    </RadialChart>
+                    <PieChart width="250px" height="250px" colors={["#272", "#822"]} legend={false}
+                              data={[["Rights", rights], ["Wrongs", wrongs]]} />
                 </div>
-                }
                 <div className="btns-container">
                     <div className="btns-replay">
                         <Button text={t('replay')} onClick={replayGame} />

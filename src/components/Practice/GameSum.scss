@@ -11,15 +11,23 @@
         flex-direction: column;
 
         .stats {
-            margin-bottom: 1rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
             font-size: 28px;
 
             .stats-misses {
                 color: darkred;
             }
         }
+
+        .exam-score-pie {
+            justify-content: center;
+            display: flex;
+        }
+
         .btns-container {
             flex-grow: 1;
+            margin-top: -40px;
 
             .btns-replay {
                 width: 50%;
