@@ -14,14 +14,14 @@ export default {
     "exercises": {
         "off-exc-000": {
             "id": "off-exc-000",
-            "q": "Highly very long sentence to break the 1st line",
-            "a": "משפט ארוך שישבור את השורה",
+            "q": "Highly very long sentence to break the 1st line and further go over the space",
+            "a": "משפט ארוך שישבור את השורה ואף יחרוג ממנה בצורה משמעותית מאוד לכל דיעה",
         },
         /* */
         "off-exc-001": {
             "id": "off-exc-001",
-            "q": "Home",
-            "a": "בית",
+            "q": "I'm a Mock",
+            "a": "אני מוק יואייי",
         },
         "off-exc-002": {
             "id": "off-exc-002",

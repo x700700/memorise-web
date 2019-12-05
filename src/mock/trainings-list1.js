@@ -43,8 +43,8 @@ export default {
         "sampleExercise": {
             "id": "5de418ad15e26e458f915e8f",
                 "trainingId": "5de409300b5b97447c4c2e53",
-                "q": "Long long question to break space",
-                "a": "תשובה ארוכה במיוחד כדי לשבור את השורה",
+                "q": "Long long question to break space and even longer as much as needed",
+                "a": "תשובה ארוכה במיוחד כדי לשבור את השורה ועל יתרה מכך",
                 "played": 0,
                 "wrongs": 0,
                 "shouldReloadSampleExercises": true,

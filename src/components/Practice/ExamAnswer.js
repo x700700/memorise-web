@@ -1,5 +1,6 @@
 import React from 'react';
 import './ExamAnswer.scss'
+import {isRtl} from "../../common/utils";
 
 const ExamAnswer = ({ id, text, answered, right, wrong, rightAnswer, setAnswer }) => {
 
@@ -17,6 +18,8 @@ const ExamAnswer = ({ id, text, answered, right, wrong, rightAnswer, setAnswer }
         transition: `background-color ${answered ? '.2s' : '0s'} linear`,
         backgroundColor: bg,
         color: answered && wrong ? 'white' : 'inherit',
+        textAlign: isRtl(text) ? 'right' : 'left',
+        direction: isRtl(text) ? 'rtl' : 'ltr'
     };
 
     const Answered = () => {
@@ -27,7 +30,7 @@ const ExamAnswer = ({ id, text, answered, right, wrong, rightAnswer, setAnswer }
 
     return (
         <div className="exam-answer-container">
-            <div className="btn-container" style={styleBtn} onClick={() => Answered()}>
+            <div className="btn-container" style={ styleBtn } onClick={() => Answered()}>
                 {text}
             </div>
         </div>
