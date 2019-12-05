@@ -8,6 +8,7 @@ import { trainingsGetList } from '../redux/actions';
 const TrainingsList = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const currPage = useSelector(state => state.app.currentPage);
     // const isFetching = useSelector(state => state.trainings.isFetching);
     const isLoaded = useSelector(state => state.trainings.isLoaded);
     const trainingsMap = useSelector(state => state.trainings.trainingsMap);
@@ -15,13 +16,15 @@ const TrainingsList = (props) => {
     // console.warn('====> ', trainingsList);
 
     useEffect(() => {
-        console.warn('TrainingsList mount');
-        dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.trainings });
-        dispatch({type: types.APP_SHOW_MENU, show: false});
+        if (currPage !== consts.pageName.trainings) {
+            console.warn('TrainingsList mount');
+            dispatch({type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.trainings});
+            dispatch({type: types.APP_SHOW_MENU, show: false});
+        }
         if (!trainingsList) {
             dispatch(trainingsGetList());
         }
-    }, [dispatch, history, trainingsList]);
+    }, [dispatch, history, trainingsList, currPage]);
 
     return (
         <div className="trainings-list-page">
