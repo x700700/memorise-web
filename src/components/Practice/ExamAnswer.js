@@ -1,6 +1,6 @@
 import React from 'react';
 import './ExamAnswer.scss'
-import {isRtl} from "../../common/utils";
+import { isRtl, isNum } from "../../common/utils";
 
 const ExamAnswer = ({ id, text, answered, right, wrong, rightAnswer, setAnswer }) => {
 
@@ -18,8 +18,8 @@ const ExamAnswer = ({ id, text, answered, right, wrong, rightAnswer, setAnswer }
         transition: `background-color ${answered ? '.2s' : '0s'} linear`,
         backgroundColor: bg,
         color: answered && wrong ? 'white' : 'inherit',
-        textAlign: isRtl(text) ? 'right' : 'left',
-        direction: isRtl(text) ? 'rtl' : 'ltr'
+        textAlign: isNum(text) ? 'center' : (isRtl(text) ? 'right' : 'left'),
+        direction: isRtl(text) ? 'rtl' : 'ltr',
     };
 
     const Answered = () => {
