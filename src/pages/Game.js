@@ -9,7 +9,7 @@ import CardsDeck from '../components/Practice/cardsDeck';
 import { loadPlay } from "../common/playUtils";
 import training from '../mock/training-words1';
 import GameSum from "../components/Practice/GameSum";
-import PopUpBox from "../components/common/PopUpBox";
+import PopUpBox from "../components/_Tools/PopUpBox";
 // import Rotate90DegreesCcwTwoToneIcon from '@material-ui/icons/Rotate90DegreesCcwTwoTone';
 
 const Game = (props) => {

@@ -8,7 +8,7 @@ import CardsDeck from '../components/Practice/cardsDeck';
 import { loadPlay } from "../common/playUtils";
 import training from '../mock/training-multiply';
 import ExamSum from "../components/Practice/ExamSum";
-import PopUpBox from "../components/common/PopUpBox";
+import PopUpBox from "../components/_Tools/PopUpBox";
 import ExamTable from "../components/Practice/ExamTable";
 
 const Exam = (props) => {

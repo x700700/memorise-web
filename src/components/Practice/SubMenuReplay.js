@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import './SubMenuReplay.scss';
-import Slider from "../common/Slider";
+import Slider from "../_Tools/Slider";
 import consts from "../../common/consts";
-import Button from "../common/Button";
+import Button from "../_Tools/Button";
 import { useTranslation } from "react-i18next";
 
 const SubMenuReplay = ({ sliderTitle, replayCb, size }) => {

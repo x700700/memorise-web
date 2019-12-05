@@ -1,6 +1,6 @@
 import React, {forwardRef, useEffect, useState} from 'react';
 import {useTranslation} from "react-i18next";
-import Button from "../common/Button";
+import Button from "../_Tools/Button";
 import './GameSum.scss';
 import { PieChart } from 'react-chartkick';
 import 'chart.js'

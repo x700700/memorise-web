@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import './MenuGame.scss';
-import TopMenu from "../common/TopMenu";
+import TopMenu from "../_Tools/TopMenu";
 import {useTranslation} from "react-i18next";
 import * as types from "../../redux/actionsTypes";
 import SubMenuReplay from "./SubMenuReplay";
-import SwitchYellow from "../common/SwitchYellow";
+import SwitchYellow from "../_Tools/SwitchYellow";
 
 const MenuDivider = () => {
     return (

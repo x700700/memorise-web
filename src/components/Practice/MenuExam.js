@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import './MenuExam.scss';
-import TopMenu from "../common/TopMenu";
+import TopMenu from "../_Tools/TopMenu";
 import {useTranslation} from "react-i18next";
 import * as types from "../../redux/actionsTypes";
 import SubMenuReplay from "./SubMenuReplay";
-import SwitchGreen from "../common/SwitchGreen";
+import SwitchGreen from "../_Tools/SwitchGreen";
 
 
 const MenuExam = ({ hide }) => {
