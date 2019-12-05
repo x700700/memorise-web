@@ -8,52 +8,74 @@
     border: $grey5 .5px solid;
     border-radius: 5px;
 
-    .training-row {
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-between;
+    .training-box {
+        position: relative;
 
-        .name {
-            max-height: 81px;
-            overflow: hidden;
+        .training-btn-edit-absolute {
+            position: absolute;
+            bottom: 0;
+            display: none;
 
-            font-size: 18px;
-            flex-grow: 1;
-            min-width: 45%;
-            max-width: 45%;
-            text-align: left;
-        }
-
-        .sample-exercises-container {
-            flex-grow: 1;
-            margin: 0 .3rem;
-
-            .exercises-row {
-                display: flex;
-                flex-wrap: nowrap;
+            .training-btn-edit {
+                .btn > i {
+                    color: $purple6;
+                    background-color: rgba(0,0,0,0.6);
+                    font-size: 22px;
+                    border-radius: 50%;
+                    padding: 18% 18%;
+                    margin-left: -17%;
+                }
             }
         }
+        .training-row {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between;
 
-        .training-btns-container {
-            flex-grow: 1;
-            min-width: 3rem;
-            max-width: 3rem;
-            padding: .1rem;
+            .name {
+                max-height: 81px;
+                overflow: hidden;
 
-            .btns-col {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                height: 100%;
+                font-size: 18px;
+                flex-grow: 1;
+                min-width: 45%;
+                max-width: 45%;
+                text-align: left;
+            }
 
-                .btn-play {
-                    .btn {
-                        i {
-                            font-size: 28px;
-                            background-color: $purple7;
-                            border-radius: 50%;
-                            padding: 18% 25%;
-                            margin-left: -17%;
+            .sample-exercises-container {
+                flex-grow: 1;
+                margin: 0 .3rem;
+
+                .exercises-row {
+                    display: flex;
+                    flex-wrap: nowrap;
+                }
+            }
+
+            .training-btns-container {
+                flex-grow: 1;
+                min-width: 3rem;
+                max-width: 3rem;
+                padding: .1rem;
+
+                .btns-col {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    height: 100%;
+
+                    .btn-play {
+                        margin-left: .3rem;
+
+                        .btn {
+                            i {
+                                font-size: 28px;
+                                background-color: $purple7;
+                                border-radius: 50%;
+                                padding: 19% 25%;
+                                margin-left: -17%;
+                            }
                         }
                     }
                 }
