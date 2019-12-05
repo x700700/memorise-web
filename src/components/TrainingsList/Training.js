@@ -2,6 +2,7 @@ import React from "react";
 import './Training.scss'
 import SampleExercise from "./SampleExercise";
 import {useHistory} from "react-router-dom";
+import { isRtl } from "../../common/utils";
 
 const Training = ({ training }) => {
     const history = useHistory();
@@ -11,7 +12,14 @@ const Training = ({ training }) => {
         history.push(`/trainings/${training.id}/edit`)
     };
     const play = () => {
-        console.warn('Play training - ', training.id);
+        console.warn('Play training - ', training.name, isRtl(training.name));
+    };
+
+    const rtlName = text => {
+        return isRtl(text) ? {
+            direction: 'rtl',
+            textAlign: 'right',
+        } : {};
     };
 
     return (
@@ -23,7 +31,7 @@ const Training = ({ training }) => {
                     </div>
                 </div>
                 <div className="training-row">
-                    <div className="name">
+                    <div className="name" style={rtlName(training.name)}>
                         {training.name}
                     </div>
                     <div className="sample-exercises-container" onClick={() => edit()}>
