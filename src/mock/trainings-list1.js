@@ -1,7 +1,7 @@
 export default {
     "5de40d0815e26e458f915e8c": {
         "id": "5de40d0815e26e458f915e8c",
-            "name": "אני מוק",
+            "name": "I'm a mock",
             "created": "2019-12-01T18:57:12.639Z",
             "modified": "2019-12-01T18:58:42.248Z",
             "popularity": 4,
@@ -15,8 +15,8 @@ export default {
         "sampleExercise": {
             "id": "5de40d3915e26e458f915e8d",
                 "trainingId": "5de40d0815e26e458f915e8c",
-                "q": "מי אני?",
-                "a": "ומה שמי",
+                "q": "Who am I",
+                "a": "And now for long one",
                 "played": 0,
                 "wrongs": 0,
                 "shouldReloadSampleExercises": true,

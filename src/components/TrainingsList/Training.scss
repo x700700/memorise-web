@@ -13,11 +13,15 @@
         flex-wrap: nowrap;
 
         .name {
-            width: 35%;
+            flex-grow: 1;
+            width: 45%;
+            min-width: 45%;
+            text-align: left;
         }
 
         .sample-exercises-container {
             flex-grow: 1;
+            margin: 0 .3rem;
 
             .exercises-row {
                 display: flex;
@@ -26,6 +30,9 @@
         }
 
         .training-btns-container {
+            flex-grow: 1;
+            padding: .1rem;
+
             .btns-col {
                 display: flex;
                 flex-direction: column;
