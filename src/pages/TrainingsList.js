@@ -19,7 +19,7 @@ const TrainingsList = (props) => {
 
     useEffect(() => {
         if (currPage !== consts.pageName.trainings) {
-            console.warn('TrainingsList mount');
+            // console.warn('TrainingsList mount');
             dispatch({type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.trainings});
             dispatch({type: types.APP_SHOW_MENU, show: false});
         }
