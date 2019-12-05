@@ -1,12 +1,14 @@
 import React from "react";
 import './SampleExercise.scss';
 
+/*
 const Divider = ({ width }) => {
     return (
         <div className="divider-container">
             <div className="divider" style={{ width: width }}></div>
         </div>);
 };
+*/
 
 const SampleExercise = ({ q, a }) => {
     return (

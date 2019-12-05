@@ -5,10 +5,11 @@ import * as types from '../redux/actionsTypes';
 import { appAuth } from '../redux/actions';
 import './Main.scss';
 import Header from '../components/Header';
-import NotFound from "./NotFound";
 import Game from './Game';
 import Exam from "./Exam";
 import TrainingsList from "./TrainingsList";
+import EditTraining from "./EditTraining";
+import NotFound from "./NotFound";
 
 
 const Main = () => {
@@ -40,7 +41,7 @@ const Main = () => {
                 <Switch>
                     <Route exact path="/"><Redirect to="/practice" /></Route>
                     <Route exact path="/trainings" component={TrainingsList} />
-                    <Route path="/trainings/:id" component={NotFound} />
+                    <Route path="/trainings/:id/edit" component={EditTraining} />
                     <Route exact path="/practice" component={Game} />
                     <Route exact path="/exam" component={Exam} />
                     <Route component={NotFound} />

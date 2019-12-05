@@ -4,7 +4,11 @@ export const appAuth = () => ({
     type: types.saga.auth,
 });
 
-export const trainingsGetList = () => ({
+export const getTrainingsList = () => ({
     type: types.saga.getTrainingsList,
 });
 
+export const getEditTraining = (id) => ({
+    type: types.saga.getEditTraining,
+    id: id,
+});

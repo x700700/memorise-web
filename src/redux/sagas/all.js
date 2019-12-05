@@ -24,3 +24,14 @@ export function* getTrainingsList(action) {
         yield put({ type: types.APP_AUTH_FAILED, message: e.message });
     }
 }
+
+export function* getEditTraining(action) {
+    try {
+        yield put({ type: types.EDIT_TRAINING_START_FETCH, id: action.id });
+        const resp = yield call(api.getEditTraining, { Bearer: consts.temp.bearer, id: action.id });
+        yield put({ type: types.EDIT_TRAINING_FETCH_SUCCEED, training: resp });
+    } catch (e) {
+        yield put({ type: types.EDIT_TRAINING_FETCH_FAILED });
+        yield put({ type: types.APP_AUTH_FAILED, message: e.message });
+    }
+}

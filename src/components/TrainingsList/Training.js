@@ -8,7 +8,7 @@ const Training = ({ training }) => {
 
     const edit = () => {
         console.warn('Edit training - ', training.id);
-        history.push(`/training/${training.id}/edit`)
+        history.push(`/trainings/${training.id}/edit`)
     };
     const play = () => {
         console.warn('Play training - ', training.id);
