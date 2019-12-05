@@ -11,7 +11,7 @@
         background-color: $grey8blueMask;
         border: $grey6 .3px solid;
         box-shadow: 2px 2px 8px -4px $grey4;
-        transition: transform .2s ease-in-out;
+        transition: transform .6s ease-in-out .1s;
         transform: scale(1);
 
         .cards-left {

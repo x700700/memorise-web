@@ -2,11 +2,11 @@ import React from 'react';
 import './ExamPage.scss';
 import ExamAnswer from "../../components/Practice/ExamAnswer";
 
-const ExamPage = ({ size, num, q, answers, nextQuestion, isPrevPage, setAnswer, isAnswered }) => {
+const ExamPage = ({ size, num, q, answers, nextQuestion, isPrevPage, setAnswer, isAnswered, showPrev }) => {
 
     return (
         <div className="exam-page-container">
-            <div className={`exam-page ${isPrevPage ? 'prev-page-flow' : ''}`}>
+            <div className={`exam-page ${isPrevPage && showPrev ? 'prev-page-flow' : ''}`}>
                 {q &&
                 <div className={`cards-left ${isPrevPage ? 'disable-prev-card' : ''}`}>
                     <span><i className="fas fa-arrow-up"/></span>

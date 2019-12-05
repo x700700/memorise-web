@@ -3,20 +3,27 @@ import './ExamTable.scss';
 import ExamPage from "./ExamPage";
 
 const ExamTable = ({ size, num, q, answers, nextQuestion, setAnswer, isAnswered, answeredId }) => {
+    const [prevQ, setPrevQ] = useState();
+    const [prevAnswers, setPrevAnswers] = useState();
     const [currQ, setCurrQ] = useState();
     const [currAnswers, setCurrAnswers] = useState();
     const [showPrev, setShowPrev] = useState(false);
 
     useEffect(() => {
-        if (currQ && currQ !== q) {
-            setShowPrev(true);
-        } else {
+        if (!currQ || !currAnswers) {
             setCurrQ(q);
             setCurrAnswers(answers);
+        } else if (prevQ && prevQ !== q) {
+            setShowPrev(true);
+            setCurrQ(q);
+            setCurrAnswers(answers);
+        } else {
+            setPrevQ(q);
+            setPrevAnswers(answers);
         }
         const prevPaperIsOut = () => {
-            setCurrQ(q);
-            setCurrAnswers(answers);
+            setPrevQ(q);
+            setPrevAnswers(answers);
             setShowPrev(false);
         };
 
@@ -24,15 +31,15 @@ const ExamTable = ({ size, num, q, answers, nextQuestion, setAnswer, isAnswered,
         return () => {
             document.getElementById("exam-previous-paper").removeEventListener("transitionend", prevPaperIsOut);
         }
-    }, [q, answers, setShowPrev, currQ, currAnswers]);
+    }, [q, answers, setShowPrev, prevQ, currQ, currAnswers, prevAnswers]);
 
     return (
         <div className="exam-table">
             <div id="exam-previous-paper" className={`exam-previous-paper-container ${showPrev ? 'prev-show' : ''}`}>
-                <ExamPage size={size} num={num} q={currQ} answers={currAnswers} nextQuestion={nextQuestion}
-                          isPrevPage={true} isAnswered={isAnswered}/>
+                <ExamPage size={size} num={num} q={prevQ} answers={prevAnswers} nextQuestion={nextQuestion}
+                          isPrevPage={true} isAnswered={isAnswered} showPrev={showPrev}/>
             </div>
-            <ExamPage size={size} num={num} q={q} answers={answers} nextQuestion={nextQuestion}
+            <ExamPage size={size} num={num} q={currQ} answers={currAnswers} nextQuestion={nextQuestion}
                       setAnswer={setAnswer} isAnswered={isAnswered} answeredId={answeredId}/>
         </div>
     );
