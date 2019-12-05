@@ -16,7 +16,7 @@ i18n.use(LanguageDetector).init({
                 "cards played": "cards played",
                 "misses": "misses",
                 "questions answered right": "questions were answered right.",
-                "Score": "Score:",
+                "Score": "Score",
             }
         },
         jap: {
