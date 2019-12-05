@@ -25,7 +25,6 @@ const Exam = (props) => {
     const defaultDeckSize = useSelector(state => state.app.examDefaultDeckSize);
 
     const setAnswer = (id, text) => {
-        // console.warn('!!! Answered - ', text, id);
         cardsDeck.setTopQAnswer(id);
         setIsPageAnswered(cardsDeck.getIsExamPageAnswered());
         setTopQAnswerId(id);

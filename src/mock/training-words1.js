@@ -17,7 +17,7 @@ export default {
             "q": "Highly very long sentence to break the 1st line",
             "a": "משפט ארוך שישבור את השורה",
         },
-        /*
+        /* */
         "off-exc-001": {
             "id": "off-exc-001",
             "q": "Home",

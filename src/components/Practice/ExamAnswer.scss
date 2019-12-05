@@ -9,5 +9,7 @@
         background-color: white;
         border: $grey6 1px solid;
         border-radius: 8px;
+        white-space: nowrap;
+        overflow: hidden;
     }
 }
