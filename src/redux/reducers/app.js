@@ -52,6 +52,11 @@ const appReducer = (  state = {
                 ...state,
                 showMenu: action.show,
             };
+        case types.APP_SET_ERROR:
+            return {
+                ...state,
+                error: action.error,
+            };
 
         case types.APP_SET_GAME_CARDSDECK:
             return {

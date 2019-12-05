@@ -17,6 +17,7 @@ i18n.use(LanguageDetector).init({
                 "misses": "misses",
                 "questions answered right": "questions were answered right",
                 "Score": "Score",
+                "Local storage was cleaned": "Local storage was cleaned",
             }
         },
         jap: {

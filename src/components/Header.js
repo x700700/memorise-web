@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import * as types from '../redux/actionsTypes';
@@ -7,24 +7,26 @@ import logo from '../logo.svg';
 import consts from "../common/consts";
 import MenuGame from "./Practice/MenuGame";
 import MenuExam from "./Practice/MenuExam";
+import {useTranslation} from "react-i18next";
 
 const Header = (props) => {
     const dispatch = useDispatch();
+    const { t } = useTranslation();
     const error = useSelector(state => state.app.error);
     const currPage = useSelector(state => state.app.currentPage);
     const [timingCurrPage, setTimingCurrPage] = useState(currPage);
-    const [errorStickerEnded, setErrorStickerEnded] = useState(false);
 
     const appShowMenu = useSelector(state => state.app.showMenu);
     const [showMenu, setShowMenu] = useState(appShowMenu);
 
+    const clearError = useCallback(() => dispatch({ type: types.APP_SET_ERROR, error: null }), [dispatch]);
     useEffect(() => {
         if (error) {
             setTimeout(() => {
-                setErrorStickerEnded(true);
+                clearError();
             }, 5000);
         }
-    }, [error, setErrorStickerEnded]);
+    }, [error, clearError]);
 
     useEffect(() => {
         if (appShowMenu) {
@@ -55,6 +57,7 @@ const Header = (props) => {
         console.warn('Clearing localStorage.');
         localStorage.removeItem(consts.localStorage.gameId);
         localStorage.removeItem(consts.localStorage.examId);
+        dispatch({ type: types.APP_SET_ERROR, error: t('Local storage was cleaned') });
     };
 
     const isMenuBtnDisable = showMenu !== appShowMenu;
@@ -79,7 +82,7 @@ const Header = (props) => {
                     <MenuExam hide={timingCurrPage !== consts.pageName.exam}/>
                 </div>
             </div>
-            {error && !errorStickerEnded &&
+            {error &&
             <div className="error">
                 {error}
             </div>}
