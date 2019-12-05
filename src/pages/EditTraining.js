@@ -34,17 +34,14 @@ const EditTraining = (props) => {
 
     return (
         <div className="edit-training-page">
-            *** EDIT ***
             <div className="edit-training-container">
-                <div className="edit-training-col">
-                    <div className="exercises-list">
-                        {exercisesList && exercisesList.map((x,i) => {
-                            return (
-                                <div key={`edit-training-exercise-${i}`}>
-                                    <Exercise exercise={x}/>
-                                </div>);
-                        })}
-                    </div>
+                <div className="edit-training-flex">
+                    {exercisesList && exercisesList.map((x,i) => {
+                        return (
+                            <div key={`edit-training-exercise-${i}`} className="exercise-container">
+                                <Exercise exercise={x}/>
+                            </div>);
+                    })}
                 </div>
 
             </div>

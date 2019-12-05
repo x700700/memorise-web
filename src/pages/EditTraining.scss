@@ -1,9 +1,26 @@
 @import "../common/colors";
 
 .edit-training-page {
-    .edit-training-container {
-        .edit-training-col {
+    background-color: white;
 
+    .edit-training-container {
+        margin: .3rem 1rem;
+
+        .edit-training-flex {
+            display: flex;
+            flex-wrap: wrap;
+
+            .exercise-container {
+                width: 50%;
+
+                @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
+                and (orientation: landscape) {
+                    width: 25%;
+                }
+                @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+                    width: 11rem;
+                }
+            }
         }
     }
 }

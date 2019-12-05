@@ -14,11 +14,10 @@ const SampleExercise = ({ q, a }) => {
     return (
         <div className="sample-exercise-container">
             <div className="sample-exercise-col">
-                <div className="sample sample-q">{q}</div>
+                <div className="exercise question">{q}</div>
                 {/*<Divider width="80%"/>*/}
-                <div className="sample sample-a">{a}</div>
+                <div className="exercise answer">{a}</div>
             </div>
-
         </div>);
 };
 export default  SampleExercise;

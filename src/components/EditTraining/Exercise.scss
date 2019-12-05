@@ -1,8 +1,32 @@
 @import "../../common/colors";
 
 .edit-training-exercise-container {
+    margin: 1rem 1rem;
+    background-color: lightgoldenrodyellow;
+    border: $grey2 .5px solid;
+    padding: .2rem;
+    //min-width: 100px;
+    //max-width: 100px;
+
     .exercise-col {
-        .question {}
-        .answer {}
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+
+        .exercise {
+            flex-grow: 1;
+            min-height: 33px;
+            max-height: 33px;
+            overflow: hidden;
+            padding: .1em;
+            font-size: 12px;
+            text-align: center;
+        }
+        .question {
+            border-bottom: $grey5 .5px solid;
+        }
+        .answer {
+        }
     }
+
 }
