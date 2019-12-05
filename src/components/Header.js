@@ -13,11 +13,13 @@ const Header = (props) => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
     const error = useSelector(state => state.app.error);
+    const training = useSelector(state => state.editTraining.training);
     const currPage = useSelector(state => state.app.currentPage);
     const [timingCurrPage, setTimingCurrPage] = useState(currPage);
-
     const appShowMenu = useSelector(state => state.app.showMenu);
     const [showMenu, setShowMenu] = useState(appShowMenu);
+
+    const editTrainingId = (training && training.id) || 'NotFound';
 
     const clearError = useCallback(() => dispatch({ type: types.APP_SET_ERROR, error: null }), [dispatch]);
     useEffect(() => {
@@ -70,7 +72,7 @@ const Header = (props) => {
                 </div>
                 <div className="tabs">
                     <Link to="/trainings"><span className={`btn ${currPage === consts.pageName.trainings ? 'tab-active' : ''}`}><i className="fas fa-book-open"/></span></Link>
-                    <Link to="/trainings/0"><span className={`btn ${currPage === consts.pageName.edit ? 'tab-active' : ''}`}><i className="fas fa-edit"/></span></Link>
+                    <Link to={`/trainings/${editTrainingId}/edit`}><span className={`btn ${currPage === consts.pageName.edit ? 'tab-active' : ''}`}><i className="fas fa-edit"/></span></Link>
                     <Link to="/practice"><span className={`btn ${currPage === consts.pageName.practice ? 'tab-active' : ''}`}><i className="fas fa-running"/></span></Link>
                     <Link to="/exam"><span className={`btn ${currPage === consts.pageName.exam ? 'tab-active' : ''}`}><i className="fas fa-grin-beam-sweat"/></span></Link>
                 </div>
