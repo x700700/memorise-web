@@ -1,4 +1,5 @@
 import * as types from '../actionsTypes';
+import mockTrainingsList from '../../mock/trainings-list1';
 
 const trainingsReducer = (  state = {
                                 isFetching: false,
@@ -27,7 +28,8 @@ const trainingsReducer = (  state = {
             return {
                 ...state,
                 isFetching: false,
-                trainingsMap: null,
+                trainingsMap: mockTrainingsList,
+                isLoaded: true,
             };
         default:
             return state;

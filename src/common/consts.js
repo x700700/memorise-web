@@ -3,6 +3,9 @@ export default {
     urls: {
         api: 'http://dev.memorise.com:4044/api',
     },
+    env: {
+        timeout: 1,
+    },
     pageName: {
         trainings: 'trainings',
         edit: 'edit',
