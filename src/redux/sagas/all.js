@@ -18,7 +18,7 @@ export function* getTrainingsList(action) {
     try {
         yield put({ type: types.TRAININGS_START_FETCH });
         const resp = yield call(api.trainingsList, { Bearer: consts.temp.bearer });
-        yield put({ type: types.TRAININGS_FETCH_SUCCEED, name: resp });
+        yield put({ type: types.TRAININGS_FETCH_SUCCEED, trainingsMap: resp });
     } catch (e) {
         yield put({ type: types.TRAININGS_FETCH_FAILED });
         yield put({ type: types.APP_AUTH_FAILED, message: e.message });

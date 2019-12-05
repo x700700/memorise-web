@@ -3,7 +3,7 @@ import * as types from '../actionsTypes';
 const trainingsReducer = (  state = {
                                 isFetching: false,
                                 isLoaded: false,
-                                trainingsList: null,
+                                trainingsMap: null,
                             },
                       action) => {
 
@@ -14,20 +14,20 @@ const trainingsReducer = (  state = {
                 ...state,
                 isFetching: true,
                 isLoaded: false,
-                trainingsList: null,
+                trainingsMap: null,
             };
         case types.TRAININGS_FETCH_SUCCEED:
             return {
                 ...state,
                 isFetching: false,
                 isLoaded: true,
-                trainingsList: action.trainings,
+                trainingsMap: action.trainingsMap,
             };
         case types.TRAININGS_FETCH_FAILED:
             return {
                 ...state,
                 isFetching: false,
-                trainingsList: null,
+                trainingsMap: null,
             };
         default:
             return state;

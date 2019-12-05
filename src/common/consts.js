@@ -5,7 +5,7 @@ export default {
     },
     pageName: {
         trainings: 'trainings',
-        exercises: 'exercises',
+        edit: 'edit',
         practice: 'practice',
         exam: 'exam',
     },

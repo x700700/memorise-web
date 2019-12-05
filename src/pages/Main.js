@@ -8,6 +8,7 @@ import Header from '../components/Header';
 import NotFound from "./NotFound";
 import Game from './Game';
 import Exam from "./Exam";
+import TrainingsList from "./TrainingsList";
 
 
 const Main = () => {
@@ -37,7 +38,8 @@ const Main = () => {
             <div className="app-body-area" onClick={() => closeHeaderMenu()}>
                 <Switch>
                     <Route exact path="/"><Redirect to="/practice" /></Route>
-                    <Route path="/trainings/:id" component={null} />
+                    <Route exact path="/trainings" component={TrainingsList} />
+                    <Route path="/trainings/:id" component={NotFound} />
                     <Route exact path="/practice" component={Game} />
                     <Route exact path="/exam" component={Exam} />
                     <Route component={NotFound} />

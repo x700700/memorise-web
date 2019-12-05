@@ -10,6 +10,10 @@ const axiosInstance = Axios.create({
 });
 
 export default function (props) {
-    console.log(`>>> ${props.method} - ${props.url}`);
-    return axiosInstance(props).then(response => response.data);
+    console.log(`<<<<< ${props.method} - ${props.url}`);
+    return axiosInstance(props).then(response => {
+        const resp = response.data;
+        // console.warn('>>>>>', resp);
+        return resp;
+    });
 };
