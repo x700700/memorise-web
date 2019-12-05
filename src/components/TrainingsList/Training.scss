@@ -11,11 +11,12 @@
     .training-row {
         display: flex;
         flex-wrap: nowrap;
+        justify-content: space-between;
 
         .name {
             flex-grow: 1;
-            width: 45%;
             min-width: 45%;
+            max-width: 45%;
             text-align: left;
         }
 
@@ -31,6 +32,8 @@
 
         .training-btns-container {
             flex-grow: 1;
+            min-width: 3rem;
+            max-width: 3rem;
             padding: .1rem;
 
             .btns-col {
