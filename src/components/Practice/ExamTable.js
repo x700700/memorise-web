@@ -10,9 +10,10 @@ const ExamTable = ({ size, num, q, answers, nextQuestion, setAnswer, isAnswered,
     const [showPrev, setShowPrev] = useState(false);
 
     useEffect(() => {
-        if (!currQ || !currAnswers) {
+        // console.warn(`===> q=[${q}] <> currQ=[${currQ}] - answers=[${answers && answers.length}] <> currAnswers=[${currAnswers && currAnswers.length}]`);
+        if (!currQ || !currAnswers || (currAnswers && currAnswers.length === 0)) {
             setCurrQ(q);
-            setCurrAnswers(answers);
+            q && setCurrAnswers(answers);
         } else if (prevQ && prevQ !== q) {
             setShowPrev(true);
             setCurrQ(q);
@@ -31,7 +32,7 @@ const ExamTable = ({ size, num, q, answers, nextQuestion, setAnswer, isAnswered,
         return () => {
             document.getElementById("exam-previous-paper").removeEventListener("transitionend", prevPaperIsOut);
         }
-    }, [q, answers, setShowPrev, prevQ, currQ, currAnswers, prevAnswers]);
+    }, [q, answers, setShowPrev, prevQ, currQ, currAnswers, setCurrAnswers, prevAnswers]);
 
     return (
         <div className="exam-table">
