@@ -2,6 +2,7 @@
 
 .game-desktop-container {
     height: 100%;
+    background-color: $grey8blueMask;
     border: $grey4 2px solid;
 
     @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
