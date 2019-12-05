@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import * as types from '../redux/actionsTypes';
-import { appAuth } from '../redux/actions/app';
+import { appAuth } from '../redux/actions';
 import './Main.scss';
 import Header from '../components/Header';
 import NotFound from "./NotFound";

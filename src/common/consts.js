@@ -18,6 +18,6 @@ export default {
         examId: 'memoBool.exam',
     },
     temp: {
-        bearer: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkZGU0YjA0MzY1MTJkYWM1MTc1ZjY2NCIsIm5hbWUiOiJCb29saSIsImlhdCI6MTU3NTIxNTc5OSwiZXhwIjoxNTc1MzAyMTk5fQ.jlp8grc2lvREkXnNMsrlsNcV-zVygzb5Fzic7TSB98c',
+        bearer: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkZGU0YjA0MzY1MTJkYWM1MTc1ZjY2NCIsIm5hbWUiOiJCb29saSIsImlhdCI6MTU3NTU0MTk2NiwiZXhwIjoxNTc1NjI4MzY2fQ.wwEB7XkKOt9AtNnQNMRrVmbcIQxSvM8Rd3DBxVomYTA',
     },
 };

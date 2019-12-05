@@ -16,6 +16,13 @@ export const APP_SET_EXAM_ENDED = 'app.APP_SET_EXAM_ENDED';
 export const APP_SET_EXAM_DEFAULT_DECK_SIZE = 'app.APP_SET_EXAM_DEFAULT_DECK_SIZE';
 
 
+
+export const TRAININGS_START_FETCH = 'trainings.TRAININGS_START_FETCH';
+export const TRAININGS_FETCH_SUCCEED = 'trainings.TRAININGS_FETCH_SUCCEED';
+export const TRAININGS_FETCH_FAILED = 'trainings.TRAININGS_FETCH_FAILED';
+
+
 export const saga = {
     auth: 'auth',
+    getTrainingsList: 'getTrainingsList',
 };
