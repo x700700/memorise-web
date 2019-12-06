@@ -1,7 +1,7 @@
 import React, {forwardRef, useImperativeHandle} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import MaterialModal from '@material-ui/core/Modal';
-import deepPurple from '@material-ui/core/colors/deepPurple';
+// import { deepPurple } from '@material-ui/core/colors';
 
 function getModalStyle() {
     const top = 50;

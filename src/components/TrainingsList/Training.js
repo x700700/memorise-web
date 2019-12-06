@@ -31,8 +31,10 @@ const Training = ({ training }) => {
                     </div>
                 </div>
                 <div className="training-row">
-                    <div className="name" style={rtlName(training.name)}>
-                        {training.name}
+                    <div className="name-container">
+                        <div className="name" style={rtlName(training.name)}>
+                            {training.name}
+                        </div>
                     </div>
                     <div className="sample-exercises-container" onClick={edit}>
                         <div className="exercises-row">

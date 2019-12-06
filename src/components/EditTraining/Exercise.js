@@ -6,7 +6,7 @@ import TextInput from "../_Tools/TextInput";
 const Exercise = ({ exercise }) => {
     const refModal = useRef();
     const onModalClose = () => {
-        console.warn('********** modal parent\'s onClose');
+        // console.warn('********** modal parent\'s onClose');
     };
     const edit = () => {
         refModal.current.handleOpen();
@@ -21,7 +21,7 @@ const Exercise = ({ exercise }) => {
             <Modal ref={refModal} onClose={onModalClose}>
                 <div className="edit-modal-container">
                     <div className="field question">
-                        <TextInput defaultValue={exercise.q} autoFocus="true"/>
+                        <TextInput defaultValue={exercise.q} autoFocus={true}/>
                     </div>
                     <div className="field answer">
                         <TextInput defaultValue={exercise.a}/>

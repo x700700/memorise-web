@@ -37,7 +37,7 @@ const Header = (props) => {
             // So when switching tab when menu is on - It goes up with the old tab menu and not new one:
             setTimeout(() => {
                 setTimingCurrPage(currPage);
-            }, 300);
+            }, 600);
         }
     }, [currPage, appShowMenu]);
 

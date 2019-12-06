@@ -1,12 +1,16 @@
 import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
-// import Input from '@material-ui/core/Input';
-// import InputLabel from '@material-ui/core/InputLabel';
+import { createMuiTheme, makeStyles, MuiThemeProvider } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
-// import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
-// import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import { deepPurple, green } from '@material-ui/core/colors';
+
+const theme = createMuiTheme({
+        palette: {
+            primary: deepPurple,
+        },
+    },
+);
 
 const useStyles = makeStyles(theme => ({
     margin: {
@@ -21,6 +25,12 @@ const useStyles = makeStyles(theme => ({
             color: 'red',
             backgroundColor: 'white',
         }
+    },
+    focused: {
+        '&$focused': {
+            color: 'red',
+            backgroundColor: 'white',
+        }
     }
 }));
 
@@ -29,28 +39,30 @@ const TextInput = ({ defaultValue, autoFocus }) => {
 
     return (
         <div className="text-input">
-            <TextField
-                className={classes.margin}
-                id="input-with-icon"
-                label=""
-                defaultValue={defaultValue}
-                autoFocus={autoFocus}
-                InputLabelProps={{
-                    classes: {
-                        focused: classes.inputFocused,
-                    }
-                }}
-                InputProps={{
-                    classes: {
-                        input: classes.font,
-                    },
-                    startAdornment: (
-                        <InputAdornment position="start">
-                            <AccountCircle />
-                        </InputAdornment>
-                    ),
-                }}
-            />
+            <MuiThemeProvider theme={theme}>
+                <TextField
+                    className={classes.margin}
+                    id="input-with-icon"
+                    label=""
+                    defaultValue={defaultValue}
+                    autoFocus={autoFocus}
+                    InputLabelProps={{
+                        classes: {
+                            focused: classes.inputFocused,
+                        }
+                    }}
+                    InputProps={{
+                        classes: {
+                            input: classes.font,
+                        },
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <AccountCircle/>
+                            </InputAdornment>
+                        ),
+                    }}
+                />
+            </MuiThemeProvider>
         </div>);
 };
 export default TextInput;
