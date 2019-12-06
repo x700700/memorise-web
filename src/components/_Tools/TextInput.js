@@ -2,8 +2,9 @@ import React from "react";
 import { createMuiTheme, makeStyles, MuiThemeProvider } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import { HelpOutline, ErrorOutline } from '@material-ui/icons';
 import { deepPurple } from '@material-ui/core/colors';
+import {isRtl} from "../../common/utils";
 
 const theme = createMuiTheme({
         palette: {
@@ -15,6 +16,9 @@ const theme = createMuiTheme({
 const useStyles = makeStyles(theme => ({
     margin: {
         margin: theme.spacing(1),
+    },
+    iconMargin: {
+        margin: '0 .2rem',
     },
     font: {
         fontSize: '1.5rem',
@@ -34,14 +38,25 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const TextInput = ({ defaultValue, autoFocus }) => {
+const TextInput = ({ type, defaultValue, autoFocus }) => {
     const classes = useStyles();
+
+    const rtlStyle = () => {
+        return isRtl(defaultValue) ? {
+            direction: 'rtl',
+            textAlign: 'right',
+        } : {};
+    };
 
     return (
         <div className="text-input">
             <MuiThemeProvider theme={theme}>
                 <TextField
+                    style={rtlStyle()}
                     className={classes.margin}
+                    autoComplete="off"
+                    type="text"
+
                     id="input-with-icon"
                     label=""
                     defaultValue={defaultValue}
@@ -56,8 +71,13 @@ const TextInput = ({ defaultValue, autoFocus }) => {
                             input: classes.font,
                         },
                         startAdornment: (
-                            <InputAdornment position="start">
-                                <AccountCircle/>
+                            <InputAdornment position="start" className={classes.iconMargin}>
+                                {type === 'q' &&
+                                <HelpOutline/>
+                                }
+                                {type === 'a' &&
+                                <ErrorOutline/>
+                                }
                             </InputAdornment>
                         ),
                     }}
