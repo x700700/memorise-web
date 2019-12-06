@@ -1,6 +1,7 @@
 import React, {forwardRef, useImperativeHandle} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import MaterialModal from '@material-ui/core/Modal';
+import deepPurple from '@material-ui/core/colors/deepPurple';
 
 function getModalStyle() {
     const top = 50;
@@ -15,9 +16,9 @@ function getModalStyle() {
 const useStyles = makeStyles(theme => ({
     paper: {
         position: 'absolute',
-        width: '50%',
+        width: '80%',
         height: 200,
-        backgroundColor: theme.palette.background.paper,
+        backgroundColor: '#eee6ff', // deepPurple[50], // theme.palette.background.paper,
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),

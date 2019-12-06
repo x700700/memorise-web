@@ -12,9 +12,19 @@ const useStyles = makeStyles(theme => ({
     margin: {
         margin: theme.spacing(1),
     },
+    font: {
+        fontSize: '1.5rem',
+        fontWeight: 600,
+    },
+    inputFocused: {
+        '&$focused': {
+            color: 'red',
+            backgroundColor: 'white',
+        }
+    }
 }));
 
-const TextInput = (props) => {
+const TextInput = ({ defaultValue, autoFocus }) => {
     const classes = useStyles();
 
     return (
@@ -23,7 +33,17 @@ const TextInput = (props) => {
                 className={classes.margin}
                 id="input-with-icon"
                 label=""
+                defaultValue={defaultValue}
+                autoFocus={autoFocus}
+                InputLabelProps={{
+                    classes: {
+                        focused: classes.inputFocused,
+                    }
+                }}
                 InputProps={{
+                    classes: {
+                        input: classes.font,
+                    },
                     startAdornment: (
                         <InputAdornment position="start">
                             <AccountCircle />

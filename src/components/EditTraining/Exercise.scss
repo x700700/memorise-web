@@ -29,5 +29,14 @@
             background-color: rgba(0,0,0,.1);
         }
     }
+}
 
+.edit-modal-container {
+    //background-color: $grey8blue;
+    direction: ltr;
+    margin-top: -58px;
+
+    .field {
+        margin: 4rem 0;
+    }
 }
