@@ -37,7 +37,7 @@ const Modal = forwardRef(({ children, onClose }, ref) => {
 
     const handleClose = () => {
         setOpen(false);
-        onClose();
+        onClose && onClose();
     };
 
     return (

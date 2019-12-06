@@ -27,14 +27,14 @@ const Training = ({ training }) => {
             <div className="training-box">
                 <div className="training-btn-edit-absolute">
                     <div className="training-btn-edit">
-                        <button onClick={() => edit()} className="btn"><i className="fas fa-edit"></i></button>
+                        <button onClick={edit} className="btn"><i className="fas fa-edit"></i></button>
                     </div>
                 </div>
                 <div className="training-row">
                     <div className="name" style={rtlName(training.name)}>
                         {training.name}
                     </div>
-                    <div className="sample-exercises-container" onClick={() => edit()}>
+                    <div className="sample-exercises-container" onClick={edit}>
                         <div className="exercises-row">
                             {training.sampleExercise &&
                             <div key={`sample-exercise-`} style={{ width: '100%' }}>

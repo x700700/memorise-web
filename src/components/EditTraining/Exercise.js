@@ -7,7 +7,7 @@ const Exercise = ({ exercise }) => {
     const onModalClose = () => {
         console.warn('********** modal parent\'s onClose');
     };
-    const edit = (exercise) => {
+    const edit = () => {
         refModal.current.handleOpen();
     };
 
