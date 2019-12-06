@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { createMuiTheme, makeStyles, MuiThemeProvider } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
@@ -41,26 +41,33 @@ const useStyles = makeStyles(theme => ({
 const TextInput = ({ type, defaultValue, autoFocus }) => {
     const classes = useStyles();
 
-    const rtlStyle = () => {
-        return isRtl(defaultValue) ? {
+    const rtlStyle = text => {
+        return isRtl(text) ? {
             direction: 'rtl',
             textAlign: 'right',
         } : {};
+    };
+    const [style, setStyle] = useState(rtlStyle(defaultValue));
+    const checkRtl = e => {
+        const text = e.target.value || defaultValue;
+        setStyle(rtlStyle(text));
     };
 
     return (
         <div className="text-input">
             <MuiThemeProvider theme={theme}>
                 <TextField
-                    style={rtlStyle()}
                     className={classes.margin}
-                    autoComplete="off"
-                    type="text"
-
-                    id="input-with-icon"
-                    label=""
+                    style={style}
                     defaultValue={defaultValue}
                     autoFocus={autoFocus}
+                    onChange={checkRtl}
+
+                    autoComplete="off"
+                    type="text"
+                    id="input-with-icon"
+                    label=""
+
                     InputLabelProps={{
                         classes: {
                             focused: classes.inputFocused,
