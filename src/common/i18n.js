@@ -18,6 +18,9 @@ i18n.use(LanguageDetector).init({
                 "questions answered right": "questions were answered right",
                 "Score": "Score",
                 "Local storage was cleaned": "Local storage was cleaned",
+                "edit exercise": "Edit Exercise Q/A",
+                "save": "Save",
+                "cancel": "Cancel",
             }
         },
         jap: {

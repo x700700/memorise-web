@@ -3,7 +3,7 @@ import { createMuiTheme, makeStyles, MuiThemeProvider } from '@material-ui/core/
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import { deepPurple, green } from '@material-ui/core/colors';
+import { deepPurple } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
         palette: {

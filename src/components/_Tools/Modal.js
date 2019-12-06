@@ -1,23 +1,22 @@
 import React, {forwardRef, useImperativeHandle} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import MaterialModal from '@material-ui/core/Modal';
-// import { deepPurple } from '@material-ui/core/colors';
 
 function getModalStyle() {
-    const top = 50;
-    const left = 50;
+    // const top = 0;
+    // const left = 50;
     return {
-        top: `${top}%`,
-        left: `${left}%`,
-        transform: `translate(-${top}%, -${left}%)`,
+        top: '3.6rem', // `${top}%`,
+        left: 0, // `${left}%`,
+        // transform: `translate(-${top}%, -${left}%)`,
     };
 }
 
 const useStyles = makeStyles(theme => ({
     paper: {
         position: 'absolute',
-        width: '80%',
-        height: 200,
+        width: '81%',
+        height: 235,
         backgroundColor: '#eee6ff', // deepPurple[50], // theme.palette.background.paper,
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
@@ -25,14 +24,17 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Modal = forwardRef(({ children, onClose }, ref) => {
+const Modal = forwardRef(({ children, onClose, title }, ref) => {
     const classes = useStyles();
     const [modalStyle] = React.useState(getModalStyle); // getModalStyle is not a pure function, we roll the style only on the first render
     const [opened, setOpen] = React.useState(false);
 
     useImperativeHandle(ref, () => ({
-        handleOpen() {
+        open() {
             setOpen(true);
+        },
+        close() {
+            setOpen(false);
         },
     }));
 
@@ -47,9 +49,15 @@ const Modal = forwardRef(({ children, onClose }, ref) => {
             aria-describedby="simple-modal-description"
             open={opened}
             onClose={handleClose}
+            disableBackdropClick={true}
         >
             <div style={modalStyle} className={classes.paper}>
-                {children}
+                <div className="modal-box">
+                    <div className="modal-title">
+                        {title}
+                    </div>
+                    {children}
+                </div>
             </div>
         </MaterialModal>
     );
