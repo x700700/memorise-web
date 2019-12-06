@@ -1,4 +1,4 @@
-import React, {useEffect, /*useCallback*/} from "react";
+import React, { useEffect } from "react";
 import './EditTraining.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
@@ -18,10 +18,6 @@ const EditTraining = (props) => {
     const idToFetch = useSelector(state => state.editTraining.idToFetch);
     const exercisesMap = isLoaded && training && training.exercises;
     const exercisesList = exercisesMap && Object.values(exercisesMap);
-
-    const edit = (exercise) => {
-        console.warn('Edit Exercise - ', exercise.id);
-    };
 
     // const getEditTrainingCb = useCallback((id) => dispatch(getEditTraining(id)), [getEditTraining]);
     useEffect(() => {
@@ -43,11 +39,10 @@ const EditTraining = (props) => {
                     {exercisesList && exercisesList.map((x,i) => {
                         return (
                             <div key={`edit-training-exercise-${i}`} className="exercise-container">
-                                <Exercise exercise={x} onClick={edit}/>
+                                <Exercise exercise={x}/>
                             </div>);
                     })}
                 </div>
-
             </div>
         </div>)
 };
