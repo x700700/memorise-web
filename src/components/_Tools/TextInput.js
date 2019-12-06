@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import { createMuiTheme, makeStyles, MuiThemeProvider } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
@@ -38,8 +38,15 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const TextInput = ({ type, defaultValue, autoFocus }) => {
+const TextInput = forwardRef(({ type, defaultValue, autoFocus }, ref) => {
     const classes = useStyles();
+    const [val, setVal] = useState(defaultValue);
+
+    useImperativeHandle(ref, () => ({
+        value() {
+            return val;
+        },
+    }));
 
     const rtlStyle = text => {
         return isRtl(text) ? {
@@ -48,9 +55,10 @@ const TextInput = ({ type, defaultValue, autoFocus }) => {
         } : {};
     };
     const [style, setStyle] = useState(rtlStyle(defaultValue));
-    const checkRtl = e => {
-        const text = e.target.value || defaultValue;
-        setStyle(rtlStyle(text));
+    const onChange = e => {
+        const text = e.target.value;
+        setVal(text);
+        setStyle(rtlStyle(text || defaultValue));
     };
 
     return (
@@ -61,7 +69,7 @@ const TextInput = ({ type, defaultValue, autoFocus }) => {
                     style={style}
                     defaultValue={defaultValue}
                     autoFocus={autoFocus}
-                    onChange={checkRtl}
+                    onChange={onChange}
 
                     autoComplete="off"
                     type="text"
@@ -91,5 +99,5 @@ const TextInput = ({ type, defaultValue, autoFocus }) => {
                 />
             </MuiThemeProvider>
         </div>);
-};
+});
 export default TextInput;

@@ -8,6 +8,8 @@ import Button from "../_Tools/Button";
 const Exercise = ({ exercise }) => {
     const { t } = useTranslation();
     const refModal = useRef();
+    const refQ = useRef();
+    const refA = useRef();
 
     /*
     const onModalClose = () => {
@@ -20,7 +22,7 @@ const Exercise = ({ exercise }) => {
         refModal.current.close(); // causes the Modal not to be openned
     };
     const save = () => {
-        console.warn('save exercise - ', exercise.q, exercise.a);
+        console.warn('SAVE Exercise - ', refQ.current.value(), refA.current.value());
         refModal.current.close(); // causes the Modal not to be openned
     };
 
@@ -33,10 +35,10 @@ const Exercise = ({ exercise }) => {
             <Modal ref={refModal} title={t("edit exercise")}>
                 <div className="edit-modal-container">
                     <div className="field question">
-                        <TextInput type="q" defaultValue={exercise.q} autoFocus={true}/>
+                        <TextInput ref={refQ} type="q" defaultValue={exercise.q} autoFocus={true}/>
                     </div>
                     <div className="field answer">
-                        <TextInput type="a" defaultValue={exercise.a}/>
+                        <TextInput ref={refA} type="a" defaultValue={exercise.a}/>
                     </div>
                     <div className="buttons">
                         <div className="button-container">
