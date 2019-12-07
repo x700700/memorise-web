@@ -16,10 +16,10 @@ const Training = ({ training }) => {
     };
     const play = () => {
         console.warn('Play training - ', training.id);
-        dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: training.id });
-        history.push('/practice');
-        // dispatch({ type: types.APP_SET_EXAM_TRAINING_ID, id: training.id });
-        // history.push('/exam');
+        // dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: training.id });
+        // history.push('/practice');
+        dispatch({ type: types.APP_SET_EXAM_TRAINING_ID, id: training.id });
+        history.push('/exam');
     };
 
     const rtlName = text => {

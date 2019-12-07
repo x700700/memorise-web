@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import * as types from '../redux/actionsTypes';
@@ -10,7 +10,7 @@ import mock from '../mock/training-words1';
 import ExamSum from "../components/Practice/ExamSum";
 import PopUpBox from "../components/_Tools/PopUpBox";
 import ExamTable from "../components/Practice/ExamTable";
-import {getExamTraining, getGameTraining} from "../redux/actions";
+import {getExamTraining} from "../redux/actions";
 
 const Exam = (props) => {
     const dispatch = useDispatch();
@@ -65,14 +65,12 @@ const Exam = (props) => {
         const createNewDeck = (shouldFlipped) => {
             return new CardsDeck(consts.localStorage.examId, training, shouldFlipped);
         };
-
         const shouldDeckFlipped = (cardsDeck && cardsDeck.getIsDeckFlipped()) || false;
         loadPlay(consts.localStorage.examId, createNewDeck,
             () => dispatch({ type: types.APP_SET_EXAM_ENDED, ended: true }),
             (newDeck) => dispatch({ type: types.APP_SET_EXAM_CARDSDECK, cardsDeck: newDeck }),
             shouldDeckFlipped);
     };
-
     useEffect(() => {
         if (examTraining) {
             loadExam(examTraining);
@@ -80,12 +78,12 @@ const Exam = (props) => {
     }, [examTraining]);
 
     useEffect(() => {
-        // console.warn('Exam mount');
+        // console.warn('Exam mount - ', examTrainingId);
         dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.exam });
         dispatch({type: types.APP_SHOW_MENU, show: false});
 
         if (examTrainingId) {
-            if (!examTraining && !examTrainingIsFetching) {
+            if ((!examTraining || examTraining.id !== examTrainingId) && !examTrainingIsFetching) {
                 localStorage.removeItem(consts.localStorage.examId);
                 dispatch({ type: types.APP_SET_EXAM_CARDSDECK, cardsDeck: cardsDeck });
                 dispatch(getExamTraining(examTrainingId));
@@ -93,7 +91,7 @@ const Exam = (props) => {
         } else {
             loadExam(mock);
         }
-    }, [dispatch, history]);
+    }, [dispatch, history, examTrainingId]);
 
     const size = cardsDeck && cardsDeck.getSizeDeck();
     const rightsNum = cardsDeck && cardsDeck.getRightsNum();

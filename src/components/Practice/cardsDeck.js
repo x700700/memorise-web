@@ -189,6 +189,7 @@ export default class cardsDeck {
                 answers = _.uniqBy(answers, a);
                 answers = _.shuffle(answers).slice(0, 4);
                 answers.unshift(right);
+                // console.warn('=========>', answers);
                 answers = _.shuffle(answers);
                 answers = answers.map(x => ({...x, examA: x[a], rightAnswer: x.id && x.id === right.id}));
             }

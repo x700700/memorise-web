@@ -49,6 +49,7 @@ const Game = (props) => {
         dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: cardsDeck });
     };
 
+
     const loadGame = ( training ) => {
         const createNewDeck = (shouldFlipped) => {
             return new CardsDeck(consts.localStorage.gameId, training, shouldFlipped);
@@ -59,7 +60,6 @@ const Game = (props) => {
             (newDeck) => dispatch({type: types.APP_SET_GAME_CARDSDECK, cardsDeck: newDeck}),
             shouldDeckFlipped);
     };
-
     useEffect(() => {
         if (gameTraining) {
             loadGame(gameTraining);
@@ -67,12 +67,12 @@ const Game = (props) => {
     }, [gameTraining]);
 
     useEffect(() => {
-        // console.warn('Game mount');
+        console.warn('Game mount');
         dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.practice });
         dispatch({type: types.APP_SHOW_MENU, show: false});
 
         if (gameTrainingId) {
-            if (!gameTraining && !gameTrainingIsFetching) {
+            if ((!gameTraining || gameTraining.id !== gameTrainingId) && !gameTrainingIsFetching) {
                 localStorage.removeItem(consts.localStorage.gameId);
                 dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: cardsDeck });
                 dispatch(getGameTraining(gameTrainingId));
@@ -81,7 +81,7 @@ const Game = (props) => {
             loadGame(mock);
         }
 
-    }, [dispatch, history]);
+    }, [dispatch, history, gameTrainingId]);
 
     // const id = props.match.params.id;
 

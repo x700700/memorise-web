@@ -1,6 +1,5 @@
 import * as types from '../actionsTypes';
 import consts from "../../common/consts";
-import mockTraining from "../../mock/training-words1";
 
 const appReducer = (  state = {
                           authCheckStarted: false,
