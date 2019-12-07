@@ -10,21 +10,21 @@ const trainingsReducer = (  state = {
 
     switch (action.type) {
 
-        case types.TRAININGS_START_FETCH:
+        case types.FETCH_TRAININGS_START:
             return {
                 ...state,
                 isFetching: true,
                 isLoaded: false,
                 trainingsMap: null,
             };
-        case types.TRAININGS_FETCH_SUCCEED:
+        case types.FETCH_TRAININGS_SUCCEED:
             return {
                 ...state,
                 isFetching: false,
                 isLoaded: true,
                 trainingsMap: action.trainingsMap,
             };
-        case types.TRAININGS_FETCH_FAILED:
+        case types.FETCH_TRAININGS_FAILED:
             return {
                 ...state,
                 isFetching: false,

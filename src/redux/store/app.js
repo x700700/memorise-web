@@ -113,7 +113,7 @@ const appReducer = (  state = {
             };
 
 
-        case types.FETCH_GAME_TRAINING_START_FETCH:
+        case types.FETCH_GAME_TRAINING_START:
             return {
                 ...state,
                 gameTrainingIsFetching: true,
@@ -121,7 +121,7 @@ const appReducer = (  state = {
                 gameTraining: null,
                 gameTrainingIdToFetch: action.id,
             };
-        case types.FETCH_GAME_TRAINING_FETCH_SUCCEED:
+        case types.FETCH_GAME_TRAINING_SUCCEED:
             return {
                 ...state,
                 gameTrainingIsFetching: false,
@@ -129,7 +129,7 @@ const appReducer = (  state = {
                 gameTraining: action.training,
                 gameTrainingFetchedId: action.training && action.training.id,
             };
-        case types.FETCH_GAME_TRAINING_FETCH_FAILED:
+        case types.FETCH_GAME_TRAINING_FAILED:
             return {
                 ...state,
                 gameTrainingIsFetching: false,
@@ -138,7 +138,7 @@ const appReducer = (  state = {
                 gameTrainingFetchedId: null,
             };
 
-        case types.FETCH_EXAM_TRAINING_START_FETCH:
+        case types.FETCH_EXAM_TRAINING_START:
             return {
                 ...state,
                 examTrainingIsFetching: true,
@@ -146,7 +146,7 @@ const appReducer = (  state = {
                 examTraining: null,
                 examTrainingIdToFetch: action.id,
             };
-        case types.FETCH_EXAM_TRAINING_FETCH_SUCCEED:
+        case types.FETCH_EXAM_TRAINING_SUCCEED:
             return {
                 ...state,
                 examTrainingIsFetching: false,
@@ -154,7 +154,7 @@ const appReducer = (  state = {
                 examTraining: action.training,
                 examTrainingFetchedId: action.training && action.training.id,
             };
-        case types.FETCH_EXAM_TRAINING_FETCH_FAILED:
+        case types.FETCH_EXAM_TRAINING_FAILED:
             return {
                 ...state,
                 examTrainingIsFetching: false,
