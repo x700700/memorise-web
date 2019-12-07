@@ -12,6 +12,16 @@ export default {
         practice: 'practice',
         exam: 'exam',
     },
+    inputProps: {
+        email: {},
+        password: {},
+        training: {
+            maxLength: 25,
+        },
+        exercise: {
+            maxLength: 25,
+        },
+    },
     play: {
         minCards: 2,
         defaultCardsNum: 20,

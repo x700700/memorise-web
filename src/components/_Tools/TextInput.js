@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import { HelpOutline, ErrorOutline } from '@material-ui/icons';
 import { deepPurple } from '@material-ui/core/colors';
 import {isRtl} from "../../common/utils";
+import consts from "../../common/consts";
 
 const theme = createMuiTheme({
         palette: {
@@ -56,7 +57,9 @@ const TextInput = forwardRef(({ type, defaultValue, autoFocus }, ref) => {
     };
     const [style, setStyle] = useState(rtlStyle(defaultValue));
     const onChange = e => {
-        const text = e.target.value;
+        let text = e.target.value;
+        text = text.slice(0, consts.inputProps.exercise.maxLength);
+        e.target.value = text;
         setVal(text);
         setStyle(rtlStyle(text || defaultValue));
     };
@@ -82,6 +85,7 @@ const TextInput = forwardRef(({ type, defaultValue, autoFocus }, ref) => {
                         }
                     }}
                     InputProps={{
+                        // maxLength: 15, // Todo - does not work
                         classes: {
                             input: classes.font,
                         },
