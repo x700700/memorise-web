@@ -35,10 +35,10 @@ const Exercise = ({ exercise }) => {
             <Modal ref={refModal} title={t("edit exercise")}>
                 <div className="edit-modal-container">
                     <div className="field question">
-                        <TextInput ref={refQ} type="q" defaultValue={exercise.q} autoFocus={true}/>
+                        <TextInput ref={refQ} type="q" defaultValue={exercise.q} autoFocus={true} onEnter={save}/>
                     </div>
                     <div className="field answer">
-                        <TextInput ref={refA} type="a" defaultValue={exercise.a}/>
+                        <TextInput ref={refA} type="a" defaultValue={exercise.a} onEnter={save}/>
                     </div>
                     <div className="buttons">
                         <div className="button-container">

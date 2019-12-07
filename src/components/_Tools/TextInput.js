@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const TextInput = forwardRef(({ type, defaultValue, autoFocus }, ref) => {
+const TextInput = forwardRef(({ type, defaultValue, autoFocus, onEnter }, ref) => {
     const classes = useStyles();
     const [val, setVal] = useState(defaultValue);
 
@@ -63,6 +63,13 @@ const TextInput = forwardRef(({ type, defaultValue, autoFocus }, ref) => {
         setVal(text);
         setStyle(rtlStyle(text || defaultValue));
     };
+    const onKeyPress = (ev) => {
+        // console.warn('key pressed', ev.ctrlKey, ev.key);
+        if (/*ev.ctrlKey &&*/ ev.key === 'Enter') {
+            console.warn('**** Enter Pressed');
+            onEnter && onEnter();
+        }
+    };
 
     return (
         <div className="text-input">
@@ -73,6 +80,7 @@ const TextInput = forwardRef(({ type, defaultValue, autoFocus }, ref) => {
                     defaultValue={defaultValue}
                     autoFocus={autoFocus}
                     onChange={onChange}
+                    onKeyPress={onKeyPress}
 
                     autoComplete="off"
                     type="text"
