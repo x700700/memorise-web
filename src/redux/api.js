@@ -18,7 +18,7 @@ export const trainingsList = ({ bearer }) => {
     return axios({method: 'GET', url: `${consts.urls.api}/trainings`});
 };
 
-export const getEditTraining = ({ bearer, id }) => {
+export const getTraining = ({ bearer, id }) => {
     return axios({method: 'GET', url: `${consts.urls.api}/trainings/${id}`});
 };
 

@@ -27,15 +27,34 @@ export function* getTrainingsList(action) {
 
 export function* getEditTraining(action) {
     try {
-        yield put({ type: types.EDIT_TRAINING_START_FETCH, id: action.id });
-        const resp = yield call(api.getEditTraining, { Bearer: consts.temp.bearer, id: action.id });
-        yield put({ type: types.EDIT_TRAINING_FETCH_SUCCEED, training: resp });
+        yield put({ type: types.FETCH_EDIT_TRAINING_START_FETCH, id: action.id });
+        const resp = yield call(api.getTraining, { Bearer: consts.temp.bearer, id: action.id });
+        yield put({ type: types.FETCH_EDIT_TRAINING_FETCH_SUCCEED, training: resp });
     } catch (e) {
-        yield put({ type: types.EDIT_TRAINING_FETCH_FAILED });
+        yield put({ type: types.FETCH_EDIT_TRAINING_FETCH_FAILED });
         yield put({ type: types.APP_AUTH_FAILED, message: e.message });
     }
 }
-
+export function* getGameTraining(action) {
+    try {
+        yield put({ type: types.FETCH_GAME_TRAINING_START_FETCH, id: action.id });
+        const resp = yield call(api.getTraining, { Bearer: consts.temp.bearer, id: action.id });
+        yield put({ type: types.FETCH_GAME_TRAINING_FETCH_SUCCEED, training: resp });
+    } catch (e) {
+        yield put({ type: types.FETCH_GAME_TRAINING_FETCH_FAILED });
+        yield put({ type: types.APP_AUTH_FAILED, message: e.message });
+    }
+}
+export function* getExamTraining(action) {
+    try {
+        yield put({ type: types.FETCH_EXAM_TRAINING_START_FETCH, id: action.id });
+        const resp = yield call(api.getTraining, { Bearer: consts.temp.bearer, id: action.id });
+        yield put({ type: types.FETCH_EXAM_TRAINING_FETCH_SUCCEED, training: resp });
+    } catch (e) {
+        yield put({ type: types.FETCH_EXAM_TRAINING_FETCH_FAILED });
+        yield put({ type: types.APP_AUTH_FAILED, message: e.message });
+    }
+}
 
 
 

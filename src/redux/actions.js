@@ -31,6 +31,14 @@ export const getEditTraining = (id) => ({
     type: types.saga.getEditTraining,
     id: id,
 });
+export const getGameTraining = (id) => ({
+    type: types.saga.getGameTraining,
+    id: id,
+});
+export const getExamTraining = (id) => ({
+    type: types.saga.getExamTraining,
+    id: id,
+});
 
 
 export const createTraining = () => ({

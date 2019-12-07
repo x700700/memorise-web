@@ -15,10 +15,12 @@ export const APP_SET_CURRENT_PAGE = 'app.APP_SET_CURRENT_PAGE';
 export const APP_SHOW_MENU = 'app.APP_SHOW_MENU';
 export const APP_SET_ERROR = 'app.APP_SET_ERROR';
 
+export const APP_SET_GAME_TRAINING_ID = 'app.APP_SET_GAME_TRAINING_ID';
 export const APP_SET_GAME_CARDSDECK = 'app.APP_SET_GAME_CARDSDECK';
 export const APP_SET_GAME_ENDED = 'app.APP_SET_GAME_ENDED';
 export const APP_SET_GAME_DEFAULT_DECK_SIZE = 'app.APP_SET_GAME_DEFAULT_DECK_SIZE';
 
+export const APP_SET_EXAM_TRAINING_ID = 'app.APP_SET_EXAM_TRAINING_ID';
 export const APP_SET_EXAM_CARDSDECK = 'app.APP_SET_EXAM_CARDSDECK';
 export const APP_SET_EXAM_ENDED = 'app.APP_SET_EXAM_ENDED';
 export const APP_SET_EXAM_DEFAULT_DECK_SIZE = 'app.APP_SET_EXAM_DEFAULT_DECK_SIZE';
@@ -28,9 +30,17 @@ export const TRAININGS_START_FETCH = 'trainings.TRAININGS_START_FETCH';
 export const TRAININGS_FETCH_SUCCEED = 'trainings.TRAININGS_FETCH_SUCCEED';
 export const TRAININGS_FETCH_FAILED = 'trainings.TRAININGS_FETCH_FAILED';
 
-export const EDIT_TRAINING_START_FETCH = 'trainings.EDIT_TRAINING_START_FETCH';
-export const EDIT_TRAINING_FETCH_SUCCEED = 'trainings.EDIT_TRAINING_FETCH_SUCCEED';
-export const EDIT_TRAINING_FETCH_FAILED = 'trainings.EDIT_TRAINING_FETCH_FAILED';
+export const FETCH_EDIT_TRAINING_START_FETCH = 'trainings.FETCH_EDIT_TRAINING_START_FETCH';
+export const FETCH_EDIT_TRAINING_FETCH_SUCCEED = 'trainings.FETCH_EDIT_TRAINING_FETCH_SUCCEED';
+export const FETCH_EDIT_TRAINING_FETCH_FAILED = 'trainings.FETCH_EDIT_TRAINING_FETCH_FAILED';
+
+export const FETCH_GAME_TRAINING_START_FETCH = 'trainings.FETCH_GAME_TRAINING_START_FETCH';
+export const FETCH_GAME_TRAINING_FETCH_SUCCEED = 'trainings.FETCH_GAME_TRAINING_FETCH_SUCCEED';
+export const FETCH_GAME_TRAINING_FETCH_FAILED = 'trainings.FETCH_GAME_TRAINING_FETCH_FAILED';
+
+export const FETCH_EXAM_TRAINING_START_FETCH = 'trainings.FETCH_EXAM_TRAINING_START_FETCH';
+export const FETCH_EXAM_TRAINING_FETCH_SUCCEED = 'trainings.FETCH_EXAM_TRAINING_FETCH_SUCCEED';
+export const FETCH_EXAM_TRAINING_FETCH_FAILED = 'trainings.FETCH_EXAM_TRAINING_FETCH_FAILED';
 
 
 export const CREATE_TRAINING_START_FETCH = 'trainings.CREATE_TRAINING_START_FETCH';
@@ -65,6 +75,8 @@ export const saga = {
 
     getTrainingsList: 'getTrainingsList',
     getEditTraining: 'getEditTraining',
+    getGameTraining: 'getGameTraining',
+    getExamTraining: 'getExamTraining',
 
     createTraining: 'createTraining',
     renameTraining: 'renameTraining',

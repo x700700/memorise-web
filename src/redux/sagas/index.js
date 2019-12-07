@@ -10,6 +10,8 @@ function* actionWatcher() {
 
     yield takeLatest(types.saga.getTrainingsList, appSagas.getTrainingsList);
     yield takeLatest(types.saga.getEditTraining, appSagas.getEditTraining);
+    yield takeLatest(types.saga.getGameTraining, appSagas.getGameTraining);
+    yield takeLatest(types.saga.getExamTraining, appSagas.getExamTraining);
 
     yield takeLatest(types.saga.createTraining, appSagas.createTraining);
     yield takeLatest(types.saga.renameTraining, appSagas.renameTraining);

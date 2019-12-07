@@ -6,10 +6,11 @@ import './Exam.scss';
 import consts from "../common/consts";
 import CardsDeck from '../components/Practice/cardsDeck';
 import { loadPlay } from "../common/playUtils";
-import training from '../mock/training-words1';
+import mock from '../mock/training-words1';
 import ExamSum from "../components/Practice/ExamSum";
 import PopUpBox from "../components/_Tools/PopUpBox";
 import ExamTable from "../components/Practice/ExamTable";
+import {getExamTraining, getGameTraining} from "../redux/actions";
 
 const Exam = (props) => {
     const dispatch = useDispatch();
@@ -23,6 +24,11 @@ const Exam = (props) => {
     const cardsDeck = useSelector(state => state.app.examCardsDeck);
     const examEnded = useSelector(state => state.app.isExamEnded);
     const defaultDeckSize = useSelector(state => state.app.examDefaultDeckSize);
+
+    const examTrainingId = useSelector(state => state.app.examTrainingId);
+    const examTrainingIsFetching = useSelector(state => state.app.examTrainingIsFetching);
+    const examTraining = useSelector(state => state.app.examTraining);
+
 
     const setAnswer = (id, text) => {
         cardsDeck.setTopQAnswer(id);
@@ -54,21 +60,39 @@ const Exam = (props) => {
         }
     }, [cardsDeck, setIsPageAnswered, setAnswers, topQAnswerId, answers, examEnded, showMenu]);
 
-    useEffect(() => {
-        // console.warn('Exam mount');
-        dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.exam });
-        dispatch({type: types.APP_SHOW_MENU, show: false});
 
+    const loadExam = (training) => {
         const createNewDeck = (shouldFlipped) => {
             return new CardsDeck(consts.localStorage.examId, training, shouldFlipped);
         };
 
         const shouldDeckFlipped = (cardsDeck && cardsDeck.getIsDeckFlipped()) || false;
         loadPlay(consts.localStorage.examId, createNewDeck,
-                    () => dispatch({ type: types.APP_SET_EXAM_ENDED, ended: true }),
-                    (newDeck) => dispatch({ type: types.APP_SET_EXAM_CARDSDECK, cardsDeck: newDeck }),
-                     shouldDeckFlipped);
+            () => dispatch({ type: types.APP_SET_EXAM_ENDED, ended: true }),
+            (newDeck) => dispatch({ type: types.APP_SET_EXAM_CARDSDECK, cardsDeck: newDeck }),
+            shouldDeckFlipped);
+    };
 
+    useEffect(() => {
+        if (examTraining) {
+            loadExam(examTraining);
+        }
+    }, [examTraining]);
+
+    useEffect(() => {
+        // console.warn('Exam mount');
+        dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.exam });
+        dispatch({type: types.APP_SHOW_MENU, show: false});
+
+        if (examTrainingId) {
+            if (!examTraining && !examTrainingIsFetching) {
+                localStorage.removeItem(consts.localStorage.examId);
+                dispatch({ type: types.APP_SET_EXAM_CARDSDECK, cardsDeck: cardsDeck });
+                dispatch(getExamTraining(examTrainingId));
+            }
+        } else {
+            loadExam(mock);
+        }
     }, [dispatch, history]);
 
     const size = cardsDeck && cardsDeck.getSizeDeck();

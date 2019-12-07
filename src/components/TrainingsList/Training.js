@@ -3,10 +3,8 @@ import './Training.scss'
 import SampleExercise from "./SampleExercise";
 import {useHistory} from "react-router-dom";
 import { isRtl } from "../../common/utils";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import * as types from '../../redux/actionsTypes';
-import CardsDeck from '../Practice/cardsDeck';
-import consts from "../../common/consts";
 
 const Training = ({ training }) => {
     const dispatch = useDispatch();
@@ -17,9 +15,11 @@ const Training = ({ training }) => {
         history.push(`/trainings/${training.id}/edit`)
     };
     const play = () => {
-        console.warn('Play training - ', training);
-        // const cardsDeck = new CardsDeck(consts.localStorage.examId, training, false);
-        // dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: cardsDeck });
+        console.warn('Play training - ', training.id);
+        dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: training.id });
+        history.push('/practice');
+        // dispatch({ type: types.APP_SET_EXAM_TRAINING_ID, id: training.id });
+        // history.push('/exam');
     };
 
     const rtlName = text => {

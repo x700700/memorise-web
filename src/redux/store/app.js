@@ -1,5 +1,6 @@
 import * as types from '../actionsTypes';
 import consts from "../../common/consts";
+import mockTraining from "../../mock/training-words1";
 
 const appReducer = (  state = {
                           authCheckStarted: false,
@@ -9,9 +10,22 @@ const appReducer = (  state = {
                           currentPage: null,
                           showMenu: false,
 
+                          gameTrainingId: null,
+                          gameTrainingIsFetching: false,
+                          gameTrainingIsLoaded: false,
+                          gameTraining: null,
+                          gameTrainingIdToFetch: null,
+                          gameTrainingFetchedId: null,
                           gameCardsDeck: null,
                           gameDefaultDeckSize: consts.play.defaultCardsNum,
                           isGameEnded: false,
+
+                          examTrainingId: null,
+                          examTrainingIsFetching: false,
+                          examTrainingIsLoaded: false,
+                          examTraining: null,
+                          examTrainingIdToFetch: null,
+                          examTrainingFetchedId: null,
 
                           examCardsDeck: null,
                           examDefaultDeckSize: consts.play.defaultCardsNum,
@@ -58,6 +72,11 @@ const appReducer = (  state = {
                 error: action.error,
             };
 
+        case types.APP_SET_GAME_TRAINING_ID:
+            return {
+                ...state,
+                gameTrainingId: action.id,
+            };
         case types.APP_SET_GAME_CARDSDECK:
             return {
                 ...state,
@@ -74,6 +93,11 @@ const appReducer = (  state = {
                 gameDefaultDeckSize: action.size,
             };
 
+        case types.APP_SET_EXAM_TRAINING_ID:
+            return {
+                ...state,
+                examTrainingId: action.id,
+            };
         case types.APP_SET_EXAM_CARDSDECK:
             return {
                 ...state,
@@ -88,6 +112,57 @@ const appReducer = (  state = {
             return {
                 ...state,
                 examDefaultDeckSize: action.size,
+            };
+
+
+        case types.FETCH_GAME_TRAINING_START_FETCH:
+            return {
+                ...state,
+                gameTrainingIsFetching: true,
+                gameTrainingIsLoaded: false,
+                gameTraining: null,
+                gameTrainingIdToFetch: action.id,
+            };
+        case types.FETCH_GAME_TRAINING_FETCH_SUCCEED:
+            return {
+                ...state,
+                gameTrainingIsFetching: false,
+                gameTrainingIsLoaded: true,
+                gameTraining: action.training,
+                gameTrainingFetchedId: action.training && action.training.id,
+            };
+        case types.FETCH_GAME_TRAINING_FETCH_FAILED:
+            return {
+                ...state,
+                gameTrainingIsFetching: false,
+                gameTrainingIsLoaded: false,
+                gameTraining: null,
+                gameTrainingFetchedId: null,
+            };
+
+        case types.FETCH_EXAM_TRAINING_START_FETCH:
+            return {
+                ...state,
+                examTrainingIsFetching: true,
+                examTrainingIsLoaded: false,
+                examTraining: null,
+                examTrainingIdToFetch: action.id,
+            };
+        case types.FETCH_EXAM_TRAINING_FETCH_SUCCEED:
+            return {
+                ...state,
+                examTrainingIsFetching: false,
+                examTrainingIsLoaded: true,
+                examTraining: action.training,
+                examTrainingFetchedId: action.training && action.training.id,
+            };
+        case types.FETCH_EXAM_TRAINING_FETCH_FAILED:
+            return {
+                ...state,
+                examTrainingIsFetching: false,
+                examTrainingIsLoaded: false,
+                examTraining: null,
+                examTrainingFetchedId: null,
             };
 
         default:

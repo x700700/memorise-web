@@ -7,10 +7,10 @@ import consts from "../common/consts";
 import Card from "../components/Practice/Card";
 import CardsDeck from '../components/Practice/cardsDeck';
 import { loadPlay } from "../common/playUtils";
-import training from '../mock/training-words1';
+import mock from '../mock/training-words1';
 import GameSum from "../components/Practice/GameSum";
 import PopUpBox from "../components/_Tools/PopUpBox";
-// import Rotate90DegreesCcwTwoToneIcon from '@material-ui/icons/Rotate90DegreesCcwTwoTone';
+import { getGameTraining } from "../redux/actions";
 
 const Game = (props) => {
     const dispatch = useDispatch();
@@ -21,6 +21,11 @@ const Game = (props) => {
     const cardsDeck = useSelector(state => state.app.gameCardsDeck);
     const gameEnded = useSelector(state => state.app.isGameEnded);
     const defaultDeckSize = useSelector(state => state.app.gameDefaultDeckSize);
+
+    const gameTrainingId = useSelector(state => state.app.gameTrainingId);
+    const gameTrainingIsFetching = useSelector(state => state.app.gameTrainingIsFetching);
+    const gameTraining = useSelector(state => state.app.gameTraining);
+
     const refGame = useRef();
 
     const rotateCard = () => {
@@ -44,20 +49,37 @@ const Game = (props) => {
         dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: cardsDeck });
     };
 
+    const loadGame = ( training ) => {
+        const createNewDeck = (shouldFlipped) => {
+            return new CardsDeck(consts.localStorage.gameId, training, shouldFlipped);
+        };
+        const shouldDeckFlipped = (cardsDeck && cardsDeck.getIsDeckFlipped()) || false;
+        loadPlay(consts.localStorage.gameId, createNewDeck,
+            () => dispatch({type: types.APP_SET_GAME_ENDED, ended: true}),
+            (newDeck) => dispatch({type: types.APP_SET_GAME_CARDSDECK, cardsDeck: newDeck}),
+            shouldDeckFlipped);
+    };
+
+    useEffect(() => {
+        if (gameTraining) {
+            loadGame(gameTraining);
+        }
+    }, [gameTraining]);
+
     useEffect(() => {
         // console.warn('Game mount');
         dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.practice });
         dispatch({type: types.APP_SHOW_MENU, show: false});
 
-        const createNewDeck = (shouldFlipped) => {
-            return new CardsDeck(consts.localStorage.gameId, training, shouldFlipped);
-        };
-
-        const shouldDeckFlipped = (cardsDeck && cardsDeck.getIsDeckFlipped()) || false;
-        loadPlay(consts.localStorage.gameId, createNewDeck,
-                    () => dispatch({ type: types.APP_SET_GAME_ENDED, ended: true }),
-                    (newDeck) => dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: newDeck }),
-                     shouldDeckFlipped);
+        if (gameTrainingId) {
+            if (!gameTraining && !gameTrainingIsFetching) {
+                localStorage.removeItem(consts.localStorage.gameId);
+                dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: cardsDeck });
+                dispatch(getGameTraining(gameTrainingId));
+            }
+        } else {
+            loadGame(mock);
+        }
 
     }, [dispatch, history]);
 
