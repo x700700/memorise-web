@@ -3,8 +3,13 @@ import './Training.scss'
 import SampleExercise from "./SampleExercise";
 import {useHistory} from "react-router-dom";
 import { isRtl } from "../../common/utils";
+import {useDispatch, useSelector} from "react-redux";
+import * as types from '../../redux/actionsTypes';
+import CardsDeck from '../Practice/cardsDeck';
+import consts from "../../common/consts";
 
 const Training = ({ training }) => {
+    const dispatch = useDispatch();
     const history = useHistory();
 
     const edit = () => {
@@ -12,7 +17,9 @@ const Training = ({ training }) => {
         history.push(`/trainings/${training.id}/edit`)
     };
     const play = () => {
-        console.warn('Play training - ', training.name, isRtl(training.name));
+        console.warn('Play training - ', training);
+        // const cardsDeck = new CardsDeck(consts.localStorage.examId, training, false);
+        // dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: cardsDeck });
     };
 
     const rtlName = text => {
