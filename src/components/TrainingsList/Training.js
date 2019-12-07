@@ -10,6 +10,8 @@ const Training = ({ training }) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const sampleExercise = (training && training.sampleExercise) || {q: '', a: ''};
+
     const edit = () => {
         console.warn('Edit training - ', training.id);
         history.push(`/trainings/${training.id}/edit`)
@@ -45,9 +47,9 @@ const Training = ({ training }) => {
                     </div>
                     <div className="sample-exercises-container" onClick={edit}>
                         <div className="exercises-row">
-                            {training.sampleExercise &&
+                            {sampleExercise &&
                             <div key={`sample-exercise-`} style={{ width: '100%' }}>
-                                <SampleExercise q={training.sampleExercise.q} a={training.sampleExercise.a}/>
+                                <SampleExercise q={sampleExercise.q} a={sampleExercise.a}/>
                             </div>
                             }
                         </div>

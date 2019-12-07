@@ -1,11 +1,11 @@
 export default {
     "id": "5de409300b5b97447c4c2e53",
-    "name": "מילים של בית",
+    "name": "מילים של האפליקציה",
     "created": "2019-12-01T18:40:48.560Z",
     "modified": "2019-12-01T19:47:35.859Z",
     "popularity": 4,
     "difficulty": 2,
-    "exercisesCount": 2,
+    "exercisesCount": 10,
     "info": {
         "userId": "5dde4b0436512dac5175f664",
         "archived": false,
@@ -14,59 +14,59 @@ export default {
     "exercises": {
         "off-exc-000": {
             "id": "off-exc-000",
-            "q": "Highly very long sentence to break the 1st line and further go over the space",
-            "a": "משפט ארוך שישבור את השורה ואף יחרוג ממנה בצורה משמעותית מאוד לכל דיעה",
+            "q": "A Training",
+            "a": "אימון",
         },
         /* */
         "off-exc-001": {
             "id": "off-exc-001",
-            "q": "I'm a Mock",
-            "a": "אני מוק יואייי",
+            "q": "An Exercise",
+            "a": "תרגיל",
         },
         "off-exc-002": {
             "id": "off-exc-002",
-            "q": "Bedroom",
-            "a": "חדר שינה",
+            "q": "A Practice",
+            "a": "תירגול",
         },
         "off-exc-003": {
             "id": "off-exc-003",
-            "q": "Kitchen",
-            "a": "מטבח",
+            "q": "An Exam",
+            "a": "בחינה",
         },
         "off-exc-004": {
             "id": "off-exc-004",
-            "q": "Toilet",
-            "a": "שירותים",
+            "q": "To Train",
+            "a": "לאמן",
         },
         "off-exc-005": {
             "id": "off-exc-005",
-            "q": "Living Room",
-            "a": "סלון",
+            "q": "A Train",
+            "a": "רכבת",
         },
         "off-exc-006": {
             "id": "off-exc-006",
-            "q": "Oven",
-            "a": "תנור חימום",
+            "q": "To Training",
+            "a": "להתאמן",
         },
         "off-exc-007": {
             "id": "off-exc-007",
-            "q": "Sink",
-            "a": "כיור",
+            "q": "To Practice",
+            "a": "לתרגל",
         },
         "off-exc-008": {
             "id": "off-exc-008",
-            "q": "Elevator",
-            "a": "מעלית",
+            "q": "To Examine",
+            "a": "לבחון",
         },
         "off-exc-009": {
             "id": "off-exc-009",
-            "q": "Stairs",
-            "a": "מדרגות",
+            "q": "To Be Examined",
+            "a": "להיבחן",
         },
         "off-exc-010": {
             "id": "off-exc-010",
-            "q": "Balcony",
-            "a": "מרפסת",
+            "q": "Right",
+            "a": "ימין, נכון",
         },
         /* */
     }
