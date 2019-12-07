@@ -9,9 +9,9 @@ const axiosInstance = Axios.create({
     },
 });
 
-export default function (props) {
-    console.log(`<<<<< ${props.method} - ${props.url}`);
-    return axiosInstance(props).then(response => {
+export default function (props, body) {
+    console.log(`<<<<< ${props.method} - ${props.url}`, body);
+    return axiosInstance({...props, data: body }).then(response => {
         const resp = response.data;
         console.warn('>>>>>', resp);
         return resp;

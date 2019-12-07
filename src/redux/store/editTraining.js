@@ -10,6 +10,7 @@ const editTrainingReducer = (  state = {
                                },
                       action) => {
 
+    const updatedTraining = state.training;
     switch (action.type) {
 
         case types.FETCH_EDIT_TRAINING_START:
@@ -44,14 +45,31 @@ const editTrainingReducer = (  state = {
                 isFetching: true,
             };
         case types.FETCH_CREATE_EXERCISE_SUCCEED:
-            const training = state.training;
-            training.exercises[action.exercise.id] = action.exercise;
+            updatedTraining.exercises[action.exercise.id] = action.exercise;
             return {
                 ...state,
                 isFetching: false,
-                training: training,
+                training: updatedTraining,
             };
         case types.FETCH_CREATE_EXERCISE_FAILED:
+            return {
+                ...state,
+                isFetching: false,
+            };
+
+        case types.FETCH_SAVE_EXERCISE_START:
+            return {
+                ...state,
+                isFetching: true,
+            };
+        case types.FETCH_SAVE_EXERCISE_SUCCEED:
+            updatedTraining.exercises[action.exercise.id] = action.exercise;
+            return {
+                ...state,
+                isFetching: false,
+                training: updatedTraining,
+            };
+        case types.FETCH_SAVE_EXERCISE_FAILED:
             return {
                 ...state,
                 isFetching: false,

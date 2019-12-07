@@ -1,12 +1,16 @@
 import React, {useRef } from "react";
+import {useDispatch} from "react-redux";
 import './Exercise.scss';
 import Modal from "../_Tools/Modal";
 import TextInput from "../_Tools/TextInput";
 import {useTranslation} from "react-i18next";
 import Button from "../_Tools/Button";
+import { saveExercise } from '../../redux/actions'
+
 
 const Exercise = ({ exercise }) => {
     const { t } = useTranslation();
+    const dispatch = useDispatch();
     const refModal = useRef();
     const refQ = useRef();
     const refA = useRef();
@@ -22,7 +26,12 @@ const Exercise = ({ exercise }) => {
         refModal.current.close(); // causes the Modal not to be openned
     };
     const save = () => {
-        console.warn('SAVE Exercise - ', refQ.current.value(), refA.current.value());
+        // console.warn('SAVE Exercise - ', refQ.current.value(), refA.current.value());
+        const updatedExercise = {
+            q: refQ.current.value(),
+            a: refA.current.value(),
+        };
+        dispatch(saveExercise(exercise.trainingId, exercise.id, updatedExercise));
         refModal.current.close(); // causes the Modal not to be openned
     };
 

@@ -64,13 +64,11 @@ export const createExercise = (trainingId) => ({
     trainingId: trainingId,
 });
 
-export const saveExercise = (trainingId, Id, id, exercise) => ({
+export const saveExercise = (trainingId, id, exercise) => ({
     type: types.saga.saveExercise,
     trainingId: trainingId,
     id: id,
-    body: {
-        exercise: exercise,
-    }
+    body: exercise,
 });
 
 export const deleteExercise = (trainingId, id) => ({
