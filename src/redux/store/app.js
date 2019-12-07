@@ -25,7 +25,6 @@ const appReducer = (  state = {
                           examTraining: null,
                           examTrainingIdToFetch: null,
                           examTrainingFetchedId: null,
-
                           examCardsDeck: null,
                           examDefaultDeckSize: consts.play.defaultCardsNum,
                           isExamEnded: false,

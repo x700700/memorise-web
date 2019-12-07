@@ -1,0 +1,21 @@
+@import '../common/colors';
+
+.add-button-container {
+
+    .btn-container {
+
+        .btn {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            margin: .5rem;
+            background-color: $purple2;
+            border-radius: 50%;
+            color: $purple6;
+            font-size: 2.5rem;
+            font-weight: 500;
+            padding: 0 .7rem;
+            padding-bottom: .1rem;
+        }
+    }
+}

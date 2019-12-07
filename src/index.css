@@ -27,8 +27,8 @@ button {
 }
 
 .hide {
-    display: none;
+    display: none!important;
 }
 .disable-pointer {
-    pointer-events: none;
+    pointer-events: none!important;
 }

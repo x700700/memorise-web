@@ -8,6 +8,7 @@ import consts from "../common/consts";
 import MenuGame from "./Practice/MenuGame";
 import MenuExam from "./Practice/MenuExam";
 import {useTranslation} from "react-i18next";
+import AddButton from "./AddButton";
 
 const Header = (props) => {
     const dispatch = useDispatch();
@@ -83,6 +84,9 @@ const Header = (props) => {
                     <MenuGame hide={timingCurrPage !== consts.pageName.practice}/>
                     <MenuExam hide={timingCurrPage !== consts.pageName.exam}/>
                 </div>
+            </div>
+            <div className="add-btn-box">
+                <AddButton/>
             </div>
             {error &&
             <div className="error">

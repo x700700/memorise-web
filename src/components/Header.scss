@@ -89,4 +89,11 @@
     .top-menu-pop-down {
         transform: translateY(0);
     }
+
+    .add-btn-box {
+        position: fixed;
+        z-index: 39;
+        bottom: 0;
+        right: 0;
+    }
 }

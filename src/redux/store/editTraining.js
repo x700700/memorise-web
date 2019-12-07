@@ -36,6 +36,27 @@ const editTrainingReducer = (  state = {
                 training: mockTraining, // Todo - remove
                 // fetchedId: null, // Todo - do it
             };
+
+
+        case types.CREATE_EXERCISE_START_FETCH:
+            return {
+                ...state,
+                isFetching: true,
+            };
+        case types.CREATE_EXERCISE_FETCH_SUCCEED:
+            const training = state.training;
+            training.exercises[action.exercise.id] = action.exercise;
+            return {
+                ...state,
+                isFetching: false,
+                training: training,
+            };
+        case types.CREATE_EXERCISE_FETCH_FAILED:
+            return {
+                ...state,
+                isFetching: false,
+            };
+
         default:
             return state;
     }
