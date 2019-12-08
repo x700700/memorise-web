@@ -7,6 +7,7 @@ import {useDispatch} from "react-redux";
 import * as types from '../../redux/actionsTypes';
 import DrawerButtons from "./DrawerButtons";
 
+
 const Training = ({ training }) => {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -19,11 +20,25 @@ const Training = ({ training }) => {
     };
     const play = () => {
         console.warn('Play training - ', training.id);
-        // dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: training.id });
-        // history.push('/practice');
+        dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: training.id });
+        history.push('/practice');
+    };
+    const exam = () => {
+        console.warn('Exam training - ', training.id);
         dispatch({ type: types.APP_SET_EXAM_TRAINING_ID, id: training.id });
         history.push('/exam');
     };
+
+    const playIcons = [
+        {
+            name: 'running',
+            onClick: play,
+        },
+        {
+            name: 'grin-beam-sweat',
+            onClick: exam,
+        },
+    ];
 
     const rtlName = text => {
         return isRtl(text) ? {
@@ -57,7 +72,8 @@ const Training = ({ training }) => {
                     </div>
                     <div className="training-btns-container">
                         <DrawerButtons size={2} backgroundColor="f3f3f3" backgroundColorDraw="e3e3e3"
-                                       icons={['running', 'grin-beam-sweat']}
+                                       icons={playIcons}
+                                       trainingId={training.id}
                         />
                     </div>
                 </div>
