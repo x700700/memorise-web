@@ -1,0 +1,32 @@
+@import "../../common/colors";
+
+.drawer-buttons-container {
+    position: relative;
+    overflow: hidden;
+    width: 9rem;
+    margin-left: -6rem;
+
+    .open-button {
+        display: flex;
+        justify-content: flex-end;
+        height: 3.1rem;
+    }
+    .open-button-absolute {
+        position: absolute;
+        border: $grey4 .5px solid;
+        top: 0;
+        right: 0;
+    }
+
+    .buttons-absolute {
+        position: absolute;
+        transition: transform .5s ease-in-out;
+        border: $grey4 .5px solid;
+        border-right: none;
+
+        .btns-row {
+            display: flex;
+            flex-wrap: nowrap;
+        }
+    }
+}

@@ -12,7 +12,7 @@ const IconButton = ({ faName, size, hide, onClick, color, backgroundColor }) => 
 
     return (
         <div className="plus-button-container">
-            <button onClick={onClick} className="btn" style={{display: hide ? 'none' : 'block'}}>
+            <button onClick={() => onClick && onClick()} className="btn" style={{display: hide ? 'none' : 'initial'}}>
                 <i className={`fas fa-${faName}`} style={styleIcon}/>
             </button>
         </div>);

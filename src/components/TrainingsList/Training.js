@@ -5,6 +5,7 @@ import {useHistory} from "react-router-dom";
 import { isRtl } from "../../common/utils";
 import {useDispatch} from "react-redux";
 import * as types from '../../redux/actionsTypes';
+import DrawerButtons from "./DrawerButtons";
 
 const Training = ({ training }) => {
     const dispatch = useDispatch();
@@ -55,11 +56,7 @@ const Training = ({ training }) => {
                         </div>
                     </div>
                     <div className="training-btns-container">
-                        <div className="btns-col">
-                            <div className="btn-play">
-                                <button onClick={play} className="btn"><i className="fas fa-running"></i></button>
-                            </div>
-                        </div>
+                        <DrawerButtons size={2} backgroundColor="f3f3f3" backgroundColorDraw="e3e3e3"/>
                     </div>
                 </div>
             </div>
