@@ -29,6 +29,13 @@ const EditTraining = (props) => {
         setTimeout(() => setInputDisabled(false), 100);
     };
 
+    const play = () => {
+        console.warn('play training - ', training);
+    };
+    const exam = () => {
+        console.warn('exam training - ', training);
+    };
+
     // const getEditTrainingCb = useCallback((id) => dispatch(getEditTraining(id)), [getEditTraining]);
     useEffect(() => {
         if (currPage !== consts.pageName.edit) {
@@ -48,7 +55,9 @@ const EditTraining = (props) => {
                 <div className="header-container">
                     <div className="header-box">
                         {training &&
-                        <EditTrainingHeader ref={refHeader} name={training.name} rename={rename} disabled={inputDisabled}/>
+                        <EditTrainingHeader ref={refHeader} name={training.name} rename={rename} disabled={inputDisabled}
+                                            play={play} exam={exam}
+                        />
                         }
                     </div>
                     <div className="header-place-holder"/>

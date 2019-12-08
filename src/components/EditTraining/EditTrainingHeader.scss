@@ -4,8 +4,21 @@
     //margin: .3rem;
 
     .header-row {
-        width: 100%;
         display: flex;
+        justify-content: space-between;
+        margin: 0 .5rem;
 
+        .edit-training-buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 6rem;
+
+            .btn {
+                i {
+                    font-size: 2rem;
+                    //color: $purple2;
+                }
+            }
+        }
     }
 }

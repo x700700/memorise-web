@@ -57,7 +57,7 @@ const Training = ({ training }) => {
                     <div className="training-btns-container">
                         <div className="btns-col">
                             <div className="btn-play">
-                                <button onClick={() => play()} className="btn"><i className="fas fa-running"></i></button>
+                                <button onClick={play} className="btn"><i className="fas fa-running"></i></button>
                             </div>
                         </div>
                     </div>
