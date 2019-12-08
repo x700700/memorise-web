@@ -6,7 +6,7 @@ import consts from "../common/consts";
 import * as types from "../redux/actionsTypes";
 import {getEditTraining} from "../redux/actions";
 import Exercise from "../components/EditTraining/Exercise";
-import Header from "../components/EditTraining/Header";
+import EditTrainingHeader from "../components/EditTraining/EditTrainingHeader";
 
 const EditTraining = (props) => {
     const id = props.match.params.id;
@@ -48,7 +48,7 @@ const EditTraining = (props) => {
                 <div className="header-container">
                     <div className="header-box">
                         {training &&
-                        <Header ref={refHeader} name={training.name} rename={rename} disabled={inputDisabled}/>
+                        <EditTrainingHeader ref={refHeader} name={training.name} rename={rename} disabled={inputDisabled}/>
                         }
                     </div>
                     <div className="header-place-holder"/>

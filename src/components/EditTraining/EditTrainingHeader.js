@@ -1,8 +1,8 @@
 import React, {forwardRef, useImperativeHandle, useRef} from "react";
-import './Header.scss';
+import './EditTrainingHeader.scss';
 import TextInput from "../_Tools/TextInput";
 
-const Header = forwardRef(({ name, rename, disabled }, ref) => {
+const EditTrainingHeader = forwardRef(({ name, rename, disabled }, ref) => {
 
     useImperativeHandle(ref, () => ({
         getName() {
@@ -24,4 +24,4 @@ const Header = forwardRef(({ name, rename, disabled }, ref) => {
             </div>
         </div>);
 });
-export default Header;
+export default EditTrainingHeader;
