@@ -7,13 +7,14 @@
     .btn-bg {
         position: absolute;
         z-index: -1;
-        background-color: $purple2;
         border-radius: 50%;
         margin: 7.5% 14.5%;
         //margin: .35rem 14.5%;
     }
     .btn-icon {
-        margin: 1.5rem;
-        color: $purple6;
+        button > i {
+            border-radius: 50%;
+            padding: .5rem .6rem;
+        }
     }
 }

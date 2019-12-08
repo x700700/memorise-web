@@ -21,12 +21,12 @@ const AddButton = (props) => {
     return (
         <div className="add-button-container">
             <div className="btn-container">
-                <div className={`btn-add-training ${currPage !== consts.pageName.trainings ? 'hide' : ''}`} onClick={addTraining}>
-                    <PlusButton size={3.5}/>
-                </div>
-                <div className={`btn-add-exercise ${currPage !== consts.pageName.edit ? 'hide' : ''}`} onClick={addExercise}>
-                    <PlusButton size={3.5}/>
-                </div>
+                <PlusButton size={3} faName="plus" onClick={addTraining} hide={currPage !== consts.pageName.trainings}
+                            color="eee6ff" backgroundColor="884dff"
+                />
+                <PlusButton size={3} faName="plus" onClick={addExercise} hide={currPage !== consts.pageName.edit}
+                            color="eee6ff" backgroundColor="884dff"
+                />
             </div>
         </div>)
 };
