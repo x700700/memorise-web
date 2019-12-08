@@ -56,7 +56,9 @@ const Training = ({ training }) => {
                         </div>
                     </div>
                     <div className="training-btns-container">
-                        <DrawerButtons size={2} backgroundColor="f3f3f3" backgroundColorDraw="e3e3e3"/>
+                        <DrawerButtons size={2} backgroundColor="f3f3f3" backgroundColorDraw="e3e3e3"
+                                       icons={['running', 'grin-beam-sweat']}
+                        />
                     </div>
                 </div>
             </div>

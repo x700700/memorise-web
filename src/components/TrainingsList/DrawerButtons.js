@@ -2,14 +2,14 @@ import React, {useState} from "react";
 import './DrawerButtons.scss';
 import IconButton from "../_Tools/IconButton";
 
-const DrawerButtons = ({ size, color, backgroundColor, backgroundColorDraw }) => {
+const DrawerButtons = ({ size, color, backgroundColor, backgroundColorDraw, icons }) => {
     const [open, setOpen] = useState(false);
 
     const clicked = () => {
         setOpen(!open);
     };
 
-    const numOfButtons = 2;
+    const numOfButtons = icons.length;
     const styleDrawer = {
         width: `${(size + 1) * (numOfButtons + 1)}rem`,
         marginLeft: `-${(size + 1) * numOfButtons}rem`,
@@ -24,17 +24,20 @@ const DrawerButtons = ({ size, color, backgroundColor, backgroundColorDraw }) =>
     const styleBgDraw = {
         backgroundColor: `#${backgroundColorDraw || backgroundColor}`,
     };
+    const xClose = (size + 1) * (numOfButtons + 1);
+    const xOpen = size + 1;
     const styleAbsolute = {
         marginLeft: `-${size + 1}rem`,
-        transform: `translateX(${open ? '3rem' : '9rem'})`,
+        transform: 'translateX(' + `${open ? xOpen : xClose}` + 'rem)', // eslint-disable-line no-useless-concat
     };
 
     return (
         <div className="drawer-buttons-container" style={styleDrawer}>
             <div className="buttons-absolute" style={{ ...styleAbsolute, ...styleBgDraw}}>
                 <div className="btns-row">
-                    <IconButton faName="running" size={size}/>
-                    <IconButton faName="grin-beam-sweat" size={size}/>
+                    {icons && icons.map(x =>
+                        <IconButton faName={x} size={size}/>
+                    )}
                 </div>
             </div>
             <div className="open-button" style={styleOpenBtn}>
