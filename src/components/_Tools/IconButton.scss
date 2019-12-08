@@ -1,16 +1,8 @@
 @import '../../common/colors';
 
 .plus-button-container {
-    position: relative;
     margin: .5rem;
 
-    .btn-bg {
-        position: absolute;
-        z-index: -1;
-        border-radius: 50%;
-        margin: 7.5% 14.5%;
-        //margin: .35rem 14.5%;
-    }
     .btn-icon {
         button > i {
             border-radius: 50%;
