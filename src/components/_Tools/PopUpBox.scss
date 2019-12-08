@@ -15,7 +15,7 @@
     transition: transform .5s ease-in-out;
 
     @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
-    and (orientation: landscape) {
+    and (min-aspect-ratio: 13/9) {
         height: 75%;
     }
 }

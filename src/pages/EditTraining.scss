@@ -33,7 +33,7 @@
                 width: 50%;
 
                 @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
-                and (orientation: landscape) {
+                and (min-aspect-ratio: 13/9) {
                     width: 25%;
                 }
                 @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
