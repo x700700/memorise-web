@@ -6,7 +6,7 @@ import './Exam.scss';
 import consts from "../common/consts";
 import CardsDeck from '../components/Practice/cardsDeck';
 import { loadPlay } from "../common/playUtils";
-import mock from '../mock/training-words1';
+import mock from '../mock/training-multiply';
 import ExamSum from "../components/Practice/ExamSum";
 import PopUpBox from "../components/_Tools/PopUpBox";
 import ExamTable from "../components/Practice/ExamTable";

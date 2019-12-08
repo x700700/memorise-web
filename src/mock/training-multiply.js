@@ -24,10 +24,12 @@ for (i = 3; i < 9; i++) {
         };
     }
 }
+/*
 foo.exercises[c++] = {
     "id": "off-exc-000",
     "q": "Highly very long sentence to break the 1st line",
     "a": "משפט ארוך שישבור את השורה",
 };
+ */
 
 export default foo;
