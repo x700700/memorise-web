@@ -3,6 +3,7 @@ import './AddButton.scss';
 import {useDispatch, useSelector} from "react-redux";
 import consts from "../common/consts";
 import {createExercise} from "../redux/actions";
+import PlusButton from "./_Tools/PlusButton";
 
 const AddButton = (props) => {
     const dispatch = useDispatch();
@@ -20,11 +21,11 @@ const AddButton = (props) => {
     return (
         <div className="add-button-container">
             <div className="btn-container">
-                <div className={`btn btn-add-training ${currPage !== consts.pageName.trainings ? 'hide' : ''}`} onClick={addTraining}>
-                    <span>+</span>
+                <div className={`btn-add-training ${currPage !== consts.pageName.trainings ? 'hide' : ''}`} onClick={addTraining}>
+                    <PlusButton size={3.5}/>
                 </div>
-                <div className={`btn btn-add-exercise ${currPage !== consts.pageName.edit ? 'hide' : ''}`} onClick={addExercise}>
-                    <span>+</span>
+                <div className={`btn-add-exercise ${currPage !== consts.pageName.edit ? 'hide' : ''}`} onClick={addExercise}>
+                    <PlusButton size={3.5}/>
                 </div>
             </div>
         </div>)
