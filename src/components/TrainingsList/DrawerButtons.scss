@@ -3,13 +3,11 @@
 .drawer-buttons-container {
     position: relative;
     overflow: hidden;
-    width: 9rem;
-    margin-left: -6rem;
+    transition: box-shadow .5s ease-in-out;
 
     .open-button {
         display: flex;
         justify-content: flex-end;
-        height: 3.1rem;
     }
     .open-button-absolute {
         position: absolute;
