@@ -1,8 +1,8 @@
-import React, { useState, forwardRef, useImperativeHandle } from 'react';
+import React, {useState, forwardRef, useImperativeHandle} from 'react';
 import { createMuiTheme, makeStyles, MuiThemeProvider } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
-import { HelpOutline, ErrorOutline } from '@material-ui/icons';
+import { HelpOutline, ErrorOutline, Edit } from '@material-ui/icons';
 import { deepPurple } from '@material-ui/core/colors';
 import {isRtl} from "../../common/utils";
 import consts from "../../common/consts";
@@ -18,11 +18,18 @@ const useStyles = makeStyles(theme => ({
     margin: {
         margin: theme.spacing(1),
     },
+    noMargin: {
+        margin: 0,
+    },
     iconMargin: {
         margin: '0 .2rem',
     },
-    font: {
+    fontExercise: {
         fontSize: '1.5rem',
+        fontWeight: 600,
+    },
+    fontTraining: {
+        fontSize: '1.1rem',
         fontWeight: 600,
     },
     inputFocused: {
@@ -39,7 +46,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const TextInput = forwardRef(({ type, defaultValue, autoFocus, onEnter }, ref) => {
+const TextInput = forwardRef(({ type, defaultValue, autoFocus, onEnter, noMargin, disabled }, ref) => {
     const classes = useStyles();
     const [val, setVal] = useState(defaultValue);
 
@@ -64,23 +71,31 @@ const TextInput = forwardRef(({ type, defaultValue, autoFocus, onEnter }, ref) =
         setStyle(rtlStyle(text || defaultValue));
     };
     const onKeyPress = (ev) => {
-        // console.warn('key pressed', ev.ctrlKey, ev.key);
-        if (/*ev.ctrlKey &&*/ ev.key === 'Enter') {
-            console.warn('**** Enter Pressed');
+        // console.warn('********** key pressed', ev.ctrlKey, ev.key);
+        if (ev.key === 'Enter') {
+            // inputRef.current.blur(); // Todo - Does not solve Training name bug (Enter doesn't blur)
             onEnter && onEnter();
         }
     };
+
+    const className = noMargin ? classes.margin : classes.noMargin;
+    let inputClassName = ['q', 'a'].includes(type) && classes.fontExercise;
+    inputClassName = (type === 'training' && classes.fontTraining) || inputClassName;
+
+    // const inputRef = useRef();
 
     return (
         <div className="text-input">
             <MuiThemeProvider theme={theme}>
                 <TextField
-                    className={classes.margin}
+                    // ref={inputRef}
+                    className={className}
                     style={style}
                     defaultValue={defaultValue}
                     autoFocus={autoFocus}
                     onChange={onChange}
                     onKeyPress={onKeyPress}
+                    disabled={disabled}
 
                     autoComplete="off"
                     type="text"
@@ -89,13 +104,12 @@ const TextInput = forwardRef(({ type, defaultValue, autoFocus, onEnter }, ref) =
 
                     InputLabelProps={{
                         classes: {
-                            focused: classes.inputFocused,
-                        }
+                        },
                     }}
                     InputProps={{
                         // maxLength: 15, // Todo - does not work
                         classes: {
-                            input: classes.font,
+                            input: inputClassName,
                         },
                         startAdornment: (
                             <InputAdornment position="start" className={classes.iconMargin}>
@@ -104,6 +118,9 @@ const TextInput = forwardRef(({ type, defaultValue, autoFocus, onEnter }, ref) =
                                 }
                                 {type === 'a' &&
                                 <ErrorOutline/>
+                                }
+                                {type === 'training' &&
+                                <Edit/>
                                 }
                             </InputAdornment>
                         ),

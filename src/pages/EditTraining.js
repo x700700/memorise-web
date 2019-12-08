@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState, useRef} from "react";
 import './EditTraining.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
@@ -6,11 +6,14 @@ import consts from "../common/consts";
 import * as types from "../redux/actionsTypes";
 import {getEditTraining} from "../redux/actions";
 import Exercise from "../components/EditTraining/Exercise";
+import Header from "../components/EditTraining/Header";
 
 const EditTraining = (props) => {
     const id = props.match.params.id;
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const [inputDisabled, setInputDisabled] = useState(false);
     const currPage = useSelector(state => state.app.currentPage);
     const isFetching = useSelector(state => state.editTraining.isFetching);
     const isLoaded = useSelector(state => state.editTraining.isLoaded);
@@ -18,6 +21,13 @@ const EditTraining = (props) => {
     const idToFetch = useSelector(state => state.editTraining.idToFetch);
     const exercisesMap = isLoaded && training && training.exercises;
     const exercisesList = exercisesMap && Object.values(exercisesMap);
+
+    const refHeader = useRef();
+    const rename = () => {
+        console.warn('rename - ', refHeader.current.getName());
+        setInputDisabled(true);
+        setTimeout(() => setInputDisabled(false), 100);
+    };
 
     // const getEditTrainingCb = useCallback((id) => dispatch(getEditTraining(id)), [getEditTraining]);
     useEffect(() => {
@@ -35,6 +45,14 @@ const EditTraining = (props) => {
     return (
         <div className="edit-training-page">
             <div className="edit-training-container">
+                <div className="header-container">
+                    <div className="header-box">
+                        {training &&
+                        <Header ref={refHeader} name={training.name} rename={rename} disabled={inputDisabled}/>
+                        }
+                    </div>
+                    <div className="header-place-holder"/>
+                </div>
                 <div className="edit-training-flex">
                     {exercisesList && exercisesList.map((x,i) => {
                         return (
