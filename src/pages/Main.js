@@ -27,6 +27,8 @@ const Main = () => {
     const authCheckStarted = useSelector(state => state.app.authCheckStarted);
     const authCheckEnded = useSelector(state => state.app.authCheckEnded);
     const isMenuShown = useSelector(state => state.app.showMenu);
+    // const activeDrawerTrainingId = useSelector(state => state.app.activeDrawerTrainingId);
+
 
     useEffect(() => {
         console.warn('App started');
@@ -41,6 +43,7 @@ const Main = () => {
 
     const onBodyClick = () => {
         isMenuShown && dispatch({type: types.APP_SHOW_MENU, show: false});
+        // activeDrawerTrainingId && dispatch({ type: types.APP_SET_ACTIVE_DRAWER_TRAINING, id: null });
     };
 
     return (
