@@ -14,6 +14,7 @@ export const APP_AUTH_FAILED = 'app.APP_AUTH_FAILED';
 export const APP_SET_CURRENT_PAGE = 'app.APP_SET_CURRENT_PAGE';
 export const APP_SHOW_MENU = 'app.APP_SHOW_MENU';
 export const APP_SET_ERROR = 'app.APP_SET_ERROR';
+export const APP_SET_ACTIVE_DRAWER_TRAINING = 'app.APP_SET_ACTIVE_DRAWER_TRAINING';
 
 export const APP_SET_GAME_TRAINING_ID = 'app.APP_SET_GAME_TRAINING_ID';
 export const APP_SET_GAME_CARDSDECK = 'app.APP_SET_GAME_CARDSDECK';
@@ -25,6 +26,8 @@ export const APP_SET_EXAM_CARDSDECK = 'app.APP_SET_EXAM_CARDSDECK';
 export const APP_SET_EXAM_ENDED = 'app.APP_SET_EXAM_ENDED';
 export const APP_SET_EXAM_DEFAULT_DECK_SIZE = 'app.APP_SET_EXAM_DEFAULT_DECK_SIZE';
 
+// ============================================================================================================
+// ============================================================================================================
 
 export const FETCH_TRAININGS_START = 'trainings.FETCH_TRAININGS_START';
 export const FETCH_TRAININGS_SUCCEED = 'trainings.FETCH_TRAININGS_SUCCEED';

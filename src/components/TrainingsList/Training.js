@@ -1,9 +1,9 @@
 import React from "react";
+import {useDispatch, useSelector} from "react-redux";
 import './Training.scss'
 import SampleExercise from "./SampleExercise";
 import {useHistory} from "react-router-dom";
 import { isRtl } from "../../common/utils";
-import {useDispatch} from "react-redux";
 import * as types from '../../redux/actionsTypes';
 import DrawerButtons from "./DrawerButtons";
 
@@ -11,6 +11,7 @@ import DrawerButtons from "./DrawerButtons";
 const Training = ({ training }) => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const activeDrawerTrainingId = useSelector(state => state.app.activeDrawerTrainingId);
 
     const sampleExercise = (training && training.sampleExercise) || {q: '', a: ''};
 
@@ -73,7 +74,7 @@ const Training = ({ training }) => {
                     <div className="training-btns-container">
                         <DrawerButtons size={2} backgroundColor="f3f3f3" backgroundColorDraw="e3e3e3"
                                        icons={playIcons}
-                                       trainingId={training.id}
+                                       trainingId={training.id} forceClose={training.id !== activeDrawerTrainingId}
                         />
                     </div>
                 </div>

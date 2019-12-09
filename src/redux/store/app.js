@@ -8,6 +8,7 @@ const appReducer = (  state = {
                           error: null,
                           currentPage: null,
                           showMenu: false,
+                          activeDrawerTrainingId: null,
 
                           gameTrainingId: null,
                           gameTrainingIsFetching: false,
@@ -68,6 +69,11 @@ const appReducer = (  state = {
             return {
                 ...state,
                 error: action.error,
+            };
+        case types.APP_SET_ACTIVE_DRAWER_TRAINING:
+            return {
+                ...state,
+                activeDrawerTrainingId: action.id,
             };
 
         case types.APP_SET_GAME_TRAINING_ID:

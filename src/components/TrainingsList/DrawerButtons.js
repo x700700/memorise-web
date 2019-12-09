@@ -1,14 +1,19 @@
 import React, {useEffect, useState} from "react";
+import {useDispatch} from "react-redux";
 import './DrawerButtons.scss';
+import * as types from '../../redux/actionsTypes';
 import IconButton from "../_Tools/IconButton";
 
-const DrawerButtons = ({ trainingId, size, color, backgroundColor, backgroundColorDraw, icons }) => {
+
+const DrawerButtons = ({ trainingId, forceClose, size, color, backgroundColor, backgroundColorDraw, icons }) => {
+    const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
     const [closeEnded, setCloseEnded] = useState(true);
 
     const clicked = () => {
         setCloseEnded(false);
         setOpen(!open);
+        dispatch({ type: types.APP_SET_ACTIVE_DRAWER_TRAINING, id: trainingId });
     };
 
     const numOfButtons = icons.length;
@@ -32,6 +37,13 @@ const DrawerButtons = ({ trainingId, size, color, backgroundColor, backgroundCol
         marginLeft: `-${size + 1}rem`,
         transform: 'translateX(' + `${open ? xOpen : xClose}` + 'rem)', // eslint-disable-line no-useless-concat
     };
+
+    useEffect(() => {
+        if (open && forceClose) {
+            setCloseEnded(false);
+            setOpen(false);
+        }
+    }, [forceClose, open, setOpen, setCloseEnded]);
 
     const divAbsoluteId = `drawer-buttons-absolute-${trainingId}`;
     useEffect(() => {
