@@ -18,7 +18,7 @@ const DrawerButtons = ({ trainingId, forceClose, size, color, backgroundColor, b
 
     const numOfButtons = icons.length;
     const styleDrawer = {
-        width: (open || !closeEnded) && `${(size + 1) * (numOfButtons + 1)}rem`,
+        width: (open || !closeEnded) ? `${(size + 1) * (numOfButtons + 1) + 0.05}rem` : `${size + 1.05}rem`,
         marginLeft: (open || !closeEnded) && `-${(size + 1) * numOfButtons}rem`,
         boxShadow: open ? '5px 5px 14px -4px #aaa' : 'none', // '0px 0px 7px 2px #884dff'
     };

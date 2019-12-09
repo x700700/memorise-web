@@ -12,6 +12,7 @@
     .open-button-absolute {
         position: absolute;
         border: $grey4 .5px solid;
+        border-left: $grey4 1px solid;
         top: 0;
         right: 0;
     }
