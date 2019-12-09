@@ -38,8 +38,9 @@ const Main = () => {
         authCheckStarted && authCheckEnded && !userName && console.warn(`*** Not Signed In ***`);
     }, [userName, authCheckEnded, authCheckStarted]);
 
-    const closeHeaderMenu = () => {
-        if (isMenuShown) dispatch({type: types.APP_SHOW_MENU, show: false});
+
+    const onBodyClick = () => {
+        isMenuShown && dispatch({type: types.APP_SHOW_MENU, show: false});
     };
 
     return (
@@ -47,7 +48,7 @@ const Main = () => {
             <div className="app-main">
                 <div className="header-space-holder" style={{minHeight: '53px'}}></div>
                 <Header/>
-                <div className="app-body-area" onClick={() => closeHeaderMenu()}>
+                <div className="app-body-area" onClick={onBodyClick}>
                     <Switch>
                         <Route exact path="/"><Redirect to="/practice"/></Route>
                         <Route exact path="/trainings" component={TrainingsList}/>

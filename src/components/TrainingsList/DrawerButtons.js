@@ -13,7 +13,7 @@ const DrawerButtons = ({ trainingId, forceClose, size, color, backgroundColor, b
     const clicked = () => {
         setCloseEnded(false);
         setOpen(!open);
-        dispatch({ type: types.APP_SET_ACTIVE_DRAWER_TRAINING, id: trainingId });
+        dispatch({ type: types.APP_SET_ACTIVE_DRAWER_TRAINING, id: !open ? trainingId : null });
     };
 
     const numOfButtons = icons.length;
