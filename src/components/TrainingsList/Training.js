@@ -16,6 +16,7 @@ const Training = ({ training }) => {
     const sampleExercise = (training && training.sampleExercise) || {q: '', a: ''};
 
     const edit = () => {
+        if (training.id === activeDrawerTrainingId) return;
         console.warn('Edit training - ', training.id);
         history.push(`/trainings/${training.id}/edit`)
     };
