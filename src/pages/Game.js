@@ -24,6 +24,7 @@ const Game = (props) => {
 
     const gameTrainingId = useSelector(state => state.app.gameTrainingId);
     const gameTrainingIsFetching = useSelector(state => state.app.gameTrainingIsFetching);
+    const gameTrainingIsLoaded = useSelector(state => state.app.gameTrainingIsLoaded);
     const gameTraining = useSelector(state => state.app.gameTraining);
 
     const refGame = useRef();
@@ -110,7 +111,7 @@ const Game = (props) => {
                             <button onClick={respGood} className="btn btn-good"><i className="fas fa-check"></i>
                             </button>
                         </div>
-                    </div> : !isLoadingNewGame &&
+                    </div> : gameTrainingId && !gameTrainingIsFetching && !gameTrainingIsLoaded &&
                     <div>
                         Network Error -
                         Either refresh for Default Game, or go back to Training tab.

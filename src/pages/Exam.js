@@ -27,6 +27,7 @@ const Exam = (props) => {
 
     const examTrainingId = useSelector(state => state.app.examTrainingId);
     const examTrainingIsFetching = useSelector(state => state.app.examTrainingIsFetching);
+    const examTrainingIsLoaded = useSelector(state => state.app.examTrainingIsLoaded);
     const examTraining = useSelector(state => state.app.examTraining);
 
 
@@ -109,7 +110,7 @@ const Exam = (props) => {
                         <ExamTable size={size} num={size - curr + 1} q={currQ} answers={answers}
                                    isAnswered={isPageAnswered} answeredId={topQAnswerId}
                                    nextQuestion={nextQuestion} setAnswer={setAnswer}/>
-                    </div> : !isLoadingNewExam &&
+                    </div> : examTrainingId && !examTrainingIsFetching && !examTrainingIsLoaded &&
                     <div>
                         Network Error -
                         Either refresh for Default Exam, or go back to Training tab.
