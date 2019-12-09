@@ -66,16 +66,17 @@ const Exam = (props) => {
             return new CardsDeck(consts.localStorage.examId, training, shouldFlipped);
         };
         const shouldDeckFlipped = (cardsDeck && cardsDeck.getIsDeckFlipped()) || false;
-        loadPlay(consts.localStorage.examId, createNewDeck,
+        return loadPlay(consts.localStorage.examId, createNewDeck,
             () => dispatch({ type: types.APP_SET_EXAM_ENDED, ended: true }),
             (newDeck) => dispatch({ type: types.APP_SET_EXAM_CARDSDECK, cardsDeck: newDeck }),
             shouldDeckFlipped);
     };
     useEffect(() => {
         if (examTraining) {
-            loadExam(examTraining);
+            const newDeck = loadExam(examTraining);
+            newDeck && setAnswers(newDeck.getTopQAnswers());
         }
-    }, [examTraining]);
+    }, [examTraining, setAnswers]);
 
     useEffect(() => {
         // console.warn('Exam mount - ', examTrainingId);
@@ -83,9 +84,10 @@ const Exam = (props) => {
         dispatch({type: types.APP_SHOW_MENU, show: false});
 
         if (examTrainingId) {
-            if ((!examTraining || examTraining.id !== examTrainingId) && !examTrainingIsFetching) {
+            if ((!examTraining || examTraining.id !== examTrainingId || examEnded) && !examTrainingIsFetching) {
                 localStorage.removeItem(consts.localStorage.examId);
-                dispatch({ type: types.APP_SET_EXAM_CARDSDECK, cardsDeck: cardsDeck });
+                dispatch({ type: types.APP_SET_EXAM_CARDSDECK, cardsDeck: null });
+                dispatch({ type: types.APP_SET_EXAM_ENDED, ended: false });
                 dispatch(getExamTraining(examTrainingId));
             }
         } else {
@@ -93,6 +95,7 @@ const Exam = (props) => {
         }
     }, [dispatch, history, examTrainingId]);
 
+    const isLoadingNewExam = examTrainingId && ((!examTraining || examTraining.id !== examTrainingId) && !examTrainingIsFetching);
     const size = cardsDeck && cardsDeck.getSizeDeck();
     const rightsNum = cardsDeck && cardsDeck.getRightsNum();
     const curr = cardsDeck && cardsDeck.sizeCurr();
@@ -101,12 +104,17 @@ const Exam = (props) => {
     return (
         <div className="exam-desktop-container">
             <div className={`exam-container ${showMenu ? 'disable-pointer' : ''}`}>
-                {(currQ || examEnded) &&
-                <div className="exam">
-                    <ExamTable size={size} num={size-curr+1} q={currQ} answers={answers}
-                               isAnswered={isPageAnswered} answeredId={topQAnswerId}
-                               nextQuestion={nextQuestion} setAnswer={setAnswer}/>
-                </div>}
+                {!examTrainingIsFetching && (currQ || examEnded) ?
+                    <div className="exam">
+                        <ExamTable size={size} num={size - curr + 1} q={currQ} answers={answers}
+                                   isAnswered={isPageAnswered} answeredId={topQAnswerId}
+                                   nextQuestion={nextQuestion} setAnswer={setAnswer}/>
+                    </div> : !isLoadingNewExam &&
+                    <div>
+                        Network Error -
+                        Either refresh for Default Exam, or go back to Training tab.
+                    </div>
+                }
             </div>
             <PopUpBox show={examEnded}>
                 <ExamSum setStats={examEnded} cardsNum={size} rightsNum={rightsNum} replayExam={() => replayExam}/>

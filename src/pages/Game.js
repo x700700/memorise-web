@@ -72,9 +72,10 @@ const Game = (props) => {
         dispatch({type: types.APP_SHOW_MENU, show: false});
 
         if (gameTrainingId) {
-            if ((!gameTraining || gameTraining.id !== gameTrainingId) && !gameTrainingIsFetching) {
+            if ((!gameTraining || gameTraining.id !== gameTrainingId || gameEnded) && !gameTrainingIsFetching) {
                 localStorage.removeItem(consts.localStorage.gameId);
-                dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: cardsDeck });
+                dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: null });
+                dispatch({ type: types.APP_SET_GAME_ENDED, ended: false });
                 dispatch(getGameTraining(gameTrainingId));
             }
         } else {
@@ -83,8 +84,7 @@ const Game = (props) => {
 
     }, [dispatch, history, gameTrainingId]);
 
-    // const id = props.match.params.id;
-
+    const isLoadingNewGame = gameTrainingId && ((!gameTraining || gameTraining.id !== gameTrainingId) && !gameTrainingIsFetching);
     const size = cardsDeck && cardsDeck.getSizeDeck();
     const playsNum = cardsDeck && cardsDeck.playsNum();
     const curr = cardsDeck && cardsDeck.sizeCurr();
@@ -93,21 +93,29 @@ const Game = (props) => {
     return (
         <div className="game-desktop-container">
             <div className="game-container">
-                {(currQ || gameEnded) &&
-                <div className="game">
-                    {currQ &&
-                    <div className="cards-left">
-                        <span><i className="fas fa-arrow-down"/></span>
-                        <span>{curr} / {size}</span>
+                {!gameTrainingIsFetching && (currQ || gameEnded) ?
+                    <div className="game">
+                        {currQ &&
+                        <div className="cards-left">
+                            <span><i className="fas fa-arrow-down"/></span>
+                            <span>{curr} / {size}</span>
+                        </div>
+                        }
+                        <Card ref={refGame} q={currQ} a={currA} setCardInMove={setCardInMove}/>
+                        <div className={`game-buttons ${cardInMove || gameEnded || showMenu ? 'buttons-disable' : ''}`}>
+                            <button onClick={respBad} className={`btn btn-bad ${curr === 1 ? 'disable-bad-button' : ''}`}>
+                                <i className="fas fa-times"></i>
+                            </button>
+                            <button onClick={rotateCard} className="btn"><i className="fas fa-sync-alt"></i></button>
+                            <button onClick={respGood} className="btn btn-good"><i className="fas fa-check"></i>
+                            </button>
+                        </div>
+                    </div> : !isLoadingNewGame &&
+                    <div>
+                        Network Error -
+                        Either refresh for Default Game, or go back to Training tab.
                     </div>
-                    }
-                    <Card ref={refGame} q={currQ} a={currA} setCardInMove={setCardInMove}/>
-                    <div className={`game-buttons ${cardInMove || gameEnded || showMenu ? 'buttons-disable' : ''}`}>
-                        <button onClick={respBad} className={`btn btn-bad ${curr ===1 ? 'disable-bad-button' : ''}`}><i className="fas fa-times"></i></button>
-                        <button onClick={rotateCard} className="btn"><i className="fas fa-sync-alt"></i></button>
-                        <button onClick={respGood} className="btn btn-good"><i className="fas fa-check"></i></button>
-                    </div>
-                </div>}
+                }
                 <PopUpBox show={gameEnded}>
                     <GameSum setStats={gameEnded} cardsNum={size} playsNum={playsNum} replayGame={() => replayGame}/>
                 </PopUpBox>

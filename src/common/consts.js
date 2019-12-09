@@ -31,6 +31,6 @@ export default {
         examId: 'memoBool.exam',
     },
     temp: {
-        bearer: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkZGU0YjA0MzY1MTJkYWM1MTc1ZjY2NCIsIm5hbWUiOiJCb29saSIsImlhdCI6MTU3NTY5NTY1NSwiZXhwIjoxNTc1NzgyMDU1fQ.wHH8SVyOlbeCc5st8Vac3n6EgN4wCH6Cl0C9nIEiihM',
+        bearer: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkZGU0YjA0MzY1MTJkYWM1MTc1ZjY2NCIsIm5hbWUiOiJCb29saSIsImlhdCI6MTU3NTkwODM0MiwiZXhwIjoxNTc1OTk0NzQyfQ.Vb0mJnb1tjFharUFKA4mQRqrMzkPzGHK3Cr-IgE6jcc',
     },
 };

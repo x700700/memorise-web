@@ -21,4 +21,5 @@ export const loadPlay = (localStorageId, createNewDeck, setPlayEnded, setCardsDe
         }
     }
     setCardsDeck(newDeck);
+    return newDeck;
 };
