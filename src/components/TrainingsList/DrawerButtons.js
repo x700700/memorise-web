@@ -56,22 +56,21 @@ const DrawerButtons = ({ trainingId, forceClose, size, color, backgroundColor, b
         }
     }, [open, setCloseEnded, divAbsoluteId]);
 
+    const iconId = open ? 'active' : '';
     return (
         <div id={divAbsoluteId} className="drawer-buttons-container" style={styleDrawer}>
             <div className="buttons-absolute" style={{ ...styleAbsolute, ...styleBgDraw}}>
                 <div className="btns-row">
                     {icons && icons.map((x, i) =>
-                        <IconButton key={`drawer-icon-btn-${i}`} faName={x.name} size={size}
-                                    onClick={x.onClick}
-                        />
+                        <IconButton key={`drawer-icon-btn-${i}`} faName={x.name} size={size} onClick={x.onClick} iconId={iconId} isDrawer={true}/>
                     )}
                 </div>
             </div>
             <div className="open-button" style={styleOpenBtn}>
-                <IconButton faName="bars" size={size} onClick={clicked}/>
+                <IconButton faName="bars" size={size} onClick={clicked} iconId={iconId} isDrawer={true}/>
             </div>
             <div className="open-button-absolute" style={styleBg}>
-                <IconButton faName="bars" size={size} onClick={clicked}/>
+                <IconButton faName="bars" size={size} onClick={clicked} iconId={iconId} isDrawer={true}/>
             </div>
         </div>);
 };

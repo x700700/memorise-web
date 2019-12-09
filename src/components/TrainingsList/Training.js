@@ -49,12 +49,8 @@ const Training = ({ training }) => {
         } : {};
     };
 
-    const onTrainingClick = () => {
-        training.id === activeDrawerTrainingId && dispatch({ type: types.APP_SET_ACTIVE_DRAWER_TRAINING, id: null });
-    };
-
     return (
-        <div className="training-container" onClick={onTrainingClick}>
+        <div className="training-container">
             <div className="training-box">
                 <div className="training-btn-edit-absolute">
                     <div className="training-btn-edit">

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -21,18 +21,32 @@ const theme = createMuiTheme({
     },
 );
 
+let _activeDrawerTrainingId = null;
 const Main = () => {
     const dispatch = useDispatch();
     const userName = useSelector(state => state.app.userName);
     const authCheckStarted = useSelector(state => state.app.authCheckStarted);
     const authCheckEnded = useSelector(state => state.app.authCheckEnded);
     const isMenuShown = useSelector(state => state.app.showMenu);
-    // const activeDrawerTrainingId = useSelector(state => state.app.activeDrawerTrainingId);
-
+    const activeDrawerTrainingId = useSelector(state => state.app.activeDrawerTrainingId);
 
     useEffect(() => {
+        _activeDrawerTrainingId = activeDrawerTrainingId;
+    }, [activeDrawerTrainingId]);
+
+    useEffect(() => {
+        const handleScroll = (e) => {
+            // console.warn('scroling.........');
+            _activeDrawerTrainingId && dispatch({ type: types.APP_SET_ACTIVE_DRAWER_TRAINING, id: null });
+        };
+
         console.warn('App started');
         dispatch(appAuth());
+
+        window.addEventListener('scroll', handleScroll, true);
+        return () => {
+            window.addEventListener('scroll', handleScroll, false);
+        }
     }, [dispatch]);
 
     useEffect(() => {
@@ -41,9 +55,14 @@ const Main = () => {
     }, [userName, authCheckEnded, authCheckStarted]);
 
 
-    const onBodyClick = () => {
+    const onBodyClick = (e) => {
+        // console.warn('============>', e.target, e.target.id, e.target.className);
+        const isActive = e.target.id === 'active' || e.target.className.includes('active');
+        if (!isActive && activeDrawerTrainingId) {
+            dispatch({ type: types.APP_SET_ACTIVE_DRAWER_TRAINING, id: null });
+        }
+
         isMenuShown && dispatch({type: types.APP_SHOW_MENU, show: false});
-        // activeDrawerTrainingId && dispatch({ type: types.APP_SET_ACTIVE_DRAWER_TRAINING, id: null });
     };
 
     return (
