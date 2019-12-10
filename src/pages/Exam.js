@@ -85,18 +85,15 @@ const Exam = (props) => {
         dispatch({type: types.APP_SHOW_MENU, show: false});
 
         if (examTrainingId) {
-            if ((!examTraining || examTraining.id !== examTrainingId || examEnded) && !examTrainingIsFetching) {
-                localStorage.removeItem(consts.localStorage.examId);
-                dispatch({ type: types.APP_SET_EXAM_CARDSDECK, cardsDeck: null });
-                dispatch({ type: types.APP_SET_EXAM_ENDED, ended: false });
-                dispatch(getExamTraining(examTrainingId));
-            }
+            localStorage.removeItem(consts.localStorage.examId);
+            dispatch({ type: types.APP_SET_EXAM_CARDSDECK, cardsDeck: null });
+            dispatch({ type: types.APP_SET_EXAM_ENDED, ended: false });
+            dispatch(getExamTraining(examTrainingId));
         } else {
             loadExam(mock);
         }
     }, [dispatch, history, examTrainingId]);
 
-    const isLoadingNewExam = examTrainingId && ((!examTraining || examTraining.id !== examTrainingId) && !examTrainingIsFetching);
     const size = cardsDeck && cardsDeck.getSizeDeck();
     const rightsNum = cardsDeck && cardsDeck.getRightsNum();
     const curr = cardsDeck && cardsDeck.sizeCurr();

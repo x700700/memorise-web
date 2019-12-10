@@ -40,6 +40,7 @@ export function* getGameTraining(action) {
         yield put({ type: types.FETCH_GAME_TRAINING_START, id: action.id });
         const resp = yield call(api.getTraining, { Bearer: consts.temp.bearer, id: action.id });
         yield put({ type: types.FETCH_GAME_TRAINING_SUCCEED, training: resp });
+        yield put({ type: types.APP_SET_GAME_TRAINING_ID, id: null });
     } catch (e) {
         yield put({ type: types.FETCH_GAME_TRAINING_FAILED });
         yield put({ type: types.APP_AUTH_FAILED, message: e.message });
@@ -50,6 +51,7 @@ export function* getExamTraining(action) {
         yield put({ type: types.FETCH_EXAM_TRAINING_START, id: action.id });
         const resp = yield call(api.getTraining, { Bearer: consts.temp.bearer, id: action.id });
         yield put({ type: types.FETCH_EXAM_TRAINING_SUCCEED, training: resp });
+        yield put({ type: types.APP_SET_EXAM_TRAINING_ID, id: null });
     } catch (e) {
         yield put({ type: types.FETCH_EXAM_TRAINING_FAILED });
         yield put({ type: types.APP_AUTH_FAILED, message: e.message });

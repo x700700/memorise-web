@@ -73,19 +73,16 @@ const Game = (props) => {
         dispatch({type: types.APP_SHOW_MENU, show: false});
 
         if (gameTrainingId) {
-            if ((!gameTraining || gameTraining.id !== gameTrainingId || gameEnded) && !gameTrainingIsFetching) {
-                localStorage.removeItem(consts.localStorage.gameId);
-                dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: null });
-                dispatch({ type: types.APP_SET_GAME_ENDED, ended: false });
-                dispatch(getGameTraining(gameTrainingId));
-            }
+            localStorage.removeItem(consts.localStorage.gameId);
+            dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: null });
+            dispatch({ type: types.APP_SET_GAME_ENDED, ended: false });
+            dispatch(getGameTraining(gameTrainingId));
         } else {
             loadGame(mock);
         }
 
     }, [dispatch, history, gameTrainingId]);
 
-    const isLoadingNewGame = gameTrainingId && ((!gameTraining || gameTraining.id !== gameTrainingId) && !gameTrainingIsFetching);
     const size = cardsDeck && cardsDeck.getSizeDeck();
     const playsNum = cardsDeck && cardsDeck.playsNum();
     const curr = cardsDeck && cardsDeck.sizeCurr();

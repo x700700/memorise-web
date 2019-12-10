@@ -58,7 +58,7 @@ const Training = ({ training }) => {
                     </div>
                 </div>
                 <div className="training-row">
-                    <div className="name-container">
+                    <div className="name-container" onClick={play}>
                         <div className="name" style={rtlName(training.name)}>
                             {training.name}
                         </div>
