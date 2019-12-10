@@ -95,6 +95,7 @@ export function* renameTraining(action) {
         yield put({ type: types.FETCH_RENAME_TRAINING_START, name: action.body.name });
         const resp = yield call(api.renameTraining, { Bearer: consts.temp.bearer, id: action.id, body: action.body });
         yield put({ type: types.FETCH_RENAME_TRAINING_SUCCEED, training: resp });
+        yield put({ type: types.TRAININGS_RENAME, training: resp });
     } catch (e) {
         yield put({ type: types.FETCH_RENAME_TRAINING_FAILED, message: e.message });
     }
