@@ -68,7 +68,7 @@ const Game = (props) => {
     }, [gameTraining]);
 
     useEffect(() => {
-        console.warn('Game mount');
+        // console.warn('Game mount');
         dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.practice });
         dispatch({type: types.APP_SHOW_MENU, show: false});
 
@@ -77,11 +77,11 @@ const Game = (props) => {
             dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: null });
             dispatch({ type: types.APP_SET_GAME_ENDED, ended: false });
             dispatch(getGameTraining(gameTrainingId));
-        } else {
+        } else if (!cardsDeck) {
             loadGame(mock);
         }
 
-    }, [dispatch, history, gameTrainingId]);
+    }, [dispatch, history]);
 
     const size = cardsDeck && cardsDeck.getSizeDeck();
     const playsNum = cardsDeck && cardsDeck.playsNum();

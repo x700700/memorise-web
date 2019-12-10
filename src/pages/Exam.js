@@ -74,6 +74,7 @@ const Exam = (props) => {
     };
     useEffect(() => {
         if (examTraining) {
+            // console.warn('loadExam(examTraining);');
             const newDeck = loadExam(examTraining);
             newDeck && setAnswers(newDeck.getTopQAnswers());
         }
@@ -89,10 +90,11 @@ const Exam = (props) => {
             dispatch({ type: types.APP_SET_EXAM_CARDSDECK, cardsDeck: null });
             dispatch({ type: types.APP_SET_EXAM_ENDED, ended: false });
             dispatch(getExamTraining(examTrainingId));
-        } else {
+        } else if (!cardsDeck) {
+            // console.warn('loadExam(mock);');
             loadExam(mock);
         }
-    }, [dispatch, history, examTrainingId]);
+    }, [dispatch, history]);
 
     const size = cardsDeck && cardsDeck.getSizeDeck();
     const rightsNum = cardsDeck && cardsDeck.getRightsNum();
