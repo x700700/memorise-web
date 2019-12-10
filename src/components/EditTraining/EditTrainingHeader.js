@@ -1,19 +1,24 @@
-import React, {forwardRef, useImperativeHandle, useRef} from "react";
+import React, {forwardRef, useImperativeHandle, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import * as types from '../../redux/actionsTypes';
 import './EditTrainingHeader.scss';
 import TextInput from "../_Tools/TextInput";
 import IconButton from "../_Tools/IconButton";
+import {renameTraining} from "../../redux/actions";
 
 
-const EditTrainingHeader = forwardRef(({ rename, play, exam, onNameEdit, disabled }, ref) => {
-    useImperativeHandle(ref, () => ({
-        getName() {
-            return refName.current.value();
-        },
-    }));
+const EditTrainingHeader = ({ id, play, exam, onNameEdit }) => {
     const dispatch = useDispatch();
     const name = useSelector(state => state.editTraining.name);
+    const [inputDisabled, setInputDisabled] = useState(false);
+
+    const rename = () => {
+        const newName = refName.current.value();
+        console.warn('rename - ', newName);
+        setInputDisabled(true);
+        setTimeout(() => setInputDisabled(false), 100);
+        dispatch(renameTraining(id, newName));
+    };
 
     const _play = () => {
         play()
@@ -40,7 +45,7 @@ const EditTrainingHeader = forwardRef(({ rename, play, exam, onNameEdit, disable
                 <div className="field name">
                     <TextInput ref={refName} type="training" defaultValue={name}
                                onEnter={rename} onFocus={onNameFocus} onBlur={onNameBlur}
-                               noMargin={true} disabled={disabled}
+                               noMargin={true} disabled={inputDisabled}
                     />
                 </div>
                 <div className="edit-training-buttons">
@@ -49,5 +54,5 @@ const EditTrainingHeader = forwardRef(({ rename, play, exam, onNameEdit, disable
                 </div>
             </div>
         </div>);
-});
+};
 export default EditTrainingHeader;

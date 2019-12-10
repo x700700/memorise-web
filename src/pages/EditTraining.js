@@ -13,7 +13,6 @@ const EditTraining = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const [inputDisabled, setInputDisabled] = useState(false);
     const currPage = useSelector(state => state.app.currentPage);
     const isFetching = useSelector(state => state.editTraining.isFetching);
     const isLoaded = useSelector(state => state.editTraining.isLoaded);
@@ -22,15 +21,6 @@ const EditTraining = (props) => {
     const exercisesMap = isLoaded && training && training.exercises;
     const exercisesList = exercisesMap && Object.values(exercisesMap);
     const [disableExercisesEdit, setDisableExercisesEdit] = useState(false);
-
-    const refHeader = useRef();
-    const rename = () => {
-        const newName = refHeader.current.getName();
-        console.warn('rename - ', newName);
-        setInputDisabled(true);
-        setTimeout(() => setInputDisabled(false), 100);
-        dispatch(renameTraining(newName));
-    };
 
     const play = () => {
         console.warn('play training - ', training);
@@ -67,9 +57,7 @@ const EditTraining = (props) => {
                 <div className="header-container">
                     <div className="header-box">
                         {training &&
-                        <EditTrainingHeader ref={refHeader}
-                                            rename={rename} onNameEdit={onNameEdit} play={play} exam={exam}
-                                            disabled={inputDisabled}
+                        <EditTrainingHeader id={training.id} onNameEdit={onNameEdit} play={play} exam={exam}
                         />
                         }
                     </div>
