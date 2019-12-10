@@ -65,7 +65,7 @@ const EditTrainingHeader = ({ id, play, exam, onNameEdit }) => {
                     />
                 </div>
                 <div className="edit-training-buttons" style={styleOnEdit}>
-                    <IconButton size={2} faName="running" onClick={_play}/>
+                    <IconButton size={2} faName="copy" onClick={_play}/>
                     <IconButton size={2} faName="grin-beam-sweat" onClick={_exam}/>
                 </div>
             </div>

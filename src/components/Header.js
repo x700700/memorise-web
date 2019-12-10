@@ -80,7 +80,7 @@ const Header = (props) => {
                 <div className="tabs" style={styleOnEdit}>
                     <Link to="/trainings"><span className={`btn ${currPage === consts.pageName.trainings ? 'tab-active' : ''}`}><i className="fas fa-book-open"/></span></Link>
                     <Link to={`/trainings/${editTrainingId}/edit`}><span className={`btn ${currPage === consts.pageName.edit ? 'tab-active' : ''}`}><i className="fas fa-edit"/></span></Link>
-                    <Link to="/practice"><span className={`btn ${currPage === consts.pageName.practice ? 'tab-active' : ''}`}><i className="fas fa-running"/></span></Link>
+                    <Link to="/practice"><span className={`btn ${currPage === consts.pageName.practice ? 'tab-active' : ''}`}><i className="fas fa-copy"/></span></Link>
                     <Link to="/exam"><span className={`btn ${currPage === consts.pageName.exam ? 'tab-active' : ''}`}><i className="fas fa-grin-beam-sweat"/></span></Link>
                 </div>
                 <img className="logo" style={styleOnEdit} src={logo} alt="logo" width="32" height="32" onClick={() => clearLocalStorage()}/>

@@ -33,7 +33,7 @@ const Training = ({ training }) => {
 
     const playIcons = [
         {
-            name: 'running',
+            name: 'copy',
             onClick: play,
         },
         {
