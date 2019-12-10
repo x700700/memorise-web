@@ -4,7 +4,7 @@ export default {
         api: 'http://dev.memorise.com:4044/api',
     },
     env: {
-        timeout: 1,
+        timeout: 3, // sec
     },
     pageName: {
         trainings: 'trainings',
