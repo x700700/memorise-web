@@ -2,7 +2,7 @@ import React from "react";
 import './AddButton.scss';
 import {useDispatch, useSelector} from "react-redux";
 import consts from "../common/consts";
-import {createExercise} from "../redux/actions";
+import {createExercise, createTraining} from "../redux/actions";
 import IconButton from "./_Tools/IconButton";
 
 const AddButton = (props) => {
@@ -12,10 +12,11 @@ const AddButton = (props) => {
     const editTrainingId = useSelector(state => state.editTraining.fetchedId);
 
     const addTraining = (e) => {
-        console.warn('Add Training');
+        // console.warn('Add Training');
+        dispatch(createTraining());
     };
     const addExercise = (e) => {
-        console.warn('Add Exercise');
+        // console.warn('Add Exercise');
         dispatch(createExercise(editTrainingId));
     };
 

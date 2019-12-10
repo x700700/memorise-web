@@ -9,6 +9,7 @@ const trainingsReducer = (  state = {
                             },
                       action) => {
 
+    const updatedTrainings = state.trainingsMap;
     switch (action.type) {
 
         case types.TRAININGS_RENAME:
@@ -50,6 +51,26 @@ const trainingsReducer = (  state = {
                 trainingsMap: mockTrainingsList,
                 isLoaded: true,
             };
+
+
+        case types.FETCH_CREATE_TRAINING_START:
+            return {
+                ...state,
+                isFetching: true,
+            };
+        case types.FETCH_CREATE_TRAINING_SUCCEED:
+            updatedTrainings[action.training.id] = action.training;
+            return {
+                ...state,
+                isFetching: false,
+                trainingsMap: updatedTrainings,
+            };
+        case types.FETCH_CREATE_TRAINING_FAILED:
+            return {
+                ...state,
+                isFetching: false,
+            };
+
         default:
             return state;
     }
