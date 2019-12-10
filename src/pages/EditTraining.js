@@ -21,6 +21,7 @@ const EditTraining = (props) => {
     const idToFetch = useSelector(state => state.editTraining.idToFetch);
     const exercisesMap = isLoaded && training && training.exercises;
     const exercisesList = exercisesMap && Object.values(exercisesMap);
+    const [disableExercisesEdit, setDisableExercisesEdit] = useState(false);
 
     const refHeader = useRef();
     const rename = () => {
@@ -38,6 +39,11 @@ const EditTraining = (props) => {
         console.warn('exam training - ', training);
         dispatch({ type: types.APP_SET_EXAM_TRAINING_ID, id: training.id });
         history.push('/exam');
+    };
+    const onNameEdit = (edit) => {
+        // console.warn('on name edit - ', edit);
+        edit && setDisableExercisesEdit(edit);
+        !edit && setTimeout(() => setDisableExercisesEdit(edit), 100);
     };
 
     // const getEditTrainingCb = useCallback((id) => dispatch(getEditTraining(id)), [getEditTraining]);
@@ -59,7 +65,8 @@ const EditTraining = (props) => {
                 <div className="header-container">
                     <div className="header-box">
                         {training &&
-                        <EditTrainingHeader ref={refHeader} name={training.name} rename={rename} disabled={inputDisabled}
+                        <EditTrainingHeader ref={refHeader} name={training.name} rename={rename}
+                                            disabled={inputDisabled} onNameEdit={onNameEdit}
                                             play={play} exam={exam}
                         />
                         }
@@ -70,7 +77,7 @@ const EditTraining = (props) => {
                     {exercisesList && exercisesList.map((x,i) => {
                         return (
                             <div key={`edit-training-exercise-${i}`} className="exercise-container">
-                                <Exercise exercise={x}/>
+                                <Exercise exercise={x} disable={disableExercisesEdit}/>
                             </div>);
                     })}
                 </div>

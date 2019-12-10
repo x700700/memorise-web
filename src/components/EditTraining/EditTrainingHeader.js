@@ -3,7 +3,7 @@ import './EditTrainingHeader.scss';
 import TextInput from "../_Tools/TextInput";
 import IconButton from "../_Tools/IconButton";
 
-const EditTrainingHeader = forwardRef(({ name, rename, disabled, play, exam }, ref) => {
+const EditTrainingHeader = forwardRef(({ name, rename, disabled, play, exam, onNameEdit }, ref) => {
 
     useImperativeHandle(ref, () => ({
         getName() {
@@ -17,13 +17,22 @@ const EditTrainingHeader = forwardRef(({ name, rename, disabled, play, exam }, r
     const _exam = () => {
         exam();
     };
+    const onNameFocus = () => {
+        // console.warn('On name focus');
+        onNameEdit && onNameEdit(true);
+    };
+    const onNameBlur = () => {
+        // console.warn('On name blur');
+        onNameEdit && onNameEdit(false);
+    };
 
     const refName = useRef();
     return (
         <div className="edit-training-header-container">
             <div className="header-row">
                 <div className="field name">
-                    <TextInput ref={refName} type="training" defaultValue={name} onEnter={rename}
+                    <TextInput ref={refName} type="training" defaultValue={name}
+                               onEnter={rename} onFocus={onNameFocus} onBlur={onNameBlur}
                                noMargin={true} disabled={disabled}
                     />
                 </div>

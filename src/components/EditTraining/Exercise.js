@@ -8,7 +8,7 @@ import Button from "../_Tools/Button";
 import { saveExercise } from '../../redux/actions'
 
 
-const Exercise = ({ exercise }) => {
+const Exercise = ({ exercise, disable }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const refModal = useRef();
@@ -20,10 +20,10 @@ const Exercise = ({ exercise }) => {
     }; */
 
     const edit = () => {
-        refModal.current.open();
+        !disable && refModal.current.open();
     };
     const cancel = () => {
-        refModal.current.close(); // causes the Modal not to be openned
+        !disable && refModal.current.close(); // causes the Modal not to be openned
     };
     const save = () => {
         // console.warn('SAVE Exercise - ', refQ.current.value(), refA.current.value());

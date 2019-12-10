@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const TextInput = forwardRef(({ type, defaultValue, autoFocus, onEnter, noMargin, disabled }, ref) => {
+const TextInput = forwardRef(({ type, defaultValue, autoFocus, onEnter, onFocus, onBlur, noMargin, disabled }, ref) => {
     const classes = useStyles();
     const [val, setVal] = useState(defaultValue);
 
@@ -75,7 +75,16 @@ const TextInput = forwardRef(({ type, defaultValue, autoFocus, onEnter, noMargin
         if (ev.key === 'Enter') {
             // inputRef.current.blur(); // Todo - Does not solve Training name bug (Enter doesn't blur)
             onEnter && onEnter();
+            onBlur && onBlur();
         }
+    };
+    const onMyFocus = (ev) => {
+        // console.warn('FOCUS');
+        onFocus && onFocus();
+    };
+    const onMyBlur = (ev) => {
+        // console.warn('BLUR');
+        onBlur && onBlur();
     };
 
     const className = noMargin ? classes.margin : classes.noMargin;
@@ -93,6 +102,8 @@ const TextInput = forwardRef(({ type, defaultValue, autoFocus, onEnter, noMargin
                     style={style}
                     defaultValue={defaultValue}
                     autoFocus={autoFocus}
+                    onFocus={onMyFocus}
+                    onBlur={onMyBlur}
                     onChange={onChange}
                     onKeyPress={onKeyPress}
                     disabled={disabled}
