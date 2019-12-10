@@ -20,8 +20,7 @@ const EditTraining = (props) => {
     const training = useSelector(state => state.editTraining.training);
     const idToFetch = useSelector(state => state.editTraining.idToFetch);
     const exercisesMap = isLoaded && training && training.exercises;
-    let exercisesList = exercisesMap && Object.values(exercisesMap);
-    exercisesList = exercisesList && _.orderBy(exercisesList, ['info.created'], ['desc']);
+    const exercisesList = exercisesMap && Object.values(exercisesMap);
     const [disableExercisesEdit, setDisableExercisesEdit] = useState(false);
 
     const play = () => {
