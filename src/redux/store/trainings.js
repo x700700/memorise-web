@@ -9,7 +9,6 @@ const trainingsReducer = (  state = {
                             },
                       action) => {
 
-    const updatedTrainings = state.trainingsMap;
     switch (action.type) {
 
         case types.TRAININGS_RENAME:
@@ -59,7 +58,9 @@ const trainingsReducer = (  state = {
                 isFetching: true,
             };
         case types.FETCH_CREATE_TRAINING_SUCCEED:
-            updatedTrainings[action.training.id] = action.training;
+            const newTraining = {};
+            newTraining[action.training.id] = action.training;
+            const updatedTrainings = Object.assign(newTraining, state.trainingsMap);
             return {
                 ...state,
                 isFetching: false,
