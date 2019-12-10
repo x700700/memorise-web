@@ -92,7 +92,7 @@ export function* createTraining(action) {
 
 export function* renameTraining(action) {
     try {
-        yield put({ type: types.FETCH_RENAME_TRAINING_START });
+        yield put({ type: types.FETCH_RENAME_TRAINING_START, name: action.body.name });
         const resp = yield call(api.renameTraining, { Bearer: consts.temp.bearer, id: action.id, body: action.body });
         yield put({ type: types.FETCH_RENAME_TRAINING_SUCCEED, training: resp });
     } catch (e) {

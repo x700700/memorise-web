@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import consts from "../common/consts";
 import * as types from "../redux/actionsTypes";
-import {getEditTraining} from "../redux/actions";
+import {getEditTraining, renameTraining} from "../redux/actions";
 import Exercise from "../components/EditTraining/Exercise";
 import EditTrainingHeader from "../components/EditTraining/EditTrainingHeader";
 
@@ -25,9 +25,11 @@ const EditTraining = (props) => {
 
     const refHeader = useRef();
     const rename = () => {
-        console.warn('rename - ', refHeader.current.getName());
+        const newName = refHeader.current.getName();
+        console.warn('rename - ', newName);
         setInputDisabled(true);
         setTimeout(() => setInputDisabled(false), 100);
+        dispatch(renameTraining(newName));
     };
 
     const play = () => {
@@ -65,9 +67,9 @@ const EditTraining = (props) => {
                 <div className="header-container">
                     <div className="header-box">
                         {training &&
-                        <EditTrainingHeader ref={refHeader} name={training.name} rename={rename}
-                                            disabled={inputDisabled} onNameEdit={onNameEdit}
-                                            play={play} exam={exam}
+                        <EditTrainingHeader ref={refHeader}
+                                            rename={rename} onNameEdit={onNameEdit} play={play} exam={exam}
+                                            disabled={inputDisabled}
                         />
                         }
                     </div>

@@ -7,6 +7,11 @@ const editTrainingReducer = (  state = {
                                    idToFetch: null,
                                    fetchedId: null,
                                    training: null,
+
+                                   isRenaming: false,
+                                   isRenamed: false,
+                                   name: null,
+                                   nameBeforeEdit: null,
                                },
                       action) => {
 
@@ -28,6 +33,8 @@ const editTrainingReducer = (  state = {
                 isLoaded: true,
                 training: action.training,
                 fetchedId: action.training && action.training.id,
+                name: action.training.name,
+                nameBeforeEdit: action.training.name,
             };
         case types.FETCH_EDIT_TRAINING_FAILED:
             return {
@@ -35,7 +42,33 @@ const editTrainingReducer = (  state = {
                 isFetching: false,
                 isLoaded: true, // Todo - false
                 training: mockTraining, // Todo - remove
+                name: mockTraining.name, // Todo - remove
+                nameBeforeEdit: mockTraining.name, // Todo - remove
                 // fetchedId: null, // Todo - do it
+            };
+
+
+        case types.FETCH_RENAME_TRAINING_START:
+            return {
+                ...state,
+                isRenaming: true,
+                isRenamed: false,
+                nameBeforeEdit: state.name,
+                name: action.name,
+            };
+        case types.FETCH_RENAME_TRAINING_SUCCEED:
+            return {
+                ...state,
+                isRenaming: false,
+                isRenamed: true,
+                name: action.training.name,
+            };
+        case types.FETCH_RENAME_TRAINING_FAILED:
+            return {
+                ...state,
+                isFetching: false,
+                isRenamed: false,
+                name: state.nameBeforeEdit,
             };
 
 
