@@ -32,6 +32,7 @@ export const APP_SET_EXAM_DEFAULT_DECK_SIZE = 'app.APP_SET_EXAM_DEFAULT_DECK_SIZ
 // ============================================================================================================
 
 export const TRAININGS_RENAME = 'trainings.TRAININGS_RENAME';
+export const TRAININGS_SAMPLE_EXERCISE_CHANGED = 'trainings.TRAININGS_SAMPLE_EXERCISE_CHANGED';
 
 export const FETCH_TRAININGS_START = 'trainings.FETCH_TRAININGS_START';
 export const FETCH_TRAININGS_SUCCEED = 'trainings.FETCH_TRAININGS_SUCCEED';

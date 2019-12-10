@@ -17,6 +17,17 @@ const trainingsReducer = (  state = {
                 ...state,
             };
 
+        case types.TRAININGS_SAMPLE_EXERCISE_CHANGED:
+            if (action.sampleExercise && action.sampleExercise.shouldReloadSampleExercises) {
+                if (state.trainingsMap) (state.trainingsMap[action.sampleExercise.trainingId] || {}).sampleExercise = action.sampleExercise;
+                return {
+                    ...state,
+                };
+            } else {
+                return state;
+            }
+
+
 
         case types.FETCH_TRAININGS_START:
             return {
