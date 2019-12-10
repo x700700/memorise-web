@@ -21,7 +21,7 @@ const EditTraining = (props) => {
     const idToFetch = useSelector(state => state.editTraining.idToFetch);
     const exercisesMap = isLoaded && training && training.exercises;
     let exercisesList = exercisesMap && Object.values(exercisesMap);
-    exercisesList = exercisesList && _.orderBy(exercisesList, ['info.modified'], ['desc']);
+    exercisesList = exercisesList && _.orderBy(exercisesList, ['info.created'], ['desc']);
     const [disableExercisesEdit, setDisableExercisesEdit] = useState(false);
 
     const play = () => {
