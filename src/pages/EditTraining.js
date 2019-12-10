@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import _ from 'lodash';
 import './EditTraining.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
@@ -19,7 +20,8 @@ const EditTraining = (props) => {
     const training = useSelector(state => state.editTraining.training);
     const idToFetch = useSelector(state => state.editTraining.idToFetch);
     const exercisesMap = isLoaded && training && training.exercises;
-    const exercisesList = exercisesMap && Object.values(exercisesMap);
+    let exercisesList = exercisesMap && Object.values(exercisesMap);
+    exercisesList = exercisesList && _.orderBy(exercisesList, ['info.modified'], ['desc']);
     const [disableExercisesEdit, setDisableExercisesEdit] = useState(false);
 
     const play = () => {
