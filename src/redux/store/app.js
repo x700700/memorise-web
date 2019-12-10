@@ -9,6 +9,7 @@ const appReducer = (  state = {
                           currentPage: null,
                           showMenu: false,
                           activeDrawerTrainingId: null,
+                          trainingNameIsOnEdit: false,
 
                           gameTrainingId: null,
                           gameTrainingIsFetching: false,
@@ -34,6 +35,8 @@ const appReducer = (  state = {
 
     switch (action.type) {
 
+        // ====================================================================================================
+        // ====================================================================================================
         case types.APP_AUTH_STARTED:
             return {
                 ...state,
@@ -75,6 +78,14 @@ const appReducer = (  state = {
                 ...state,
                 activeDrawerTrainingId: action.id,
             };
+        case types.APP_SET_TRAINING_NAME_IS_ON_EDIT:
+            return {
+                ...state,
+                trainingNameIsOnEdit: action.edit,
+            };
+
+        // ====================================================================================================
+        // ====================================================================================================
 
         case types.APP_SET_GAME_TRAINING_ID:
             return {
@@ -118,6 +129,8 @@ const appReducer = (  state = {
                 examDefaultDeckSize: action.size,
             };
 
+        // ====================================================================================================
+        // ====================================================================================================
 
         case types.FETCH_GAME_TRAINING_START:
             return {
@@ -144,6 +157,9 @@ const appReducer = (  state = {
                 gameTrainingFetchedId: null,
             };
 
+        // ====================================================================================================
+        // ====================================================================================================
+
         case types.FETCH_EXAM_TRAINING_START:
             return {
                 ...state,
@@ -168,6 +184,9 @@ const appReducer = (  state = {
                 examTraining: null,
                 examTrainingFetchedId: null,
             };
+
+        // ====================================================================================================
+        // ====================================================================================================
 
         default:
             return state;

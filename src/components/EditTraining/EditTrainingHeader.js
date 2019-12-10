@@ -1,15 +1,18 @@
 import React, {forwardRef, useImperativeHandle, useRef} from "react";
+import {useDispatch} from "react-redux";
+import * as types from '../../redux/actionsTypes';
 import './EditTrainingHeader.scss';
 import TextInput from "../_Tools/TextInput";
 import IconButton from "../_Tools/IconButton";
 
-const EditTrainingHeader = forwardRef(({ name, rename, disabled, play, exam, onNameEdit }, ref) => {
 
+const EditTrainingHeader = forwardRef(({ name, rename, disabled, play, exam, onNameEdit }, ref) => {
     useImperativeHandle(ref, () => ({
         getName() {
             return refName.current.value();
         },
     }));
+    const dispatch = useDispatch();
 
     const _play = () => {
         play()
@@ -20,10 +23,12 @@ const EditTrainingHeader = forwardRef(({ name, rename, disabled, play, exam, onN
     const onNameFocus = () => {
         // console.warn('On name focus');
         onNameEdit && onNameEdit(true);
+        onNameEdit && dispatch({ type: types.APP_SET_TRAINING_NAME_IS_ON_EDIT, edit: true });
     };
     const onNameBlur = () => {
         // console.warn('On name blur');
         onNameEdit && onNameEdit(false);
+        onNameEdit && dispatch({ type: types.APP_SET_TRAINING_NAME_IS_ON_EDIT, edit: false });
     };
 
     const refName = useRef();
