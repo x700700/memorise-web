@@ -119,8 +119,8 @@ const TextInput = forwardRef(({ label, type, defaultValue, autoFocus, onEnter, o
                     id="input-with-icon"
 
                     InputLabelProps={{
-                        classes: {
-                        },
+                        // shrink: true,
+                        classes: {},
                     }}
                     InputProps={{
                         // maxLength: 15, // Todo - does not work

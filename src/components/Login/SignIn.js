@@ -13,22 +13,22 @@ const SignIn = (props) => {
     const refPass = useRef();
     return (
         <div className="signin-container">
-            {/*<form>*/}
+            <form>
                 <div className="signin-col">
                     <div className="signin-title">
                         {t('signin-title')}
                     </div>
                     <div className="field signin-name">
-                        <TextInput ref={refName} label={t('nickname')} autoFocus={true}/>
+                        <TextInput ref={refName} label={t('nickname')} defaultValue="" autoFocus={true} onEnter={() => {}} />
                     </div>
                     <div className="field signin-pass">
-                        <TextInput ref={refPass} label={t('password')} />
+                        <TextInput ref={refPass} label={t('password')} defaultValue="" />
                     </div>
                     <div className="signin-btn-container">
                         <Button type="ok" text={t('signin-btn')} onClick={() => login} />
                     </div>
                 </div>
-            {/*</form>*/}
+            </form>
         </div>);
 };
 export default SignIn;
