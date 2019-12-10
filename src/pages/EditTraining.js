@@ -31,9 +31,13 @@ const EditTraining = (props) => {
 
     const play = () => {
         console.warn('play training - ', training);
+        dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: training.id });
+        history.push('/practice');
     };
     const exam = () => {
         console.warn('exam training - ', training);
+        dispatch({ type: types.APP_SET_EXAM_TRAINING_ID, id: training.id });
+        history.push('/exam');
     };
 
     // const getEditTrainingCb = useCallback((id) => dispatch(getEditTraining(id)), [getEditTraining]);
