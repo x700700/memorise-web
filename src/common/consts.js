@@ -7,6 +7,7 @@ export default {
         timeout: 3, // sec
     },
     pageName: {
+        login: 'login',
         trainings: 'trainings',
         edit: 'edit',
         practice: 'practice',

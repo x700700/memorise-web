@@ -5,6 +5,14 @@ i18n.use(LanguageDetector).init({
     resources: {
         en: {
             translations: {
+                "signin-title": "Sign-In:",
+                "signup-title": "Sign-Up:",
+                "nickname": "Nick Name",
+                "password": "Password",
+                "repassword": "Re-Type Password",
+                "signin-btn": "Sign In",
+                "signup-btn": "Sign Up",
+                "signup-err-taken": "This Nick Name is already taken",
                 "hello": "Hello",
                 "practice": "Practice",
                 "exam": "Exam",

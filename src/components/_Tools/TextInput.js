@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const TextInput = forwardRef(({ type, defaultValue, autoFocus, onEnter, onFocus, onBlur, noMargin, disabled }, ref) => {
+const TextInput = forwardRef(({ label, type, defaultValue, autoFocus, onEnter, onFocus, onBlur, noMargin, disabled }, ref) => {
     useImperativeHandle(ref, () => ({
         value() {
             return val;
@@ -105,6 +105,8 @@ const TextInput = forwardRef(({ type, defaultValue, autoFocus, onEnter, onFocus,
                     value={val}
                     className={className}
                     style={style}
+                    label={label || ''}
+                    variant={label ? 'outlined' : 'standard'}
                     autoFocus={autoFocus}
                     onFocus={onMyFocus}
                     onBlur={onMyBlur}
@@ -115,7 +117,6 @@ const TextInput = forwardRef(({ type, defaultValue, autoFocus, onEnter, onFocus,
                     autoComplete="off"
                     type="text"
                     id="input-with-icon"
-                    label=""
 
                     InputLabelProps={{
                         classes: {

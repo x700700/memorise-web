@@ -12,6 +12,7 @@ import Exam from "./Exam";
 import TrainingsList from "./TrainingsList";
 import EditTraining from "./EditTraining";
 import NotFound from "./NotFound";
+import Login from "./Login";
 
 const theme = createMuiTheme({
         palette: {
@@ -73,6 +74,7 @@ const Main = () => {
                 <div className="app-body-area" onClick={onBodyClick}>
                     <Switch>
                         <Route exact path="/"><Redirect to="/practice"/></Route>
+                        <Route exact path="/login" component={Login}/>
                         <Route exact path="/trainings" component={TrainingsList}/>
                         <Route path="/trainings/:id/edit" component={EditTraining}/>
                         <Route exact path="/practice" component={Game}/>
