@@ -99,6 +99,28 @@ const editTrainingReducer = (  state = {
                 isFetching: false,
             };
 
+
+
+        case types.FETCH_DELETE_EXERCISE_START:
+            return {
+                ...state,
+                isFetching: true,
+            };
+        case types.FETCH_DELETE_EXERCISE_SUCCEED:
+            delete state.training.exercises[action.exercise.id];
+            return {
+                ...state,
+                isFetching: false,
+                lastDeletedExerciseId: action.exercise.id,
+            };
+        case types.FETCH_DELETE_EXERCISE_FAILED:
+            return {
+                ...state,
+                isFetching: false,
+            };
+
+
+
         case types.FETCH_SAVE_EXERCISE_START:
             return {
                 ...state,

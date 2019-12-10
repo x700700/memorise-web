@@ -35,6 +35,16 @@
     //background-color: $grey8blue;
     direction: ltr;
 
+    .delete-btn {
+        position: absolute;
+        right: 0;
+        top: 0;
+        margin: .5rem;
+
+        i {
+            color: red;
+        }
+    }
     .question {
         margin-bottom: 1.5rem;
     }

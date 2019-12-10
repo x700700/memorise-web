@@ -45,5 +45,5 @@ export const saveExercise = ({ bearer, trainingId, id, body }) => {
 };
 
 export const deleteExercise = ({ bearer, trainingId, id }) => {
-    return axios({method: 'DEL', url: `${consts.urls.api}/trainings/${trainingId}/exercises/${id}`});
+    return axios({method: 'DELETE', url: `${consts.urls.api}/trainings/${trainingId}/exercises/${id}`});
 };

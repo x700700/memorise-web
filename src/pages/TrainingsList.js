@@ -24,7 +24,7 @@ const TrainingsList = (props) => {
             dispatch({ type: types.TRAININGS_UPDATE_LAST_NEW_TRAINING_ID, id: null });
             history.push(`/trainings/${lastNewTrainingId}/edit`);
         }
-    }, [lastNewTrainingId]);
+    }, [lastNewTrainingId, dispatch, history]);
 
     useEffect(() => {
         if (currPage !== consts.pageName.trainings) {

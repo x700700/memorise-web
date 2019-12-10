@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import _ from 'lodash';
 import './EditTraining.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";

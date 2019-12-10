@@ -5,7 +5,8 @@ import Modal from "../_Tools/Modal";
 import TextInput from "../_Tools/TextInput";
 import {useTranslation} from "react-i18next";
 import Button from "../_Tools/Button";
-import { saveExercise } from '../../redux/actions'
+import IconButton from "../_Tools/IconButton";
+import {deleteExercise, saveExercise} from '../../redux/actions'
 import * as types from "../../redux/actionsTypes";
 
 
@@ -37,6 +38,10 @@ const Exercise = ({ exercise, disable }) => {
         dispatch(saveExercise(exercise.trainingId, exercise.id, updatedExercise));
         refModal.current.close(); // causes the Modal not to be openned
     };
+    const del = () => {
+        dispatch(deleteExercise(exercise.trainingId, exercise.id));
+        refModal.current.close();
+    };
 
     useEffect(() => {
         if (lastNewExerciseId && lastNewExerciseId === exercise.id) {
@@ -44,7 +49,7 @@ const Exercise = ({ exercise, disable }) => {
             dispatch({ type: types.TRAINING_UPDATE_LAST_NEW_EXERCISE_ID, id: null });
             !disable && refModal.current.open();
         }
-    }, [lastNewExerciseId]);
+    }, [lastNewExerciseId, dispatch, disable, refModal, exercise.id]);
 
     return (
         <div className="edit-training-exercise-container">
@@ -54,6 +59,9 @@ const Exercise = ({ exercise, disable }) => {
             </div>
             <Modal ref={refModal} title={t("edit exercise")}>
                 <div className="edit-modal-container">
+                    <div className="delete-btn">
+                        <IconButton size={2} faName="trash-alt" onClick={del}/>
+                    </div>
                     <div className="field question">
                         <TextInput ref={refQ} type="q" defaultValue={exercise.q} autoFocus={true} onEnter={save}/>
                     </div>
