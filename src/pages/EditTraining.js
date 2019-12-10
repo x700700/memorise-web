@@ -14,6 +14,7 @@ const EditTraining = (props) => {
     const history = useHistory();
 
     const currPage = useSelector(state => state.app.currentPage);
+    const showMenu = useSelector(state => state.app.showMenu);
     const isFetching = useSelector(state => state.editTraining.isFetching);
     const isLoaded = useSelector(state => state.editTraining.isLoaded);
     const training = useSelector(state => state.editTraining.training);
@@ -67,7 +68,7 @@ const EditTraining = (props) => {
                     {exercisesList && exercisesList.map((x,i) => {
                         return (
                             <div key={`edit-training-exercise-${i}`} className="exercise-container">
-                                <Exercise exercise={x} disable={disableExercisesEdit}/>
+                                <Exercise exercise={x} disable={showMenu || disableExercisesEdit}/>
                             </div>);
                     })}
                 </div>

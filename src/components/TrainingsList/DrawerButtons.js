@@ -52,7 +52,8 @@ const DrawerButtons = ({ trainingId, forceClose, size, color, backgroundColor, b
         };
         document.getElementById(divAbsoluteId).addEventListener("transitionend", drawerClosed);
         return () => {
-            document.getElementById(divAbsoluteId).removeEventListener("transitionend", drawerClosed);
+            const el = document.getElementById(divAbsoluteId);
+            el && drawerClosed && el.removeEventListener("transitionend", drawerClosed);
         }
     }, [open, setCloseEnded, divAbsoluteId]);
 

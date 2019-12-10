@@ -1,0 +1,27 @@
+@import "../../common/colors";
+
+.menu-edit-col {
+    height: 100%;
+    padding: .3rem;
+
+    .title {
+        color: $grey3;
+        width: 98%;
+        margin: 0 auto;
+        margin-bottom: 1rem;
+    }
+
+    .are-u-sure {
+        padding: .5rem;
+        color: red;
+        font-size: 1.3rem;
+        text-align: center;
+        line-height: 1.5;
+        margin-bottom: 2rem;
+    }
+
+    .delete-btn-container {
+        width: 7rem;
+        margin: 0 auto;
+    }
+}

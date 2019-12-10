@@ -8,6 +8,7 @@ import IconButton from "./_Tools/IconButton";
 const AddButton = (props) => {
     const dispatch = useDispatch();
     const currPage = useSelector(state => state.app.currentPage);
+    const showMenu = useSelector(state => state.app.showMenu);
     const trainingNameIsOnEdit = useSelector(state => state.app.trainingNameIsOnEdit);
     const editTrainingId = useSelector(state => state.editTraining.fetchedId);
 
@@ -20,7 +21,7 @@ const AddButton = (props) => {
         dispatch(createExercise(editTrainingId));
     };
 
-    const disable = trainingNameIsOnEdit;
+    const disable = showMenu || trainingNameIsOnEdit;
     return (
         <div className="add-button-container">
             <div className="btn-container">

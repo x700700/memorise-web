@@ -21,6 +21,9 @@ i18n.use(LanguageDetector).init({
                 "edit exercise": "Edit Exercise Q/A",
                 "save": "Save",
                 "cancel": "Cancel",
+                "delete": "Delete",
+                "delete training": "Delete Training",
+                "are u sure": "Deleting the Training will delete ALL the Exercises included!",
             }
         },
         jap: {

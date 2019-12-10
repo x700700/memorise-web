@@ -9,6 +9,7 @@ import MenuGame from "./Practice/MenuGame";
 import MenuExam from "./Practice/MenuExam";
 import {useTranslation} from "react-i18next";
 import AddButton from "./AddButton";
+import MenuEdit from "./EditTraining/MenuEdit";
 
 const Header = (props) => {
     const dispatch = useDispatch();
@@ -86,6 +87,7 @@ const Header = (props) => {
             </div>
             <div id="top-header-menu" className={`top-menu-box ${appShowMenu ? 'top-menu-pop-down' : ''}`}>
                 <div className="menu-container">
+                    <MenuEdit hide={timingCurrPage !== consts.pageName.edit}/>
                     <MenuGame hide={timingCurrPage !== consts.pageName.practice}/>
                     <MenuExam hide={timingCurrPage !== consts.pageName.exam}/>
                 </div>

@@ -32,7 +32,7 @@ export const renameTraining = ({ bearer, id, body }) => {
 };
 
 export const deleteTraining = ({ bearer, id }) => {
-    return axios({method: 'DEL', url: `${consts.urls.api}/trainings/${id}`});
+    return axios({method: 'DELETE', url: `${consts.urls.api}/trainings/${id}`});
 };
 
 

@@ -79,6 +79,25 @@ const trainingsReducer = (  state = {
                 isFetching: false,
             };
 
+
+
+        case types.FETCH_DELETE_TRAINING_START:
+            return {
+                ...state,
+                isFetching: true,
+            };
+        case types.FETCH_DELETE_TRAINING_SUCCEED:
+            delete state.trainingsMap[action.training.id];
+            return {
+                ...state,
+                isFetching: false,
+            };
+        case types.FETCH_DELETE_TRAINING_FAILED:
+            return {
+                ...state,
+                isFetching: false,
+            };
+
         default:
             return state;
     }
