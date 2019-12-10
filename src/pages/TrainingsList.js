@@ -14,8 +14,17 @@ const TrainingsList = (props) => {
     const isFetching = useSelector(state => state.trainings.isFetching);
     const isLoaded = useSelector(state => state.trainings.isLoaded);
     const trainingsMap = useSelector(state => state.trainings.trainingsMap);
+    const lastNewTrainingId = useSelector(state => state.trainings.lastNewTrainingId);
     const trainingsList = isLoaded && trainingsMap && Object.values(trainingsMap);
     // console.warn('====> ', trainingsList);
+
+    useEffect(() => {
+        if (lastNewTrainingId) {
+            // console.warn('new training');
+            dispatch({ type: types.TRAININGS_UPDATE_LAST_NEW_TRAINING_ID, id: null });
+            history.push(`/trainings/${lastNewTrainingId}/edit`);
+        }
+    }, [lastNewTrainingId]);
 
     useEffect(() => {
         if (currPage !== consts.pageName.trainings) {

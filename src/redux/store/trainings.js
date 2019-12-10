@@ -6,6 +6,7 @@ const trainingsReducer = (  state = {
                                 isFetching: false,
                                 isLoaded: false,
                                 trainingsMap: null,
+                                lastNewTrainingId: null,
                             },
                       action) => {
 
@@ -27,6 +28,11 @@ const trainingsReducer = (  state = {
                 return state;
             }
 
+        case types.TRAININGS_UPDATE_LAST_NEW_TRAINING_ID:
+            return {
+                ...state,
+                lastNewTrainingId: action.id,
+            };
 
 
         case types.FETCH_TRAININGS_START:
@@ -65,6 +71,7 @@ const trainingsReducer = (  state = {
                 ...state,
                 isFetching: false,
                 trainingsMap: updatedTrainings,
+                lastNewTrainingId: action.training.id,
             };
         case types.FETCH_CREATE_TRAINING_FAILED:
             return {
