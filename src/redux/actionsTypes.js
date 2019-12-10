@@ -64,6 +64,11 @@ export const FETCH_DELETE_TRAINING_START = 'trainings.FETCH_DELETE_TRAINING_STAR
 export const FETCH_DELETE_TRAINING_SUCCEED = 'trainings.FETCH_DELETE_TRAINING_SUCCEED';
 export const FETCH_DELETE_TRAINING_FAILED = 'trainings.FETCH_DELETE_TRAINING_FAILED';
 
+// ============================================================================================================
+// ============================================================================================================
+
+export const TRAINING_UPDATE_LAST_NEW_EXERCISE_ID = 'exercises.TRAINING_UPDATE_LAST_NEW_EXERCISE_ID';
+
 
 export const FETCH_CREATE_EXERCISE_START = 'exercises.FETCH_CREATE_EXERCISE_START';
 export const FETCH_CREATE_EXERCISE_SUCCEED = 'exercises.FETCH_CREATE_EXERCISE_SUCCEED';

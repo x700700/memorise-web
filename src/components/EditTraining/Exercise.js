@@ -1,11 +1,12 @@
-import React, {useRef } from "react";
-import {useDispatch} from "react-redux";
+import React, {useEffect, useRef} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import './Exercise.scss';
 import Modal from "../_Tools/Modal";
 import TextInput from "../_Tools/TextInput";
 import {useTranslation} from "react-i18next";
 import Button from "../_Tools/Button";
 import { saveExercise } from '../../redux/actions'
+import * as types from "../../redux/actionsTypes";
 
 
 const Exercise = ({ exercise, disable }) => {
@@ -14,6 +15,8 @@ const Exercise = ({ exercise, disable }) => {
     const refModal = useRef();
     const refQ = useRef();
     const refA = useRef();
+
+    const lastNewExerciseId = useSelector(state => state.editTraining.lastNewExerciseId);
 
     /*
     const onModalClose = () => {
@@ -34,6 +37,14 @@ const Exercise = ({ exercise, disable }) => {
         dispatch(saveExercise(exercise.trainingId, exercise.id, updatedExercise));
         refModal.current.close(); // causes the Modal not to be openned
     };
+
+    useEffect(() => {
+        if (lastNewExerciseId && lastNewExerciseId === exercise.id) {
+            // console.warn('new exercise');
+            dispatch({ type: types.TRAINING_UPDATE_LAST_NEW_EXERCISE_ID, id: null });
+            !disable && refModal.current.open();
+        }
+    }, [lastNewExerciseId]);
 
     return (
         <div className="edit-training-exercise-container">

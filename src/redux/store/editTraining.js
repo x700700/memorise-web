@@ -7,6 +7,7 @@ const editTrainingReducer = (  state = {
                                    idToFetch: null,
                                    fetchedId: null,
                                    training: null,
+                                   lastNewExerciseId: null,
 
                                    isRenaming: false,
                                    isRenamed: false,
@@ -17,6 +18,12 @@ const editTrainingReducer = (  state = {
 
     const updatedTraining = state.training;
     switch (action.type) {
+
+        case types.TRAINING_UPDATE_LAST_NEW_EXERCISE_ID:
+            return {
+                ...state,
+                lastNewExerciseId: action.id,
+            };
 
         case types.FETCH_EDIT_TRAINING_START:
             return {
@@ -83,6 +90,7 @@ const editTrainingReducer = (  state = {
                 ...state,
                 isFetching: false,
                 training: updatedTraining,
+                lastNewExerciseId: action.exercise.id,
             };
         case types.FETCH_CREATE_EXERCISE_FAILED:
             return {
