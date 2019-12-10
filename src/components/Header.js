@@ -16,6 +16,7 @@ const Header = (props) => {
     const error = useSelector(state => state.app.error);
     const training = useSelector(state => state.editTraining.training);
     const currPage = useSelector(state => state.app.currentPage);
+    const trainingNameIsOnEdit = useSelector(state => state.app.trainingNameIsOnEdit);
     const [timingCurrPage, setTimingCurrPage] = useState(currPage);
     const appShowMenu = useSelector(state => state.app.showMenu);
     const [showMenu, setShowMenu] = useState(appShowMenu);
@@ -60,7 +61,11 @@ const Header = (props) => {
         console.warn('Clearing localStorage.');
         localStorage.removeItem(consts.localStorage.gameId);
         localStorage.removeItem(consts.localStorage.examId);
-        dispatch({ type: types.APP_SET_ERROR, error: t('Local storage was cleaned') });
+        dispatch({type: types.APP_SET_ERROR, error: t('Local storage was cleaned')});
+    };
+
+    const styleOnEdit = {
+        pointerEvents: trainingNameIsOnEdit ? 'none' : 'auto',
     };
 
     const isMenuBtnDisable = showMenu !== appShowMenu;
@@ -68,16 +73,16 @@ const Header = (props) => {
     return (
         <div className="header">
             <div className="header-row">
-                <div className="header-left">
+                <div className="header-left" style={styleOnEdit}>
                     <button onClick={() => menuClicked(!appShowMenu)} className={`btn btn-menu ${isMenuBtnDisable ? 'disable-pointer' : ''}`}><i className={`fas fa-chevron-down ${menuBtnStatusClass}`}/></button>
                 </div>
-                <div className="tabs">
+                <div className="tabs" style={styleOnEdit}>
                     <Link to="/trainings"><span className={`btn ${currPage === consts.pageName.trainings ? 'tab-active' : ''}`}><i className="fas fa-book-open"/></span></Link>
                     <Link to={`/trainings/${editTrainingId}/edit`}><span className={`btn ${currPage === consts.pageName.edit ? 'tab-active' : ''}`}><i className="fas fa-edit"/></span></Link>
                     <Link to="/practice"><span className={`btn ${currPage === consts.pageName.practice ? 'tab-active' : ''}`}><i className="fas fa-running"/></span></Link>
                     <Link to="/exam"><span className={`btn ${currPage === consts.pageName.exam ? 'tab-active' : ''}`}><i className="fas fa-grin-beam-sweat"/></span></Link>
                 </div>
-                <img className="logo" src={logo} alt="logo" width="32" height="32" onClick={() => clearLocalStorage()}/>
+                <img className="logo" style={styleOnEdit} src={logo} alt="logo" width="32" height="32" onClick={() => clearLocalStorage()}/>
             </div>
             <div id="top-header-menu" className={`top-menu-box ${appShowMenu ? 'top-menu-pop-down' : ''}`}>
                 <div className="menu-container">
@@ -85,7 +90,7 @@ const Header = (props) => {
                     <MenuExam hide={timingCurrPage !== consts.pageName.exam}/>
                 </div>
             </div>
-            <div className="add-btn-box">
+            <div className="add-btn-box" style={styleOnEdit}>
                 <AddButton/>
             </div>
             {error &&

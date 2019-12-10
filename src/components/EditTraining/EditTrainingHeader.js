@@ -1,4 +1,4 @@
-import React, {forwardRef, useImperativeHandle, useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import * as types from '../../redux/actionsTypes';
 import './EditTrainingHeader.scss';
@@ -10,34 +10,41 @@ import {renameTraining} from "../../redux/actions";
 const EditTrainingHeader = ({ id, play, exam, onNameEdit }) => {
     const dispatch = useDispatch();
     const name = useSelector(state => state.editTraining.name);
-    const [inputDisabled, setInputDisabled] = useState(false);
+    const [nameInputDisabled, setNameInputDisabled] = useState(false);
+    const [nameInputOnEdit, setNameInputOnEdit] = useState(false);
 
     const rename = () => {
         const newName = refName.current.value();
         console.warn('rename - ', newName);
-        setInputDisabled(true);
-        setTimeout(() => setInputDisabled(false), 100);
+        setNameInputDisabled(true);
+        setTimeout(() => setNameInputDisabled(false), 100);
         dispatch(renameTraining(id, newName));
     };
 
     const _play = () => {
-        play()
+        !nameInputOnEdit && play();
     };
     const _exam = () => {
-        exam();
+        !nameInputOnEdit && exam();
     };
     const onNameFocus = () => {
         // console.warn('On name focus');
-        onNameEdit && onNameEdit(true);
-        onNameEdit && dispatch({ type: types.APP_SET_TRAINING_NAME_IS_ON_EDIT, edit: true });
+        setNameInputOnEdit(true);
+        onNameEdit(true);
+        dispatch({ type: types.APP_SET_TRAINING_NAME_IS_ON_EDIT, edit: true });
     };
     const onNameBlur = (enterPressed) => {
         console.warn('On name blur - Cancel');
-        onNameEdit && onNameEdit(false);
-        onNameEdit && dispatch({ type: types.APP_SET_TRAINING_NAME_IS_ON_EDIT, edit: false });
+        setNameInputOnEdit(false);
+        onNameEdit(false);
+        dispatch({ type: types.APP_SET_TRAINING_NAME_IS_ON_EDIT, edit: false });
+
         !enterPressed && refName.current.setValue(name);
     };
 
+    const styleOnEdit = {
+        pointerEvents: nameInputOnEdit ? 'none' : 'auto',
+    };
     const refName = useRef();
     return (
         <div className="edit-training-header-container">
@@ -45,10 +52,10 @@ const EditTrainingHeader = ({ id, play, exam, onNameEdit }) => {
                 <div className="field name">
                     <TextInput ref={refName} type="training" defaultValue={name}
                                onEnter={rename} onFocus={onNameFocus} onBlur={onNameBlur}
-                               noMargin={true} disabled={inputDisabled}
+                               noMargin={true} disabled={nameInputDisabled}
                     />
                 </div>
-                <div className="edit-training-buttons">
+                <div className="edit-training-buttons" style={styleOnEdit}>
                     <IconButton size={2} faName="running" onClick={_play}/>
                     <IconButton size={2} faName="grin-beam-sweat" onClick={_exam}/>
                 </div>

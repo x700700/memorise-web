@@ -1,10 +1,10 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, {useEffect, useState} from "react";
 import './EditTraining.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import consts from "../common/consts";
 import * as types from "../redux/actionsTypes";
-import {getEditTraining, renameTraining} from "../redux/actions";
+import {getEditTraining} from "../redux/actions";
 import Exercise from "../components/EditTraining/Exercise";
 import EditTrainingHeader from "../components/EditTraining/EditTrainingHeader";
 

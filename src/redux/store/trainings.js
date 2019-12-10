@@ -1,4 +1,4 @@
-import _ from 'lodash';
+// import _ from 'lodash';
 import * as types from '../actionsTypes';
 import mockTrainingsList from '../../mock/trainings-list1';
 
