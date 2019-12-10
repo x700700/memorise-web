@@ -84,6 +84,10 @@ export default class cardsDeck {
         this.rights = mem.rights;
         this.wrongs = mem.wrongs;
 
+        if (!this.initialDeck || !Array.isArray(this.initialDeck) || this.initialDeck.length === 0) {
+            console.error('*** local storage might be improper. deleted it. please Refresh page.');
+            localStorage.removeItem(consts.localStorage.examId);
+        }
         /*
         if (this.topQAnswers && (!Array.isArray(this.topQAnswers) || this.topQAnswers.length === 0)) {
             console.error('*** local storage might be improper. deleted it. please Refresh page.');
@@ -93,6 +97,7 @@ export default class cardsDeck {
          */
     };
 
+    getSize = () => this.initialDeck.length;
     top = () => this.currentDeck[0] || null;
     topQ = () => !this.isDeckFlipped ? (this.currentDeck[0] || {}).q : (this.currentDeck[0] || {}).a || '';
     topA = () => !this.isDeckFlipped ? (this.currentDeck[0] || {}).a : (this.currentDeck[0] || {}).q || '';
