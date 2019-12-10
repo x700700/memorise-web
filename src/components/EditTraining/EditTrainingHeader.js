@@ -34,7 +34,7 @@ const EditTrainingHeader = ({ id, play, exam, onNameEdit }) => {
         dispatch({ type: types.APP_SET_TRAINING_NAME_IS_ON_EDIT, edit: true });
     };
     const onNameBlur = (enterPressed) => {
-        console.warn('On name blur - Cancel');
+        // console.warn('On name blur - Cancel');
         setNameInputOnEdit(false);
         onNameEdit(false);
         dispatch({ type: types.APP_SET_TRAINING_NAME_IS_ON_EDIT, edit: false });

@@ -52,7 +52,6 @@ const TextInput = forwardRef(({ type, defaultValue, autoFocus, onEnter, onFocus,
             return val;
         },
         setValue(_val) {
-            console.warn('setValue - ', _val);
             setVal(_val);
         },
     }));
@@ -99,12 +98,10 @@ const TextInput = forwardRef(({ type, defaultValue, autoFocus, onEnter, onFocus,
     let inputClassName = ['q', 'a'].includes(type) && classes.fontExercise;
     inputClassName = (type === 'training' && classes.fontTraining) || inputClassName;
 
-    // const refInput = useRef();
     return (
         <div className="text-input">
             <MuiThemeProvider theme={theme}>
                 <TextField
-                    // ref={refInput}
                     value={val}
                     className={className}
                     style={style}
