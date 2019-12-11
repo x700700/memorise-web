@@ -1,12 +1,16 @@
 import React, {useRef, useState} from "react";
+import {useDispatch} from "react-redux";
 import './Login.scss';
 import {useTranslation} from "react-i18next";
 import TextInput from "../_Tools/TextInput";
 import Button from "../_Tools/Button";
 import {validateName, validatePassword} from "../../common/utils";
+import { signin } from '../../redux/actions';
+
 
 const SignIn = (props) => {
     const { t } = useTranslation();
+    const dispatch = useDispatch();
     const [valid, setValid] = useState([false, false]);
     const [errName, setErrName] = useState(null);
     const [errPass, setErrPass] = useState(null);
@@ -43,6 +47,10 @@ const SignIn = (props) => {
         const name = refName.current.value();
         const pass = refPass.current.value();
         console.warn('login - ', name, pass);
+        dispatch(signin({
+            nickName: name,
+            password: pass,
+        }));
     };
 
     const refName = useRef();

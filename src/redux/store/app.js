@@ -5,6 +5,7 @@ const appReducer = (  state = {
                           authCheckStarted: false,
                           authCheckEnded: false,
                           userName: null,
+                          jwt: null,
                           error: null,
                           currentPage: null,
                           showMenu: false,
@@ -57,6 +58,32 @@ const appReducer = (  state = {
                 error: action.message,
                 userName: null,
             };
+
+
+        case types.APP_SIGNIN_STARTED:
+            return {
+                ...state,
+                authCheckStarted: true,
+                authCheckEnded: false,
+            };
+        case types.APP_SIGNIN_SUCCEED:
+            localStorage.setItem(consts.localStorage.tokenId, action.loginResult.token);
+            return {
+                ...state,
+                authCheckEnded: true,
+                userName: action.loginResult.user.nickName,
+                jwt: action.loginResult.token,
+            };
+        case types.APP_SIGNIN_FAILED:
+            console.error('signin failed: ', action.message);
+            return {
+                ...state,
+                authCheckEnded: true,
+                error: action.message,
+                userName: null,
+            };
+        // ====================================================================================================
+        // ====================================================================================================
 
         case types.APP_SET_CURRENT_PAGE:
             return {

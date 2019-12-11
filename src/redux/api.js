@@ -1,11 +1,11 @@
 import axios from '../middlewares/axios';
 import consts from '../common/consts';
 
-export const signin = ({ bearer, body }) => {
+export const signin = ({ body }) => {
     return axios({method: 'POST', url: `${consts.urls.api}/auth/login`}, body);
 };
 
-export const signup = ({ bearer, body }) => {
+export const signup = ({ body }) => {
     return axios({method: 'POST', url: `${consts.urls.api}/auth/register`}, body);
 };
 

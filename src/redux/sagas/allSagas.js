@@ -63,8 +63,8 @@ export function* getExamTraining(action) {
 export function* signin(action) {
     try {
         yield put({ type: types.APP_SIGNIN_STARTED });
-        const resp = yield call(api.signin, { Bearer: consts.temp.bearer, body: action.body });
-        yield put({ type: types.APP_SIGNIN_SUCCEED, resp: resp });
+        const resp = yield call(api.signin, { body: action.body });
+        yield put({ type: types.APP_SIGNIN_SUCCEED, loginResult: resp });
     } catch (e) {
         yield put({ type: types.APP_SIGNIN_FAILED, message: e.message });
     }

@@ -28,6 +28,7 @@ export default {
         defaultCardsNum: 20,
     },
     localStorage: {
+        tokenId: 'memoBool.token',
         gameId: 'memoBool.practice',
         examId: 'memoBool.exam',
     },
