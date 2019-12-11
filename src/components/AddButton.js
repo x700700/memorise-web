@@ -10,6 +10,7 @@ import {useHistory} from "react-router";
 const AddButton = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const authCheckEnded = useSelector(state => state.app.authCheckEnded);
     const loggedInUserName = useSelector(state => state.app.userName);
     const currPage = useSelector(state => state.app.currentPage);
     const showMenu = useSelector(state => state.app.showMenu);
@@ -35,7 +36,7 @@ const AddButton = (props) => {
         <div className="add-button-container">
             <div className="btn-container">
                 <IconButton size={3} faName="user" onClick={login}
-                            hide={loggedInUserName || [consts.pageName.practice, consts.pageName.exam, consts.pageName.login].includes(currPage)}
+                            hide={!authCheckEnded || loggedInUserName || [consts.pageName.practice, consts.pageName.exam, consts.pageName.login].includes(currPage)}
                             color="ffe6ff" backgroundColor="ff4ddd"
                 />
                 <IconButton size={3} faName="plus" onClick={addTraining} hide={disableAddBtn || currPage !== consts.pageName.trainings}
