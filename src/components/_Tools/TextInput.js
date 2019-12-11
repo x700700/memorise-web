@@ -127,7 +127,7 @@ const TextInput = forwardRef(({ label, type, defaultValue, autoFocus, onEnter, o
                         classes: {
                             input: inputClassName,
                         },
-                        startAdornment: (
+                        startAdornment: label ? null : (
                             <InputAdornment position="start" className={classes.iconMargin}>
                                 {type === 'q' &&
                                 <HelpOutline/>
