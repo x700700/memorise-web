@@ -5,8 +5,8 @@ i18n.use(LanguageDetector).init({
     resources: {
         en: {
             translations: {
-                "signin-title": "Sign-In:",
-                "signup-title": "Sign-Up:",
+                "signin-title": "Sign In:",
+                "signup-title": "Sign Up for More Trainings:",
                 "email": "Email",
                 "nickname": "Nick Name",
                 "password": "Password",
@@ -17,6 +17,10 @@ i18n.use(LanguageDetector).init({
                 "signin?": "Already on memoBool?",
                 "signin-done": "Welcome",
                 "err-requied-field": "Requied Field",
+                "err-name-required": "Name is required",
+                "err-name-valid": "Name mustn't include spaces",
+                "err-email": "Wrong email",
+                "err-pass": "Password min length is 6",
                 "err-signin-failed": "Wrong nick name or password",
                 "err-signup-email-taken": "The Email is already taken",
                 "err-signup-nick-taken": "The Nick Name is already taken",

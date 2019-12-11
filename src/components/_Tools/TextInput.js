@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const TextInput = forwardRef(({ label, type, defaultValue, autoFocus, onEnter, onFocus, onBlur, noMargin, disabled }, ref) => {
+const TextInput = forwardRef(({ label, type, defaultValue, autoFocus, onEnter, onFocus, onBlur, onChange, noMargin, disabled, error }, ref) => {
     useImperativeHandle(ref, () => ({
         value() {
             return val;
@@ -58,6 +58,7 @@ const TextInput = forwardRef(({ label, type, defaultValue, autoFocus, onEnter, o
 
     const classes = useStyles();
     const [val, setVal] = useState(defaultValue);
+    const [focused, setFocused] = useState(false);
 
     const rtlStyle = text => {
         return isRtl(text) ? {
@@ -66,27 +67,30 @@ const TextInput = forwardRef(({ label, type, defaultValue, autoFocus, onEnter, o
         } : {};
     };
     const [style, setStyle] = useState(rtlStyle(defaultValue));
-    const onChange = e => {
+    const onMyChange = e => {
         let text = e.target.value;
         text = text.slice(0, consts.inputProps.exercise.maxLength);
         e.target.value = text;
         setVal(text);
         setStyle(rtlStyle(text || defaultValue));
+        onChange && onChange(text);
     };
     const onKeyPress = (ev) => {
         // console.warn('********** key pressed', ev.ctrlKey, ev.key);
         if (ev.key === 'Enter') {
             onEnter && onEnter();
-            onBlur && onBlur(val);
+            onBlur && onBlur(val, true);
         }
     };
     const onMyFocus = (ev) => {
         // console.warn('FOCUS');
+        setFocused(true);
         onFocus && onFocus();
     };
     const onMyBlur = (ev) => {
         // console.warn('BLUR');
-        onBlur && onBlur();
+        setFocused(false);
+        onBlur && onBlur(val);
     };
 
     // onMount
@@ -97,26 +101,31 @@ const TextInput = forwardRef(({ label, type, defaultValue, autoFocus, onEnter, o
     const className = noMargin ? classes.margin : classes.noMargin;
     let inputClassName = ['q', 'a'].includes(type) && classes.fontExercise;
     inputClassName = (type === 'training' && classes.fontTraining) || inputClassName;
+    const typeName = ['q', 'a', 'training'].includes(type) ? 'text' : type || 'text';
 
     return (
         <div className="text-input">
             <MuiThemeProvider theme={theme}>
                 <TextField
                     value={val}
+                    variant={label ? 'outlined' : 'standard'}
+                    type={typeName}
+                    autoComplete={type === 'password' ? 'current-password' : 'off'}
                     className={className}
                     style={style}
                     label={label || ''}
-                    variant={label ? 'outlined' : 'standard'}
+                    size="small"
+
+                    error={error && !focused}
+                    helperText={error || ''}
+
                     autoFocus={autoFocus}
                     onFocus={onMyFocus}
                     onBlur={onMyBlur}
-                    onChange={onChange}
+                    onChange={onMyChange}
                     onKeyPress={onKeyPress}
                     disabled={disabled}
-
-                    autoComplete="off"
-                    type="text"
-                    id="input-with-icon"
+                    // id="input-with-icon"
 
                     InputLabelProps={{
                         // shrink: true,

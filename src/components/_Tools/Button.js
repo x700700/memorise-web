@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Button = ({ type, text, onClick }) => {
+const Button = ({ type, text, onClick, disabled }) => {
     const classes = useStyles();
     const color = type === 'cancel' ? 'secondary' : 'primary';
     const style = {
@@ -30,7 +30,9 @@ const Button = ({ type, text, onClick }) => {
 
     return (
         <div>
-            <ColorButton onClick={onClick()} variant="contained" style={style} color={color} size="medium" fullWidth={true} className={classes.margin}>
+            <ColorButton variant="contained" style={style} color={color} size="medium" fullWidth={true} className={classes.margin}
+                         onClick={onClick()} disabled={disabled}
+            >
                 {text}
             </ColorButton>
         </div>
