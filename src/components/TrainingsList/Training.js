@@ -16,7 +16,7 @@ const Training = ({ training }) => {
     const sampleExercise = (training && training.sampleExercise) || {q: '', a: ''};
 
     const edit = () => {
-        if (training.id === activeDrawerTrainingId) return;
+        if (activeDrawerTrainingId) return;
         console.warn('Edit training - ', training.id);
         history.push(`/trainings/${training.id}/edit`)
     };
@@ -58,7 +58,7 @@ const Training = ({ training }) => {
                     </div>
                 </div>
                 <div className="training-row">
-                    <div className="name-container" onClick={play}>
+                    <div className="name-container" onClick={!activeDrawerTrainingId ? play : () => {}}>
                         <div className="name" style={rtlName(training.name)}>
                             {training.name}
                         </div>
