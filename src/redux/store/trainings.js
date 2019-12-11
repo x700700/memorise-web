@@ -53,7 +53,7 @@ const trainingsReducer = (  state = {
             return {
                 ...state,
                 isFetching: false,
-                trainingsMap: mockTrainingsList,
+                trainingsMap: mockTrainingsList, // Todo - null
                 isLoaded: true,
             };
 

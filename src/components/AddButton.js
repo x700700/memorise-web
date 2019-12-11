@@ -5,13 +5,20 @@ import consts from "../common/consts";
 import {createExercise, createTraining} from "../redux/actions";
 import IconButton from "./_Tools/IconButton";
 import * as types from "../redux/actionsTypes";
+import {useHistory} from "react-router";
 
 const AddButton = (props) => {
     const dispatch = useDispatch();
+    const history = useHistory();
+    const loggedInUserName = useSelector(state => state.app.userName);
     const currPage = useSelector(state => state.app.currentPage);
     const showMenu = useSelector(state => state.app.showMenu);
     const trainingNameIsOnEdit = useSelector(state => state.app.trainingNameIsOnEdit);
     const editTrainingId = useSelector(state => state.editTraining.fetchedId);
+
+    const login = (e) => {
+        history.push('/login');
+    };
 
     const addTraining = (e) => {
         // console.warn('Add Training');
@@ -23,14 +30,18 @@ const AddButton = (props) => {
         dispatch(createExercise(editTrainingId));
     };
 
-    const disable = showMenu || trainingNameIsOnEdit;
+    const disableAddBtn = !loggedInUserName || showMenu || trainingNameIsOnEdit;
     return (
         <div className="add-button-container">
             <div className="btn-container">
-                <IconButton size={3} faName="plus" onClick={addTraining} hide={disable || currPage !== consts.pageName.trainings}
+                <IconButton size={3} faName="user" onClick={login}
+                            hide={loggedInUserName || [consts.pageName.practice, consts.pageName.exam, consts.pageName.login].includes(currPage)}
+                            color="ffe6ff" backgroundColor="ff4ddd"
+                />
+                <IconButton size={3} faName="plus" onClick={addTraining} hide={disableAddBtn || currPage !== consts.pageName.trainings}
                             color="eee6ff" backgroundColor="884dff"
                 />
-                <IconButton size={3} faName="plus" onClick={addExercise} hide={disable || currPage !== consts.pageName.edit}
+                <IconButton size={3} faName="plus" onClick={addExercise} hide={disableAddBtn || currPage !== consts.pageName.edit}
                             color="eee6ff" backgroundColor="884dff"
                 />
             </div>

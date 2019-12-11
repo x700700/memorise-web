@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import './Login.scss';
+import * as types from '../../redux/actionsTypes';
 import {useTranslation} from "react-i18next";
 import TextInput from "../_Tools/TextInput";
 import Button from "../_Tools/Button";
@@ -63,9 +64,11 @@ const SignIn = (props) => {
         setOnSignin(false);
         setValid([true, false]);
         if (loggedInUsername) {
+            dispatch({ type: types.FETCH_TRAININGS_SUCCEED, trainingsMap: null });
+            // dispatch({ type: types.FETCH_TRAININGS_SUCCEED, trainingsMap: null }); // Todo - reset also editTraining store
             history.push('/trainings');
         }
-    }, [isSigningIn, loggedInUsername, setValid, history, setOnSignin]);
+    }, [isSigningIn, loggedInUsername, setValid, history, setOnSignin, dispatch]);
 
     const refName = useRef();
     const refPass = useRef();
