@@ -7,30 +7,36 @@ import {validateName, validatePassword} from "../../common/utils";
 
 const SignIn = (props) => {
     const { t } = useTranslation();
+    const [valid, setValid] = useState([false, false]);
     const [errName, setErrName] = useState(null);
     const [errPass, setErrPass] = useState(null);
 
     const checkName = (text) => {
         if (!validateName(text)) {
             setErrName(t('err-name-required'));
+            setValid([false, valid[1]]);
         } else if (text.includes(' ')) {
             setErrName(t('err-name-valid'));
+            setValid([false, valid[1]]);
         } else {
             setErrName(null);
+            setValid([true, valid[1]]);
         }
     };
     const checkPassword = (text) => {
         if (!validatePassword(text)) {
             setErrPass(t('err-pass'));
+            setValid([valid[0], false]);
         } else {
             setErrPass(null);
+            setValid([valid[0], true]);
         }
     };
     const nameEnter = () => {
         // refPass.current.focus();
     };
     const passEnter = () => {
-        if (valid) login();
+        if (isValid) login();
     };
 
     const login = () => {
@@ -41,7 +47,7 @@ const SignIn = (props) => {
 
     const refName = useRef();
     const refPass = useRef();
-    const valid = validateName(refName.current && refName.current.value()) && validateName(refPass.current && refPass.current.value());
+    const isValid = valid.reduce((x,a) => a = a && x , true);
     return (
         <div className="signin-container">
             <form>
@@ -60,7 +66,7 @@ const SignIn = (props) => {
                         />
                     </div>
                     <div className="signin-btn-container">
-                        <Button type="ok" text={t('signin-btn')} disabled={!valid} onClick={() => login} />
+                        <Button type="ok" text={t('signin-btn')} disabled={!isValid} onClick={() => login} />
                     </div>
                     <div className="signin-signup">
                         <span>{t('signup?')} </span>
