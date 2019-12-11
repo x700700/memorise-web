@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import consts from "../common/consts";
 import {createExercise, createTraining} from "../redux/actions";
 import IconButton from "./_Tools/IconButton";
+import * as types from "../redux/actionsTypes";
 
 const AddButton = (props) => {
     const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const AddButton = (props) => {
 
     const addTraining = (e) => {
         // console.warn('Add Training');
+        dispatch({ type: types.APP_SET_ACTIVE_DRAWER_TRAINING, id: null });
         dispatch(createTraining());
     };
     const addExercise = (e) => {
