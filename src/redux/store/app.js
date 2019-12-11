@@ -5,6 +5,7 @@ const appReducer = (  state = {
                           authCheckStarted: false,
                           authCheckEnded: false,
                           userName: null,
+                          isSigningIn: false,
                           jwt: null,
                           error: null,
                           currentPage: null,
@@ -61,15 +62,18 @@ const appReducer = (  state = {
 
 
         case types.APP_SIGNIN_STARTED:
+            localStorage.removeItem(consts.localStorage.tokenId);
             return {
                 ...state,
-                authCheckStarted: true,
+                isSigningIn: true,
                 authCheckEnded: false,
+                jwt: null,
             };
         case types.APP_SIGNIN_SUCCEED:
             localStorage.setItem(consts.localStorage.tokenId, action.loginResult.token);
             return {
                 ...state,
+                isSigningIn: false,
                 authCheckEnded: true,
                 userName: action.loginResult.user.nickName,
                 jwt: action.loginResult.token,
@@ -78,6 +82,7 @@ const appReducer = (  state = {
             console.error('signin failed: ', action.message);
             return {
                 ...state,
+                isSigningIn: false,
                 authCheckEnded: true,
                 error: action.message,
                 userName: null,

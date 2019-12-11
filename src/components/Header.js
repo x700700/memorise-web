@@ -60,6 +60,7 @@ const Header = (props) => {
 
     const clearLocalStorage = () => {
         console.warn('Clearing localStorage.');
+        localStorage.removeItem(consts.localStorage.tokenId);
         localStorage.removeItem(consts.localStorage.gameId);
         localStorage.removeItem(consts.localStorage.examId);
         dispatch({type: types.APP_SET_ERROR, error: t('Local storage was cleaned')});

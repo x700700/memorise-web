@@ -1,19 +1,24 @@
-import React, {useRef, useState} from "react";
-import {useDispatch} from "react-redux";
+import React, {useEffect, useRef, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import './Login.scss';
 import {useTranslation} from "react-i18next";
 import TextInput from "../_Tools/TextInput";
 import Button from "../_Tools/Button";
 import {validateName, validatePassword} from "../../common/utils";
 import { signin } from '../../redux/actions';
+import {useHistory} from "react-router";
 
 
 const SignIn = (props) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
+    const history = useHistory();
+    const isSigningIn = useSelector(state => state.app.isSigningIn);
+    const loggedInUsername = useSelector(state => state.app.userName);
     const [valid, setValid] = useState([false, false]);
     const [errName, setErrName] = useState(null);
     const [errPass, setErrPass] = useState(null);
+    const [onSignin, setOnSignin] = useState(false);
 
     const checkName = (text) => {
         if (!validateName(text)) {
@@ -36,26 +41,35 @@ const SignIn = (props) => {
             setValid([valid[0], true]);
         }
     };
-    const nameEnter = () => {
-        // refPass.current.focus();
-    };
     const passEnter = () => {
         if (isValid) login();
     };
 
     const login = () => {
+        if (!isValid) return;
         const name = refName.current.value();
         const pass = refPass.current.value();
-        console.warn('login - ', name, pass);
+        // console.warn('login - ', name, pass);
+        refPass.current.setValue('');
+        setOnSignin(true);
         dispatch(signin({
             nickName: name,
             password: pass,
         }));
     };
 
+    useEffect(() => {
+        console.warn('logged in with username = ', loggedInUsername);
+        setOnSignin(false);
+        setValid([true, false]);
+        if (loggedInUsername) {
+            history.push('/trainings');
+        }
+    }, [isSigningIn, loggedInUsername, setValid, history, setOnSignin]);
+
     const refName = useRef();
     const refPass = useRef();
-    const isValid = valid.reduce((x,a) => a = a && x , true);
+    const isValid = !onSignin && valid.reduce((x,a) => a = a && x , true);
     return (
         <div className="signin-container">
             <form>
@@ -65,7 +79,7 @@ const SignIn = (props) => {
                     </div>
                     <div className="field signin-name">
                         <TextInput ref={refName} label={t('nickname')} defaultValue="" autoFocus={true}
-                                   onBlur={checkName} onChange={checkName} error={errName} onEnter={nameEnter}
+                                   onBlur={checkName} onChange={checkName} error={errName}
                         />
                     </div>
                     <div className="field signin-pass">
