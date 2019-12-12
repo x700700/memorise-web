@@ -27,6 +27,7 @@ const editTrainingReducer = (  state = {
             return {
                 isLoaded: false,
                 training: null,
+                idToFetch: null,
                 fetchedId: null,
                 lastNewExerciseId: null,
                 name: null,

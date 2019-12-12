@@ -110,6 +110,7 @@ export function* deleteTraining(action) {
         yield put({ type: types.FETCH_DELETE_TRAINING_START });
         const resp = yield call(api.deleteTraining, { Bearer: consts.temp.bearer, id: action.id });
         yield put({ type: types.FETCH_DELETE_TRAINING_SUCCEED, training: resp });
+        yield put({ type: types.TRAINING_RESET });
     } catch (e) {
         yield put({ type: types.FETCH_DELETE_TRAINING_FAILED, message: e.message });
         yield put({ type: types.APP_CHECK_AUTH_FAILED, e: e });
