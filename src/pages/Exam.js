@@ -80,11 +80,11 @@ const Exam = (props) => {
             // console.warn('loadExam(examTraining);');
             const newDeck = loadExam(examTraining);
             newDeck && setAnswers(newDeck.getTopQAnswers());
-            if (newDeck.getSize() === 0) {
+            if (newDeck.getSize() < 3) {
                 localStorage.removeItem(consts.localStorage.examId);
                 dispatch({ type: types.APP_RESET_EXAM_TRAINING });
                 dispatch({ type: types.APP_SET_ERROR, error: t('err-exam-too-small') });
-                history.push('/trainings');
+                history.push(`/trainings/${examTrainingId || '-'}/edit`);
             }
         }
     }, [examTraining, setAnswers]);

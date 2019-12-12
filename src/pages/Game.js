@@ -67,11 +67,11 @@ const Game = (props) => {
     useEffect(() => {
         if (gameTraining) {
             const newDeck = loadGame(gameTraining);
-            if (newDeck.getSize() === 0) {
+            if (newDeck.getSize() < 3) {
                 localStorage.removeItem(consts.localStorage.gameId);
                 dispatch({ type: types.APP_RESET_GAME_TRAINING });
                 dispatch({ type: types.APP_SET_ERROR, error: t('err-game-too-small') });
-                history.push('/trainings');
+                history.push(`/trainings/${gameTrainingId || '-'}/edit`);
             }
         }
     }, [gameTraining]);
