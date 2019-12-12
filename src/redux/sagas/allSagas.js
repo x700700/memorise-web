@@ -6,7 +6,7 @@ import consts from '../../common/consts';
 
 export function* auth(action) {
     try {
-        yield put({ type: types.APP_AUTH_STARTED });
+        yield put({ type: types.APP_AUTH_STARTED, authErrorMessage: action.authErrorMessage, signinErrorMessage: action.signinErrorMessage });
         const resp = yield call(api.auth, { Bearer: consts.temp.bearer });
         yield put({ type: types.APP_AUTH_SUCCEED, name: resp.name });
     } catch (e) {
@@ -21,7 +21,7 @@ export function* getTrainingsList(action) {
         yield put({ type: types.FETCH_TRAININGS_SUCCEED, trainingsMap: resp });
     } catch (e) {
         yield put({ type: types.FETCH_TRAININGS_FAILED });
-        // yield put({ type: types.APP_AUTH_FAILED, message: e.message });
+        yield put({ type: types.APP_CHECK_AUTH_FAILED, e: e });
     }
 }
 
@@ -32,7 +32,7 @@ export function* getEditTraining(action) {
         yield put({ type: types.FETCH_EDIT_TRAINING_SUCCEED, training: resp });
     } catch (e) {
         yield put({ type: types.FETCH_EDIT_TRAINING_FAILED });
-        // yield put({ type: types.APP_AUTH_FAILED, message: e.message });
+        yield put({ type: types.APP_CHECK_AUTH_FAILED, e: e });
     }
 }
 export function* getGameTraining(action) {
@@ -43,7 +43,7 @@ export function* getGameTraining(action) {
         yield put({ type: types.APP_SET_GAME_TRAINING_ID, id: null });
     } catch (e) {
         yield put({ type: types.FETCH_GAME_TRAINING_FAILED });
-        // yield put({ type: types.APP_AUTH_FAILED, message: e.message });
+        yield put({ type: types.APP_CHECK_AUTH_FAILED, e: e });
     }
 }
 export function* getExamTraining(action) {
@@ -54,7 +54,7 @@ export function* getExamTraining(action) {
         yield put({ type: types.APP_SET_EXAM_TRAINING_ID, id: null });
     } catch (e) {
         yield put({ type: types.FETCH_EXAM_TRAINING_FAILED });
-        // yield put({ type: types.APP_AUTH_FAILED, message: e.message });
+        yield put({ type: types.APP_CHECK_AUTH_FAILED, e: e });
     }
 }
 
@@ -89,6 +89,7 @@ export function* createTraining(action) {
         yield put({ type: types.FETCH_CREATE_TRAINING_SUCCEED, training: resp });
     } catch (e) {
         yield put({ type: types.FETCH_CREATE_TRAINING_FAILED, message: e.message });
+        yield put({ type: types.APP_CHECK_AUTH_FAILED, e: e });
     }
 }
 
@@ -100,6 +101,7 @@ export function* renameTraining(action) {
         yield put({ type: types.TRAININGS_RENAME, training: resp });
     } catch (e) {
         yield put({ type: types.FETCH_RENAME_TRAINING_FAILED, message: e.message });
+        yield put({ type: types.APP_CHECK_AUTH_FAILED, e: e });
     }
 }
 
@@ -110,6 +112,7 @@ export function* deleteTraining(action) {
         yield put({ type: types.FETCH_DELETE_TRAINING_SUCCEED, training: resp });
     } catch (e) {
         yield put({ type: types.FETCH_DELETE_TRAINING_FAILED, message: e.message });
+        yield put({ type: types.APP_CHECK_AUTH_FAILED, e: e });
     }
 }
 
@@ -121,6 +124,7 @@ export function* createExercise(action) {
         yield put({ type: types.FETCH_CREATE_EXERCISE_SUCCEED, exercise: resp });
     } catch (e) {
         yield put({ type: types.FETCH_CREATE_EXERCISE_FAILED, message: e.message });
+        yield put({ type: types.APP_CHECK_AUTH_FAILED, e: e });
     }
 }
 
@@ -132,6 +136,7 @@ export function* saveExercise(action) {
         yield put({ type: types.TRAININGS_SAMPLE_EXERCISE_CHANGED, sampleExercise: resp.sampleExercise });
     } catch (e) {
         yield put({ type: types.FETCH_SAVE_EXERCISE_FAILED, message: e.message });
+        yield put({ type: types.APP_CHECK_AUTH_FAILED, e: e });
     }
 }
 
@@ -142,5 +147,6 @@ export function* deleteExercise(action) {
         yield put({ type: types.FETCH_DELETE_EXERCISE_SUCCEED, exercise: resp });
     } catch (e) {
         yield put({ type: types.FETCH_DELETE_EXERCISE_FAILED, message: e.message });
+        yield put({ type: types.APP_CHECK_AUTH_FAILED, e: e });
     }
 }

@@ -17,8 +17,10 @@ export const signup = ({ email, nickName, password }) => ({
     },
 });
 
-export const appAuth = () => ({
+export const appAuth = ({ authErrorMessage, signinErrorMessage }) => ({
     type: types.saga.auth,
+    authErrorMessage: authErrorMessage,
+    signinErrorMessage: signinErrorMessage,
 });
 
 

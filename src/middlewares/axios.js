@@ -12,12 +12,15 @@ export default function (props, body) {
         ...props,
         data: body,
         headers: {
-            'Authorization': `Bearer ${jwt}`,
+            'Authorization': jwt ? `Bearer ${jwt}` : '',
             'Content-Type': 'application/json',
         },
     }).then(response => {
         const resp = response.data;
         console.warn('>>>>>', resp);
         return resp;
+    }).catch(e => {
+        console.error('>!!!>', e.response);
+        throw { ...e.response, message: e.message };
     });
 };

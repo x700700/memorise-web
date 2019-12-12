@@ -3,6 +3,8 @@ import consts from "../../common/consts";
 
 const appReducer = (  state = {
                           authCheckStarted: false,
+                          authErrorMessage: 'Press the user icon to sign in',
+                          signinErrorMessage: 'Nick name or password are wrong',
                           authCheckEnded: false,
                           userName: null,
                           isSigningIn: false,
@@ -44,6 +46,8 @@ const appReducer = (  state = {
                 ...state,
                 authCheckStarted: true,
                 authCheckEnded: false,
+                authErrorMessage: action.authErrorMessage || state.authErrorMessage,
+                signinErrorMessage: action.signinErrorMessage || state.signinErrorMessage,
             };
         case types.APP_AUTH_SUCCEED:
             return {
@@ -52,14 +56,31 @@ const appReducer = (  state = {
                 userName: action.name,
             };
         case types.APP_AUTH_FAILED:
-            console.warn('auth failed: ', action.message);
+            console.error('auth failed: ', action.message);
             return {
                 ...state,
                 authCheckEnded: true,
-                error: action.message,
+                error: state.authErrorMessage,
                 userName: null,
             };
-
+        case types.APP_CHECK_AUTH_FAILED:
+            const status = (action.e || {}).status;
+            const message = ((action.e || {}).data || {}).message || action.e.statusText;
+            if (status === 401 || message.toLowerCase().includes('jwt')) {
+                console.error('auth failure: ', message);
+                return {
+                    ...state,
+                    authCheckEnded: true,
+                    error: state.authErrorMessage,
+                    userName: null,
+                    jwt: null,
+                };
+            } else {
+                return {
+                    ...state,
+                    error: action.message,
+                };
+            }
 
         case types.APP_SIGNIN_STARTED:
             localStorage.removeItem(consts.localStorage.tokenId);
@@ -83,7 +104,7 @@ const appReducer = (  state = {
                 ...state,
                 isSigningIn: false,
                 authCheckEnded: true,
-                error: action.message,
+                error: state.signinErrorMessage,
                 userName: null,
             };
         // ====================================================================================================

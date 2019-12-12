@@ -25,6 +25,8 @@ i18n.use(LanguageDetector).init({
                 "err-signup-email-taken": "The Email is already taken",
                 "err-signup-nick-taken": "The Nick Name is already taken",
                 "err-signup-pass-match": "The passwords are not match",
+                "err-auth": "Press the user icon to sign in!",
+                "err-signin": "Incorrect nick name or password",
                 "hello": "Hello",
                 "practice": "Practice",
                 "exam": "Exam",

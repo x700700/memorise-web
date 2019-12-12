@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
+import {useTranslation} from "react-i18next";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { green, red } from '@material-ui/core/colors';
 import * as types from '../redux/actionsTypes';
@@ -14,6 +15,7 @@ import EditTraining from "./EditTraining";
 import NotFound from "./NotFound";
 import Login from "./Login";
 
+
 const theme = createMuiTheme({
         palette: {
             primary: green,
@@ -24,6 +26,7 @@ const theme = createMuiTheme({
 
 let _activeDrawerTrainingId = null;
 const Main = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const userName = useSelector(state => state.app.userName);
     const authCheckStarted = useSelector(state => state.app.authCheckStarted);
@@ -42,13 +45,16 @@ const Main = () => {
         };
 
         console.warn('App started');
-        dispatch(appAuth());
+        dispatch(appAuth({
+            authErrorMessage: t('err-auth'),
+            signinErrorMessage: t('err-signin'),
+        }));
 
         window.addEventListener('scroll', handleScroll, true);
         return () => {
             window.addEventListener('scroll', handleScroll, false);
         }
-    }, [dispatch]);
+    }, [dispatch, t]);
 
     useEffect(() => {
         authCheckStarted && authCheckEnded && userName && console.warn(`*** Hello ${userName} ***`);
