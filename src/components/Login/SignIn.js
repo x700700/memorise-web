@@ -15,6 +15,7 @@ const SignIn = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const isSigningIn = useSelector(state => state.app.isSigningIn);
+    const authCheckEnded = useSelector(state => state.app.authCheckEnded);
     const loggedInUsername = useSelector(state => state.app.userName);
     const [valid, setValid] = useState([false, false]);
     const [errName, setErrName] = useState(null);
@@ -60,7 +61,7 @@ const SignIn = (props) => {
     };
 
     useEffect(() => {
-        console.warn('logged in with username = ', loggedInUsername);
+        // console.warn('logged in with username = ', loggedInUsername);
         setOnSignin(false);
         setValid([true, false]);
         if (loggedInUsername) {
@@ -70,12 +71,16 @@ const SignIn = (props) => {
         }
     }, [isSigningIn, loggedInUsername, setValid, history, setOnSignin, dispatch]);
 
+    const styleBox = {
+        opacity: !authCheckEnded || loggedInUsername ? 0 : 1,
+    };
     const refName = useRef();
     const refPass = useRef();
+    const name = refName.current && refName.current.value();
     const isValid = !onSignin && valid.reduce((x,a) => a = a && x , true);
     return (
         <div className="signin-container">
-            <form>
+            <form style={styleBox}>
                 <div className="signin-col">
                     <div className="signin-title">
                         {t('signin-title')}
@@ -86,7 +91,7 @@ const SignIn = (props) => {
                         />
                     </div>
                     <div className="field signin-pass">
-                        <TextInput ref={refPass} label={t('password')} type="password" defaultValue=""
+                        <TextInput ref={refPass} label={t('password')} type="password" defaultValue="" autoFocus={name ? true : false}
                                    onBlur={checkPassword} onChange={checkPassword} error={errPass} onEnter={passEnter}
                         />
                     </div>

@@ -66,7 +66,6 @@ const appReducer = (  state = {
             return {
                 ...state,
                 isSigningIn: true,
-                authCheckEnded: false,
                 jwt: null,
             };
         case types.APP_SIGNIN_SUCCEED:
