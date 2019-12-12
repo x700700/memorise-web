@@ -28,7 +28,7 @@ let _activeDrawerTrainingId = null;
 const Main = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
-    const userName = useSelector(state => state.app.userName);
+    const loggedInUsername = useSelector(state => state.app.userName);
     const authCheckStarted = useSelector(state => state.app.authCheckStarted);
     const authCheckEnded = useSelector(state => state.app.authCheckEnded);
     const isMenuShown = useSelector(state => state.app.showMenu);
@@ -57,9 +57,9 @@ const Main = () => {
     }, [dispatch, t]);
 
     useEffect(() => {
-        authCheckStarted && authCheckEnded && userName && console.warn(`*** Hello ${userName} ***`);
-        authCheckStarted && authCheckEnded && !userName && console.warn(`*** Not Signed In ***`);
-    }, [userName, authCheckEnded, authCheckStarted]);
+        authCheckStarted && authCheckEnded && loggedInUsername && console.warn(`*** Hello ${loggedInUsername} ***`);
+        authCheckStarted && authCheckEnded && !loggedInUsername && console.warn(`*** Not Signed In ***`);
+    }, [loggedInUsername, authCheckEnded, authCheckStarted]);
 
 
     const onBodyClick = (e) => {

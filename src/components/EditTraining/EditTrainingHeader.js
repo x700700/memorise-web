@@ -9,6 +9,7 @@ import {renameTraining} from "../../redux/actions";
 
 const EditTrainingHeader = ({ id, play, exam, onNameEdit }) => {
     const dispatch = useDispatch();
+    const loggedIn = useSelector(state => state.app.userName) && true;
     const isLoaded = useSelector(state => state.editTraining.isLoaded);
     const name = useSelector(state => state.editTraining.name);
     const [nameInputDisabled, setNameInputDisabled] = useState(false);
@@ -51,7 +52,8 @@ const EditTrainingHeader = ({ id, play, exam, onNameEdit }) => {
     }, [name, isLoaded]);
 
     const styleOnEdit = {
-        pointerEvents: nameInputOnEdit ? 'none' : 'auto',
+        pointerEvents: !loggedIn || nameInputOnEdit ? 'none' : 'auto',
+        opacity: !loggedIn ? 0.5 : 1,
     };
     const refName = useRef();
     return (
@@ -61,7 +63,7 @@ const EditTrainingHeader = ({ id, play, exam, onNameEdit }) => {
                 <div className="field name">
                     <TextInput ref={refName} type="training" defaultValue={name} autoFocus={shouldAutoFocus}
                                onEnter={rename} onFocus={onNameFocus} onBlur={onNameBlur}
-                               noMargin={true} disabled={nameInputDisabled}
+                               noMargin={true} disabled={!loggedIn || nameInputDisabled}
                     />
                 </div>
                 <div className="edit-training-buttons" style={styleOnEdit}>
