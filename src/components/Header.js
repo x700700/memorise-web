@@ -71,13 +71,17 @@ const Header = (props) => {
     const styleOnEdit = {
         pointerEvents: trainingNameIsOnEdit ? 'none' : 'auto',
     };
+    const styleMenuBtn = {
+        visibility: currPage === consts.pageName.trainings ? 'hidden' : 'visible',
+        pointerEvents: currPage === consts.pageName.trainings || trainingNameIsOnEdit ? 'none' : 'auto',
+    };
 
     const isMenuBtnDisable = showMenu !== appShowMenu;
     const menuBtnStatusClass = appShowMenu ? 'btn-menu-opened' : '';
     return (
         <div className="header">
             <div className="header-row">
-                <div className="header-left" style={styleOnEdit}>
+                <div className="header-left" style={styleMenuBtn}>
                     <button onClick={() => menuClicked(!appShowMenu)} className={`btn btn-menu ${isMenuBtnDisable ? 'disable-pointer' : ''}`}><i className={`fas fa-chevron-down ${menuBtnStatusClass}`}/></button>
                 </div>
                 <div className="tabs" style={styleOnEdit}>
