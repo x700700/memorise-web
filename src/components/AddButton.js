@@ -24,10 +24,12 @@ const AddButton = (props) => {
     const addTraining = (e) => {
         // console.warn('Add Training');
         dispatch({ type: types.APP_SET_ACTIVE_DRAWER_TRAINING, id: null });
+        window.scrollTo(0, 0);
         dispatch(createTraining());
     };
     const addExercise = (e) => {
         // console.warn('Add Exercise');
+        window.scrollTo(0, 0);
         dispatch(createExercise(editTrainingId));
     };
 
