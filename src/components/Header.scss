@@ -66,6 +66,16 @@
                     color: $grey10;
                 }
             }
+            .btn-play {
+                i {
+                    color: #fdd;
+                }
+            }
+            .tab-inactive {
+                i {
+                    color: #aaa;
+                }
+            }
             .tab-active {
                 i {
                     color: $purple4;

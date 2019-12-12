@@ -9,7 +9,7 @@ import Exercise from "../components/EditTraining/Exercise";
 import EditTrainingHeader from "../components/EditTraining/EditTrainingHeader";
 
 const EditTraining = (props) => {
-    const id = props.match.params.id;
+    const paramId = props.match.params.id;
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -47,10 +47,10 @@ const EditTraining = (props) => {
             dispatch({type: types.APP_SHOW_MENU, show: false});
         }
         // console.warn('id <> idToFetch', id, idToFetch, training);
-        if ((!training && !isFetching) || (training && id && id !== training.id)) {
-            id !== idToFetch && dispatch(getEditTraining(id));
+        if ((!training && !isFetching) || (training && paramId && paramId !== training.id)) {
+            paramId !== '-' && paramId !== idToFetch && dispatch(getEditTraining(paramId));
         }
-    }, [dispatch, history, id, idToFetch, training, isFetching, currPage]);
+    }, [dispatch, history, paramId, idToFetch, training, isFetching, currPage]);
 
     return (
         <div className="edit-training-page">

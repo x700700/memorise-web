@@ -56,11 +56,18 @@ const editTrainingReducer = (  state = {
             return {
                 ...state,
                 isFetching: false,
-                isLoaded: true, // Todo - false
-                training: mockTraining, // Todo - remove
-                name: mockTraining.name, // Todo - remove
-                nameBeforeEdit: mockTraining.name, // Todo - remove
-                // fetchedId: null, // Todo - do it
+                isLoaded: false,
+                training: null,
+                name: null,
+                nameBeforeEdit: null,
+                fetchedId: null,
+                /*
+                // Mock:
+                isLoaded: true,
+                training: mockTraining,
+                name: mockTraining.name,
+                nameBeforeEdit: mockTraining.name,
+                */
             };
 
 

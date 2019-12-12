@@ -14,15 +14,17 @@ import MenuEdit from "./EditTraining/MenuEdit";
 const Header = (props) => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
-    const error = useSelector(state => state.app.error);
-    const training = useSelector(state => state.editTraining.training);
+    const isLoggedIn = useSelector(state => state.app.userName) && true;
     const currPage = useSelector(state => state.app.currentPage);
+    const error = useSelector(state => state.app.error);
+    const editedTrainingId = useSelector(state => state.editTraining.idToFetch);
+    const training = useSelector(state => state.editTraining.training);
     const trainingNameIsOnEdit = useSelector(state => state.app.trainingNameIsOnEdit);
     const [timingCurrPage, setTimingCurrPage] = useState(currPage);
     const appShowMenu = useSelector(state => state.app.showMenu);
     const [showMenu, setShowMenu] = useState(appShowMenu);
 
-    const editTrainingId = (training && training.id) || 'NotFound';
+    const editTrainingId = (training && training.id) || '-';
 
     const clearError = useCallback(() => dispatch({ type: types.APP_SET_ERROR, error: null }), [dispatch]);
     useEffect(() => {
@@ -80,9 +82,19 @@ const Header = (props) => {
                 </div>
                 <div className="tabs" style={styleOnEdit}>
                     <Link to="/trainings"><span className={`btn ${currPage === consts.pageName.trainings ? 'tab-active' : ''}`}><i className="fas fa-book-open"/></span></Link>
-                    <Link to={`/trainings/${editTrainingId}/edit`}><span className={`btn ${currPage === consts.pageName.edit ? 'tab-active' : ''}`}><i className="fas fa-edit"/></span></Link>
-                    <Link to="/practice"><span className={`btn ${currPage === consts.pageName.practice ? 'tab-active' : ''}`}><i className="fas fa-copy"/></span></Link>
-                    <Link to="/exam"><span className={`btn ${currPage === consts.pageName.exam ? 'tab-active' : ''}`}><i className="fas fa-grin-beam-sweat"/></span></Link>
+
+                    {isLoggedIn && editedTrainingId ?
+                        <Link to={`/trainings/${editTrainingId}/edit`}><span
+                            className={`btn ${currPage === consts.pageName.edit ? 'tab-active' : ''}`}><i
+                            className="fas fa-edit"/></span></Link> :
+
+                        <span
+                            className={`btn tab-inactive ${currPage === consts.pageName.edit ? 'tab-active' : ''}`}><i
+                            className="fas fa-edit"/></span>
+                    }
+
+                    <Link to="/practice"><span className={`btn btn-play ${currPage === consts.pageName.practice ? 'tab-active' : ''}`}><i className="fas fa-copy"/></span></Link>
+                    <Link to="/exam"><span className={`btn btn-play ${currPage === consts.pageName.exam ? 'tab-active' : ''}`}><i className="fas fa-grin-beam-sweat"/></span></Link>
                 </div>
                 <img className="logo" style={styleOnEdit} src={logo} alt="logo" width="32" height="32" onClick={() => clearLocalStorage()}/>
             </div>
