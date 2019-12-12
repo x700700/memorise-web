@@ -144,7 +144,8 @@ export function* deleteExercise(action) {
     try {
         yield put({ type: types.FETCH_DELETE_EXERCISE_START });
         const resp = yield call(api.deleteExercise, { Bearer: consts.temp.bearer, trainingId: action.trainingId, id: action.id });
-        yield put({ type: types.FETCH_DELETE_EXERCISE_SUCCEED, exercise: resp });
+        yield put({ type: types.FETCH_DELETE_EXERCISE_SUCCEED, exercise: resp.deletedExercise });
+        yield put({ type: types.TRAININGS_SAMPLE_EXERCISE_CHANGED, sampleExercise: resp.sampleExercise });
     } catch (e) {
         yield put({ type: types.FETCH_DELETE_EXERCISE_FAILED, message: e.message });
         yield put({ type: types.APP_CHECK_AUTH_FAILED, e: e });
