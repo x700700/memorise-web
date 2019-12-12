@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
+import {useTranslation} from "react-i18next";
 import * as types from '../redux/actionsTypes';
 import './Exam.scss';
 import consts from "../common/consts";
@@ -12,7 +13,9 @@ import PopUpBox from "../components/_Tools/PopUpBox";
 import ExamTable from "../components/Practice/ExamTable";
 import {getExamTraining} from "../redux/actions";
 
+
 const Exam = (props) => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const history = useHistory();
     const [, setTopCard] = useState(null); // !! This is necessary for making the dom render on next card !!
@@ -77,6 +80,12 @@ const Exam = (props) => {
             // console.warn('loadExam(examTraining);');
             const newDeck = loadExam(examTraining);
             newDeck && setAnswers(newDeck.getTopQAnswers());
+            if (newDeck.getSize() === 0) {
+                localStorage.removeItem(consts.localStorage.examId);
+                dispatch({ type: types.APP_RESET_EXAM_TRAINING });
+                dispatch({ type: types.APP_SET_ERROR, error: t('err-exam-too-small') });
+                history.push('/trainings');
+            }
         }
     }, [examTraining, setAnswers]);
 

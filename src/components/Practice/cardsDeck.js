@@ -8,7 +8,7 @@ export default class cardsDeck {
         if (training) {
             const exercises = training && training.exercises && Object.values(training.exercises);
             // console.warn('=====> cardsDeck - exercises = ', exercises);
-            this.initialDeck = _.cloneDeep(exercises);
+            this.initialDeck = _.cloneDeep(exercises).filter(x => x.q && x.a);
         } else {
             this.initialDeck = [];
         }
@@ -23,7 +23,7 @@ export default class cardsDeck {
     reset = (shouldSaveToStorage, cardsNum) => {
         // console.warn('cardsDeck reset isExamPageAnswered');
         if (this.isNextDeckFlipped) this.isDeckFlipped = this.isNextDeckFlipped === 2;
-        this.currentDeck = this.initialDeck.filter(x => x.q && x.a);
+        this.currentDeck = this.initialDeck;
         this.examStartDeck = _.cloneDeep(this.currentDeck);
         this.sizeTraining = this.currentDeck.length;
         this.currentDeck = (_.shuffle(this.currentDeck)).splice(0, cardsNum);
@@ -41,7 +41,8 @@ export default class cardsDeck {
     };
     validate = () => {
         if (!this.initialDeck || this.initialDeck.length === 0) {
-            throw new Error('Tried to loaded empty training');
+            this.initialDeck = [];
+            // throw new Error('Tried to loaded empty training');
         }
     };
 

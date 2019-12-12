@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
+import {useTranslation} from "react-i18next";
 import * as types from '../redux/actionsTypes';
 import './Game.scss';
 import consts from "../common/consts";
@@ -12,7 +13,9 @@ import GameSum from "../components/Practice/GameSum";
 import PopUpBox from "../components/_Tools/PopUpBox";
 import { getGameTraining } from "../redux/actions";
 
+
 const Game = (props) => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const history = useHistory();
     const [, setTopCard] = useState(null); // !! This is necessary for making the dom render on next card !!
@@ -56,14 +59,20 @@ const Game = (props) => {
             return new CardsDeck(consts.localStorage.gameId, training, shouldFlipped);
         };
         const shouldDeckFlipped = (cardsDeck && cardsDeck.getIsDeckFlipped()) || false;
-        loadPlay(consts.localStorage.gameId, createNewDeck,
+        return loadPlay(consts.localStorage.gameId, createNewDeck,
             () => dispatch({type: types.APP_SET_GAME_ENDED, ended: true}),
             (newDeck) => dispatch({type: types.APP_SET_GAME_CARDSDECK, cardsDeck: newDeck}),
             shouldDeckFlipped);
     };
     useEffect(() => {
         if (gameTraining) {
-            loadGame(gameTraining);
+            const newDeck = loadGame(gameTraining);
+            if (newDeck.getSize() === 0) {
+                localStorage.removeItem(consts.localStorage.gameId);
+                dispatch({ type: types.APP_RESET_GAME_TRAINING });
+                dispatch({ type: types.APP_SET_ERROR, error: t('err-game-too-small') });
+                history.push('/trainings');
+            }
         }
     }, [gameTraining]);
 

@@ -184,6 +184,15 @@ const appReducer = (  state = {
         // ====================================================================================================
         // ====================================================================================================
 
+        case types.APP_RESET_GAME_TRAINING:
+            return {
+                ...state,
+                gameTrainingIsLoaded: false,
+                gameTraining: null,
+                gameTrainingIdToFetch: null,
+                gameCardsDeck: null,
+            };
+
         case types.FETCH_GAME_TRAINING_START:
             return {
                 ...state,
@@ -211,6 +220,15 @@ const appReducer = (  state = {
 
         // ====================================================================================================
         // ====================================================================================================
+
+        case types.APP_RESET_EXAM_TRAINING:
+            return {
+                ...state,
+                examTrainingIsLoaded: false,
+                examTraining: null,
+                examTrainingIdToFetch: null,
+                examCardsDeck: null,
+            };
 
         case types.FETCH_EXAM_TRAINING_START:
             return {
