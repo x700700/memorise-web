@@ -21,6 +21,7 @@ export default function (props, body) {
         return resp;
     }).catch(e => {
         console.error('>!!!>', e.response);
+        // eslint-disable-next-line no-throw-literal
         throw { ...e.response, message: e.message };
     });
 };

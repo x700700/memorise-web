@@ -22,25 +22,30 @@ const SignIn = (props) => {
     const [errPass, setErrPass] = useState(null);
     const [onSignin, setOnSignin] = useState(false);
 
+    const updateValid = (fieldCount, val) => {
+        const updated = valid.map((x,i) => i === fieldCount-1 ? val : x);
+        setValid(updated);
+    };
+
     const checkName = (text) => {
         if (!validateRequired(text)) {
             setErrName(t('err-name-required'));
-            setValid([false, valid[1]]);
+            updateValid(1, false);
         } else if (!validateName(text)) {
             setErrName(t('err-name-valid'));
-            setValid([false, valid[1]]);
+            updateValid(1, false);
         } else {
             setErrName(null);
-            setValid([true, valid[1]]);
+            updateValid(1, true);
         }
     };
     const checkPassword = (text) => {
         if (!validatePassword(text)) {
             setErrPass(t('err-pass'));
-            setValid([valid[0], false]);
+            updateValid(2, false);
         } else {
             setErrPass(null);
-            setValid([valid[0], true]);
+            updateValid(2, true);
         }
     };
     const passEnter = () => {
