@@ -5,7 +5,7 @@ import * as types from '../../redux/actionsTypes';
 import {useTranslation} from "react-i18next";
 import TextInput from "../_Tools/TextInput";
 import Button from "../_Tools/Button";
-import {validateName, validatePassword} from "../../common/utils";
+import { validateRequired, validateName, validatePassword } from "../../common/utils";
 import { signin } from '../../redux/actions';
 import {useHistory} from "react-router";
 
@@ -23,10 +23,10 @@ const SignIn = (props) => {
     const [onSignin, setOnSignin] = useState(false);
 
     const checkName = (text) => {
-        if (!validateName(text)) {
+        if (!validateRequired(text)) {
             setErrName(t('err-name-required'));
             setValid([false, valid[1]]);
-        } else if (text.includes(' ')) {
+        } else if (!validateName(text)) {
             setErrName(t('err-name-valid'));
             setValid([false, valid[1]]);
         } else {
@@ -72,7 +72,7 @@ const SignIn = (props) => {
     }, [isSigningIn, loggedInUsername, setValid, history, setOnSignin, dispatch]);
 
     const styleBox = {
-        opacity: !authCheckEnded || loggedInUsername ? 0 : 1,
+        opacity: !authCheckEnded || loggedInUsername || onSignin ? 0 : 1,
     };
     const refName = useRef();
     const refPass = useRef();
