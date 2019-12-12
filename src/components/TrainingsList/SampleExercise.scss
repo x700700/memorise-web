@@ -2,10 +2,17 @@
 
 
 .sample-exercise-container {
+    position: relative;
     margin: .2rem 0;
     background-color: lightgoldenrodyellow;
     border: $grey2 .5px solid;
     padding: .2rem;
+
+    .icon-edit-absolute {
+        position: absolute;
+        bottom: 0;
+        color: $grey4;
+    }
 
     .sample-exercise-col {
         text-align: left;

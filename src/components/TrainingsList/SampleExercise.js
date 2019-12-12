@@ -10,7 +10,7 @@ const Divider = ({ width }) => {
 };
 */
 
-const SampleExercise = ({ q, a }) => {
+const SampleExercise = ({ q, a, hideEditIcon }) => {
     return (
         <div className="sample-exercise-container">
             <div className="sample-exercise-col">
@@ -18,6 +18,11 @@ const SampleExercise = ({ q, a }) => {
                 {/*<Divider width="80%"/>*/}
                 <div className="exercise answer">{a}</div>
             </div>
+            {!hideEditIcon &&
+            <div className="icon-edit-absolute">
+                <i className="fas fa-edit"/>
+            </div>
+            }
         </div>);
 };
 export default  SampleExercise;
