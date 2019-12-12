@@ -69,6 +69,7 @@ export const FETCH_DELETE_TRAINING_FAILED = 'trainings.FETCH_DELETE_TRAINING_FAI
 // ============================================================================================================
 
 export const TRAINING_UPDATE_LAST_NEW_EXERCISE_ID = 'exercises.TRAINING_UPDATE_LAST_NEW_EXERCISE_ID';
+export const TRAINING_RESET = 'exercises.TRAINING_RESET';
 
 
 export const FETCH_CREATE_EXERCISE_START = 'exercises.FETCH_CREATE_EXERCISE_START';

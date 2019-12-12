@@ -18,6 +18,7 @@ const Training = ({ training }) => {
     const edit = () => {
         if (activeDrawerTrainingId) return;
         console.warn('Edit training - ', training.id);
+        dispatch({ type: types.TRAINING_RESET });
         history.push(`/trainings/${training.id}/edit`)
     };
     const play = () => {

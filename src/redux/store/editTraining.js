@@ -23,6 +23,15 @@ const editTrainingReducer = (  state = {
                 ...state,
                 lastNewExerciseId: action.id,
             };
+        case types.TRAINING_RESET:
+            return {
+                isLoaded: false,
+                training: null,
+                fetchedId: null,
+                lastNewExerciseId: null,
+                name: null,
+                nameBeforeEdit: null,
+            };
 
         case types.FETCH_EDIT_TRAINING_START:
             return {

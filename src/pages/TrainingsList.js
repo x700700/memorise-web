@@ -20,7 +20,8 @@ const TrainingsList = (props) => {
 
     useEffect(() => {
         if (lastNewTrainingId) {
-            // console.warn('new training');
+            // console.warn('new training created - redirecting to it');
+            dispatch({ type: types.TRAINING_RESET });
             dispatch({ type: types.TRAININGS_UPDATE_LAST_NEW_TRAINING_ID, id: null });
             history.push(`/trainings/${lastNewTrainingId}/edit`);
         }
