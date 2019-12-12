@@ -190,7 +190,7 @@ export default class cardsDeck {
             const a = !this.isDeckFlipped ? 'a' : 'q';
             const right = this.currentDeck[0];
             if (right) {
-                answers = this.examStartDeck.filter(x => right && x && x[a] && x[a] !== right[a]);
+                answers = (this.examStartDeck || []).filter(x => right && x && x[a] && x[a] !== right[a]);
                 answers = _.uniqBy(answers, a);
                 answers = _.shuffle(answers).slice(0, 4);
                 answers.unshift(right);

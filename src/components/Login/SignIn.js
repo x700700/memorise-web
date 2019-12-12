@@ -59,6 +59,8 @@ const SignIn = (props) => {
         // console.warn('login - ', name, pass);
         refPass.current.setValue('');
         setOnSignin(true);
+        dispatch({ type: types.TRAININGS_LIST_RESET });
+        dispatch({ type: types.TRAINING_RESET });
         dispatch(signin({
             nickName: name,
             password: pass,
@@ -70,11 +72,9 @@ const SignIn = (props) => {
         setOnSignin(false);
         setValid([true, false]);
         if (loggedInUsername) {
-            dispatch({ type: types.FETCH_TRAININGS_SUCCEED, trainingsMap: null });
-            // dispatch({ type: types.FETCH_TRAININGS_SUCCEED, trainingsMap: null }); // Todo - reset also editTraining store
             history.push('/trainings');
         }
-    }, [isSigningIn, loggedInUsername, setValid, history, setOnSignin, dispatch]);
+    }, [isSigningIn, loggedInUsername, setValid, history, setOnSignin]);
 
     const styleBox = {
         opacity: !authCheckEnded || loggedInUsername || onSignin ? 0 : 1,

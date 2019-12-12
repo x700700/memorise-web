@@ -1,12 +1,15 @@
-const foo = {
-    "id": "__001",
+const trainingMultiply = {
+    "id": "__T001",
     "name": "לוח הכפל",
     "created": "2019-12-01T18:40:48.560Z",
     "modified": "2019-12-01T19:47:35.859Z",
     "popularity": 5,
     "difficulty": 3,
+    "sampleExercise": {
+        "q": "6 X 7",
+        "a": "42",
+    },
     "info": {
-        "userId": "5dde4b0436512dac5175f664",
         "archived": false,
         "lastTrainedAt": null
     },
@@ -16,8 +19,8 @@ const foo = {
 let i, j, c = 0;
 for (i = 3; i < 9; i++) {
     for (j = 3; j < 9; j++) {
-        foo.exercises[c++] = {
-            id: `${i * j}`,
+        trainingMultiply.exercises[c++] = {
+            id: `${i}X${j}`,
             q: `${i} X ${j}`,
             a: `${i * j}`,
         };
@@ -31,4 +34,4 @@ foo.exercises[c++] = {
 };
  */
 
-export default foo;
+export default { "__T001": trainingMultiply };

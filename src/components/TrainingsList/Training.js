@@ -6,6 +6,8 @@ import SampleExercise from "./SampleExercise";
 import {useHistory} from "react-router-dom";
 import { isRtl } from "../../common/utils";
 import DrawerButtons from "./DrawerButtons";
+import CardsDeck from "../Practice/cardsDeck";
+import consts from "../../common/consts";
 
 
 const Training = ({ training }) => {
@@ -19,19 +21,35 @@ const Training = ({ training }) => {
     const edit = () => {
         if (!isLoggedIn || activeDrawerTrainingId) return;
         console.warn('Edit training - ', training.id);
-        dispatch({ type: types.TRAINING_RESET });
-        history.push(`/trainings/${training.id}/edit`)
+        if (!training.id.startsWith('__')) {
+            dispatch({type: types.TRAINING_RESET});
+            history.push(`/trainings/${training.id}/edit`)
+        }
     };
     const play = () => {
         // if (!isLoggedIn) return;
         console.warn('Play training - ', training.id);
-        dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: training.id });
+        if (!training.id.startsWith('__')) {
+            dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: training.id });
+        } else {
+            dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: null });
+            const cardsDeck = new CardsDeck(consts.localStorage.gameId, training, false);
+            dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: cardsDeck });
+            dispatch({ type: types.APP_SET_GAME_ENDED, ended: false });
+        }
         history.push('/practice');
     };
     const exam = () => {
         // if (!isLoggedIn) return;
         console.warn('Exam training - ', training.id);
-        dispatch({ type: types.APP_SET_EXAM_TRAINING_ID, id: training.id });
+        if (!training.id.startsWith('__')) {
+            dispatch({type: types.APP_SET_EXAM_TRAINING_ID, id: training.id});
+        } else {
+            dispatch({ type: types.APP_SET_EXAM_TRAINING_ID, id: null });
+            const cardsDeck = new CardsDeck(consts.localStorage.examId, training, false);
+            dispatch({ type: types.APP_SET_EXAM_CARDSDECK, cardsDeck: cardsDeck });
+            dispatch({ type: types.APP_SET_EXAM_ENDED, ended: false });
+        }
         history.push('/exam');
     };
 

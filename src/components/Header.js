@@ -83,7 +83,7 @@ const Header = (props) => {
                 <div className="tabs" style={styleOnEdit}>
                     <Link to="/trainings"><span className={`btn ${currPage === consts.pageName.trainings ? 'tab-active' : ''}`}><i className="fas fa-book-open"/></span></Link>
 
-                    {isLoggedIn && editedTrainingId ?
+                    {isLoggedIn && editedTrainingId && !editedTrainingId.startsWith('__') ?
                         <Link to={`/trainings/${editTrainingId}/edit`}><span
                             className={`btn ${currPage === consts.pageName.edit ? 'tab-active' : ''}`}><i
                             className="fas fa-edit"/></span></Link> :

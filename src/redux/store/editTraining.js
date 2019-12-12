@@ -1,5 +1,5 @@
 import * as types from '../actionsTypes';
-import mockTraining from '../../mock/training-words1';
+// import mockTraining from '../../mock/training-words1';
 
 const editTrainingReducer = (  state = {
                                    isFetching: false,
@@ -25,6 +25,7 @@ const editTrainingReducer = (  state = {
             };
         case types.TRAINING_RESET:
             return {
+                ...state,
                 isLoaded: false,
                 training: null,
                 idToFetch: null,

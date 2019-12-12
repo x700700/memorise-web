@@ -33,7 +33,7 @@ const TrainingsList = (props) => {
             dispatch({type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.trainings});
             dispatch({type: types.APP_SHOW_MENU, show: false});
         }
-        if (!trainingsList && !isFetching) {
+        if (!isFetching && !trainingsList) {
             dispatch(getTrainingsList());
         }
     }, [dispatch, history, trainingsList, isFetching, currPage]);
