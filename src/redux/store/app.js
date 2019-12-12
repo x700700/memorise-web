@@ -66,7 +66,7 @@ const appReducer = (  state = {
         case types.APP_CHECK_AUTH_FAILED:
             const status = (action.e || {}).status;
             const message = ((action.e || {}).data || {}).message || action.e.statusText;
-            if (status === 401 || message.toLowerCase().includes('jwt')) {
+            if (status === 401 || (message || '').toLowerCase().includes('jwt')) {
                 console.error('auth failure: ', message);
                 return {
                     ...state,
