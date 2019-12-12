@@ -51,8 +51,11 @@ const Exercise = ({ exercise, disable }) => {
         }
     }, [lastNewExerciseId, dispatch, disable, refModal, exercise.id]);
 
+    const styleContainer = {
+        backgroundColor: exercise.q.trim() && exercise.a.trim() ? 'lightgoldenrodyellow' : '#ffdddd',
+    };
     return (
-        <div className="edit-training-exercise-container">
+        <div className="edit-training-exercise-container" style={styleContainer}>
             <div className="exercise-col" onClick={edit}>
                 <div className="exercise question">{exercise.q}</div>
                 <div className="exercise answer">{exercise.a}</div>
