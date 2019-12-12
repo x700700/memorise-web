@@ -11,22 +11,25 @@ import DrawerButtons from "./DrawerButtons";
 const Training = ({ training }) => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const isLoggedIn = useSelector(state => state.app.userName) && true;
     const activeDrawerTrainingId = useSelector(state => state.app.activeDrawerTrainingId);
 
     const sampleExercise = (training && training.sampleExercise) || {q: '', a: ''};
 
     const edit = () => {
-        if (activeDrawerTrainingId) return;
+        if (!isLoggedIn || activeDrawerTrainingId) return;
         console.warn('Edit training - ', training.id);
         dispatch({ type: types.TRAINING_RESET });
         history.push(`/trainings/${training.id}/edit`)
     };
     const play = () => {
+        // if (!isLoggedIn) return;
         console.warn('Play training - ', training.id);
         dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: training.id });
         history.push('/practice');
     };
     const exam = () => {
+        // if (!isLoggedIn) return;
         console.warn('Exam training - ', training.id);
         dispatch({ type: types.APP_SET_EXAM_TRAINING_ID, id: training.id });
         history.push('/exam');
