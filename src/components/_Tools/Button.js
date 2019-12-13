@@ -1,15 +1,29 @@
 import React from 'react';
-import {makeStyles, withStyles} from '@material-ui/core/styles';
+import { ThemeProvider, createMuiTheme, makeStyles, withStyles } from '@material-ui/core/styles';
 import MaterialButton from '@material-ui/core/Button';
-// import { green } from '@material-ui/core/colors';
+import { green, red, purple } from '@material-ui/core/colors';
+
+const themeStd = createMuiTheme({
+    palette: {
+        primary: green,
+        secondary: red,
+    },
+});
+
+const themePurple = createMuiTheme({
+    palette: {
+        primary: green,
+        secondary: purple,
+    },
+});
 
 const ColorButton = withStyles(theme => ({
     /*
     root: {
-        color: theme.palette.getContrastText(green[500]),
-        backgroundColor: green[500],
+        color: theme.palette.getContrastText(purple[500]),
+        backgroundColor: purple[500],
         '&:hover': {
-            backgroundColor: green[700],
+            backgroundColor: purple[700],
         },
     },
      */
@@ -23,18 +37,21 @@ const useStyles = makeStyles(theme => ({
 
 const Button = ({ type, text, onClick, disabled }) => {
     const classes = useStyles();
-    const color = type === 'cancel' ? 'secondary' : 'primary';
+    const color = type && type.startsWith('cancel') ? 'secondary' : 'primary';
     const style = {
         // backgroundColor: type === 'cancel' ? 'red' : 'green',
     };
 
+    const themeButton = type === 'cancel-delete' ? themePurple : themeStd;
     return (
         <div>
-            <ColorButton variant="contained" style={style} color={color} size="medium" fullWidth={true} className={classes.margin}
-                         onClick={onClick()} disabled={disabled}
-            >
-                {text}
-            </ColorButton>
+            <ThemeProvider theme={themeButton}>
+                <ColorButton variant="contained" style={style} color={color} size="medium" fullWidth={true} className={classes.margin}
+                             onClick={onClick()} disabled={disabled}
+                >
+                    {text}
+                </ColorButton>
+            </ThemeProvider>
         </div>
     );
 

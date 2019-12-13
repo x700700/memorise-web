@@ -3,7 +3,7 @@ import './ModalOkCancel.scss';
 import Modal from "./Modal";
 import Button from './Button';
 
-const ModalOkCancel = forwardRef(({ children, title, okMsg, cancelMsg, onOk, onCancel }, ref) => {
+const ModalOkCancel = forwardRef(({ children, title, okMsg, cancelMsg, onOk, onCancel, cancelType }, ref) => {
     useImperativeHandle(ref, () => ({
         open() {
             refModal.current.open();
@@ -22,10 +22,10 @@ const ModalOkCancel = forwardRef(({ children, title, okMsg, cancelMsg, onOk, onC
 
                 <div className="buttons">
                     <div className="button-container">
-                        <Button type="cancel" text={cancelMsg} onClick={onCancel} />
+                        <Button type={cancelType || 'cancel'} text={cancelMsg} onClick={onCancel} />
                     </div>
                     <div className="button-container">
-                        <Button type="ok" text={okMsg} onClick={onOk} />
+                        <Button type={cancelType ? 'cancel' : 'ok'} text={okMsg} onClick={onOk} />
                     </div>
                 </div>
             </div>
