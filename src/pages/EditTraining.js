@@ -106,7 +106,7 @@ const EditTraining = (props) => {
                     })}
                 </div>
             </div>
-            <ModalOkCancel ref={refModal} title={t("delete approval")}
+            <ModalOkCancel ref={refModal} title={`${t("delete approval")} - ${training && training.name}`}
                            okMsg={t('delete')} cancelMsg={t('cancel')} cancelType="cancel-delete"
                            onOk={() => trainingDelete} onCancel={() => cancelDelete}
             >

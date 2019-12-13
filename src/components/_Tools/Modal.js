@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Modal = forwardRef(({ children, onClose, title }, ref) => {
+const Modal = forwardRef(({ children, onClose, title, disableBackdropClick = false }, ref) => {
     useImperativeHandle(ref, () => ({
         open() {
             setOpen(true);
@@ -49,7 +49,7 @@ const Modal = forwardRef(({ children, onClose, title }, ref) => {
             aria-describedby="simple-modal-description"
             open={opened}
             onClose={handleClose}
-            disableBackdropClick={true}
+            disableBackdropClick={disableBackdropClick}
         >
             <div style={modalStyle} className={classes.paper}>
                 <div className="modal-box">
