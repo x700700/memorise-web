@@ -37,7 +37,7 @@ const MenuGame = ({ hide }) => {
         <TopMenu hide={hide}>
             {cardsDeck &&
             <div className="menu-game-col">
-                <div className="title">{t("practice")}</div>
+                <div className="title">{cardsDeck && cardsDeck.name}</div>
                 <div className="flip-container">
                     <SwitchYellow label={t('flip-deck-side')} value="gameFlipSwitch" onChange={flipDeck} startValue={isDeckFlipped}/>
                 </div>

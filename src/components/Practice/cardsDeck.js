@@ -8,6 +8,7 @@ export default class cardsDeck {
         if (training) {
             const exercises = training && training.exercises && Object.values(training.exercises);
             // console.warn('=====> cardsDeck - exercises = ', exercises);
+            this.name = training.name;
             this.initialDeck = _.cloneDeep(exercises).filter(x => x.q && x.a);
         } else {
             this.initialDeck = [];
@@ -49,6 +50,7 @@ export default class cardsDeck {
     getStorage = () => {
         const mem = {
             localStorageKey: this.localStorageKey,
+            name: this.name,
             initialDeck: this.initialDeck,
             examStartDeck: this.examStartDeck,
             currentDeck: this.currentDeck,
@@ -70,6 +72,7 @@ export default class cardsDeck {
     setStorage = (storage) => {
         const mem = JSON.parse(storage);
         this.localStorageKey = mem.localStorageKey;
+        this.name = mem.name;
         this.initialDeck = mem.initialDeck;
         this.examStartDeck = mem.examStartDeck;
         this.currentDeck = mem.currentDeck;
