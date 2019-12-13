@@ -23,6 +23,7 @@ const EditTraining = (props) => {
     const isLoaded = useSelector(state => state.editTraining.isLoaded);
     const training = useSelector(state => state.editTraining.training);
     const idToFetch = useSelector(state => state.editTraining.idToFetch);
+    const fetchedId = useSelector(state => state.editTraining.fetchedId);
     const idToDelete = useSelector(state => state.editTraining.idToDelete);
 
     const exercisesMap = isLoaded && training && training.exercises;
@@ -47,6 +48,8 @@ const EditTraining = (props) => {
     const trainingDelete = () => {
         dispatch(deleteTraining(training.id));
         refModal.current.close();
+        dispatch({ type: types.TRAINING_RESET });
+        history.push('/trainings');
     };
     const cancelDelete = () => {
         refModal.current.close();
@@ -60,6 +63,14 @@ const EditTraining = (props) => {
         }
     }, [idToDelete, dispatch]);
 
+    useEffect(() => {
+        if (!isFetching && !isLoaded && idToFetch && !fetchedId) {
+            console.error('Training was not fetched - redirect to list');
+            dispatch({ type: types.TRAINING_RESET });
+            history.push('/trainings');
+        }
+    }, [isFetching, isLoaded, idToFetch, fetchedId, history, dispatch]);
+
     // const getEditTrainingCb = useCallback((id) => dispatch(getEditTraining(id)), [getEditTraining]);
     useEffect(() => {
         if (currPage !== consts.pageName.edit) {
@@ -67,11 +78,11 @@ const EditTraining = (props) => {
             dispatch({type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.edit});
             dispatch({type: types.APP_SHOW_MENU, show: false});
         }
-        // console.warn('id <> idToFetch', id, idToFetch, training);
-        if ((!training && !isFetching) || (training && paramId && paramId !== training.id)) {
-            paramId !== '-' && paramId !== idToFetch && dispatch(getEditTraining(paramId));
+        // console.warn('id <> idToFetch', paramId , idToFetch, idToDelete, training);
+        if ((paramId && !training && !isFetching) || (training && paramId && paramId !== training.id)) {
+            paramId !== '-' && paramId !== idToFetch && paramId !== idToDelete && dispatch(getEditTraining(paramId));
         }
-    }, [dispatch, history, paramId, idToFetch, training, isFetching, currPage]);
+    }, [dispatch, history, paramId, idToFetch, idToDelete, training, isFetching, currPage]);
 
     const refModal = useRef();
     return (
