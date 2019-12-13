@@ -8,6 +8,7 @@ const editTrainingReducer = (  state = {
                                    fetchedId: null,
                                    training: null,
                                    lastNewExerciseId: null,
+                                   idToDelete: null,
 
                                    isRenaming: false,
                                    isRenamed: false,
@@ -34,6 +35,12 @@ const editTrainingReducer = (  state = {
                 name: null,
                 nameBeforeEdit: null,
             };
+        case types.TRAINING_SET_DELETE_ID:
+            return {
+                ...state,
+                idToDelete: action.id,
+            };
+
 
         case types.FETCH_EDIT_TRAINING_START:
             return {

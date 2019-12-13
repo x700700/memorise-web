@@ -44,10 +44,11 @@ i18n.use(LanguageDetector).init({
                 "save": "Save",
                 "cancel": "Cancel",
                 "delete": "Delete",
-                "delete training": "Delete Training",
-                "are u sure": "Deleting the Training will delete ALL the Exercises included!",
+                "delete this training": "Delete the entire Training",
                 "err-game-too-small": "Add exercises to practice it",
                 "err-exam-too-small": "Add exercises to be examined",
+                "delete approval": "Delete Approval",
+                "delete-training-approval": "Delete this Training Including all its Exercises?"
             }
         },
         jap: {

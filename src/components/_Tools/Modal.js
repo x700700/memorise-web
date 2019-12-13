@@ -25,10 +25,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Modal = forwardRef(({ children, onClose, title }, ref) => {
-    const classes = useStyles();
-    const [modalStyle] = React.useState(getModalStyle); // getModalStyle is not a pure function, we roll the style only on the first render
-    const [opened, setOpen] = React.useState(false);
-
     useImperativeHandle(ref, () => ({
         open() {
             setOpen(true);
@@ -37,6 +33,10 @@ const Modal = forwardRef(({ children, onClose, title }, ref) => {
             setOpen(false);
         },
     }));
+
+    const classes = useStyles();
+    const [modalStyle] = React.useState(getModalStyle); // getModalStyle is not a pure function, we roll the style only on the first render
+    const [opened, setOpen] = React.useState(false);
 
     const handleClose = () => {
         setOpen(false);

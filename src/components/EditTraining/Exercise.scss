@@ -31,9 +31,6 @@
 }
 
 .edit-modal-container {
-    //background-color: $grey8blue;
-    direction: ltr;
-
     .delete-btn {
         position: absolute;
         right: 0;
@@ -46,14 +43,5 @@
     }
     .question {
         margin-bottom: 1.5rem;
-    }
-    .buttons {
-        margin-top: .8rem;
-        display: flex;
-        justify-content: space-between;
-
-        .button-container {
-            width: 7rem;
-        }
     }
 }

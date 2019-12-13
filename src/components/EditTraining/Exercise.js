@@ -1,10 +1,9 @@
 import React, {useEffect, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import './Exercise.scss';
-import Modal from "../_Tools/Modal";
+import ModalOkCancel from "../_Tools/ModalOkCancel";
 import TextInput from "../_Tools/TextInput";
 import {useTranslation} from "react-i18next";
-import Button from "../_Tools/Button";
 import IconButton from "../_Tools/IconButton";
 import {deleteExercise, saveExercise} from '../../redux/actions'
 import * as types from "../../redux/actionsTypes";
@@ -60,7 +59,10 @@ const Exercise = ({ exercise, disable }) => {
                 <div className="exercise question">{exercise.q}</div>
                 <div className="exercise answer">{exercise.a}</div>
             </div>
-            <Modal ref={refModal} title={t("edit exercise")}>
+            <ModalOkCancel ref={refModal} title={t("edit exercise")}
+                           okMsg={t('save')} cancelMsg={t('cancel')}
+                           onOk={() => save} onCancel={() => cancel}
+            >
                 <div className="edit-modal-container">
                     <div className="delete-btn">
                         <IconButton size={2} faName="trash-alt" onClick={del}/>
@@ -71,16 +73,8 @@ const Exercise = ({ exercise, disable }) => {
                     <div className="field answer">
                         <TextInput ref={refA} type="a" defaultValue={exercise.a} onEnter={save}/>
                     </div>
-                    <div className="buttons">
-                        <div className="button-container">
-                            <Button type="cancel" text={t('cancel')} onClick={() => cancel} />
-                        </div>
-                        <div className="button-container">
-                            <Button type="ok" text={t('save')} onClick={() => save} />
-                        </div>
-                    </div>
                 </div>
-            </Modal>
+            </ModalOkCancel>
         </div>);
 };
 export default Exercise;

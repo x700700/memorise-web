@@ -1,0 +1,15 @@
+@import "../../common/colors";
+
+.modal-ok-cancel-container {
+    direction: ltr;
+
+    .buttons {
+        margin-top: .8rem;
+        display: flex;
+        justify-content: space-between;
+
+        .button-container {
+            width: 7rem;
+        }
+    }
+}
