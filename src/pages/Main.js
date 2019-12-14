@@ -48,6 +48,7 @@ const Main = () => {
         dispatch(appAuth({
             authErrorMessage: t('err-auth'),
             signinErrorMessage: t('err-signin'),
+            signupErrorMessage: t('err-signup'),
         }));
 
         window.addEventListener('scroll', handleScroll, true);

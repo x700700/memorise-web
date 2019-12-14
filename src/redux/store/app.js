@@ -5,9 +5,12 @@ const appReducer = (  state = {
                           authCheckStarted: false,
                           authErrorMessage: 'Press the user icon to sign in',
                           signinErrorMessage: 'Nick name or password are wrong',
+                          signupErrorMessage: 'Nick name or password are wrong',
                           authCheckEnded: false,
                           userName: null,
                           isSigningIn: false,
+                          isSigningUp: false,
+                          registeredUserName: null,
                           jwt: null,
                           error: null,
                           currentPage: null,
@@ -48,6 +51,7 @@ const appReducer = (  state = {
                 authCheckEnded: false,
                 authErrorMessage: action.authErrorMessage || state.authErrorMessage,
                 signinErrorMessage: action.signinErrorMessage || state.signinErrorMessage,
+                signupErrorMessage: action.signupErrorMessage || state.signupErrorMessage
             };
         case types.APP_AUTH_SUCCEED:
             return {
@@ -106,6 +110,29 @@ const appReducer = (  state = {
                 authCheckEnded: true,
                 error: state.signinErrorMessage,
                 userName: null,
+            };
+
+        case types.APP_SIGNUP_STARTED:
+            localStorage.removeItem(consts.localStorage.tokenId);
+            return {
+                ...state,
+                isSigningUp: true,
+                registeredUserName: null,
+                jwt: null,
+            };
+        case types.APP_SIGNUP_SUCCEED:
+            return {
+                ...state,
+                isSigningUp: false,
+                registeredUserName: action.registerResult.nickName,
+            };
+        case types.APP_SIGNUP_FAILED:
+            console.error('signup failed: ', action.message);
+            return {
+                ...state,
+                isSigningUp: false,
+                error: state.signupErrorMessage,
+                registeredUserName: null,
             };
         // ====================================================================================================
         // ====================================================================================================

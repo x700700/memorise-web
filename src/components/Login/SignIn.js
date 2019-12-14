@@ -41,7 +41,7 @@ const SignIn = (props) => {
     };
     const checkPassword = (text) => {
         if (!validatePassword(text)) {
-            setErrPass(t('err-pass'));
+            setErrPass(t('err-pass-valid'));
             updateValid(2, false);
         } else {
             setErrPass(null);
@@ -84,23 +84,23 @@ const SignIn = (props) => {
     const name = refName.current && refName.current.value();
     const isValid = !onSignin && valid.reduce((x,a) => a = a && x , true);
     return (
-        <div className="signin-container">
+        <div className="sign-container">
             <form style={styleBox}>
-                <div className="signin-col">
-                    <div className="signin-title">
+                <div className="sign-col">
+                    <div className="sign-title">
                         {t('signin-title')}
                     </div>
-                    <div className="field signin-name">
+                    <div className="field sign-name">
                         <TextInput ref={refName} label={t('nickname')} defaultValue="" autoFocus={true}
                                    onBlur={checkName} onChange={checkName} error={errName}
                         />
                     </div>
-                    <div className="field signin-pass">
+                    <div className="field sign-pass">
                         <TextInput ref={refPass} label={t('password')} type="password" defaultValue="" autoFocus={name ? true : false}
                                    onBlur={checkPassword} onChange={checkPassword} error={errPass} onEnter={passEnter}
                         />
                     </div>
-                    <div className="signin-btn-container">
+                    <div className="sign-btn-container">
                         <Button type="ok" text={t('signin-btn')} disabled={!isValid} onClick={() => login} />
                     </div>
                     <div className="signin-signup">

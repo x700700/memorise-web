@@ -6,7 +6,11 @@ import consts from '../../common/consts';
 
 export function* auth(action) {
     try {
-        yield put({ type: types.APP_AUTH_STARTED, authErrorMessage: action.authErrorMessage, signinErrorMessage: action.signinErrorMessage });
+        yield put({ type: types.APP_AUTH_STARTED,
+            authErrorMessage: action.authErrorMessage,
+            signinErrorMessage: action.signinErrorMessage,
+            signupErrorMessage: action.signupErrorMessage,
+        });
         const resp = yield call(api.auth, { Bearer: consts.temp.bearer });
         yield put({ type: types.APP_AUTH_SUCCEED, name: resp.name });
     } catch (e) {
@@ -74,7 +78,8 @@ export function* signup(action) {
     try {
         yield put({ type: types.APP_SIGNUP_STARTED });
         const resp = yield call(api.signup, { Bearer: consts.temp.bearer, body: action.body });
-        yield put({ type: types.APP_SIGNUP_SUCCEED, resp: resp });
+        if (resp && resp.status && resp.status !== 200) throw resp;
+        yield put({ type: types.APP_SIGNUP_SUCCEED, registerResult: resp });
     } catch (e) {
         yield put({ type: types.APP_SIGNUP_FAILED, message: e.message });
     }

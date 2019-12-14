@@ -3,6 +3,7 @@ import consts from "../common/consts";
 import * as types from "../redux/actionsTypes";
 import {useDispatch, useSelector} from "react-redux";
 import SignIn from "../components/Login/SignIn";
+import SignUp from "../components/Login/SignUp";
 
 const Login = (props) => {
     const dispatch = useDispatch();
