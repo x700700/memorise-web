@@ -1,17 +1,20 @@
 import React from "react";
 import './IconButton.scss';
 
-const IconButton = ({ faName, size, hide, onClick, color, backgroundColor, iconId, isDrawer }) => {
+const IconButton = ({ faName, size, hide, onClick, color, backgroundColor, iconId, isBorder, isDrawer }) => {
 
+    const styleBox = {
+        backgroundColor: isDrawer && `#${backgroundColor}`,
+    };
     const styleIcon = {
         fontSize: `${size}rem`,
         fontWeight: '300',
         color: `#${color}`,
-        backgroundColor: `#${backgroundColor}`,
+        backgroundColor: !isDrawer && `#${backgroundColor}`,
     };
 
     return (
-        <div className="plus-button-container">
+        <div className={`icon-button-container ${isBorder && 'icon-button-border'}`} style={styleBox}>
             <button onClick={() => onClick && onClick()} className="btn" style={{display: hide ? 'none' : 'initial'}}>
                 <i id={iconId || ''} className={`${isDrawer ? 'active' : ''} fas fa-${faName}`} style={styleIcon}/>
             </button>

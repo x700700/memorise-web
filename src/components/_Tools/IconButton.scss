@@ -1,6 +1,6 @@
 @import '../../common/colors';
 
-.plus-button-container {
+.icon-button-container {
     .btn {
         padding: 0;
     }
@@ -8,4 +8,8 @@
         border-radius: 50%;
         padding: .5rem .6rem;
     }
+}
+
+.icon-button-border {
+    border: $grey4 .5px solid;
 }

@@ -18,24 +18,28 @@ const DrawerButtons = ({ trainingId, forceClose, size, color, backgroundColor, b
 
     const numOfButtons = icons.length;
     const styleDrawer = {
-        width: (open || !closeEnded) ? `${(size + 1) * (numOfButtons + 1) + 0.05}rem` : `${size + 1.05}rem`,
+        width: (open || !closeEnded) ? `${(size + 1) * (numOfButtons + 1)}rem` : `${size + 1}rem`,
         marginLeft: (open || !closeEnded) && `-${(size + 1) * numOfButtons}rem`,
         boxShadow: open ? '5px 5px 14px -4px #aaa' : 'none', // '0px 0px 7px 2px #884dff'
     };
+    const styleButtonSize = {
+        width: `${size + 1}rem`,
+        height: 'min-content', // `${size + 1}rem`,
+    };
     const styleOpenBtn = {
-        height: `${size + 1}.1rem`
+        height: `${size + 1}rem`
     };
     const styleBg = {
-        backgroundColor: `#${backgroundColor}`,
+        // backgroundColor: `#${backgroundColor}`,
     };
     const styleBgDraw = {
-        backgroundColor: `#${backgroundColorDraw || backgroundColor}`,
+        // backgroundColor: `#${backgroundColorDraw || backgroundColor}`,
     };
-    const xClose = (size + 1) * (numOfButtons + 1);
-    const xOpen = size + 1;
+    const xClose = `${(size + 1) * (numOfButtons + 1)}rem`;
+    const xOpen = `${size + 1}rem`;
     const styleAbsolute = {
         marginLeft: `-${size + 1}rem`,
-        transform: 'translateX(' + `${open ? xOpen : xClose}` + 'rem)', // eslint-disable-line no-useless-concat
+        transform: 'translateX(' + `${open ? xOpen : xClose}` + ')', // eslint-disable-line no-useless-concat
     };
 
     useEffect(() => {
@@ -60,18 +64,24 @@ const DrawerButtons = ({ trainingId, forceClose, size, color, backgroundColor, b
     const iconId = open ? 'active' : '';
     return (
         <div id={divAbsoluteId} className="drawer-buttons-container" style={styleDrawer}>
-            <div className="buttons-absolute" style={{ ...styleAbsolute, ...styleBgDraw}}>
+            <div className="buttons-absolute" style={styleAbsolute}>
                 <div className="btns-row">
                     {icons && icons.map((x, i) =>
-                        <IconButton key={`drawer-icon-btn-${i}`} faName={x.name} size={size} onClick={x.onClick} iconId={iconId} isDrawer={true}/>
+                        <div className="button-border" style={{...styleBgDraw, ...styleButtonSize}}>
+                            <IconButton key={`drawer-icon-btn-${i}`} faName={x.name} size={size - .3} onClick={x.onClick} iconId={iconId} isBorder={true} isDrawer={true} backgroundColor={backgroundColorDraw}/>
+                        </div>
                     )}
                 </div>
             </div>
-            <div className="open-button" style={styleOpenBtn}>
-                <IconButton faName="bars" size={size} onClick={clicked} iconId={iconId} isDrawer={true}/>
+            <div className="open-button">
+                <div className="button-border" style={styleButtonSize} onClick={clicked}>
+                    <IconButton faName="bars" size={size - .3} iconId={iconId} isBorder={true} isDrawer={true} backgroundColor={backgroundColor}/>
+                </div>
             </div>
-            <div className="open-button-absolute" style={styleBg}>
-                <IconButton faName="bars" size={size} onClick={clicked} iconId={iconId} isDrawer={true}/>
+            <div className="open-button-absolute">
+                <div className="button-border" style={{...styleButtonSize, ...styleBg}} onClick={clicked}>
+                    <IconButton faName="bars" size={size - .3} iconId={iconId} isBorder={true} isDrawer={true} backgroundColor={backgroundColor}/>
+                </div>
             </div>
         </div>);
 };
