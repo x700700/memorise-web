@@ -17,6 +17,7 @@ const SignIn = ({ flipSign }) => {
     const isSigningIn = useSelector(state => state.app.isSigningIn);
     const authCheckEnded = useSelector(state => state.app.authCheckEnded);
     const loggedInUsername = useSelector(state => state.app.userName);
+    const registeredUsername = useSelector(state => state.app.registeredUserName);
     const [valid, setValid] = useState([false, false]);
     const [errName, setErrName] = useState(null);
     const [errPass, setErrPass] = useState(null);
@@ -91,7 +92,7 @@ const SignIn = ({ flipSign }) => {
                         {t('signin-title')}
                     </div>
                     <div className="field sign-name">
-                        <TextInput ref={refName} label={t('nickname')} defaultValue="" autoFocus={true}
+                        <TextInput ref={refName} label={t('nickname')} defaultValue={registeredUsername || ''} autoFocus={!registeredUsername}
                                    onBlur={checkName} onChange={checkName} error={errName}
                         />
                     </div>

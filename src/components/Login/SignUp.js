@@ -99,7 +99,7 @@ const SignUp = ({ flipSign }) => {
                 console.warn('registered successfully = ', registeredUsername);
                 refEmail.current.setValue('');
                 refName.current.setValue('');
-                // history.push('/trainings');
+                flipSign()
             } else {
                 setValid([false, false, false, false]);
                 setErrEmail(t('err-signup-short'));
