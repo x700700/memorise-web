@@ -50,10 +50,9 @@
                 border-bottom: $grey5 2px solid;
 
                 > div {
-                    text-overflow: ellipsis;
                     //white-space: nowrap;
+                    text-overflow: ellipsis;
                     overflow: hidden;
-                    max-width: 80%;
                     margin: 0 auto;
                 }
             }
@@ -78,6 +77,7 @@
 
             .answers-container {
                 flex-grow: 1;
+                height: 68%;
 
                 .answers-col {
                     height: 100%;
