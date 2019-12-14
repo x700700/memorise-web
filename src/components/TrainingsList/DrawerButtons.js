@@ -26,15 +26,7 @@ const DrawerButtons = ({ trainingId, forceClose, size, color, backgroundColor, b
         width: `${size + 1}rem`,
         height: 'min-content', // `${size + 1}rem`,
     };
-    const styleOpenBtn = {
-        height: `${size + 1}rem`
-    };
-    const styleBg = {
-        // backgroundColor: `#${backgroundColor}`,
-    };
-    const styleBgDraw = {
-        // backgroundColor: `#${backgroundColorDraw || backgroundColor}`,
-    };
+
     const xClose = `${(size + 1) * (numOfButtons + 1)}rem`;
     const xOpen = `${size + 1}rem`;
     const styleAbsolute = {
@@ -67,8 +59,8 @@ const DrawerButtons = ({ trainingId, forceClose, size, color, backgroundColor, b
             <div className="buttons-absolute" style={styleAbsolute}>
                 <div className="btns-row">
                     {icons && icons.map((x, i) =>
-                        <div className="button-border" style={{...styleBgDraw, ...styleButtonSize}}>
-                            <IconButton key={`drawer-icon-btn-${i}`} faName={x.name} size={size - .3} onClick={x.onClick} iconId={iconId} isBorder={true} isDrawer={true} backgroundColor={backgroundColorDraw}/>
+                        <div key={`drawer-icon-btn-${i}`} className="button-border" style={styleButtonSize}>
+                            <IconButton faName={x.name} size={size - .3} onClick={x.onClick} iconId={iconId} isBorder={true} isDrawer={true} backgroundColor={backgroundColorDraw}/>
                         </div>
                     )}
                 </div>
@@ -79,7 +71,7 @@ const DrawerButtons = ({ trainingId, forceClose, size, color, backgroundColor, b
                 </div>
             </div>
             <div className="open-button-absolute">
-                <div className="button-border" style={{...styleButtonSize, ...styleBg}} onClick={clicked}>
+                <div className="button-border" style={styleButtonSize} onClick={clicked}>
                     <IconButton faName="bars" size={size - .3} iconId={iconId} isBorder={true} isDrawer={true} backgroundColor={backgroundColor}/>
                 </div>
             </div>
