@@ -1,8 +1,15 @@
 import React, { forwardRef, useImperativeHandle, useState, useEffect, useCallback } from 'react';
 import './Card.scss';
 import {useSelector} from "react-redux";
+import {isRtl} from "../../common/utils";
 
 const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
+    useImperativeHandle(ref, () => ({
+        rotate() {
+            _rotate();
+        },
+    }));
+
     const [currQ, setCurrQ] = useState(q);
     const [currA, setCurrA] = useState(a);
     const [nextQ, setNextQ] = useState(q);
@@ -25,11 +32,6 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
             if (showBack) setShowBack(false);
         }
     };
-    useImperativeHandle(ref, () => ({
-        rotate() {
-            _rotate();
-        },
-    }));
 
     useEffect(() => {
         setNextQ(q);
@@ -85,20 +87,30 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
         }
     }, [isRotateStarted, setCardMoveEnded]);
 
+    const styleTextQ = {
+        direction: isRtl(currQ) ? 'rtl' : 'ltr',
+    };
+    const styleTextA = {
+        direction: isRtl(currA) ? 'rtl' : 'ltr',
+    };
+    const styleTextNextQ = {
+        direction: isRtl(q) ? 'rtl' : 'ltr',
+    };
+
     return (
         <div className="card-desktop-container">
             <div className="card-container">
                 <div className={`card-placeholder ${isRotate ? 'disable-pointer' : ''}`} onClick={() => _rotate()}>
                     <div id="game-card-front" className={`card ${!showFront ? 'card-hide' : ''} ${inSwitch ? 'no-rotate-anim' : ''} ${!currQ ? 'end-card' : ''}`}>
-                        <p>{currQ}</p>
+                        <p style={styleTextQ}>{currQ}</p>
                     </div>
                     <div id="game-card-back" className={`card card-back ${!showBack ? 'card-hide' : ''} ${inSwitch ? 'no-rotate-anim' : ''}`}>
-                        <p>{currA}</p>
+                        <p style={styleTextA}>{currA}</p>
                     </div>
                 </div>
                 <div id="game-card-in" className={`next-card-placeholder ${inSwitch ? 'next-card-in' : ''} ${inFade ? 'next-card-fade' : ''}`}>
                     <div id="game-card-front" className={`card next-card-shadow ${!q ? 'end-card' : ''}`}>
-                        <p>{q}</p>
+                        <p style={styleTextNextQ}>{q}</p>
                     </div>
                 </div>
             </div>

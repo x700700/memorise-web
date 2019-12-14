@@ -5,6 +5,10 @@
     padding: .3rem;
 
     .title {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+
         text-align: center;
         text-decoration: underline;
         color: $grey3;

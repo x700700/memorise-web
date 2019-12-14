@@ -1,7 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import './Login.scss';
-import * as types from '../../redux/actionsTypes';
 import {useTranslation} from "react-i18next";
 import TextInput from "../_Tools/TextInput";
 import Button from "../_Tools/Button";
@@ -15,7 +14,6 @@ const SignUp = ({ flipSign }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const isSigningUp = useSelector(state => state.app.isSigningUp);
-    const authCheckEnded = useSelector(state => state.app.authCheckEnded);
     const registeredUsername = useSelector(state => state.app.registeredUserName);
     const [valid, setValid] = useState([false, false]);
     const [errName, setErrName] = useState(null);
@@ -106,7 +104,7 @@ const SignUp = ({ flipSign }) => {
                 window.scrollTo(0, 0);
             }
         }
-    }, [isSigningUp, registeredUsername, setValid, history, setOnSignup]);
+    }, [isSigningUp, registeredUsername, setValid, history, setOnSignup, flipSign, t]);
 
     const styleBox = {
         opacity: onSignup ? 0 : 1,

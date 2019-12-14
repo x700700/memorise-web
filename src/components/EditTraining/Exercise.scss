@@ -16,10 +16,12 @@
             flex-grow: 1;
             min-height: 33px;
             max-height: 33px;
+            text-align: center;
             overflow: hidden;
             font-size: 1rem;
             padding: .1em;
-            text-align: center;
+            padding-bottom: .5rem;
+            text-overflow: ellipsis;
         }
         .question {
             border-bottom: $grey5 .5px solid;

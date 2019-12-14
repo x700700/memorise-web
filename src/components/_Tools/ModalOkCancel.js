@@ -3,7 +3,7 @@ import './ModalOkCancel.scss';
 import Modal from "./Modal";
 import Button from './Button';
 
-const ModalOkCancel = forwardRef(({ children, title, okMsg, cancelMsg, onOk, onCancel, cancelType, disableBackdropClick }, ref) => {
+const ModalOkCancel = forwardRef(({ children, title, okMsg, cancelMsg, onOk, onCancel, cancelType, disableBackdropClick = true }, ref) => {
     useImperativeHandle(ref, () => ({
         open() {
             refModal.current.open();

@@ -1,8 +1,12 @@
 import React from 'react';
 import './ExamPage.scss';
 import ExamAnswer from "../../components/Practice/ExamAnswer";
+import {isRtl} from "../../common/utils";
 
 const ExamPage = ({ size, num, q, answers, nextQuestion, isPrevPage, setAnswer, isAnswered, showPrev }) => {
+    const styleQ = {
+        direction: isRtl(q) ? 'rtl' : 'ltr',
+    };
 
     return (
         <div className="exam-page-container">
@@ -15,7 +19,7 @@ const ExamPage = ({ size, num, q, answers, nextQuestion, isPrevPage, setAnswer, 
                 }
                 <div className="exam-col">
                     <div className="question">
-                        <span>{q}</span>
+                        <div style={styleQ}>{q}</div>
                     </div>
                     <div className="answers-container">
                         <div className="answers-col">

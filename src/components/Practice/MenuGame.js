@@ -6,6 +6,7 @@ import {useTranslation} from "react-i18next";
 import * as types from "../../redux/actionsTypes";
 import SubMenuReplay from "./SubMenuReplay";
 import SwitchYellow from "../_Tools/SwitchYellow";
+import {isRtl} from "../../common/utils";
 
 const MenuDivider = () => {
     return (
@@ -31,13 +32,17 @@ const MenuGame = ({ hide }) => {
         cardsDeck.setIsDeckFlipped(flipped);
     };
 
+    const styleTitle = {
+        direction: cardsDeck && isRtl(cardsDeck.name) ? 'rtl' : 'ltr',
+    };
+
     const size = (cardsDeck && cardsDeck.getSizeTraining()) || 0;
     const isDeckFlipped = (cardsDeck && cardsDeck.getIsDeckFlipped()) || false;
     return (
         <TopMenu hide={hide}>
             {cardsDeck &&
             <div className="menu-game-col">
-                <div className="title">{cardsDeck && cardsDeck.name}</div>
+                <div className="title" style={styleTitle}>{cardsDeck && cardsDeck.name}</div>
                 <div className="flip-container">
                     <SwitchYellow label={t('flip-deck-side')} value="gameFlipSwitch" onChange={flipDeck} startValue={isDeckFlipped}/>
                 </div>

@@ -17,8 +17,13 @@ button {
     direction: ltr;
 
     .modal-title {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+
         text-align: center;
-        color: $grey5;
+        text-decoration: underline;
+        color: $grey3;
         font-weight: 600;
         margin-bottom: .8rem;
     }

@@ -6,6 +6,7 @@ import {useTranslation} from "react-i18next";
 import * as types from "../../redux/actionsTypes";
 import SubMenuReplay from "./SubMenuReplay";
 import SwitchGreen from "../_Tools/SwitchGreen";
+import {isRtl} from "../../common/utils";
 
 
 const MenuExam = ({ hide }) => {
@@ -24,13 +25,17 @@ const MenuExam = ({ hide }) => {
         cardsDeck.setIsNextDeckFlipped(flipped);
     };
 
+    const styleTitle = {
+        direction: cardsDeck && isRtl(cardsDeck.name) ? 'rtl' : 'ltr',
+    };
+
     const size = (cardsDeck && cardsDeck.getSizeTraining()) || 0;
     const isDeckFlipped = (cardsDeck && cardsDeck.getIsDeckFlipped()) || false;
     return (
         <TopMenu hide={hide}>
             {cardsDeck &&
             <div className="menu-exam-col">
-                <div className="title">{cardsDeck && cardsDeck.name}</div>
+                <div className="title" style={styleTitle}>{cardsDeck && cardsDeck.name}</div>
                 <div className="flip-container">
                     <SwitchGreen label={t('flip-exam-side')} value="examFlipSwitch" onChange={flipDeck} startValue={isDeckFlipped}/>
                 </div>

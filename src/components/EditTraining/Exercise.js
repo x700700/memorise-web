@@ -7,6 +7,7 @@ import {useTranslation} from "react-i18next";
 import IconButton from "../_Tools/IconButton";
 import {deleteExercise, saveExercise} from '../../redux/actions'
 import * as types from "../../redux/actionsTypes";
+import {isRtl} from "../../common/utils";
 
 
 const Exercise = ({ exercise, disable }) => {
@@ -53,11 +54,18 @@ const Exercise = ({ exercise, disable }) => {
     const styleContainer = {
         backgroundColor: exercise.q.trim() && exercise.a.trim() ? 'lightgoldenrodyellow' : '#ffdddd',
     };
+    const styleQ = {
+        direction: isRtl(exercise.q) ? 'rtl' : 'ltr',
+    };
+    const styleA = {
+        direction: isRtl(exercise.a) ? 'rtl' : 'ltr',
+    };
+
     return (
         <div className="edit-training-exercise-container" style={styleContainer}>
             <div className="exercise-col" onClick={edit}>
-                <div className="exercise question">{exercise.q}</div>
-                <div className="exercise answer">{exercise.a}</div>
+                <div className="exercise question" style={styleQ}>{exercise.q}</div>
+                <div className="exercise answer" style={styleA}>{exercise.a}</div>
             </div>
             <ModalOkCancel ref={refModal} title={t("edit exercise")}
                            okMsg={t('save')} cancelMsg={t('cancel')}

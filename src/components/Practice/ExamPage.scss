@@ -35,7 +35,8 @@
             height: calc(100% - .2rem);
 
             .question {
-                width: fit-content;
+                //width: fit-content;
+                max-width: 90%;
                 margin: 0 auto;
                 max-height: 55px;
                 overflow: hidden;
@@ -45,8 +46,16 @@
                 font-weight: 700;
                 margin-bottom: 1.5rem;
                 margin-top: 1.5rem;
-                padding-bottom: 0;
+                padding-bottom: 0.1rem;
                 border-bottom: $grey5 2px solid;
+
+                > div {
+                    text-overflow: ellipsis;
+                    //white-space: nowrap;
+                    overflow: hidden;
+                    max-width: 80%;
+                    margin: 0 auto;
+                }
             }
 
             .next-btn-container {
