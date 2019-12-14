@@ -10,7 +10,7 @@ import { signup } from '../../redux/actions';
 import {useHistory} from "react-router";
 
 
-const SignUp = (props) => {
+const SignUp = ({ flipSign }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const history = useHistory();
@@ -92,7 +92,7 @@ const SignUp = (props) => {
     };
 
     useEffect(() => {
-        console.warn('watch signup = ', isSigningUp, registeredUsername);
+        // console.warn('watch signup = ', isSigningUp, registeredUsername);
         if (!isSigningUp) {
             setOnSignup(false);
             if (registeredUsername) {
@@ -103,6 +103,7 @@ const SignUp = (props) => {
             } else {
                 setValid([false, false, false, false]);
                 setErrEmail(t('err-signup-short'));
+                window.scrollTo(0, 0);
             }
         }
     }, [isSigningUp, registeredUsername, setValid, history, setOnSignup]);
@@ -119,7 +120,7 @@ const SignUp = (props) => {
     return (
         <div className="sign-container">
             <form style={styleBox}>
-                <div className="sign-col">
+                <div className="sign-col sign-up-box">
                     <div className="signup-title">
                         {t('signup-title')}
                     </div>
@@ -148,7 +149,7 @@ const SignUp = (props) => {
                     </div>
                     <div className="signin-signup">
                         <span>{t('signin?')} </span>
-                        <span>{t('signin-btn')}</span>
+                        <span className="sign-flip-btn" onClick={flipSign}>{t('signin-btn')}</span>
                     </div>
                 </div>
             </form>

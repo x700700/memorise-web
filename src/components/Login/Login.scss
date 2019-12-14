@@ -1,6 +1,12 @@
 @import "../../common/colors";
 
 .sign-container {
+    margin: .5rem;
+    .sign-up-box {
+        background-color: $purple6;
+        border: 1px $purple4 solid;
+    }
+
     .sign-col {
         display: flex;
         flex-direction: column;
@@ -33,6 +39,13 @@
             margin-top: 1rem;
             font-size: .9rem;
             color: $grey3;
+            margin-bottom: .6rem;
+
+            .sign-flip-btn {
+                color: blue;
+                font-size: 1.2rem;
+                cursor: pointer;
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import consts from "../common/consts";
 import * as types from "../redux/actionsTypes";
 import {useDispatch, useSelector} from "react-redux";
@@ -8,6 +8,7 @@ import SignUp from "../components/Login/SignUp";
 const Login = (props) => {
     const dispatch = useDispatch();
     const currPage = useSelector(state => state.app.currentPage);
+    const [showSignUp, setShowSignUp] = useState(false);
 
     useEffect(() => {
         if (currPage !== consts.pageName.login) {
@@ -17,9 +18,16 @@ const Login = (props) => {
         }
     }, [dispatch, currPage]);
 
+    const flipSign = (side) => {
+        setShowSignUp(side);
+    };
+
     return (
         <div className="login-page">
-            <SignIn />
+            {!showSignUp ?
+                <SignIn flipSign={() => flipSign(true)}/> :
+                <SignUp flipSign={() => flipSign(false)}/>
+            }
         </div>
     );
 };

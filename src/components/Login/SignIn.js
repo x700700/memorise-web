@@ -10,7 +10,7 @@ import { signin } from '../../redux/actions';
 import {useHistory} from "react-router";
 
 
-const SignIn = (props) => {
+const SignIn = ({ flipSign }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const history = useHistory();
@@ -105,7 +105,7 @@ const SignIn = (props) => {
                     </div>
                     <div className="signin-signup">
                         <span>{t('signup?')} </span>
-                        <span>{t('signup-btn')}</span>
+                        <span className="sign-flip-btn" onClick={flipSign}>{t('signup-btn')}</span>
                     </div>
                 </div>
             </form>
