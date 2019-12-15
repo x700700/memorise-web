@@ -8,6 +8,11 @@
         display: flex;
         justify-content: space-between;
 
+        @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+            width: 20rem;
+            margin: .8rem auto;
+        }
+
         .button-container {
             width: 7rem;
         }

@@ -33,6 +33,12 @@
 }
 
 .edit-modal-container {
+
+    @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+        width: 18rem;
+        margin: 0 auto;
+    }
+
     .delete-btn {
         position: absolute;
         right: 0;

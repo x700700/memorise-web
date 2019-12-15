@@ -1,21 +1,14 @@
 import React, {forwardRef, useImperativeHandle} from 'react';
+import {useDispatch} from "react-redux";
+import * as types from '../../redux/actionsTypes';
 import { makeStyles } from '@material-ui/core/styles';
 import MaterialModal from '@material-ui/core/Modal';
 
-function getModalStyle() {
-    // const top = 0;
-    // const left = 50;
-    return {
-        top: '3.6rem', // `${top}%`,
-        left: 0, // `${left}%`,
-        // transform: `translate(-${top}%, -${left}%)`,
-    };
-}
 
 const useStyles = makeStyles(theme => ({
     paper: {
         position: 'absolute',
-        width: '81%',
+        width: '80%',
         height: 235,
         backgroundColor: '#eee6ff', // deepPurple[50], // theme.palette.background.paper,
         border: '2px solid #000',
@@ -28,25 +21,32 @@ const Modal = forwardRef(({ children, onClose, title, disableBackdropClick = fal
     useImperativeHandle(ref, () => ({
         open() {
             setOpen(true);
+            dispatch({ type: types.APP_SHOW_MODAL, on: true });
         },
         close() {
             setOpen(false);
+            dispatch({ type: types.APP_SHOW_MODAL, on: false });
         },
     }));
 
     const classes = useStyles();
-    const [modalStyle] = React.useState(getModalStyle); // getModalStyle is not a pure function, we roll the style only on the first render
+    const dispatch = useDispatch();
+    const [modalStyle] = React.useState({
+        top: '3.6rem',
+        left: window.innerWidth > 812 ? '6%' : '1%',
+    });
     const [opened, setOpen] = React.useState(false);
 
     const handleClose = () => {
         setOpen(false);
+        dispatch({ type: types.APP_SHOW_MODAL, on: false });
         onClose && onClose();
     };
 
     return (
         <MaterialModal
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
+            aria-labelledby=""
+            aria-describedby=""
             open={opened}
             onClose={handleClose}
             disableBackdropClick={disableBackdropClick}

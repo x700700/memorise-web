@@ -15,6 +15,7 @@ const appReducer = (  state = {
                           error: null,
                           currentPage: null,
                           showMenu: false,
+                          isModalOn: false,
                           activeDrawerTrainingId: null,
                           trainingNameIsOnEdit: false,
 
@@ -146,6 +147,11 @@ const appReducer = (  state = {
             return {
                 ...state,
                 showMenu: action.show,
+            };
+        case types.APP_SHOW_MODAL:
+            return {
+                ...state,
+                isModalOn: action.on,
             };
         case types.APP_SET_ERROR:
             return {

@@ -50,7 +50,6 @@
                 border-bottom: $grey5 2px solid;
 
                 > div {
-                    //white-space: nowrap;
                     text-overflow: ellipsis;
                     overflow: hidden;
                     margin: 0 auto;
@@ -58,7 +57,7 @@
             }
 
             .next-btn-container {
-                align-self: flex-end;
+                align-self: center;
                 opacity: 1;
                 transition: opacity .5s ease-in-out .4s;
 
@@ -77,7 +76,7 @@
 
             .answers-container {
                 flex-grow: 1;
-                height: 68%;
+                height: max-content;
 
                 .answers-col {
                     height: 100%;

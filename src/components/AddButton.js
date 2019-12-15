@@ -14,6 +14,7 @@ const AddButton = (props) => {
     const loggedInUserName = useSelector(state => state.app.userName);
     const currPage = useSelector(state => state.app.currentPage);
     const showMenu = useSelector(state => state.app.showMenu);
+    const isModalOn = useSelector(state => state.app.isModalOn);
     const trainingNameIsOnEdit = useSelector(state => state.app.trainingNameIsOnEdit);
     const editTrainingId = useSelector(state => state.editTraining.fetchedId);
 
@@ -33,7 +34,7 @@ const AddButton = (props) => {
         dispatch(createExercise(editTrainingId));
     };
 
-    const disableAddBtn = !loggedInUserName || showMenu || trainingNameIsOnEdit;
+    const disableAddBtn = !loggedInUserName || showMenu || isModalOn || trainingNameIsOnEdit;
     return (
         <div className="add-button-container">
             <div className="btn-container">
