@@ -12,7 +12,7 @@ const ExamPage = ({ size, num, q, answers, nextQuestion, isPrevPage, setAnswer, 
         <div className="exam-page-container">
             <div className={`exam-page ${isPrevPage && showPrev ? 'prev-page-flow' : ''}`}>
                 {q &&
-                <div className={`cards-left ${isPrevPage ? 'disable-prev-card' : ''}`}>
+                <div className="cards-left">
                     <span><i className="fas fa-arrow-up"/></span>
                     <span>{num} / {size}</span>
                 </div>
