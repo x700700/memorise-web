@@ -15,6 +15,10 @@ const DrawerButtons = ({ trainingId, forceClose, size, color, backgroundColor, b
         setOpen(!open);
         dispatch({ type: types.APP_SET_ACTIVE_DRAWER_TRAINING, id: !open ? trainingId : null });
     };
+    const actionClicked = (cb) => {
+        dispatch({ type: types.APP_SET_ACTIVE_DRAWER_TRAINING, id: null });
+        cb();
+    };
 
     const numOfButtons = icons.length;
     const styleDrawer = {
@@ -60,7 +64,7 @@ const DrawerButtons = ({ trainingId, forceClose, size, color, backgroundColor, b
                 <div className="btns-row">
                     {icons && icons.map((x, i) =>
                         <div key={`drawer-icon-btn-${i}`} className="button-border" style={styleButtonSize}>
-                            <IconButton faName={x.name} size={size - .3} onClick={x.onClick} iconId={iconId} isBorder={true} isDrawer={true} backgroundColor={backgroundColorDraw}/>
+                            <IconButton faName={x.name} size={size - .3} onClick={() => actionClicked(x.onClick)} iconId={iconId} isBorder={true} isDrawer={true} backgroundColor={backgroundColorDraw}/>
                         </div>
                     )}
                 </div>
