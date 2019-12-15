@@ -13,8 +13,9 @@ const Login = (props) => {
     useEffect(() => {
         if (currPage !== consts.pageName.login) {
             // console.warn('Login mount');
-            dispatch({type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.login});
-            dispatch({type: types.APP_SHOW_MENU, show: false});
+            dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.login });
+            dispatch({ type: types.APP_SHOW_MENU, show: false });
+            dispatch({ type: types.APP_SET_ERROR, error: null });
         }
     }, [dispatch, currPage]);
 
