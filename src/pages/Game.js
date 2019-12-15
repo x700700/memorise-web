@@ -8,7 +8,7 @@ import consts from "../common/consts";
 import Card from "../components/Practice/Card";
 import CardsDeck from '../components/Practice/cardsDeck';
 import { loadPlay } from "../common/playUtils";
-import mock from '../mock/training-words1';
+import mock from '../mock/training-multiply';
 import GameSum from "../components/Practice/GameSum";
 import PopUpBox from "../components/_Tools/PopUpBox";
 import { getGameTraining } from "../redux/actions";
@@ -87,7 +87,7 @@ const Game = (props) => {
             dispatch({ type: types.APP_SET_GAME_ENDED, ended: false });
             dispatch(getGameTraining(gameTrainingId));
         } else if (!cardsDeck) {
-            loadGame(mock);
+            loadGame(Object.values(mock)[0]);
         }
 
     }, [dispatch, history]);
