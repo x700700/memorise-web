@@ -2,6 +2,12 @@
 
 .sign-container {
     margin: .5rem;
+
+    @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+        width: 40rem;
+        margin: .5rem auto;
+    }
+
     .sign-up-box {
         background-color: $purple6;
         border: 1px $purple4 solid;

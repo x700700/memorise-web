@@ -21,6 +21,10 @@
         display: flex;
         justify-content: space-between;
 
+        @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+            justify-content: initial;
+        }
+
         .msg {
             display: flex;
             align-items: center;
@@ -30,6 +34,10 @@
         .delete-btn-container {
             width: 7rem;
             margin: 0 auto;
+
+            @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+                margin: 0;
+            }
         }
     }
 }
