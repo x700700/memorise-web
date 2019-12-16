@@ -1,10 +1,11 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import * as types from '../redux/actionsTypes';
 import './Header.scss';
 import logo from '../logo.svg';
 import consts from "../common/consts";
+import Tooltip from '../components/_Tools/Toolip';
 import MenuGame from "./Practice/MenuGame";
 import MenuExam from "./Practice/MenuExam";
 import {useTranslation} from "react-i18next";
@@ -14,7 +15,8 @@ import MenuEdit from "./EditTraining/MenuEdit";
 const Header = (props) => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
-    const isLoggedIn = useSelector(state => state.app.userName) && true;
+    const userName = useSelector(state => state.app.userName);
+    const isLoggedIn = userName && true;
     const currPage = useSelector(state => state.app.currentPage);
     const error = useSelector(state => state.app.error);
     const editedTrainingId = useSelector(state => state.editTraining.idToFetch);
@@ -60,12 +62,15 @@ const Header = (props) => {
         dispatch({ type: types.APP_SHOW_MENU, show: show });
     };
 
-    const clearLocalStorage = () => {
+    const logoClick = () => {
+        refTooltip.current.switch();
+        /*
         console.warn('Clearing localStorage.');
         localStorage.removeItem(consts.localStorage.tokenId);
         localStorage.removeItem(consts.localStorage.gameId);
         localStorage.removeItem(consts.localStorage.examId);
         dispatch({type: types.APP_SET_ERROR, error: t('Local storage was cleaned')});
+         */
     };
 
     const styleOnEdit = {
@@ -75,6 +80,8 @@ const Header = (props) => {
         visibility: currPage === consts.pageName.trainings ? 'hidden' : 'visible',
         pointerEvents: currPage === consts.pageName.trainings || trainingNameIsOnEdit ? 'none' : 'auto',
     };
+
+    const refTooltip = useRef();
 
     const isMenuBtnDisable = showMenu !== appShowMenu;
     const menuBtnStatusClass = appShowMenu ? 'btn-menu-opened' : '';
@@ -100,7 +107,9 @@ const Header = (props) => {
                     <Link to="/practice"><span className={`btn btn-play ${currPage === consts.pageName.practice ? 'tab-active' : ''}`}><i className="fas fa-copy"/></span></Link>
                     <Link to="/exam"><span className={`btn btn-play ${currPage === consts.pageName.exam ? 'tab-active' : ''}`}><i className="fas fa-grin-beam-sweat"/></span></Link>
                 </div>
-                <img className="logo" style={styleOnEdit} src={logo} alt="logo" width="32" height="32" onClick={() => clearLocalStorage()}/>
+                <Tooltip ref={refTooltip} text={`${t('hello')} ${userName}`} placement="bottom-end">
+                    <img className="logo" style={styleOnEdit} src={logo} alt="logo" width="32" height="32" onClick={() => logoClick()}/>
+                </Tooltip>
             </div>
             <div id="top-header-menu" className={`top-menu-box ${appShowMenu ? 'top-menu-pop-down' : ''}`}>
                 <div className="menu-container">
