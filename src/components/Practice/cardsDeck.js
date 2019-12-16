@@ -1,6 +1,5 @@
-import _ from 'lodash';
+import * as _ from '../../common/boolidash';
 import consts from "../../common/consts";
-// import { cardsDeckStub } from '../stubs/cardsDeck';
 
 export default class cardsDeck {
 
@@ -9,7 +8,7 @@ export default class cardsDeck {
             const exercises = training && training.exercises && Object.values(training.exercises);
             // console.warn('=====> cardsDeck - exercises = ', exercises);
             this.name = training.name;
-            this.initialDeck = _.cloneDeep(exercises).filter(x => x.q && x.a);
+            this.initialDeck = exercises.filter(x => x.q && x.a);
         } else {
             this.initialDeck = [];
         }
@@ -25,7 +24,7 @@ export default class cardsDeck {
         // console.warn('cardsDeck reset isExamPageAnswered');
         if (this.isNextDeckFlipped) this.isDeckFlipped = this.isNextDeckFlipped === 2;
         this.currentDeck = this.initialDeck;
-        this.examStartDeck = _.cloneDeep(this.currentDeck);
+        this.examStartDeck = [...this.currentDeck];
         this.sizeTraining = this.currentDeck.length;
         this.currentDeck = (_.shuffle(this.currentDeck)).splice(0, cardsNum);
         this.topQAnswers = this.createTopQAnswers();
@@ -144,7 +143,7 @@ export default class cardsDeck {
                 this.wrongsDeck.unshift(this.currentDeck.splice(0, 1)[0]);
             }
             if (this.currentDeck.length === 0) {
-                this.currentDeck = _.cloneDeep(this.wrongsDeck);
+                this.currentDeck = [...this.wrongsDeck];
                 this.currentDeck = _.shuffle(this.currentDeck.slice(1));
                 this.currentDeck.push(this.wrongsDeck[0]);
                 this.wrongsDeck = [];
@@ -195,7 +194,7 @@ export default class cardsDeck {
             const right = this.currentDeck[0];
             if (right) {
                 answers = (this.examStartDeck || []).filter(x => right && x && x[a] && x[a] !== right[a]);
-                answers = _.uniqBy(answers, a);
+                answers = _.uniqBy(answers, x => x.a);
                 answers = _.shuffle(answers).slice(0, 4);
                 answers.unshift(right);
                 // console.warn('=========>', answers);

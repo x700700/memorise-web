@@ -17,6 +17,7 @@ export const slice0 = (obj) => {
 };
 
 // http://www.robweir.com/blog/2010/02/microsoft-random-browser-ballot.html
-export const shuffle = (array) => {
-    return array.map((a) => [Math.random(),a]).sort((a,b) => a[0]-b[0]).map((a) => a[1]);
-};
+export const shuffle = (array) => array.map((a) => [Math.random(),a]).sort((a,b) => a[0]-b[0]).map((a) => a[1]);
+
+
+export const uniqBy = (arr, fn) => [...new Map(arr.reverse().map((x) => [typeof fn === 'function' ? fn(x) : x[fn], x])).values()];
