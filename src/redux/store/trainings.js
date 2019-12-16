@@ -1,4 +1,4 @@
-// import _ from 'lodash';
+import * as _ from '../../common/boolidash';
 import * as types from '../actionsTypes';
 import mockMultiplyTraining from '../../mock/training-multiply'
 
@@ -73,16 +73,10 @@ const trainingsReducer = (  state = {
                 isFetching: true,
             };
         case types.FETCH_CREATE_TRAINING_SUCCEED:
-            const newTraining = {};
-            newTraining[action.training.id] = action.training;
-
             // Put the new training 2nd, after the offline one (multiplicity chart)
-            const tempMap = { ...state.trainingsMap };
-            const key1 = Object.keys(tempMap)[0];
-            let item1 = {};
-            item1[key1] = tempMap[key1];
-            delete tempMap[key1];
-            const updatedTrainings = Object.assign(item1, newTraining, tempMap);
+            const [item1, restMap] = _.slice0(state.trainingsMap);
+            const newTraining = _.toObject(action.training, 'id');
+            const updatedTrainings = Object.assign(item1, newTraining, restMap);
             return {
                 ...state,
                 isFetching: false,
