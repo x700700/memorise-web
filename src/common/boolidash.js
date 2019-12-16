@@ -15,3 +15,8 @@ export const slice0 = (obj) => {
 
     return [item1, restMap];
 };
+
+// http://www.robweir.com/blog/2010/02/microsoft-random-browser-ballot.html
+export const shuffle = (array) => {
+    return array.map((a) => [Math.random(),a]).sort((a,b) => a[0]-b[0]).map((a) => a[1]);
+};
