@@ -75,7 +75,14 @@ const trainingsReducer = (  state = {
         case types.FETCH_CREATE_TRAINING_SUCCEED:
             const newTraining = {};
             newTraining[action.training.id] = action.training;
-            const updatedTrainings = Object.assign(newTraining, state.trainingsMap);
+
+            // Put the new training 2nd, after the offline one (multiplicity chart)
+            const tempMap = { ...state.trainingsMap };
+            const key1 = Object.keys(tempMap)[0];
+            let item1 = {};
+            item1[key1] = tempMap[key1];
+            delete tempMap[key1];
+            const updatedTrainings = Object.assign(item1, newTraining, tempMap);
             return {
                 ...state,
                 isFetching: false,
