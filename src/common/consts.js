@@ -1,7 +1,8 @@
 
 export default {
     urls: {
-        api: 'http://dev.memorise.com:4044/api',
+        // api: 'http://dev.memorise.com:4044/api',
+        api: 'https://memobool-api.herokuapp.com/api',
     },
     env: {
         timeout: 3, // sec
