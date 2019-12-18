@@ -89,7 +89,7 @@ const Training = ({ training }) => {
                         <div className="exercises-row">
                             {sampleExercise &&
                             <div key={`sample-exercise-`} style={{ width: '100%' }}>
-                                <SampleExercise q={sampleExercise.q} a={sampleExercise.a} hideEditIcon={training.id.startsWith('__')}/>
+                                <SampleExercise q={sampleExercise.q} a={sampleExercise.a} hideEditIcon={training && training.id.startsWith('__')}/>
                             </div>
                             }
                         </div>
