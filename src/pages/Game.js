@@ -30,13 +30,17 @@ const Game = (props) => {
     const gameTrainingIsLoaded = useSelector(state => state.app.gameTrainingIsLoaded);
     const gameTraining = useSelector(state => state.app.gameTraining);
 
-    const refGame = useRef();
+    const [isFlipped, setIsFlipped] = useState(false);
+
+    const refCard = useRef();
 
     const rotateCard = () => {
-        refGame.current.rotate();
+        setIsFlipped(true);
+        refCard.current.rotate();
     };
 
     const replaceCard = (good) => {
+        setIsFlipped(false);
         const ended = cardsDeck.nextCard(good);
         ended && dispatch({ type: types.APP_SET_GAME_ENDED, ended: true });
         setTopCard(cardsDeck.top()); // !! This is necessary for making the dom render on next card !!
@@ -108,13 +112,14 @@ const Game = (props) => {
                             <span>{curr} / {size}</span>
                         </div>
                         }
-                        <Card ref={refGame} q={currQ} a={currA} setCardInMove={setCardInMove}/>
+                        <Card ref={refCard} q={currQ} a={currA} setCardInMove={setCardInMove} rotateCb={rotateCard}/>
                         <div className={`game-buttons ${cardInMove || gameEnded || showMenu ? 'buttons-disable' : ''}`}>
-                            <button onClick={respBad} className={`btn btn-bad ${curr === 1 ? 'disable-bad-button' : ''}`}>
+                            <button onClick={respBad} className={`btn btn-bad ${!isFlipped ? 'disable-result-button' : ''}`}>
                                 <i className="fas fa-times"></i>
                             </button>
                             <button onClick={rotateCard} className="btn"><i className="fas fa-sync-alt"></i></button>
-                            <button onClick={respGood} className="btn btn-good"><i className="fas fa-check"></i>
+                            <button onClick={respGood} className={`btn btn-good ${!isFlipped ? 'disable-result-button' : ''}`}>
+                                <i className="fas fa-check"></i>
                             </button>
                         </div>
                     </div> : gameTrainingId && !gameTrainingIsFetching && !gameTrainingIsLoaded &&

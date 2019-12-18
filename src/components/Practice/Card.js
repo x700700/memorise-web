@@ -3,7 +3,7 @@ import './Card.scss';
 import {useSelector} from "react-redux";
 import {isRtl} from "../../common/utils";
 
-const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
+const Card = forwardRef(({ q, a, setCardInMove, rotateCb }, ref) => {
     useImperativeHandle(ref, () => ({
         rotate() {
             _rotate();
@@ -100,7 +100,7 @@ const Card = forwardRef(({ q, a, setCardInMove }, ref) => {
     return (
         <div className="card-desktop-container">
             <div className="card-container">
-                <div className={`card-placeholder ${isRotate ? 'disable-pointer' : ''}`} onClick={() => _rotate()}>
+                <div className={`card-placeholder ${isRotate ? 'disable-pointer' : ''}`} onClick={rotateCb}>
                     <div id="game-card-front" className={`card ${!showFront ? 'card-hide' : ''} ${inSwitch ? 'no-rotate-anim' : ''} ${!currQ ? 'end-card' : ''}`}>
                         <p style={styleTextQ}>{currQ}</p>
                     </div>
