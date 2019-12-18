@@ -140,7 +140,12 @@ export default class cardsDeck {
                     deckFinished = true;
                 }
             } else {
-                this.wrongsDeck.unshift(this.currentDeck.splice(0, 1)[0]);
+                const wrongCard = this.currentDeck.splice(0, 1)[0];
+                if (this.currentDeck.length > 0 || this.wrongsDeck.length > 0) {
+                    this.wrongsDeck.unshift(wrongCard);
+                } else {
+                    deckFinished = true;
+                }
             }
             if (this.currentDeck.length === 0) {
                 this.currentDeck = [...this.wrongsDeck];
