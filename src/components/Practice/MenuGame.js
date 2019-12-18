@@ -47,7 +47,7 @@ const MenuGame = ({ hide }) => {
                     <SwitchYellow label={t('flip-deck-side')} value="gameFlipSwitch" onChange={flipDeck} startValue={isDeckFlipped}/>
                 </div>
                 <MenuDivider/>
-                <SubMenuReplay playType="practice" sliderTitle={t("cards num to practice")} replayCb={replayGame} size={size}/>
+                <SubMenuReplay playType="practice" sliderTitle={t("cards num to practice")} replayCb={replayGame} size={size} replayMsg={t('replay')}/>
             </div>
             }
         </TopMenu>

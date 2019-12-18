@@ -3,10 +3,8 @@ import './SubMenuReplay.scss';
 import Slider from "../_Tools/Slider";
 import consts from "../../common/consts";
 import Button from "../_Tools/Button";
-import { useTranslation } from "react-i18next";
 
-const SubMenuReplay = ({ sliderTitle, replayCb, size }) => {
-    const { t } = useTranslation();
+const SubMenuReplay = ({ sliderTitle, replayCb, size, replayMsg }) => {
     const refSlider = useRef();
 
     const replay = () => {
@@ -21,7 +19,7 @@ const SubMenuReplay = ({ sliderTitle, replayCb, size }) => {
             </div>
             <div className="footline size-slider-foot">{sliderTitle}</div>
             <div className="replay-btn">
-                <Button text={t('replay')} onClick={() => replay} />
+                <Button text={replayMsg} onClick={() => replay} />
             </div>
         </div>
     );
