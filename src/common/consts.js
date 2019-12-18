@@ -1,8 +1,7 @@
 
 export default {
     urls: {
-        // api: 'http://dev.memorise.com:4044/api',
-        api: 'https://memobool-api.herokuapp.com/api',
+        api: process.env.NODE_ENV === 'production' ? process.env.API_URL : 'http://dev.memorise.com:4044/api',
     },
     env: {
         timeout: 3, // sec

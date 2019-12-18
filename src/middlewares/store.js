@@ -1,9 +1,13 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import { reducer as formReducer } from 'redux-form';
 import { createLogger } from 'redux-logger'
 import reducers from '../redux/store';
 import middleware from './saga';
+
+let reduxDevtoolsExtension;
+if (process.env.NODE_ENV !== 'production') {
+    reduxDevtoolsExtension = require('redux-devtools-extension');
+}
 
 const logger = createLogger({
     collapsed: true,
@@ -14,5 +18,5 @@ export default createStore(
         ...reducers,
         form: formReducer
     }),
-    composeWithDevTools(applyMiddleware(...middleware, logger))
+    (reduxDevtoolsExtension && reduxDevtoolsExtension.composeWithDevTools(applyMiddleware(...middleware, logger))) || null
 );
