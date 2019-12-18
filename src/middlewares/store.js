@@ -18,5 +18,7 @@ export default createStore(
         ...reducers,
         form: formReducer
     }),
-    (reduxDevtoolsExtension && reduxDevtoolsExtension.composeWithDevTools(applyMiddleware(...middleware, logger))) || null
+    process.env.NODE_ENV !== 'production' ?
+        reduxDevtoolsExtension.composeWithDevTools(applyMiddleware(...middleware, logger)) :
+        applyMiddleware(...middleware, logger)
 );
