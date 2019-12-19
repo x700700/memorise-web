@@ -43,11 +43,11 @@ const AddButton = (props) => {
     };
 
     useEffect(() => {
-        if (authError) {
+        if (authError && (currPage === consts.pageName.trainings || currPage === consts.pageName.edit)) {
             refTooltip.current.open();
             dispatch({ type: types.APP_RESET_AUTH_ERROR });
         }
-    }, [authError]);
+    }, [authError, currPage, dispatch]);
 
     const refTooltip = useRef();
     const disableAddBtn = !loggedInUserName || showMenu || isModalOn || trainingNameIsOnEdit;

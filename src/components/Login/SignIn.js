@@ -49,7 +49,7 @@ const SignIn = ({ flipSign }) => {
             updateValid(2, true);
         }
     };
-    const passEnter = () => {
+    const enterPressed = () => {
         if (isValid) login();
     };
 
@@ -93,12 +93,12 @@ const SignIn = ({ flipSign }) => {
                     </div>
                     <div className="field sign-name">
                         <TextInput ref={refName} label={t('nickname')} defaultValue={registeredUsername || ''} autoFocus={!registeredUsername}
-                                   onBlur={checkName} onChange={checkName} error={errName}
+                                   onBlur={checkName} onChange={checkName} error={errName} onEnter={enterPressed}
                         />
                     </div>
                     <div className="field sign-pass">
                         <TextInput ref={refPass} label={t('password')} type="password" defaultValue="" autoFocus={name ? true : false}
-                                   onBlur={checkPassword} onChange={checkPassword} error={errPass} onEnter={passEnter}
+                                   onBlur={checkPassword} onChange={checkPassword} error={errPass} onEnter={enterPressed}
                         />
                     </div>
                     <div className="sign-btn-container">

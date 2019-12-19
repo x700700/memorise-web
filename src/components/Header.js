@@ -31,6 +31,7 @@ const Header = (props) => {
     const [logoTooltipMsg, setLogoTooltipMsg] = useState(t('press me to login'));
 
     const [isAuthErrorShown, setIsAuthErrorShown] = useState(false);
+    const [isWelcomeShown, setIsWelcomeShown] = useState(false);
 
     const editTrainingId = (training && training.id) || '-';
 
@@ -60,10 +61,12 @@ const Header = (props) => {
         if (!isAuthErrorShown && authCheckEnded && !isLoggedIn && currPage !== consts.pageName.trainings && currPage !== consts.pageName.edit && currPage !== consts.pageName.login) {
             refTooltipLogo.current.open();
             setIsAuthErrorShown(true);
-        } else if (authCheckEnded && isLoggedIn) {
+        } else if (authCheckEnded && isLoggedIn && !isWelcomeShown) {
             setLogoTooltipMsg(`${t('hello')} ${userName}`);
+            refTooltipLogo.current.open();
+            setIsWelcomeShown(true);
         }
-    }, [isAuthErrorShown, authCheckEnded, isLoggedIn, userName, currPage, setLogoTooltipMsg, setIsAuthErrorShown, t]);
+    }, [isAuthErrorShown, isWelcomeShown, authCheckEnded, isLoggedIn, userName, currPage, setLogoTooltipMsg, setIsAuthErrorShown, setIsWelcomeShown, t]);
 
     useEffect(() => {
         if (appShowMenu) {
