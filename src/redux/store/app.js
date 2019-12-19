@@ -10,6 +10,7 @@ const appReducer = (  state = {
                           userName: null,
                           isSigningIn: false,
                           isSigningUp: false,
+                          registeringUserName: null,
                           registeredUserName: null,
                           jwt: null,
                           error: null,
@@ -119,6 +120,7 @@ const appReducer = (  state = {
                 ...state,
                 isSigningUp: true,
                 registeredUserName: null,
+                registeringUserName: action.nickName,
                 jwt: null,
             };
         case types.APP_SIGNUP_SUCCEED:

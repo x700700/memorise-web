@@ -76,7 +76,7 @@ export function* signin(action) {
 
 export function* signup(action) {
     try {
-        yield put({ type: types.APP_SIGNUP_STARTED });
+        yield put({ type: types.APP_SIGNUP_STARTED, nickName: action.body.nickName });
         const resp = yield call(api.signup, { Bearer: consts.temp.bearer, body: action.body });
         if (resp && resp.status && resp.status !== 200) throw resp;
         yield put({ type: types.APP_SIGNUP_SUCCEED, registerResult: resp });

@@ -15,7 +15,8 @@ const SignUp = ({ flipSign }) => {
     const history = useHistory();
     const isSigningUp = useSelector(state => state.app.isSigningUp);
     const registeredUsername = useSelector(state => state.app.registeredUserName);
-    const [valid, setValid] = useState([false, false]);
+    const registeringUserName = useSelector(state => state.app.registeringUserName);
+    const [valid, setValid] = useState([false, false, false, false]);
     const [errName, setErrName] = useState(null);
     const [errEmail, setErrEmail] = useState(null);
     const [errPass, setErrPass] = useState(null);
@@ -98,13 +99,13 @@ const SignUp = ({ flipSign }) => {
                 refEmail.current.setValue('');
                 refName.current.setValue('');
                 flipSign()
-            } else {
+            } else if (registeringUserName) {
                 setValid([false, false, false, false]);
                 setErrEmail(t('err-signup-short'));
                 window.scrollTo(0, 0);
             }
         }
-    }, [isSigningUp, registeredUsername, setValid, history, setOnSignup, flipSign, t]);
+    }, [isSigningUp, registeringUserName, registeredUsername, setValid, history, setOnSignup, flipSign, t]);
 
     const styleBox = {
         opacity: onSignup ? 0 : 1,
