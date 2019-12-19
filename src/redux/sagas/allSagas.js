@@ -10,6 +10,7 @@ export function* auth(action) {
             authErrorMessage: action.authErrorMessage,
             signinErrorMessage: action.signinErrorMessage,
             signupErrorMessage: action.signupErrorMessage,
+            friendErrorMessage: action.friendErrorMessage,
         });
         const resp = yield call(api.auth, { Bearer: consts.temp.bearer });
         yield put({ type: types.APP_AUTH_SUCCEED, name: resp.name });
@@ -40,8 +41,8 @@ export function* getFriendTrainingsList(action) {
         yield put({ type: types.APP_SET_FRIEND_NAME, friendName: friendName });
     } catch (e) {
         yield put({ type: types.FETCH_FRIEND_TRAININGS_FAILED });
-        yield put({ type: types.APP_SET_FRIEND_NAME, friendName: null });
         yield put({ type: types.APP_CHECK_AUTH_FAILED, e: e });
+        yield put({ type: types.APP_SET_FRIEND_NAME, friendName: null, error: e });
     }
 }
 

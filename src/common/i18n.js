@@ -58,9 +58,10 @@ i18n.use(LanguageDetector).init({
 
                 "play friend btn title": "Play A Friend's Trainings",
                 "play friend btn": "Play Friend",
-                "play mine btn title": "Play Mine Trainings",
-                "play mine btn": "Play Mine",
+                "play mine btn title": "Hide Friend Trainings",
+                "play mine btn": "Hide Friend",
                 "friend name": "Friend Nickname",
+                "err-friend-not-found": "Friend by that name was not found",
             }
         },
         he: {
@@ -115,6 +116,13 @@ i18n.use(LanguageDetector).init({
                 "delete approval": "אישור מחיקה",
                 "delete-training-approval": "האם למחוק את האימון על כל תרגיליו?",
                 "of": "מתוך",
+
+                "play friend btn title": "שחק אימונים של חבר",
+                "play friend btn": "שחק אימוני חבר",
+                "play mine btn title": "החבא אימונים של חבר",
+                "play mine btn": "החבא אימוני חבר",
+                "friend name": "כינוי החבר",
+                "err-friend-not-found": "לא נמצא חבר בשם",
             }
         },
     },

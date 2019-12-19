@@ -49,6 +49,7 @@ const Main = () => {
             authErrorMessage: t('err-auth'),
             signinErrorMessage: t('err-signin'),
             signupErrorMessage: t('err-signup'),
+            friendErrorMessage: t('err-friend-not-found'),
         }));
 
         window.addEventListener('scroll', handleScroll, true);

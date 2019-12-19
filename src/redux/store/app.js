@@ -6,6 +6,7 @@ const appReducer = (  state = {
                           authErrorMessage: 'Press the user icon to sign in',
                           signinErrorMessage: 'Nick name or password are wrong',
                           signupErrorMessage: 'Nick name or password are wrong',
+                          friendErrorMessage: 'Friend was not found',
                           authCheckEnded: false,
                           userName: null,
                           isSigningIn: false,
@@ -57,7 +58,8 @@ const appReducer = (  state = {
                 authCheckEnded: false,
                 authErrorMessage: action.authErrorMessage || state.authErrorMessage,
                 signinErrorMessage: action.signinErrorMessage || state.signinErrorMessage,
-                signupErrorMessage: action.signupErrorMessage || state.signupErrorMessage
+                signupErrorMessage: action.signupErrorMessage || state.signupErrorMessage,
+                friendErrorMessage: action.friendErrorMessage || state.friendErrorMessage,
             };
         case types.APP_AUTH_SUCCEED:
             const friendName = localStorage.getItem(consts.localStorage.friendId);
@@ -95,10 +97,15 @@ const appReducer = (  state = {
             }
 
         case types.APP_SET_FRIEND_NAME:
-            localStorage.setItem(consts.localStorage.friendId, action.friendName);
+            if (action.friendName) {
+                localStorage.setItem(consts.localStorage.friendId, action.friendName);
+            } else {
+                localStorage.removeItem(consts.localStorage.friendId);
+            }
             return {
                 ...state,
                 friendName: action.friendName,
+                error: action.error ? state.friendErrorMessage : null,
             };
 
         case types.APP_SIGNIN_STARTED:
