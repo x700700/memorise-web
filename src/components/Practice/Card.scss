@@ -10,6 +10,11 @@
         overflow-x: hidden;
         position: relative;
 
+        @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
+        and (min-aspect-ratio: 13/9) {
+            height: 100%;
+        }
+
         .card-placeholder, .next-card-placeholder, .card-placeholder-bg {
             width: 95%;
             height: 70vh;
@@ -17,7 +22,9 @@
 
             @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
             and (min-aspect-ratio: 13/9) {
-                height: 52vh;
+                height: 100%;
+                width: 66%;
+                margin-left: -29%;
             }
 
             .card {
@@ -77,6 +84,11 @@
         .next-card-in {
             transform: translateX(0);
             transition: transform 0.5s ease-in-out, opacity 0.3s linear;
+
+            @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
+            and (min-aspect-ratio: 13/9) {
+                transform: translateX(22%);
+            }
         }
 
         .next-card-fade {
