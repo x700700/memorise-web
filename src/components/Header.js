@@ -69,6 +69,9 @@ const Header = (props) => {
             setLogoTooltipMsg(`${t('hello')} ${userName}`);
             refTooltipLogo.current.open();
             setIsWelcomeShown(true);
+            setTimeout(() => {
+                refTooltipLogo.current.close();
+            }, 4000);
         }
     }, [authError, isAuthErrorShown, isWelcomeShown, authCheckEnded, isLoggedIn, userName, currPage, setLogoTooltipMsg, setIsAuthErrorShown, setIsWelcomeShown, t]);
 
