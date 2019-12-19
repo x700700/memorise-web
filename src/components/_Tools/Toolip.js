@@ -11,6 +11,7 @@ const HtmlTooltip = withStyles(theme => ({
         fontSize: '1.2rem',
         fontWeight: '400',
         border: '.5px solid #220066',
+        direction: 'rtl',
         // maxWidth: 220,
     },
 }))(MaterialTooltip);

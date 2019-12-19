@@ -11,11 +11,12 @@ import { getFriendTrainingsList } from '../../redux/actions';
 const ChooseFriend = ({ closeModal }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
+    const userName = useSelector(state => state.app.userName);
     const friendName = useSelector(state => state.app.friendName);
     const [errName, setErrName] = useState(t('err-name-valid'));
 
     const checkName = (text) => {
-        if (!validateName(text)) {
+        if (!validateName(text) || (text && text.toLowerCase() === userName.toLowerCase())) {
             setErrName(t('err-name-valid'));
         } else {
             setErrName(null);

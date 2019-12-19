@@ -33,7 +33,7 @@ const MenuTrainings = ({ hide }) => {
     useEffect(() => {
         setTimeout(() => {
             setFriendName(storeFriendName);
-        }, 600);
+        }, 800);
     }, [storeFriendName, setFriendName]);
 
     const refModal = useRef();
