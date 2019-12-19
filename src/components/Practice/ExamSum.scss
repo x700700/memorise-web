@@ -15,12 +15,27 @@
             direction: rtl;
             margin-bottom: 1rem;
 
+            @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
+            and (min-aspect-ratio: 13/9) {
+                margin-bottom: -2.5rem;
+
+                > p {
+                    margin: 0;
+                }
+            }
+
             .exam-score {
                 position: relative;
                 color: $grey6;
                 margin-top: 1rem;
                 font-size: 32px;
                 font-weight: 500;
+
+                @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
+                and (min-aspect-ratio: 13/9) {
+                    transform: scale(.5);
+                    margin-top: -3.5rem;
+                }
 
                 .score-val-container {
                     z-index: 29;
