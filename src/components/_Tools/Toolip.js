@@ -21,6 +21,9 @@ const Tooltip = forwardRef(({ children, text, placement }, ref) => {
         open() {
             setOpen(true);
         },
+        close() {
+            setOpen(false);
+        },
         switch() {
             setOpen(!open);
         },
@@ -34,6 +37,7 @@ const Tooltip = forwardRef(({ children, text, placement }, ref) => {
     return (
         <ClickAwayListener onClickAway={handleTooltipClose}>
             <HtmlTooltip
+                arrow
                 PopperProps={{
                     disablePortal: true,
                 }}

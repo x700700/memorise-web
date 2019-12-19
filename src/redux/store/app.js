@@ -74,7 +74,7 @@ const appReducer = (  state = {
             return {
                 ...state,
                 authCheckEnded: true,
-                error: state.authErrorMessage,
+                // error: state.authErrorMessage,
                 userName: null,
             };
         case types.APP_CHECK_AUTH_FAILED:

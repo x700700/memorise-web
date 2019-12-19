@@ -5,6 +5,7 @@ i18n.use(LanguageDetector).init({
     resources: {
         en: {
             translations: {
+                "press me to login": "Press Me to Sign In",
                 "signin-title": "Sign In:",
                 "signup-title": "Sign Up for Making Your Own Trainings:",
                 "email": "Email",
@@ -65,6 +66,7 @@ i18n.use(LanguageDetector).init({
         },
         he: {
             translations: {
+                "press me to login": "לחץ עלי להיכנס לאימונים האישיים",
                 "signin-title": "היכנס:",
                 "signup-title": "הירשם כדי ליצור אימונים משלך:",
                 "email": "אימייל",

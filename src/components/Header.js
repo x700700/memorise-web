@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import { Link } from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import * as types from '../redux/actionsTypes';
 import './Header.scss';
@@ -15,7 +15,9 @@ import MenuTrainings from "./TrainingsList/MenuTrainings";
 
 const Header = (props) => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const { t } = useTranslation();
+    const authCheckEnded = useSelector(state => state.app.authCheckEnded);
     const userName = useSelector(state => state.app.userName);
     const isLoggedIn = userName && true;
     const currPage = useSelector(state => state.app.currentPage);
@@ -26,6 +28,7 @@ const Header = (props) => {
     const [timingCurrPage, setTimingCurrPage] = useState(currPage);
     const appShowMenu = useSelector(state => state.app.showMenu);
     const [showMenu, setShowMenu] = useState(appShowMenu);
+    const [logoTooltipMsg, setLogoTooltipMsg] = useState(t('press me to login'));
 
     const editTrainingId = (training && training.id) || '-';
 
@@ -37,6 +40,14 @@ const Header = (props) => {
             }, 5000);
         }
     }, [error, clearError]);
+
+    useEffect(() => {
+        if (authCheckEnded && !isLoggedIn) {
+            refTooltipLogo.current.open();
+        } else if (authCheckEnded && isLoggedIn) {
+            setLogoTooltipMsg(`${t('hello')} ${userName}`);
+        }
+    }, [authCheckEnded, isLoggedIn, userName, setLogoTooltipMsg, t]);
 
     useEffect(() => {
         if (appShowMenu) {
@@ -64,14 +75,12 @@ const Header = (props) => {
     };
 
     const logoClick = () => {
-        refTooltip.current.switch();
-        /*
-        console.warn('Clearing localStorage.');
-        localStorage.removeItem(consts.localStorage.tokenId);
-        localStorage.removeItem(consts.localStorage.gameId);
-        localStorage.removeItem(consts.localStorage.examId);
-        dispatch({type: types.APP_SET_ERROR, error: t('Local storage was cleaned')});
-         */
+        if (!userName) {
+            refTooltipLogo.current.close();
+            currPage !== consts.pageName.login && history.push('/login');
+        } else {
+            refTooltipLogo.current.switch();
+        }
     };
 
     const styleOnEdit = {
@@ -81,7 +90,7 @@ const Header = (props) => {
         pointerEvents: trainingNameIsOnEdit ? 'none' : 'auto',
     };
 
-    const refTooltip = useRef();
+    const refTooltipLogo = useRef();
 
     const isMenuBtnDisable = showMenu !== appShowMenu;
     const menuBtnStatusClass = appShowMenu ? 'btn-menu-opened' : '';
@@ -92,12 +101,16 @@ const Header = (props) => {
                     <button onClick={() => menuClicked(!appShowMenu)} className={`btn btn-menu ${isMenuBtnDisable ? 'disable-pointer' : ''}`}><i className={`fas fa-chevron-down ${menuBtnStatusClass}`}/></button>
                 </div>
                 <div className="tabs" style={styleOnEdit}>
-                    <Link to="/trainings"><span className={`btn ${currPage === consts.pageName.trainings ? 'tab-active' : ''}`}><i className="fas fa-book-open"/></span></Link>
+                    <Link to="/trainings">
+                        <span className={`btn ${currPage === consts.pageName.trainings ? 'tab-active' : ''}`}><i className="fas fa-book-open"/></span>
+                    </Link>
 
                     {isLoggedIn && editedTrainingId && !editedTrainingId.startsWith('__') ?
-                        <Link to={`/trainings/${editTrainingId}/edit`}><span
-                            className={`btn ${currPage === consts.pageName.edit ? 'tab-active' : ''}`}><i
-                            className="fas fa-edit"/></span></Link> :
+                        <Link to={`/trainings/${editTrainingId}/edit`}>
+                            <span className={`btn ${currPage === consts.pageName.edit ? 'tab-active' : ''}`}>
+                                <i className="fas fa-edit"/>
+                            </span>
+                        </Link> :
 
                         <span className={`btn tab-inactive ${currPage === consts.pageName.edit ? 'tab-active' : ''}`}>
                             <i className="fas fa-edit"/>
@@ -107,7 +120,7 @@ const Header = (props) => {
                     <Link to="/practice"><span className={`btn btn-play ${currPage === consts.pageName.practice ? 'tab-active' : ''}`}><i className="fas fa-copy"/></span></Link>
                     <Link to="/exam"><span className={`btn btn-play ${currPage === consts.pageName.exam ? 'tab-active' : ''}`}><i className="fas fa-grin-beam-sweat"/></span></Link>
                 </div>
-                <Tooltip ref={refTooltip} text={`${t('hello')} ${userName}`} placement="bottom-end">
+                <Tooltip ref={refTooltipLogo} text={logoTooltipMsg} placement="bottom-end">
                     <img className="logo" style={styleOnEdit} src={logo} alt="logo" width="32" height="32" onClick={() => logoClick()}/>
                 </Tooltip>
             </div>
