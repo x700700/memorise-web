@@ -20,6 +20,8 @@ const appReducer = (  state = {
                           activeDrawerTrainingId: null,
                           trainingNameIsOnEdit: false,
 
+                          friendName: null,
+
                           gameTrainingId: null,
                           gameTrainingIsFetching: false,
                           gameTrainingIsLoaded: false,
@@ -56,10 +58,12 @@ const appReducer = (  state = {
                 signupErrorMessage: action.signupErrorMessage || state.signupErrorMessage
             };
         case types.APP_AUTH_SUCCEED:
+            const friendName = localStorage.getItem(consts.localStorage.friendId);
             return {
                 ...state,
                 authCheckEnded: true,
                 userName: action.name,
+                friendName: friendName,
             };
         case types.APP_AUTH_FAILED:
             console.error('auth failed: ', action.message);
@@ -87,6 +91,13 @@ const appReducer = (  state = {
                     error: action.message,
                 };
             }
+
+        case types.APP_SET_FRIEND_NAME:
+            localStorage.setItem(consts.localStorage.friendId, action.friendName);
+            return {
+                ...state,
+                friendName: action.friendName,
+            };
 
         case types.APP_SIGNIN_STARTED:
             localStorage.removeItem(consts.localStorage.tokenId);

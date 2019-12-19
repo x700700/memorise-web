@@ -1,0 +1,45 @@
+@import "../../common/colors";
+
+.menu-trainings-col {
+    height: 100%;
+    padding: .3rem;
+
+    .title {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+
+        text-align: center;
+        text-decoration: underline;
+        color: $grey3;
+        width: 98%;
+        margin: 0 auto;
+        margin-bottom: 1rem;
+    }
+
+    .friend-btn-row {
+        display: flex;
+        justify-content: space-between;
+
+        @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+            justify-content: initial;
+            width: fit-content;
+            margin: auto;
+        }
+
+        .msg {
+            display: flex;
+            align-items: center;
+            padding: .5rem;
+        }
+
+        .friend-btn-container {
+            width: 7rem;
+            margin: 0 auto;
+
+            @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+                margin: 0;
+            }
+        }
+    }
+}

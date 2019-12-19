@@ -29,6 +29,12 @@ export const appAuth = ({ authErrorMessage, signinErrorMessage, signupErrorMessa
 export const getTrainingsList = () => ({
     type: types.saga.getTrainingsList,
 });
+export const getFriendTrainingsList = (friendName) => ({
+    type: types.saga.getFriendTrainingsList,
+    friendName: friendName,
+});
+
+
 
 export const getEditTraining = (id) => ({
     type: types.saga.getEditTraining,

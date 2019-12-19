@@ -11,6 +11,7 @@ import MenuExam from "./Practice/MenuExam";
 import {useTranslation} from "react-i18next";
 import AddButton from "./AddButton";
 import MenuEdit from "./EditTraining/MenuEdit";
+import MenuTrainings from "./TrainingsList/MenuTrainings";
 
 const Header = (props) => {
     const dispatch = useDispatch();
@@ -77,8 +78,7 @@ const Header = (props) => {
         pointerEvents: trainingNameIsOnEdit ? 'none' : 'auto',
     };
     const styleMenuBtn = {
-        visibility: currPage === consts.pageName.trainings ? 'hidden' : 'visible',
-        pointerEvents: currPage === consts.pageName.trainings || trainingNameIsOnEdit ? 'none' : 'auto',
+        pointerEvents: trainingNameIsOnEdit ? 'none' : 'auto',
     };
 
     const refTooltip = useRef();
@@ -99,9 +99,9 @@ const Header = (props) => {
                             className={`btn ${currPage === consts.pageName.edit ? 'tab-active' : ''}`}><i
                             className="fas fa-edit"/></span></Link> :
 
-                        <span
-                            className={`btn tab-inactive ${currPage === consts.pageName.edit ? 'tab-active' : ''}`}><i
-                            className="fas fa-edit"/></span>
+                        <span className={`btn tab-inactive ${currPage === consts.pageName.edit ? 'tab-active' : ''}`}>
+                            <i className="fas fa-edit"/>
+                        </span>
                     }
 
                     <Link to="/practice"><span className={`btn btn-play ${currPage === consts.pageName.practice ? 'tab-active' : ''}`}><i className="fas fa-copy"/></span></Link>
@@ -113,6 +113,7 @@ const Header = (props) => {
             </div>
             <div id="top-header-menu" className={`top-menu-box ${appShowMenu ? 'top-menu-pop-down' : ''}`}>
                 <div className="menu-container">
+                    <MenuTrainings hide={timingCurrPage !== consts.pageName.trainings}/>
                     <MenuEdit hide={timingCurrPage !== consts.pageName.edit}/>
                     <MenuGame hide={timingCurrPage !== consts.pageName.practice}/>
                     <MenuExam hide={timingCurrPage !== consts.pageName.exam}/>

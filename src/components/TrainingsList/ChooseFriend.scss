@@ -1,0 +1,24 @@
+@import "../../common/colors";
+
+.choose-friend-container {
+    width: fit-content;
+    margin: auto;
+
+    .friend-row {
+        display: flex;
+        margin: 1rem 0;
+        margin-top: 2rem;
+        justify-content: space-between;
+        max-width: 18rem;
+        min-height: 5rem;
+
+        .play-btn-container {
+            margin-top: -.6rem;
+        }
+    }
+
+    .cancel-btn-container {
+        width: 50%;
+        margin: auto;
+    }
+}

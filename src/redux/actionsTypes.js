@@ -18,6 +18,7 @@ export const APP_SHOW_MODAL = 'app.APP_SHOW_MODAL';
 export const APP_SET_ERROR = 'app.APP_SET_ERROR';
 export const APP_SET_ACTIVE_DRAWER_TRAINING = 'app.APP_SET_ACTIVE_DRAWER_TRAINING';
 export const APP_SET_TRAINING_NAME_IS_ON_EDIT = 'app.APP_SET_TRAINING_NAME_IS_ON_EDIT';
+export const APP_SET_FRIEND_NAME = 'app.APP_SET_FRIEND_NAME';
 
 
 export const APP_SET_GAME_TRAINING_ID = 'app.APP_SET_GAME_TRAINING_ID';
@@ -29,6 +30,14 @@ export const APP_SET_EXAM_TRAINING_ID = 'app.APP_SET_EXAM_TRAINING_ID';
 export const APP_SET_EXAM_CARDSDECK = 'app.APP_SET_EXAM_CARDSDECK';
 export const APP_SET_EXAM_ENDED = 'app.APP_SET_EXAM_ENDED';
 export const APP_SET_EXAM_DEFAULT_DECK_SIZE = 'app.APP_SET_EXAM_DEFAULT_DECK_SIZE';
+
+// ============================================================================================================
+// ============================================================================================================
+
+export const FRIEND_TRAININGS_LIST_RESET = 'friendTrainings.FRIEND_TRAININGS_LIST_RESET';
+export const FETCH_FRIEND_TRAININGS_START = 'friendTrainings.FETCH_FRIEND_TRAININGS_START';
+export const FETCH_FRIEND_TRAININGS_SUCCEED = 'friendTrainings.FETCH_FRIEND_TRAININGS_SUCCEED';
+export const FETCH_FRIEND_TRAININGS_FAILED = 'friendTrainings.FETCH_FRIEND_TRAININGS_FAILED';
 
 // ============================================================================================================
 // ============================================================================================================
@@ -95,6 +104,8 @@ export const saga = {
     signin: 'signin',
     signup: 'signup',
     auth: 'auth',
+
+    getFriendTrainingsList: 'getFriendTrainingsList',
 
     getTrainingsList: 'getTrainingsList',
     getEditTraining: 'getEditTraining',

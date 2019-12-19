@@ -55,6 +55,12 @@ i18n.use(LanguageDetector).init({
                 "delete approval": "Delete Approval",
                 "delete-training-approval": "Delete this Training Including all its Exercises?",
                 "of": "of",
+
+                "play friend btn title": "Play A Friend's Trainings",
+                "play friend btn": "Play Friend",
+                "play mine btn title": "Play Mine Trainings",
+                "play mine btn": "Play Mine",
+                "friend name": "Friend Nickname",
             }
         },
         he: {

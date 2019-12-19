@@ -8,6 +8,8 @@ function* actionWatcher() {
     yield takeLatest(types.saga.signup, sagas.signup);
     yield takeLatest(types.saga.auth, sagas.auth);
 
+    yield takeLatest(types.saga.getFriendTrainingsList, sagas.getFriendTrainingsList);
+
     yield takeLatest(types.saga.getTrainingsList, sagas.getTrainingsList);
     yield takeLatest(types.saga.getEditTraining, sagas.getEditTraining);
     yield takeLatest(types.saga.getGameTraining, sagas.getGameTraining);

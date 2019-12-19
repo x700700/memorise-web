@@ -14,9 +14,16 @@ export const auth = ({ bearer }) => {
 };
 
 
+
 export const trainingsList = ({ bearer }) => {
     return axios({method: 'GET', url: `${consts.urls.api}/trainings`});
 };
+
+export const friendTrainingsList = ({ bearer, friendName }) => {
+    return axios({method: 'GET', url: `${consts.urls.api}/friend/${friendName}/trainings`});
+};
+
+
 
 export const getTraining = ({ bearer, id }) => {
     return axios({method: 'GET', url: `${consts.urls.api}/trainings/${id}`});

@@ -18,6 +18,8 @@ export function* auth(action) {
     }
 }
 
+
+
 export function* getTrainingsList(action) {
     try {
         yield put({ type: types.FETCH_TRAININGS_START });
@@ -28,6 +30,22 @@ export function* getTrainingsList(action) {
         yield put({ type: types.APP_CHECK_AUTH_FAILED, e: e });
     }
 }
+
+export function* getFriendTrainingsList(action) {
+    try {
+        yield put({ type: types.FETCH_FRIEND_TRAININGS_START });
+        const resp = yield call(api.friendTrainingsList, { Bearer: consts.temp.bearer, friendName: action.friendName });
+        yield put({ type: types.FETCH_FRIEND_TRAININGS_SUCCEED, trainingsMap: resp });
+        const friendName = resp && ((resp[Object.keys(resp)[0]] || {}).info || {}).friendName;
+        yield put({ type: types.APP_SET_FRIEND_NAME, friendName: friendName });
+    } catch (e) {
+        yield put({ type: types.FETCH_FRIEND_TRAININGS_FAILED });
+        yield put({ type: types.APP_SET_FRIEND_NAME, friendName: null });
+        yield put({ type: types.APP_CHECK_AUTH_FAILED, e: e });
+    }
+}
+
+
 
 export function* getEditTraining(action) {
     try {
