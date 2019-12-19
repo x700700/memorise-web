@@ -29,7 +29,7 @@ const Exam = (props) => {
     const defaultDeckSize = useSelector(state => state.app.examDefaultDeckSize);
 
     const examTrainingId = useSelector(state => state.app.examTrainingId);
-    const friendName = useSelector(state => state.app.friendName);
+    const examFriendName = useSelector(state => state.app.examFriendName);
     const examTrainingIsFetching = useSelector(state => state.app.examTrainingIsFetching);
     const examTrainingIsLoaded = useSelector(state => state.app.examTrainingIsLoaded);
     const examTraining = useSelector(state => state.app.examTraining);
@@ -99,7 +99,7 @@ const Exam = (props) => {
             localStorage.removeItem(consts.localStorage.examId);
             dispatch({ type: types.APP_SET_EXAM_CARDSDECK, cardsDeck: null });
             dispatch({ type: types.APP_SET_EXAM_ENDED, ended: false });
-            dispatch(getExamTraining(examTrainingId, friendName));
+            dispatch(getExamTraining(examTrainingId, examFriendName));
         } else if (!cardsDeck) {
             // console.warn('loadExam(mock);');
             loadExam(mockTrainingMultiply.__T001);

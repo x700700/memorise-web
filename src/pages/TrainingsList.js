@@ -18,7 +18,11 @@ const TrainingsList = (props) => {
 
     const myTrainingsMap = useSelector(state => state.trainings.trainingsMap);
     const friendTrainingsMap = useSelector(state => state.friendTrainings.trainingsMap);
-    const trainingsMap = !friendName ? {...myTrainingsMap} : {...friendTrainingsMap};
+    // const trainingsMap = !friendName ? {...myTrainingsMap} : {...friendTrainingsMap};
+    let trainingsMap = myTrainingsMap;
+    if (friendName && friendTrainingsMap) {
+        trainingsMap = myTrainingsMap && Object.assign(friendTrainingsMap, myTrainingsMap);
+    }
     const trainingsList = isLoaded && trainingsMap && Object.values(trainingsMap);
     // console.warn('====> ', trainingsList);
 

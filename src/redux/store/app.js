@@ -22,6 +22,7 @@ const appReducer = (  state = {
 
                           friendName: null,
 
+                          gameFriendName: null,
                           gameTrainingId: null,
                           gameTrainingIsFetching: false,
                           gameTrainingIsLoaded: false,
@@ -32,6 +33,7 @@ const appReducer = (  state = {
                           gameDefaultDeckSize: consts.play.defaultCardsNum,
                           isGameEnded: false,
 
+                          examFriendName: null,
                           examTrainingId: null,
                           examTrainingIsFetching: false,
                           examTrainingIsLoaded: false,
@@ -189,6 +191,7 @@ const appReducer = (  state = {
             return {
                 ...state,
                 gameTrainingId: action.id,
+                gameFriendName: action.friendName,
             };
         case types.APP_SET_GAME_CARDSDECK:
             return {
@@ -210,6 +213,7 @@ const appReducer = (  state = {
             return {
                 ...state,
                 examTrainingId: action.id,
+                examFriendName: action.friendName,
             };
         case types.APP_SET_EXAM_CARDSDECK:
             return {

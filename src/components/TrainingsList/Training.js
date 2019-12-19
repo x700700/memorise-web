@@ -30,15 +30,13 @@ const Training = ({ training }) => {
         // if (!isLoggedIn) return;
         console.warn('Play training - ', training.id);
         if (!training.id.startsWith('__')) {
-            dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: training.id });
-        } else if (!friendName) {
+            dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: training.id, friendName: friendName || null });
+        } else {
+            // Offline Game (Multiply Chart)
             dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: null });
             const cardsDeck = new CardsDeck(consts.localStorage.gameId, training, false);
             dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: cardsDeck });
             dispatch({ type: types.APP_SET_GAME_ENDED, ended: false });
-        } else {
-            // Friend Training
-            dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: training.id });
         }
         history.push('/practice');
     };
@@ -46,8 +44,9 @@ const Training = ({ training }) => {
         // if (!isLoggedIn) return;
         console.warn('Exam training - ', training.id);
         if (!training.id.startsWith('__')) {
-            dispatch({type: types.APP_SET_EXAM_TRAINING_ID, id: training.id});
+            dispatch({ type: types.APP_SET_EXAM_TRAINING_ID, id: training.id, friendName: friendName || null });
         } else {
+            // Offline Exam (Multiply Chart)
             dispatch({ type: types.APP_SET_EXAM_TRAINING_ID, id: null });
             const cardsDeck = new CardsDeck(consts.localStorage.examId, training, false);
             dispatch({ type: types.APP_SET_EXAM_CARDSDECK, cardsDeck: cardsDeck });

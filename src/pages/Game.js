@@ -26,7 +26,7 @@ const Game = (props) => {
     const defaultDeckSize = useSelector(state => state.app.gameDefaultDeckSize);
 
     const gameTrainingId = useSelector(state => state.app.gameTrainingId);
-    const friendName = useSelector(state => state.app.friendName);
+    const gameFriendName = useSelector(state => state.app.gameFriendName);
     const gameTrainingIsFetching = useSelector(state => state.app.gameTrainingIsFetching);
     const gameTrainingIsLoaded = useSelector(state => state.app.gameTrainingIsLoaded);
     const gameTraining = useSelector(state => state.app.gameTraining);
@@ -90,7 +90,7 @@ const Game = (props) => {
             localStorage.removeItem(consts.localStorage.gameId);
             dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: null });
             dispatch({ type: types.APP_SET_GAME_ENDED, ended: false });
-            dispatch(getGameTraining(gameTrainingId, friendName));
+            dispatch(getGameTraining(gameTrainingId, gameFriendName));
         } else if (!cardsDeck) {
             loadGame(Object.values(mock)[0]);
         }

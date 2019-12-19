@@ -77,6 +77,8 @@ const EditTraining = (props) => {
             // console.warn('EditTraining mount');
             dispatch({type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.edit});
             dispatch({type: types.APP_SHOW_MENU, show: false});
+            dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: null, friendName: null });
+            dispatch({ type: types.APP_SET_EXAM_TRAINING_ID, id: null, friendName: null });
         }
         // console.warn('id <> idToFetch', paramId , idToFetch, idToDelete, training);
         if ((paramId && !training && !isFetching) || (training && paramId && paramId !== training.id)) {
