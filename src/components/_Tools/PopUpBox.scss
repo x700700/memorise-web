@@ -11,7 +11,7 @@
     background-color: $purple2;
     color: $grey10;
     z-index: 19;
-    transform: translateY(850px);
+    transform: translateY(150%);
     transition: transform .5s ease-in-out;
 
     @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
