@@ -11,6 +11,7 @@ const TrainingsList = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const currPage = useSelector(state => state.app.currentPage);
+    const showMenu = useSelector(state => state.app.showMenu);
     const friendName = useSelector(state => state.app.friendName);
     const isFetching = useSelector(state => state.trainings.isFetching);
     const isLoaded = useSelector(state => state.trainings.isLoaded);
@@ -51,7 +52,7 @@ const TrainingsList = (props) => {
 
     return (
         <div className="trainings-list-page">
-            <div className="trainings-list-container">
+            <div className={`trainings-list-container ${showMenu && 'disable-pointer'}`}>
                 <div className="trainings-list-col">
                     {trainingsList && trainingsList.map((x, i) => {
                         return (
