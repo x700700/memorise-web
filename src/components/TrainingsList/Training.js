@@ -19,7 +19,7 @@ const Training = ({ training }) => {
     const sampleExercise = (training && training.sampleExercise) || {q: '', a: ''};
 
     const edit = () => {
-        if (!isLoggedIn || activeDrawerTrainingId) return;
+        if (!isLoggedIn || activeDrawerTrainingId || friendName) return;
         console.warn('Edit training - ', training.id);
         if (!training.id.startsWith('__')) {
             dispatch({type: types.TRAINING_RESET});
@@ -31,11 +31,14 @@ const Training = ({ training }) => {
         console.warn('Play training - ', training.id);
         if (!training.id.startsWith('__')) {
             dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: training.id });
-        } else {
+        } else if (!friendName) {
             dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: null });
             const cardsDeck = new CardsDeck(consts.localStorage.gameId, training, false);
             dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: cardsDeck });
             dispatch({ type: types.APP_SET_GAME_ENDED, ended: false });
+        } else {
+            // Friend Training
+            dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: training.id });
         }
         history.push('/practice');
     };
@@ -71,8 +74,15 @@ const Training = ({ training }) => {
         } : {};
     };
 
+    const friendName = training.info.friendName;
+    const disableEdit = friendName || training.id.startsWith('__');
+
+    const styleContainer = {
+        backgroundColor: friendName && '#eee6ff',
+    };
+
     return (
-        <div className="training-container">
+        <div className="training-container" style={styleContainer}>
             <div className="training-box">
                 <div className="training-btn-edit-absolute">
                     <div className="training-btn-edit">
@@ -82,6 +92,9 @@ const Training = ({ training }) => {
                 <div className="training-row">
                     <div className="name-container" onClick={!activeDrawerTrainingId ? play : () => {}}>
                         <div className="name" style={rtlName(training.name)}>
+                            {friendName &&
+                            <span className="friend-name">{friendName}</span>
+                            }
                             {training.name}
                         </div>
                     </div>
@@ -89,7 +102,7 @@ const Training = ({ training }) => {
                         <div className="exercises-row">
                             {sampleExercise &&
                             <div key={`sample-exercise-`} style={{ width: '100%' }}>
-                                <SampleExercise q={sampleExercise.q} a={sampleExercise.a} hideEditIcon={training && training.id.startsWith('__')}/>
+                                <SampleExercise q={sampleExercise.q} a={sampleExercise.a} hideEditIcon={disableEdit}/>
                             </div>
                             }
                         </div>

@@ -60,7 +60,12 @@ export function* getEditTraining(action) {
 export function* getGameTraining(action) {
     try {
         yield put({ type: types.FETCH_GAME_TRAINING_START, id: action.id });
-        const resp = yield call(api.getTraining, { Bearer: consts.temp.bearer, id: action.id });
+        let resp = null;
+        if (!action.friendName) {
+            resp = yield call(api.getTraining, {Bearer: consts.temp.bearer, id: action.id });
+        } else {
+            resp = yield call(api.getFriendTraining, {Bearer: consts.temp.bearer, id: action.id, friendName: action.friendName });
+        }
         yield put({ type: types.FETCH_GAME_TRAINING_SUCCEED, training: resp });
         yield put({ type: types.APP_SET_GAME_TRAINING_ID, id: null });
     } catch (e) {
@@ -71,7 +76,12 @@ export function* getGameTraining(action) {
 export function* getExamTraining(action) {
     try {
         yield put({ type: types.FETCH_EXAM_TRAINING_START, id: action.id });
-        const resp = yield call(api.getTraining, { Bearer: consts.temp.bearer, id: action.id });
+        let resp = null;
+        if (!action.friendName) {
+            resp = yield call(api.getTraining, {Bearer: consts.temp.bearer, id: action.id});
+        } else {
+            resp = yield call(api.getFriendTraining, {Bearer: consts.temp.bearer, id: action.id, friendName: action.friendName });
+        }
         yield put({ type: types.FETCH_EXAM_TRAINING_SUCCEED, training: resp });
         yield put({ type: types.APP_SET_EXAM_TRAINING_ID, id: null });
     } catch (e) {

@@ -40,13 +40,15 @@ export const getEditTraining = (id) => ({
     type: types.saga.getEditTraining,
     id: id,
 });
-export const getGameTraining = (id) => ({
+export const getGameTraining = (id, friendName) => ({
     type: types.saga.getGameTraining,
     id: id,
+    friendName: friendName
 });
-export const getExamTraining = (id) => ({
+export const getExamTraining = (id, friendName) => ({
     type: types.saga.getExamTraining,
     id: id,
+    friendName: friendName,
 });
 
 

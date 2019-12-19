@@ -29,6 +29,10 @@ export const getTraining = ({ bearer, id }) => {
     return axios({method: 'GET', url: `${consts.urls.api}/trainings/${id}`});
 };
 
+export const getFriendTraining = ({ bearer, friendName, id }) => {
+    return axios({method: 'GET', url: `${consts.urls.api}/friend/${friendName}/trainings/${id}`});
+};
+
 
 export const createTraining = ({ bearer }) => {
     return axios({method: 'POST', url: `${consts.urls.api}/trainings`});

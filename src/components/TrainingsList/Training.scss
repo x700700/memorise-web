@@ -46,6 +46,17 @@
                     padding: .3rem;
                     max-height: 83%;
                     overflow: hidden;
+
+                    .friend-name {
+                        background-color: $grey7;
+                        color: $purple1;
+                        padding: 3px;
+                        font-weight: 700;
+
+                        &:after {
+                            margin-left: .5rem;
+                        }
+                    }
                 }
             }
 
