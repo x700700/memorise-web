@@ -18,6 +18,7 @@ const Header = (props) => {
     const history = useHistory();
     const { t } = useTranslation();
     const authCheckEnded = useSelector(state => state.app.authCheckEnded);
+    const authError = useSelector(state => state.app.authError);
     const userName = useSelector(state => state.app.userName);
     const isLoggedIn = userName && true;
     const currPage = useSelector(state => state.app.currentPage);
@@ -58,15 +59,18 @@ const Header = (props) => {
     }, [error, clearError]);
 
     useEffect(() => {
-        if (!isAuthErrorShown && authCheckEnded && !isLoggedIn && currPage !== consts.pageName.trainings && currPage !== consts.pageName.edit && currPage !== consts.pageName.login) {
-            refTooltipLogo.current.open();
-            setIsAuthErrorShown(true);
+        if (authError || (!isAuthErrorShown && authCheckEnded && !isLoggedIn)) {
+            if (currPage !== consts.pageName.trainings && currPage !== consts.pageName.edit && currPage !== consts.pageName.login) {
+                setLogoTooltipMsg(t('press me to login'));
+                refTooltipLogo.current.open();
+                setIsAuthErrorShown(true);
+            }
         } else if (authCheckEnded && isLoggedIn && !isWelcomeShown) {
             setLogoTooltipMsg(`${t('hello')} ${userName}`);
             refTooltipLogo.current.open();
             setIsWelcomeShown(true);
         }
-    }, [isAuthErrorShown, isWelcomeShown, authCheckEnded, isLoggedIn, userName, currPage, setLogoTooltipMsg, setIsAuthErrorShown, setIsWelcomeShown, t]);
+    }, [authError, isAuthErrorShown, isWelcomeShown, authCheckEnded, isLoggedIn, userName, currPage, setLogoTooltipMsg, setIsAuthErrorShown, setIsWelcomeShown, t]);
 
     useEffect(() => {
         if (appShowMenu) {

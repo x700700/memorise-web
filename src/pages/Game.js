@@ -125,8 +125,6 @@ const Game = (props) => {
                         </div>
                     </div> : gameTrainingId && !gameTrainingIsFetching && !gameTrainingIsLoaded &&
                     <div>
-                        Network Error -
-                        Either refresh for Default Game, or go back to Training tab.
                     </div>
                 }
                 <PopUpBox show={gameEnded}>

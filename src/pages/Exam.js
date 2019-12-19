@@ -121,8 +121,6 @@ const Exam = (props) => {
                                    nextQuestion={nextQuestion} setAnswer={setAnswer}/>
                     </div> : examTrainingId && !examTrainingIsFetching && !examTrainingIsLoaded &&
                     <div>
-                        Network Error -
-                        Either refresh for Default Exam, or go back to Training tab.
                     </div>
                 }
             </div>
