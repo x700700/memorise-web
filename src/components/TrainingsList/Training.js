@@ -92,7 +92,10 @@ const Training = ({ training }) => {
                     <div className="name-container" onClick={!activeDrawerTrainingId ? play : () => {}}>
                         <div className="name" style={rtlName(training.name)}>
                             {friendName &&
-                            <span className="friend-name">{friendName}</span>
+                            <span>
+                                <span className="friend-name">{friendName}</span>
+                                <span> - </span>
+                            </span>
                             }
                             {training.name}
                         </div>
