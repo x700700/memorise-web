@@ -144,6 +144,7 @@ export default class cardsDeck {
                 if (this.currentDeck.length > 0 || this.wrongsDeck.length > 0) {
                     this.wrongsDeck.unshift(wrongCard);
                 } else {
+                    this.plays++;
                     deckFinished = true;
                 }
             }
