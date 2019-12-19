@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import './MenuTrainings.scss';
 // import consts from '../../common/consts';
@@ -14,7 +14,8 @@ const MenuTrainings = ({ hide }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const userName = useSelector(state => state.app.userName);
-    const friendName = useSelector(state => state.app.friendName);
+    const storeFriendName = useSelector(state => state.app.friendName);
+    const [friendName, setFriendName] = useState(null);
 
     const playFriend = () => {
         dispatch({ type: types.APP_SHOW_MENU, show: false });
@@ -28,6 +29,12 @@ const MenuTrainings = ({ hide }) => {
     const closeModal = () => {
         refModal.current.close();
     };
+
+    useEffect(() => {
+        setTimeout(() => {
+            setFriendName(storeFriendName);
+        }, 600);
+    }, [storeFriendName, setFriendName]);
 
     const refModal = useRef();
     return (
