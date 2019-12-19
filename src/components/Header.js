@@ -30,7 +30,22 @@ const Header = (props) => {
     const [showMenu, setShowMenu] = useState(appShowMenu);
     const [logoTooltipMsg, setLogoTooltipMsg] = useState(t('press me to login'));
 
+    const [isAuthErrorShown, setIsAuthErrorShown] = useState(false);
+
     const editTrainingId = (training && training.id) || '-';
+
+    const menuClicked = (show) => {
+        dispatch({ type: types.APP_SHOW_MENU, show: show });
+    };
+
+    const logoClick = () => {
+        if (!userName) {
+            refTooltipLogo.current.close();
+            currPage !== consts.pageName.login && history.push('/login');
+        } else {
+            refTooltipLogo.current.switch();
+        }
+    };
 
     const clearError = useCallback(() => dispatch({ type: types.APP_SET_ERROR, error: null }), [dispatch]);
     useEffect(() => {
@@ -42,12 +57,13 @@ const Header = (props) => {
     }, [error, clearError]);
 
     useEffect(() => {
-        if (authCheckEnded && !isLoggedIn) {
+        if (!isAuthErrorShown && authCheckEnded && !isLoggedIn && currPage !== consts.pageName.trainings && currPage !== consts.pageName.edit && currPage !== consts.pageName.login) {
             refTooltipLogo.current.open();
+            setIsAuthErrorShown(true);
         } else if (authCheckEnded && isLoggedIn) {
             setLogoTooltipMsg(`${t('hello')} ${userName}`);
         }
-    }, [authCheckEnded, isLoggedIn, userName, setLogoTooltipMsg, t]);
+    }, [isAuthErrorShown, authCheckEnded, isLoggedIn, userName, currPage, setLogoTooltipMsg, setIsAuthErrorShown, t]);
 
     useEffect(() => {
         if (appShowMenu) {
@@ -70,18 +86,6 @@ const Header = (props) => {
         }
     }, [setShowMenu, appShowMenu]);
 
-    const menuClicked = (show) => {
-        dispatch({ type: types.APP_SHOW_MENU, show: show });
-    };
-
-    const logoClick = () => {
-        if (!userName) {
-            refTooltipLogo.current.close();
-            currPage !== consts.pageName.login && history.push('/login');
-        } else {
-            refTooltipLogo.current.switch();
-        }
-    };
 
     const styleOnEdit = {
         pointerEvents: trainingNameIsOnEdit ? 'none' : 'auto',

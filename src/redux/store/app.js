@@ -15,6 +15,7 @@ const appReducer = (  state = {
                           registeredUserName: null,
                           jwt: null,
                           error: null,
+                          authError: false,
                           currentPage: null,
                           showMenu: false,
                           isModalOn: false,
@@ -85,7 +86,8 @@ const appReducer = (  state = {
                 return {
                     ...state,
                     authCheckEnded: true,
-                    error: state.authErrorMessage,
+                    // error: state.authErrorMessage,
+                    authError: true,
                     userName: null,
                     jwt: null,
                 };
@@ -95,6 +97,13 @@ const appReducer = (  state = {
                     error: action.message,
                 };
             }
+
+        case types.APP_RESET_AUTH_ERROR:
+            return {
+                ...state,
+                authError: false,
+            };
+
 
         case types.APP_SET_FRIEND_NAME:
             if (action.friendName) {
