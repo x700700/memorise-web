@@ -105,6 +105,7 @@ const Header = (props) => {
     };
     const styleMenuBtn = {
         pointerEvents: trainingNameIsOnEdit ? 'none' : 'auto',
+        visibility: !isLoggedIn && (currPage === consts.pageName.trainings || currPage === consts.pageName.edit) && 'hidden',
     };
 
     const refTooltipLogo = useRef();

@@ -51,7 +51,7 @@ const trainingsReducer = (  state = {
                 trainingsMap: null,
             };
         case types.FETCH_TRAININGS_SUCCEED:
-            const trainings = Object.assign(mockMultiplyTraining, action.trainingsMap);
+            const trainings = { ...mockMultiplyTraining, ...action.trainingsMap};
             return {
                 ...state,
                 isFetching: false,

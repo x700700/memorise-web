@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import './MenuTrainings.scss';
-// import consts from '../../common/consts';
+import consts from '../../common/consts';
 import TopMenu from "../_Tools/TopMenu";
 import {useTranslation} from "react-i18next";
 import * as types from "../../redux/actionsTypes";
@@ -30,6 +30,16 @@ const MenuTrainings = ({ hide }) => {
         refModal.current.close();
     };
 
+    const logout = () => {
+        localStorage.removeItem(consts.localStorage.tokenId);
+        localStorage.removeItem(consts.localStorage.friendId);
+        dispatch({ type: types.APP_AUTH_RESET });
+        dispatch({ type: types.TRAININGS_LIST_RESET });
+        dispatch({ type: types.FRIEND_TRAININGS_LIST_RESET });
+        dispatch({ type: types.TRAINING_RESET });
+        dispatch({ type: types.APP_SHOW_MENU, show: false });
+    };
+
     useEffect(() => {
         setTimeout(() => {
             setFriendName(storeFriendName);
@@ -56,6 +66,9 @@ const MenuTrainings = ({ hide }) => {
                         </div>
                     </div>
                 }
+                <div className="logout-btn-container">
+                    <Button type="cancel" text={t('logout')} onClick={() => logout} />
+                </div>
             </div>
             }
             <Modal ref={refModal} title={t('play friend btn title')} disableBackdropClick={false}>

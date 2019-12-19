@@ -12,6 +12,7 @@ export const APP_AUTH_SUCCEED = 'app.APP_AUTH_SUCCEED';
 export const APP_AUTH_FAILED = 'app.APP_AUTH_FAILED';
 export const APP_CHECK_AUTH_FAILED = 'app.APP_CHECK_AUTH_FAILED';
 export const APP_RESET_AUTH_ERROR = 'app.APP_RESET_AUTH_ERROR';
+export const APP_AUTH_RESET = 'app.APP_AUTH_RESET';
 
 export const APP_SET_CURRENT_PAGE = 'app.APP_SET_CURRENT_PAGE';
 export const APP_SHOW_MENU = 'app.APP_SHOW_MENU';

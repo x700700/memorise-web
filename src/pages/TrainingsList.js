@@ -23,7 +23,7 @@ const TrainingsList = (props) => {
     if (friendName && friendTrainingsMap) {
         trainingsMap = myTrainingsMap && { ...friendTrainingsMap, ...myTrainingsMap };
     }
-    const trainingsList = isLoaded && trainingsMap && Object.values(trainingsMap);
+    const trainingsList = isLoaded ? trainingsMap && Object.values(trainingsMap) : null;
     // console.warn('====> ', trainingsList);
 
 

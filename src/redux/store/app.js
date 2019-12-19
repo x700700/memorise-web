@@ -98,6 +98,22 @@ const appReducer = (  state = {
                 };
             }
 
+        case types.APP_AUTH_RESET:
+            return {
+                ...state,
+                authCheckStarted: false,
+                authCheckEnded: false,
+                userName: null,
+                isSigningIn: false,
+                isSigningUp: false,
+                registeringUserName: null,
+                registeredUserName: null,
+                jwt: null,
+                error: null,
+                authError: false,
+                friendName: null,
+            };
+
         case types.APP_RESET_AUTH_ERROR:
             return {
                 ...state,
