@@ -46,6 +46,9 @@ const Header = (props) => {
             currPage !== consts.pageName.login && history.push('/login');
         } else {
             refTooltipLogo.current.switch();
+            setTimeout(() => {
+                refTooltipLogo.current.close();
+            }, 3000);
         }
     };
 
