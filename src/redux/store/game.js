@@ -1,8 +1,7 @@
 import * as types from '../actionsTypes';
-import logger from "../../common/logger";
 import consts from "../../common/consts";
 import CardsDeck from "../../components/Practice/cardsDeck";
-import mock from '../../mock/training-multiply';
+import { loadCardsDeck } from '../../common/playUtils';
 
 const init = () => ({
     name: null,
@@ -90,29 +89,7 @@ const gameReducer = (  state = init(),
             };
 
         case types.GAME_LOAD:
-            cardsDeck = state.cardsDeck;
-            try {
-                if (action.training) {
-                    logger.trace('load game - from action');
-                    cardsDeck = new CardsDeck(storageId, action.training, state.isDeckFlipped);
-                }
-                else if (!cardsDeck) {
-                    logger.trace('load game - no store, loading from storage');
-                    const savedCardsDeck = localStorage.getItem(storageId);
-                    cardsDeck = new CardsDeck(storageId, null, state.isDeckFlipped);
-                    cardsDeck.setStorage(savedCardsDeck);
-                }
-            } catch (e) {
-                logger.trace('game load - localStorage was bitter');
-                localStorage.removeItem(storageId);
-                cardsDeck = new CardsDeck(storageId, Object.values(mock)[0], state.isDeckFlipped);
-            }
-            if (cardsDeck.getFullDeckSize() === 0) {
-                logger.trace('game load - new deck is empty, loading mock');
-                localStorage.removeItem(storageId);
-                cardsDeck = new CardsDeck(storageId, Object.values(mock)[0], state.isDeckFlipped);
-            }
-            // if (cardsDeck) localStorage.setItem(storageId, cardsDeck.getStorage());
+            cardsDeck = loadCardsDeck(storageId, state.cardsDeck, action.training, state.isDeckFlipped);
             return {
                 ...state,
                 ...cardsDeckProps(cardsDeck),
