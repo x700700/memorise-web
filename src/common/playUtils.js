@@ -14,7 +14,7 @@ export const loadPlay = (localStorageId, createNewDeck, setPlayEnded, setCardsDe
         newDeck = new CardsDeck(localStorageId, null, shouldDeckFlipped);
         try {
             newDeck.setStorage(lastCardsDeck);
-            if (newDeck.getSize() === 0) {
+            if (newDeck.getFullDeckSize() === 0) {
                 logger.error('loadPlay - new deck is empty');
                 newDeck = createNewDeck(shouldDeckFlipped);
             }

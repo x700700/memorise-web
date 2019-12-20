@@ -82,7 +82,7 @@ const Exam = (props) => {
             // logger.warn('loadExam(examTraining);');
             const newDeck = loadExam(examTraining);
             newDeck && setAnswers(newDeck.getTopQAnswers());
-            if (newDeck.getSize() < 3) {
+            if (newDeck.getFullDeckSize() < 3) {
                 localStorage.removeItem(consts.localStorage.examId);
                 dispatch({ type: types.APP_RESET_EXAM_TRAINING });
                 dispatch({ type: types.APP_SET_ERROR, error: t('err-exam-too-small') });
@@ -107,9 +107,9 @@ const Exam = (props) => {
         }
     }, [dispatch, history]);
 
-    const size = cardsDeck && cardsDeck.getSizeDeck();
+    const size = cardsDeck && cardsDeck.getGameDeckSize();
     const rightsNum = cardsDeck && cardsDeck.getRightsNum();
-    const curr = cardsDeck && cardsDeck.sizeCurr();
+    const curr = cardsDeck && cardsDeck.getDeckCurrentSize();
     const currQ = cardsDeck && cardsDeck.topQ();
 
     return (

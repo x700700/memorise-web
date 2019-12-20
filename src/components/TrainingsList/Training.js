@@ -35,9 +35,7 @@ const Training = ({ training }) => {
         } else {
             // Offline Game (Multiply Chart)
             dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: null });
-            const cardsDeck = new CardsDeck(consts.localStorage.gameId, training, false);
-            dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: cardsDeck });
-            dispatch({ type: types.APP_SET_GAME_ENDED, ended: false });
+            dispatch({ type: types.GAME_LOAD, training: training })
         }
         history.push('/practice');
     };

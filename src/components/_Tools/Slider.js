@@ -44,19 +44,21 @@ const Slider = forwardRef(({ min, max }, ref) => {
         value() {
             return val;
         },
+        set(value) {
+            setVal(value);
+        }
     }));
 
-    const valueChanged = (props) => {
-        const val = Number(props.target.innerText);
-        setVal(val);
+    const valueChanged = (event, value) => {
+        setVal(value);
     };
 
     return (
         <div>
-            <MySlider onChangeCommitted={valueChanged} valueLabelDisplay="auto" aria-label="pretto slider"
-                      min={minVal} max={max} defaultValue={defaultVal}/>
+            <MySlider valueLabelDisplay="auto" min={minVal} max={max}
+                      onChange={valueChanged} value={val}
+            />
         </div>
     );
-
 });
 export default Slider;

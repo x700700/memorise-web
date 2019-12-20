@@ -2,35 +2,35 @@ import React, { useEffect, useRef, useState } from 'react';
 import './Game.scss';
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
-import {useTranslation} from "react-i18next";
 import logger from '../common/logger';
 import * as types from '../redux/actionsTypes';
 import consts from "../common/consts";
 import Card from "../components/Practice/Card";
-import CardsDeck from '../components/Practice/cardsDeck';
-import { loadPlay } from "../common/playUtils";
-import mock from '../mock/training-multiply';
 import GameSum from "../components/Practice/GameSum";
 import PopUpBox from "../components/_Tools/PopUpBox";
 import { getGameTraining } from "../redux/actions";
 
 
 const Game = (props) => {
-    const { t } = useTranslation();
     const dispatch = useDispatch();
     const history = useHistory();
-    const [, setTopCard] = useState(null); // !! This is necessary for making the dom render on next card !!
     const [cardInMove, setCardInMove] = useState(false);
     const showMenu = useSelector(state => state.app.showMenu);
-    const cardsDeck = useSelector(state => state.app.gameCardsDeck);
-    const gameEnded = useSelector(state => state.app.isGameEnded);
-    const defaultDeckSize = useSelector(state => state.app.gameDefaultDeckSize);
 
-    const gameTrainingId = useSelector(state => state.app.gameTrainingId);
-    const gameFriendName = useSelector(state => state.app.gameFriendName);
-    const gameTrainingIsFetching = useSelector(state => state.app.gameTrainingIsFetching);
-    const gameTrainingIsLoaded = useSelector(state => state.app.gameTrainingIsLoaded);
-    const gameTraining = useSelector(state => state.app.gameTraining);
+    const trainingIdToFetch = useSelector(state => state.game.trainingIdToFetch);
+    const trainingFetchedId = useSelector(state => state.game.trainingFetchedId);
+    const trainingFriendName = useSelector(state => state.game.friendName);
+    const gameTrainingIsFetching = useSelector(state => state.game.trainingIsFetching);
+    const gameTrainingIsLoaded = useSelector(state => state.game.trainingIsLoaded);
+    const isDeckLoaded = useSelector(state => state.game.isDeckLoaded);
+
+    const gameDeckSize = useSelector(state => state.game.gameDeckSize);
+    const deckCurrentSize = useSelector(state => state.game.deckCurrentSize);
+    const currQ = useSelector(state => state.game.cardQ);
+    const currA = useSelector(state => state.game.cardA);
+    const gameEnded = useSelector(state => state.game.isEnded);
+    const playsNum = useSelector(state => state.game.plays);
+    const playNumber = useSelector(state => state.game.playNumber);
 
     const [isFlipped, setIsFlipped] = useState(false);
 
@@ -40,12 +40,9 @@ const Game = (props) => {
         setIsFlipped(true);
         refCard.current.rotate();
     };
-
     const replaceCard = (good) => {
         setIsFlipped(false);
-        const ended = cardsDeck.nextCard(good);
-        ended && dispatch({ type: types.APP_SET_GAME_ENDED, ended: true });
-        setTopCard(cardsDeck.top()); // !! This is necessary for making the dom render on next card !!
+        dispatch({ type: types.GAME_NEXT_CARD, right: good });
     };
     const respGood = () => {
         replaceCard(true);
@@ -55,54 +52,27 @@ const Game = (props) => {
     };
     const replayGame = () => {
         dispatch({ type: types.APP_SET_GAME_ENDED, ended: false });
-        cardsDeck.replay(defaultDeckSize);
-        dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: cardsDeck });
+        dispatch({ type: types.GAME_REPLAY });
     };
 
 
-    const loadGame = ( training ) => {
-        const createNewDeck = (shouldFlipped) => {
-            return new CardsDeck(consts.localStorage.gameId, training, shouldFlipped);
-        };
-        const shouldDeckFlipped = (cardsDeck && cardsDeck.getIsDeckFlipped()) || false;
-        return loadPlay(consts.localStorage.gameId, createNewDeck,
-            () => dispatch({type: types.APP_SET_GAME_ENDED, ended: true}),
-            (newDeck) => dispatch({type: types.APP_SET_GAME_CARDSDECK, cardsDeck: newDeck}),
-            shouldDeckFlipped);
-    };
     useEffect(() => {
-        if (gameTraining) {
-            const newDeck = loadGame(gameTraining);
-            if (newDeck.getSize() < 3) {
-                localStorage.removeItem(consts.localStorage.gameId);
-                dispatch({ type: types.APP_RESET_GAME_TRAINING });
-                dispatch({ type: types.APP_SET_ERROR, error: t('err-game-too-small') });
-                history.push(`/trainings/${gameTrainingId || '-'}/edit`);
-            }
-        }
-    }, [gameTraining]);
+        logger.trace('Game replayed #', playNumber);
+        setIsFlipped(false);
+    }, [playNumber]);
 
     useEffect(() => {
         logger.trace('Game mount');
         dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.practice });
         dispatch({type: types.APP_SHOW_MENU, show: false});
 
-        if (gameTrainingId) {
-            localStorage.removeItem(consts.localStorage.gameId);
-            dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: null });
-            dispatch({ type: types.APP_SET_GAME_ENDED, ended: false });
-            dispatch(getGameTraining(gameTrainingId, gameFriendName));
-        } else if (!cardsDeck) {
-            loadGame(Object.values(mock)[0]);
+        if (!gameTrainingIsFetching && trainingIdToFetch && trainingIdToFetch !== trainingFetchedId) {
+            dispatch(getGameTraining(trainingIdToFetch, trainingFriendName));
+        } else if (!gameTrainingIsFetching && !isDeckLoaded) {
+            dispatch({ type: types.GAME_LOAD });
         }
+    }, [trainingIdToFetch, trainingFetchedId, gameTrainingIsFetching, trainingFriendName, isDeckLoaded, dispatch, history]);
 
-    }, [dispatch, history]);
-
-    const size = cardsDeck && cardsDeck.getSizeDeck();
-    const playsNum = cardsDeck && cardsDeck.playsNum();
-    const curr = cardsDeck && cardsDeck.sizeCurr();
-    const currQ = cardsDeck && cardsDeck.topQ();
-    const currA = cardsDeck && cardsDeck.topA();
     return (
         <div className="game-desktop-container">
             <div className="game-container">
@@ -111,7 +81,7 @@ const Game = (props) => {
                         {currQ &&
                         <div className="cards-left">
                             <span><i className="fas fa-arrow-down"/></span>
-                            <span>{curr} / {size}</span>
+                            <span>{deckCurrentSize} / {gameDeckSize}</span>
                         </div>
                         }
                         <Card ref={refCard} q={currQ} a={currA} setCardInMove={setCardInMove} rotateCb={rotateCard}/>
@@ -124,12 +94,12 @@ const Game = (props) => {
                                 <i className="fas fa-check"></i>
                             </button>
                         </div>
-                    </div> : gameTrainingId && !gameTrainingIsFetching && !gameTrainingIsLoaded &&
+                    </div> : trainingIdToFetch && !gameTrainingIsFetching && !gameTrainingIsLoaded &&
                     <div>
                     </div>
                 }
                 <PopUpBox show={gameEnded}>
-                    <GameSum setStats={gameEnded} cardsNum={size} playsNum={playsNum} replayGame={() => replayGame}/>
+                    <GameSum setStats={gameEnded} cardsNum={gameDeckSize} playsNum={playsNum} replayGame={() => replayGame}/>
                 </PopUpBox>
             </div>
         </div>

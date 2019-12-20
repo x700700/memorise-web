@@ -25,17 +25,6 @@ const appReducer = (  state = {
 
                           friendName: null,
 
-                          gameFriendName: null,
-                          gameTrainingId: null,
-                          gameTrainingIsFetching: false,
-                          gameTrainingIsLoaded: false,
-                          gameTraining: null,
-                          gameTrainingIdToFetch: null,
-                          gameTrainingFetchedId: null,
-                          gameCardsDeck: null,
-                          gameDefaultDeckSize: consts.play.defaultCardsNum,
-                          isGameEnded: false,
-
                           examFriendName: null,
                           examTrainingId: null,
                           examTrainingIsFetching: false,
@@ -220,28 +209,6 @@ const appReducer = (  state = {
         // ====================================================================================================
         // ====================================================================================================
 
-        case types.APP_SET_GAME_TRAINING_ID:
-            return {
-                ...state,
-                gameTrainingId: action.id,
-                gameFriendName: action.friendName,
-            };
-        case types.APP_SET_GAME_CARDSDECK:
-            return {
-                ...state,
-                gameCardsDeck: action.cardsDeck,
-            };
-        case types.APP_SET_GAME_ENDED:
-            return {
-                ...state,
-                isGameEnded: action.ended,
-            };
-        case types.APP_SET_GAME_DEFAULT_DECK_SIZE:
-            return {
-                ...state,
-                gameDefaultDeckSize: action.size,
-            };
-
         case types.APP_SET_EXAM_TRAINING_ID:
             return {
                 ...state,
@@ -262,43 +229,6 @@ const appReducer = (  state = {
             return {
                 ...state,
                 examDefaultDeckSize: action.size,
-            };
-
-        // ====================================================================================================
-        // ====================================================================================================
-
-        case types.APP_RESET_GAME_TRAINING:
-            return {
-                ...state,
-                gameTrainingIsLoaded: false,
-                gameTraining: null,
-                gameTrainingIdToFetch: null,
-                gameCardsDeck: null,
-            };
-
-        case types.FETCH_GAME_TRAINING_START:
-            return {
-                ...state,
-                gameTrainingIsFetching: true,
-                gameTrainingIsLoaded: false,
-                gameTraining: null,
-                gameTrainingIdToFetch: action.id,
-            };
-        case types.FETCH_GAME_TRAINING_SUCCEED:
-            return {
-                ...state,
-                gameTrainingIsFetching: false,
-                gameTrainingIsLoaded: true,
-                gameTraining: action.training,
-                gameTrainingFetchedId: action.training && action.training.id,
-            };
-        case types.FETCH_GAME_TRAINING_FAILED:
-            return {
-                ...state,
-                gameTrainingIsFetching: false,
-                gameTrainingIsLoaded: false,
-                gameTraining: null,
-                gameTrainingFetchedId: null,
             };
 
         // ====================================================================================================

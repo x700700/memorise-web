@@ -29,7 +29,7 @@ const MenuExam = ({ hide }) => {
         direction: cardsDeck && isRtl(cardsDeck.name) ? 'rtl' : 'ltr',
     };
 
-    const size = (cardsDeck && cardsDeck.getSizeTraining()) || 0;
+    const size = (cardsDeck && cardsDeck.getGameDeckSize()) || 0;
     const isDeckFlipped = (cardsDeck && cardsDeck.getIsDeckFlipped()) || false;
     return (
         <TopMenu hide={hide}>

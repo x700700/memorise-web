@@ -4,34 +4,34 @@ import consts from "../../common/consts";
 
 export default class cardsDeck {
 
-    constructor(localStorageKey, training, shouldDeckFlipped) {
+    constructor(localStorageKey, training, shouldDeckFlipped, playSize = consts.play.defaultCardsNum) {
         if (training) {
             const exercises = training && training.exercises && Object.values(training.exercises);
             // logger.warn('=====> cardsDeck - exercises = ', exercises);
             this.name = training.name;
+            this.trainingSize = exercises.length;
             this.initialDeck = exercises.filter(x => x.q && x.a);
         } else {
             this.initialDeck = [];
         }
         this.localStorageKey = localStorageKey;
-        this.reset(training, consts.play.defaultCardsNum);
+        this.reset(training, playSize);
         this.isDeckFlipped = shouldDeckFlipped || false;
         if (training) {
             this.validate();
         }
     }
 
-    reset = (shouldSaveToStorage, cardsNum) => {
+    reset = (shouldSaveToStorage, playSize) => {
         // logger.warn('cardsDeck reset isExamPageAnswered');
         if (this.isNextDeckFlipped) this.isDeckFlipped = this.isNextDeckFlipped === 2;
         this.currentDeck = this.initialDeck;
         this.examStartDeck = [...this.currentDeck];
-        this.sizeTraining = this.currentDeck.length;
-        this.currentDeck = (_.shuffle(this.currentDeck)).splice(0, cardsNum);
+        this.currentDeck = (_.shuffle(this.currentDeck)).splice(0, playSize);
+        this.gameDeckSize = this.currentDeck.length;
         this.topQAnswers = this.createTopQAnswers();
         this.isExamPageAnswered = false;
         this.topQAnswerId = null;
-        this.sizeDeck = this.currentDeck.length;
         this.plays = 0;
         this.rights = 0;
         this.wrongs = 0;
@@ -59,8 +59,8 @@ export default class cardsDeck {
             topQAnswerId: this.topQAnswerId,
             isNextDeckFlipped: this.isNextDeckFlipped,
             wrongsDeck: this.wrongsDeck,
-            sizeTraining: this.sizeTraining,
-            sizeDeck: this.sizeDeck,
+            trainingSize: this.trainingSize,
+            gameDeckSize: this.gameDeckSize,
             isDeckFlipped: this.isDeckFlipped,
             plays: this.plays,
             rights: this.rights,
@@ -81,27 +81,27 @@ export default class cardsDeck {
         this.topQAnswerId = mem.topQAnswerId;
         this.isNextDeckFlipped = mem.isNextDeckFlipped;
         this.wrongsDeck = mem.wrongsDeck;
-        this.sizeTraining = mem.sizeTraining;
-        this.sizeDeck = mem.sizeDeck;
+        this.trainingSize = mem.trainingSize;
+        this.gameDeckSize = mem.gameDeckSize;
         this.isDeckFlipped = mem.isDeckFlipped;
         this.plays = mem.plays;
         this.rights = mem.rights;
         this.wrongs = mem.wrongs;
 
-        if (!this.initialDeck || !Array.isArray(this.initialDeck) || this.initialDeck.length === 0) {
-            logger.error('*** local storage might be improper. deleted it. please Refresh page.');
-            localStorage.removeItem(consts.localStorage.examId);
+        if (!this.gameDeckSize || !this.initialDeck || !Array.isArray(this.initialDeck) || this.initialDeck.length === 0) {
+            logger.error('local storage seems to be improper, deleting it.');
+            localStorage.removeItem(this.localStorageKey);
         }
         /*
         if (this.topQAnswers && (!Array.isArray(this.topQAnswers) || this.topQAnswers.length === 0)) {
-            logger.error('*** local storage might be improper. deleted it. please Refresh page.');
-            localStorage.removeItem(consts.localStorage.examId);
+            logger.error('local storage seems to be improper, deleting it.');
+            localStorage.removeItem(this.localStorageKey);
             this.topQAnswers = [];
         }
          */
     };
 
-    getSize = () => this.initialDeck.length;
+    getName = () => this.name;
     top = () => this.currentDeck[0] || null;
     topQ = () => !this.isDeckFlipped ? (this.currentDeck[0] || {}).q : (this.currentDeck[0] || {}).a || '';
     topA = () => !this.isDeckFlipped ? (this.currentDeck[0] || {}).a : (this.currentDeck[0] || {}).q || '';
@@ -110,14 +110,15 @@ export default class cardsDeck {
     getTopQAnswerId = () => this.topQAnswerId;
     getRightsNum = () => this.rights;
 
-    getSizeTraining = () => this.sizeTraining;
-    getSizeDeck = () => this.sizeDeck;
-    sizeCurr = () => this.currentDeck.length + this.wrongsDeck.length;
-    playsNum = () => this.plays;
+    getTrainingSize = () => this.trainingSize;
+    getFullDeckSize = () => this.initialDeck.length;
+    getGameDeckSize = () => this.gameDeckSize;
+    getDeckCurrentSize = () => this.currentDeck.length + this.wrongsDeck.length;
+    getPlays = () => this.plays;
     getIsDeckFlipped = () => this.isDeckFlipped;
 
-    replay = (cardsNum) => {
-        this.reset(true, cardsNum);
+    replay = (playSize) => {
+        this.reset(true, playSize);
     };
     setIsDeckFlipped = (flipped) => {
         this.isDeckFlipped = flipped;

@@ -19,30 +19,29 @@ const MenuDivider = () => {
 const MenuGame = ({ hide }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
-    const cardsDeck = useSelector(state => state.app.gameCardsDeck);
+    const name = useSelector(state => state.game.name);
+    const size = useSelector(state => state.game.fullDeckSize);
+    const isDeckFlipped = useSelector(state => state.game.isDeckFlipped);
 
     const replayGame = (size) => {
-        cardsDeck.replay(size);
-        dispatch({ type: types.APP_SET_GAME_CARDSDECK, cardsDeck: cardsDeck });
         dispatch({ type: types.APP_SHOW_MENU, show: false });
         dispatch({ type: types.APP_SET_GAME_ENDED, ended: false });
-        dispatch({ type: types.APP_SET_GAME_DEFAULT_DECK_SIZE, size: size });
+        dispatch({ type: types.GAME_SET_PLAY_SIZE, size: size });
+        dispatch({ type: types.GAME_REPLAY });
     };
     const flipDeck = (flipped) => {
-        cardsDeck.setIsDeckFlipped(flipped);
+        dispatch({ type: types.GAME_FLIP, flip: flipped });
     };
 
     const styleTitle = {
-        direction: cardsDeck && isRtl(cardsDeck.name) ? 'rtl' : 'ltr',
+        direction: name && isRtl(name) ? 'rtl' : 'ltr',
     };
 
-    const size = (cardsDeck && cardsDeck.getSizeTraining()) || 0;
-    const isDeckFlipped = (cardsDeck && cardsDeck.getIsDeckFlipped()) || false;
     return (
         <TopMenu hide={hide}>
-            {cardsDeck &&
+            {name &&
             <div className="menu-game-col">
-                <div className="title" style={styleTitle}>{cardsDeck && cardsDeck.name}</div>
+                <div className="title" style={styleTitle}>{name}</div>
                 <div className="flip-container">
                     <SwitchYellow label={t('flip-deck-side')} value="gameFlipSwitch" onChange={flipDeck} startValue={isDeckFlipped}/>
                 </div>

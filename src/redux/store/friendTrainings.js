@@ -1,6 +1,6 @@
 import * as types from '../actionsTypes';
 
-const trainingsReducer = (  state = {
+const friendTrainingsReducer = (  state = {
                                 isFetching: false,
                                 isLoaded: false,
                                 trainingsMap: null,
@@ -43,4 +43,4 @@ const trainingsReducer = (  state = {
             return state;
     }
 };
-export default trainingsReducer;
+export default friendTrainingsReducer;

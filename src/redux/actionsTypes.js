@@ -24,9 +24,8 @@ export const APP_SET_FRIEND_NAME = 'app.APP_SET_FRIEND_NAME';
 
 
 export const APP_SET_GAME_TRAINING_ID = 'app.APP_SET_GAME_TRAINING_ID';
-export const APP_SET_GAME_CARDSDECK = 'app.APP_SET_GAME_CARDSDECK';
 export const APP_SET_GAME_ENDED = 'app.APP_SET_GAME_ENDED';
-export const APP_SET_GAME_DEFAULT_DECK_SIZE = 'app.APP_SET_GAME_DEFAULT_DECK_SIZE';
+
 
 export const APP_SET_EXAM_TRAINING_ID = 'app.APP_SET_EXAM_TRAINING_ID';
 export const APP_SET_EXAM_CARDSDECK = 'app.APP_SET_EXAM_CARDSDECK';
@@ -57,7 +56,6 @@ export const FETCH_EDIT_TRAINING_START = 'trainings.FETCH_EDIT_TRAINING_START';
 export const FETCH_EDIT_TRAINING_SUCCEED = 'trainings.FETCH_EDIT_TRAINING_SUCCEED';
 export const FETCH_EDIT_TRAINING_FAILED = 'trainings.FETCH_EDIT_TRAINING_FAILED';
 
-export const APP_RESET_GAME_TRAINING = 'trainings.APP_RESET_GAME_TRAINING';
 export const FETCH_GAME_TRAINING_START = 'trainings.FETCH_GAME_TRAINING_START';
 export const FETCH_GAME_TRAINING_SUCCEED = 'trainings.FETCH_GAME_TRAINING_SUCCEED';
 export const FETCH_GAME_TRAINING_FAILED = 'trainings.FETCH_GAME_TRAINING_FAILED';
@@ -100,7 +98,23 @@ export const FETCH_DELETE_EXERCISE_START = 'exercises.FETCH_DELETE_EXERCISE_STAR
 export const FETCH_DELETE_EXERCISE_SUCCEED = 'exercises.FETCH_DELETE_EXERCISE_SUCCEED';
 export const FETCH_DELETE_EXERCISE_FAILED = 'exercises.FETCH_DELETE_EXERCISE_FAILED';
 
+// ============================================================================================================
+// ============================================================================================================
 
+export const GAME_RESET = 'game.GAME_RESET';
+export const GAME_LOAD = 'game.GAME_LOAD';
+export const GAME_REPLAY = 'game.GAME_REPLAY';
+export const GAME_NEXT_CARD = 'game.GAME_NEXT_CARD';
+export const GAME_FLIP = 'game.GAME_FLIP';
+export const GAME_SET_PLAY_SIZE = 'game.GAME_SET_PLAY_SIZE';
+
+
+
+export const EXAM_RESET = 'exam.EXAM_RESET';
+export const EXAM_LOAD = 'exam.EXAM_LOAD';
+
+// ============================================================================================================
+// ============================================================================================================
 
 export const saga = {
     signin: 'signin',
