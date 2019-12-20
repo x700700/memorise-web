@@ -15,6 +15,7 @@ const init = () => ({
     cardA: null,
     isEnded: false,
     plays: 0,
+    isNextDeckFlipped: false,
     isDeckFlipped: false,
     playSize: consts.play.defaultCardsNum,
     playNumber: 1,
@@ -46,6 +47,8 @@ const cardsDeckProps = (cardsDeck, replay = false) => {
         fullDeckSize: cardsDeck.getFullDeckSize(),
         playDeckSize: cardsDeck.getPlayDeckSize(),
         deckCurrentSize: cardsDeck.getDeckCurrentSize(),
+        isDeckFlipped: cardsDeck.getIsDeckFlipped(),
+        isNextDeckFlipped: cardsDeck.getIsNextDeckFlipped(),
         cardQ: cardsDeck.topQ(),
         cardA: cardsDeck.topA(),
 
@@ -54,7 +57,6 @@ const cardsDeckProps = (cardsDeck, replay = false) => {
         isExamPageAnswered: cardsDeck.getIsExamPageAnswered(),
         rightsNum: cardsDeck.getRightsNum(),
 
-        isDeckFlipped: cardsDeck.getIsDeckFlipped(),
         isEnded: !cardsDeck.top(),
     };
 };
@@ -101,9 +103,7 @@ const examReducer = (  state = init(),
             state.cardsDeck.setIsNextDeckFlipped(action.flip);
             return {
                 ...state,
-                isDeckFlipped: action.flip,
-                cardQ: state.cardsDeck.topQ(),
-                cardA: state.cardsDeck.topA(),
+                isNextDeckFlipped: state.cardsDeck.getIsNextDeckFlipped(),
             };
 
         case types.EXAM_SET_PLAY_SIZE:
@@ -113,7 +113,7 @@ const examReducer = (  state = init(),
             };
 
         case types.EXAM_LOAD:
-            cardsDeck = loadCardsDeck(storageId, state.cardsDeck, action.training, state.isDeckFlipped);
+            cardsDeck = loadCardsDeck(storageId, state.cardsDeck, action.training, state.isNextDeckFlipped);
             return {
                 ...state,
                 ...cardsDeckProps(cardsDeck),
@@ -156,7 +156,7 @@ const examReducer = (  state = init(),
                 trainingIdToFetch: action.id,
             };
         case types.EXAM_FETCH_TRAINING_SUCCEED:
-            cardsDeck = new CardsDeck(storageId, action.training, state.isDeckFlipped);
+            cardsDeck = new CardsDeck(storageId, action.training, state.isNextDeckFlipped);
             return {
                 ...state,
                 trainingIsFetching: false,

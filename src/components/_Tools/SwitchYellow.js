@@ -3,13 +3,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { ColorSwitchYellow } from '../../common/materialUI styles/Switch'
 
 const SwitchYellow = forwardRef(({ label, value, onChange }, ref) => {
-    const [check, setCheck] = useState(false);
+    const [check, setCheck] = useState(value);
     useImperativeHandle(ref, () => ({
         check() {
             return check;
-        },
-        set(_check) {
-            setCheck(_check);
         },
     }));
 

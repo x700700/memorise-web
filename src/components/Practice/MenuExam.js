@@ -14,7 +14,7 @@ const MenuExam = ({ hide }) => {
     const dispatch = useDispatch();
     const name = useSelector(state => state.exam.name);
     const size = useSelector(state => state.exam.fullDeckSize);
-    const isDeckFlipped = useSelector(state => state.exam.isDeckFlipped);
+    const isNextDeckFlipped = useSelector(state => state.exam.isNextDeckFlipped);
     const playSize = useSelector(state => state.exam.playSize);
 
     const replayExam = (size) => {
@@ -37,7 +37,7 @@ const MenuExam = ({ hide }) => {
             <div className="menu-exam-col">
                 <div className="title" style={styleTitle}>{name}</div>
                 <div className="flip-container">
-                    <SwitchGreen label={t('flip-exam-side')} value={isDeckFlipped} onChange={flipDeck}/>
+                    <SwitchGreen label={t('flip-exam-side')} value={isNextDeckFlipped} onChange={flipDeck}/>
                 </div>
                 <SubMenuReplay sliderTitle={t('questions num for exam')} replayMsg={t('reexam')}
                                replayCb={replayExam} size={size} playSize={playSize} />

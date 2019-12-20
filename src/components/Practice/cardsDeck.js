@@ -15,16 +15,17 @@ export default class cardsDeck {
             this.initialDeck = [];
         }
         this.localStorageKey = localStorageKey;
-        this.reset(training, playSize);
-        this.isDeckFlipped = shouldDeckFlipped || false;
+        this.reset(training, playSize, shouldDeckFlipped, localStorageKey);
         if (training) {
             this.validate();
         }
     }
 
-    reset = (shouldSaveToStorage, playSize) => {
-        // logger.warn('cardsDeck reset isExamPageAnswered');
+    reset = (shouldSaveToStorage, playSize, shouldDeckFlipped, localStorageKey = null) => {
+        this.isDeckFlipped = shouldDeckFlipped;
         if (this.isNextDeckFlipped) this.isDeckFlipped = this.isNextDeckFlipped === 2;
+        if (localStorageKey === consts.localStorage.examId) this.isNextDeckFlipped = !shouldDeckFlipped ? 1 : 2;
+
         this.currentDeck = this.initialDeck;
         this.examStartDeck = [...this.currentDeck];
         this.currentDeck = (_.shuffle(this.currentDeck)).splice(0, playSize);
@@ -116,9 +117,10 @@ export default class cardsDeck {
     getDeckCurrentSize = () => this.currentDeck.length + this.wrongsDeck.length;
     getPlays = () => this.plays;
     getIsDeckFlipped = () => this.isDeckFlipped;
+    getIsNextDeckFlipped = () => this.isNextDeckFlipped === 2;
 
     replay = (playSize) => {
-        this.reset(true, playSize);
+        this.reset(true, playSize, this.isDeckFlipped);
     };
     setIsDeckFlipped = (flipped) => {
         this.isDeckFlipped = flipped;

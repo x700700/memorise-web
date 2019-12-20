@@ -41,9 +41,9 @@ const cardsDeckProps = (cardsDeck, replay = false) => {
         fullDeckSize: cardsDeck.getFullDeckSize(),
         playDeckSize: cardsDeck.getPlayDeckSize(),
         deckCurrentSize: cardsDeck.getDeckCurrentSize(),
+        isDeckFlipped: cardsDeck.getIsDeckFlipped() || false,
         cardQ: cardsDeck.topQ(),
         cardA: cardsDeck.topA(),
-        isDeckFlipped: cardsDeck.getIsDeckFlipped(),
         isEnded: !cardsDeck.top(),
     };
 };
