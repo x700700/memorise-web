@@ -3,6 +3,7 @@ import './DrawerButtons.scss';
 import {useDispatch} from "react-redux";
 import * as types from '../../redux/actionsTypes';
 import IconButton from "../_Tools/IconButton";
+import logger from "../../common/logger";
 
 
 const DrawerButtons = ({ trainingId, forceClose, size, color, backgroundColor, backgroundColorDraw, icons }) => {
@@ -39,6 +40,7 @@ const DrawerButtons = ({ trainingId, forceClose, size, color, backgroundColor, b
     };
 
     useEffect(() => {
+        logger.trace('DrawerButton update');
         if (open && forceClose) {
             setCloseEnded(false);
             setOpen(false);
@@ -47,6 +49,8 @@ const DrawerButtons = ({ trainingId, forceClose, size, color, backgroundColor, b
 
     const divAbsoluteId = `drawer-buttons-absolute-${trainingId}`;
     useEffect(() => {
+        logger.trace('DrawerButton mount');
+
         const drawerClosed = () => {
             setCloseEnded(true);
         };

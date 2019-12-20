@@ -2,6 +2,7 @@ import React, {forwardRef, useEffect, useState} from 'react';
 import './ExamSum.scss';
 import {useTranslation} from "react-i18next";
 import Button from "../_Tools/Button";
+import logger from "../../common/logger";
 
 
 const ExamSum = forwardRef(({ setStats, cardsNum, rightsNum, replayExam }, ref) => {
@@ -10,6 +11,7 @@ const ExamSum = forwardRef(({ setStats, cardsNum, rightsNum, replayExam }, ref) 
     const [rights, setRights] = useState(0);
 
     useEffect(() => {
+        logger.trace('Exam Sum set stats');
         if (setStats) {
             setCards(cardsNum);
             setRights(rightsNum);

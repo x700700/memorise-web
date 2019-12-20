@@ -58,6 +58,7 @@ const EditTraining = (props) => {
 
 
     useEffect(() => {
+        logger.trace('EditTraining update - id to delete');
         if (idToDelete) {
             refModal.current.open();
             dispatch({ type: types.TRAINING_SET_DELETE_ID, id: null });
@@ -65,6 +66,7 @@ const EditTraining = (props) => {
     }, [idToDelete, dispatch]);
 
     useEffect(() => {
+        logger.trace('EditTraining update - fetch status');
         if (!isFetching && !isLoaded && idToFetch && !fetchedId) {
             logger.error('Training was not fetched - redirect to list');
             dispatch({ type: types.TRAINING_RESET });
@@ -74,8 +76,8 @@ const EditTraining = (props) => {
 
     // const getEditTrainingCb = useCallback((id) => dispatch(getEditTraining(id)), [getEditTraining]);
     useEffect(() => {
+        logger.trace('EditTraining mount');
         if (currPage !== consts.pageName.edit) {
-            // logger.warn('EditTraining mount');
             dispatch({type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.edit});
             dispatch({type: types.APP_SHOW_MENU, show: false});
             dispatch({ type: types.GAME_SET_TRAINING_ID, id: null, friendName: null });

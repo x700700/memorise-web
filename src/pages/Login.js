@@ -12,8 +12,8 @@ const Login = (props) => {
     const [showSignUp, setShowSignUp] = useState(false);
 
     useEffect(() => {
+        logger.trace('Login mount');
         if (currPage !== consts.pageName.login) {
-            logger.trace('Login mount');
             dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.login });
             dispatch({ type: types.APP_SHOW_MENU, show: false });
             dispatch({ type: types.APP_SET_ERROR, error: null });

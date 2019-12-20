@@ -35,6 +35,7 @@ const Card = forwardRef(({ q, a, setCardInMove, rotateCb }, ref) => {
     };
 
     useEffect(() => {
+        logger.trace('Card update');
         setNextQ(q);
         setNextA(a);
         if (currQ !== q) { // Card switch (Only on 1st mount currQ and q are euqal)
@@ -46,6 +47,8 @@ const Card = forwardRef(({ q, a, setCardInMove, rotateCb }, ref) => {
 
     const setCardMoveEnded = useCallback(() => setCardInMove(false), [setCardInMove]);
     useEffect(() => {
+        logger.trace('Card transition started');
+
         const setNextCard = () => {
             if (inSwitch && !inFade) {
                 setInFade(true);

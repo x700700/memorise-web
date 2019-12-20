@@ -45,6 +45,7 @@ const Exercise = ({ exercise, disable }) => {
     };
 
     useEffect(() => {
+        logger.trace('Exercise update');
         if (lastNewExerciseId && lastNewExerciseId === exercise.id) {
             logger.trace('new exercise');
             dispatch({ type: types.TRAINING_UPDATE_LAST_NEW_EXERCISE_ID, id: null });

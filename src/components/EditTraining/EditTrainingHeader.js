@@ -47,6 +47,7 @@ const EditTrainingHeader = ({ id, play, exam, onNameEdit }) => {
     };
 
     useEffect(() => {
+        logger.trace('Training Edit Header update');
         if (isLoaded && !name) {
             logger.trace('focus auto focus');
             setShouldAutoFocus(true);

@@ -44,7 +44,7 @@ const Exam = (props) => {
     };
 
     useEffect(() => {
-        logger.warn('Exam mount');
+        logger.trace('Exam mount');
         dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.exam });
         dispatch({type: types.APP_SHOW_MENU, show: false});
 

@@ -15,7 +15,7 @@ const SubMenuReplay = ({ sliderTitle, replayCb, size, replayMsg, playSize }) => 
     };
 
     useEffect(() => {
-        logger.trace('play size changed - ', playSize);
+        logger.trace('Play SubMenu - size changed - ', playSize);
         refSlider.current.set(playSize);
     }, [playSize]);
 

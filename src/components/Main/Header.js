@@ -12,6 +12,7 @@ import MenuGame from "../Practice/MenuGame";
 import MenuExam from "../Practice/MenuExam";
 import MenuEdit from "../EditTraining/MenuEdit";
 import MenuTrainings from "../TrainingsList/MenuTrainings";
+import logger from "../../common/logger";
 
 const Header = (props) => {
     const dispatch = useDispatch();
@@ -54,6 +55,7 @@ const Header = (props) => {
 
     const clearError = useCallback(() => dispatch({ type: types.APP_SET_ERROR, error: null }), [dispatch]);
     useEffect(() => {
+        logger.trace('Header updated with error - ', error);
         if (error) {
             setTimeout(() => {
                 clearError();
@@ -65,6 +67,7 @@ const Header = (props) => {
         return currPage === consts.pageName.trainings || currPage === consts.pageName.edit || currPage === consts.pageName.login;
     }, [currPage]);
     useEffect(() => {
+        logger.trace('Header update - auth changed');
         if (authError || (!isAuthErrorShown && authCheckEnded && !isLoggedIn)) {
             if (!isNoNoTab()) {
                 setLogoTooltipMsg(t('press me to login'));
@@ -84,6 +87,7 @@ const Header = (props) => {
     }, [authError, isAuthErrorShown, isWelcomeShown, authCheckEnded, isLoggedIn, userName, isNoNoTab, setLogoTooltipMsg, setIsAuthErrorShown, setIsWelcomeShown, t]);
 
     useEffect(() => {
+        logger.trace('Header update - tab changed');
         if (appShowMenu) {
             setTimingCurrPage(currPage);
         } else {
@@ -95,6 +99,7 @@ const Header = (props) => {
     }, [currPage, appShowMenu]);
 
     useEffect(() => {
+        logger.trace('Header mount');
         const menuTransEnded = () => {
             setShowMenu(appShowMenu);
         };

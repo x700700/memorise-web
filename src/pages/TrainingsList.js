@@ -29,6 +29,7 @@ const TrainingsList = (props) => {
 
 
     useEffect(() => {
+        logger.trace('TrainingsList update - new training added');
         if (lastNewTrainingId) {
             // logger.warn('new training created - redirecting to it');
             dispatch({ type: types.TRAINING_RESET });

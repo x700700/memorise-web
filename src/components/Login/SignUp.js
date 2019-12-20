@@ -92,7 +92,7 @@ const SignUp = ({ flipSign }) => {
     };
 
     useEffect(() => {
-        logger.trace('watch signup = ', isSigningUp, registeredUsername);
+        logger.trace('Signup update - ', isSigningUp, registeredUsername);
         if (!isSigningUp) {
             setOnSignup(false);
             if (registeredUsername) {

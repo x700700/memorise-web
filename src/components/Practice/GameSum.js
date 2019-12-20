@@ -1,6 +1,7 @@
 import React, {forwardRef, useEffect, useState} from 'react';
 import './GameSum.scss';
 import {useTranslation} from "react-i18next";
+import logger from "../../common/logger";
 import Button from "../_Tools/Button";
 import { PieChart } from 'react-chartkick';
 import 'chart.js'
@@ -11,6 +12,7 @@ const GameSum = forwardRef(({ setStats, cardsNum, playsNum, replayGame }, ref) =
     const [plays, setPlays] = useState(0);
 
     useEffect(() => {
+        logger.trace('GameSum mount');
         if (setStats) {
             setCards(cardsNum);
             setPlays(playsNum);

@@ -36,16 +36,18 @@ const Main = () => {
     const activeDrawerTrainingId = useSelector(state => state.app.activeDrawerTrainingId);
 
     useEffect(() => {
+        logger.trace('Main update - drawer change');
         _activeDrawerTrainingId = activeDrawerTrainingId;
     }, [activeDrawerTrainingId]);
 
     useEffect(() => {
+        logger.warn('App started');
+
         const handleScroll = (e) => {
             // logger.warn('scroling.........');
             _activeDrawerTrainingId && dispatch({ type: types.APP_SET_ACTIVE_DRAWER_TRAINING, id: null });
         };
 
-        logger.warn('App started');
         dispatch(appAuth({
             authErrorMessage: t('err-auth'),
             signinErrorMessage: t('err-signin'),
@@ -60,6 +62,7 @@ const Main = () => {
     }, [dispatch, t]);
 
     useEffect(() => {
+        logger.trace('Main update - auth change');
         authCheckStarted && authCheckEnded && loggedInUsername && logger.warn('*** Hello', loggedInUsername + ' ***');
         authCheckStarted && authCheckEnded && !loggedInUsername && logger.warn(`*** Not Signed In ***`);
     }, [loggedInUsername, authCheckEnded, authCheckStarted]);

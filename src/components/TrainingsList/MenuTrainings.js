@@ -8,6 +8,7 @@ import * as types from "../../redux/actionsTypes";
 import Button from "../_Tools/Button";
 import Modal from "../_Tools/Modal";
 import ChooseFriend from "./ChooseFriend";
+import logger from "../../common/logger";
 
 
 const MenuTrainings = ({ hide }) => {
@@ -41,6 +42,7 @@ const MenuTrainings = ({ hide }) => {
     };
 
     useEffect(() => {
+        logger.trace('MenuTraining update');
         setTimeout(() => {
             setFriendName(storeFriendName);
         }, 800);

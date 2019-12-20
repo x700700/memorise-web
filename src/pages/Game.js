@@ -56,7 +56,7 @@ const Game = (props) => {
 
 
     useEffect(() => {
-        logger.trace('Game replayed #', playNumber);
+        logger.trace('Game update - replayed #', playNumber);
         setIsFlipped(false);
     }, [playNumber]);
 
