@@ -4,6 +4,7 @@ import mock from "../mock/training-multiply";
 
 
 export const loadCardsDeck = (storageId, _cardsDeck, training, isDeckFlipped) => {
+    logger.trace('load game - isDeckFlipped = ', isDeckFlipped);
     let cardsDeck = _cardsDeck;
     try {
         if (training) {

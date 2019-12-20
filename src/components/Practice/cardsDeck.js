@@ -5,6 +5,7 @@ import consts from "../../common/consts";
 export default class cardsDeck {
 
     constructor(localStorageKey, training, shouldDeckFlipped, playSize = consts.play.defaultCardsNum) {
+        logger.trace('CardsDeck ctor - shouldDeckFlipped = ', shouldDeckFlipped);
         if (training) {
             const exercises = training && training.exercises && Object.values(training.exercises);
             // logger.warn('=====> cardsDeck - exercises = ', exercises);
@@ -15,16 +16,17 @@ export default class cardsDeck {
             this.initialDeck = [];
         }
         this.localStorageKey = localStorageKey;
-        this.reset(training, playSize, shouldDeckFlipped, localStorageKey);
+        this.reset(training, playSize, shouldDeckFlipped);
         if (training) {
             this.validate();
         }
     }
 
-    reset = (shouldSaveToStorage, playSize, shouldDeckFlipped, localStorageKey = null) => {
+    reset = (shouldSaveToStorage, playSize, shouldDeckFlipped) => {
         this.isDeckFlipped = shouldDeckFlipped;
         if (this.isNextDeckFlipped) this.isDeckFlipped = this.isNextDeckFlipped === 2;
-        if (localStorageKey === consts.localStorage.examId) this.isNextDeckFlipped = !shouldDeckFlipped ? 1 : 2;
+        if (shouldDeckFlipped) this.isNextDeckFlipped = 2;
+        logger.trace('this.isDeckFlipped = ', this.isDeckFlipped);
 
         this.currentDeck = this.initialDeck;
         this.examStartDeck = [...this.currentDeck];

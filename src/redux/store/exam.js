@@ -3,7 +3,7 @@ import consts from "../../common/consts";
 import CardsDeck from "../../components/Practice/cardsDeck";
 import { loadCardsDeck } from '../../common/playUtils';
 
-const init = () => ({
+const init = (isDeckFlipped = false, isNextDeckFlipped = false) => ({
     name: null,
     cardsDeck: null,
     isDeckLoaded: false,
@@ -15,8 +15,8 @@ const init = () => ({
     cardA: null,
     isEnded: false,
     plays: 0,
-    isNextDeckFlipped: false,
-    isDeckFlipped: false,
+    isNextDeckFlipped: isNextDeckFlipped,
+    isDeckFlipped: isDeckFlipped,
     playSize: consts.play.defaultCardsNum,
     playNumber: 1,
 
@@ -150,7 +150,7 @@ const examReducer = (  state = init(),
             localStorage.removeItem(storageId);
             return {
                 ...state,
-                ...init(),
+                ...init(state.isDeckFlipped, state.isNextDeckFlipped),
                 trainingIsFetching: true,
                 trainingIsLoaded: false,
                 trainingIdToFetch: action.id,
@@ -167,7 +167,7 @@ const examReducer = (  state = init(),
         case types.EXAM_FETCH_TRAINING_FAILED:
             return {
                 ...state,
-                ...init(),
+                ...init(state.isDeckFlipped, state.isNextDeckFlipped),
                 trainingIsFetching: false,
                 trainingIsLoaded: false,
             };

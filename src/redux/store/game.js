@@ -3,7 +3,7 @@ import consts from "../../common/consts";
 import CardsDeck from "../../components/Practice/cardsDeck";
 import { loadCardsDeck } from '../../common/playUtils';
 
-const init = () => ({
+const init = (isDeckFlipped = false) => ({
     name: null,
     cardsDeck: null,
     isDeckLoaded: false,
@@ -15,7 +15,7 @@ const init = () => ({
     cardA: null,
     isEnded: false,
     plays: 0,
-    isDeckFlipped: false,
+    isDeckFlipped: isDeckFlipped,
     playSize: consts.play.defaultCardsNum,
     playNumber: 1,
 
@@ -127,7 +127,7 @@ const gameReducer = (  state = init(),
             localStorage.removeItem(storageId);
             return {
                 ...state,
-                ...init(),
+                ...init(state.isDeckFlipped),
                 trainingIsFetching: true,
                 trainingIsLoaded: false,
                 trainingIdToFetch: action.id,
@@ -144,7 +144,7 @@ const gameReducer = (  state = init(),
         case types.GAME_FETCH_TRAINING_FAILED:
             return {
                 ...state,
-                ...init(),
+                ...init(state.isDeckFlipped),
                 trainingIsFetching: false,
                 trainingIsLoaded: false,
             };
