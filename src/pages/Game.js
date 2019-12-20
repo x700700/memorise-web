@@ -18,7 +18,6 @@ const Game = (props) => {
     const showMenu = useSelector(state => state.app.showMenu);
 
     const trainingIdToFetch = useSelector(state => state.game.trainingIdToFetch);
-    const trainingFetchedId = useSelector(state => state.game.trainingFetchedId);
     const trainingFriendName = useSelector(state => state.game.friendName);
     const gameTrainingIsFetching = useSelector(state => state.game.trainingIsFetching);
     const gameTrainingIsLoaded = useSelector(state => state.game.trainingIsLoaded);
@@ -66,16 +65,16 @@ const Game = (props) => {
         dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.practice });
         dispatch({type: types.APP_SHOW_MENU, show: false});
 
-        if (!gameTrainingIsFetching && trainingIdToFetch && trainingIdToFetch !== trainingFetchedId) {
+        if (!gameTrainingIsFetching && trainingIdToFetch) {
             dispatch(getGameTraining(trainingIdToFetch, trainingFriendName));
         } else if (!gameTrainingIsFetching && !isDeckLoaded) {
             dispatch({ type: types.GAME_LOAD });
         }
-    }, [trainingIdToFetch, trainingFetchedId, gameTrainingIsFetching, trainingFriendName, isDeckLoaded, dispatch, history]);
+    }, [trainingIdToFetch, gameTrainingIsFetching, trainingFriendName, isDeckLoaded, dispatch, history]);
 
     return (
         <div className="game-desktop-container">
-            <div className="game-container">
+            <div className={`game-container ${showMenu && 'disable-pointer'}`}>
                 {!gameTrainingIsFetching && (currQ || gameEnded) ?
                     <div className="game">
                         {currQ &&

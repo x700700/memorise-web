@@ -24,7 +24,6 @@ const init = () => ({
     friendName: null,
     trainingIsFetching: false,
     trainingIsLoaded: false,
-    trainingFetchedId: null,
 });
 const cardsDeckProps = (cardsDeck) => ({
     cardsDeck: cardsDeck,
@@ -114,7 +113,6 @@ const gameReducer = (  state = init(),
                 friendName: null,
                 trainingIsFetching: false,
                 trainingIsLoaded: false,
-                trainingFetchedId: null,
             };
 
         case types.GAME_REPLAY:
@@ -154,7 +152,6 @@ const gameReducer = (  state = init(),
                 trainingIsFetching: true,
                 trainingIsLoaded: false,
                 trainingIdToFetch: action.id,
-                trainingFetchedId: null,
             };
         case types.FETCH_GAME_TRAINING_SUCCEED:
             cardsDeck = new CardsDeck(storageId, action.training, state.isDeckFlipped);
@@ -162,7 +159,7 @@ const gameReducer = (  state = init(),
                 ...state,
                 trainingIsFetching: false,
                 trainingIsLoaded: true,
-                trainingFetchedId: action.training && action.training.id,
+                trainingIdToFetch: null,
                 ...cardsDeckProps(cardsDeck),
             };
         case types.FETCH_GAME_TRAINING_FAILED:
