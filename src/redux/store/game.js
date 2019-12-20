@@ -10,7 +10,7 @@ const init = () => ({
     isDeckLoaded: false,
     trainingSize: 0,
     fullDeckSize: 0,
-    gameDeckSize: 0,
+    playDeckSize: 0,
     deckCurrentSize: 0,
     cardQ: null,
     cardA: null,
@@ -25,21 +25,28 @@ const init = () => ({
     trainingIsFetching: false,
     trainingIsLoaded: false,
 });
-const cardsDeckProps = (cardsDeck) => ({
-    cardsDeck: cardsDeck,
-    isDeckLoaded: true,
-    name: cardsDeck.getName(),
-    trainingSize: cardsDeck.getTrainingSize(),
-    fullDeckSize: cardsDeck.getFullDeckSize(),
-    gameDeckSize: cardsDeck.getGameDeckSize(),
-    deckCurrentSize: cardsDeck.getDeckCurrentSize(),
-    cardQ: cardsDeck.topQ(),
-    cardA: cardsDeck.topA(),
-    isEnded: !cardsDeck.top(),
-    plays: cardsDeck.getPlays(),
-    playSize: cardsDeck.getGameDeckSize(),
-
-});
+const cardsDeckProps = (cardsDeck, replay = false) => {
+    let basic = {};
+    if (!replay) {
+        basic = {
+            cardsDeck: cardsDeck,
+            isDeckLoaded: true,
+            name: cardsDeck.getName(),
+            plays: cardsDeck.getPlays(),
+            playSize: cardsDeck.getGameDeckSize(),
+        };
+    }
+    return {
+        ...basic,
+        trainingSize: cardsDeck.getTrainingSize(),
+        fullDeckSize: cardsDeck.getFullDeckSize(),
+        playDeckSize: cardsDeck.getGameDeckSize(),
+        deckCurrentSize: cardsDeck.getDeckCurrentSize(),
+        cardQ: cardsDeck.topQ(),
+        cardA: cardsDeck.topA(),
+        isEnded: !cardsDeck.top(),
+    };
+};
 
 const gameReducer = (  state = init(),
                       action) => {
@@ -119,13 +126,7 @@ const gameReducer = (  state = init(),
             state.cardsDeck.replay(state.playSize);
             return {
                 ...state,
-                trainingSize: state.cardsDeck.getTrainingSize(),
-                fullDeckSize: state.cardsDeck.getFullDeckSize(),
-                gameDeckSize: state.cardsDeck.getGameDeckSize(),
-                deckCurrentSize: state.cardsDeck.getDeckCurrentSize(),
-                cardQ: state.cardsDeck.topQ(),
-                cardA: state.cardsDeck.topA(),
-                isEnded: !state.cardsDeck.top(),
+                ...cardsDeckProps(state.cardsDeck, true),
                 plays: 0,
                 playNumber: state.playNumber + 1,
             };

@@ -23,7 +23,7 @@ const Game = (props) => {
     const gameTrainingIsLoaded = useSelector(state => state.game.trainingIsLoaded);
     const isDeckLoaded = useSelector(state => state.game.isDeckLoaded);
 
-    const gameDeckSize = useSelector(state => state.game.gameDeckSize);
+    const playDeckSize = useSelector(state => state.game.playDeckSize);
     const deckCurrentSize = useSelector(state => state.game.deckCurrentSize);
     const currQ = useSelector(state => state.game.cardQ);
     const currA = useSelector(state => state.game.cardA);
@@ -80,7 +80,7 @@ const Game = (props) => {
                         {currQ &&
                         <div className="cards-left">
                             <span><i className="fas fa-arrow-down"/></span>
-                            <span>{deckCurrentSize} / {gameDeckSize}</span>
+                            <span>{deckCurrentSize} / {playDeckSize}</span>
                         </div>
                         }
                         <Card ref={refCard} q={currQ} a={currA} setCardInMove={setCardInMove} rotateCb={rotateCard}/>
@@ -98,7 +98,7 @@ const Game = (props) => {
                     </div>
                 }
                 <PopUpBox show={gameEnded}>
-                    <GameSum setStats={gameEnded} cardsNum={gameDeckSize} playsNum={playsNum} replayGame={() => replayGame}/>
+                    <GameSum setStats={gameEnded} cardsNum={playDeckSize} playsNum={playsNum} replayGame={() => replayGame}/>
                 </PopUpBox>
             </div>
         </div>

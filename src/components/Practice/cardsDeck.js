@@ -28,7 +28,7 @@ export default class cardsDeck {
         this.currentDeck = this.initialDeck;
         this.examStartDeck = [...this.currentDeck];
         this.currentDeck = (_.shuffle(this.currentDeck)).splice(0, playSize);
-        this.gameDeckSize = this.currentDeck.length;
+        this.playDeckSize = this.currentDeck.length;
         this.topQAnswers = this.createTopQAnswers();
         this.isExamPageAnswered = false;
         this.topQAnswerId = null;
@@ -60,7 +60,7 @@ export default class cardsDeck {
             isNextDeckFlipped: this.isNextDeckFlipped,
             wrongsDeck: this.wrongsDeck,
             trainingSize: this.trainingSize,
-            gameDeckSize: this.gameDeckSize,
+            playDeckSize: this.playDeckSize,
             isDeckFlipped: this.isDeckFlipped,
             plays: this.plays,
             rights: this.rights,
@@ -82,13 +82,13 @@ export default class cardsDeck {
         this.isNextDeckFlipped = mem.isNextDeckFlipped;
         this.wrongsDeck = mem.wrongsDeck;
         this.trainingSize = mem.trainingSize;
-        this.gameDeckSize = mem.gameDeckSize;
+        this.playDeckSize = mem.playDeckSize;
         this.isDeckFlipped = mem.isDeckFlipped;
         this.plays = mem.plays;
         this.rights = mem.rights;
         this.wrongs = mem.wrongs;
 
-        if (!this.gameDeckSize || !this.initialDeck || !Array.isArray(this.initialDeck) || this.initialDeck.length === 0) {
+        if (!this.playDeckSize || !this.initialDeck || !Array.isArray(this.initialDeck) || this.initialDeck.length === 0) {
             logger.error('local storage seems to be improper, deleting it.');
             localStorage.removeItem(this.localStorageKey);
         }
@@ -112,7 +112,7 @@ export default class cardsDeck {
 
     getTrainingSize = () => this.trainingSize;
     getFullDeckSize = () => this.initialDeck.length;
-    getGameDeckSize = () => this.gameDeckSize;
+    getGameDeckSize = () => this.playDeckSize;
     getDeckCurrentSize = () => this.currentDeck.length + this.wrongsDeck.length;
     getPlays = () => this.plays;
     getIsDeckFlipped = () => this.isDeckFlipped;
