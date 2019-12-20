@@ -110,19 +110,19 @@ const gameReducer = (  state = init(),
 
 
 
-        case types.APP_SET_GAME_TRAINING_ID:
+        case types.GAME_SET_TRAINING_ID:
             return {
                 ...state,
                 trainingIdToFetch: action.id,
                 friendName: action.friendName,
             };
-        case types.APP_SET_GAME_ENDED:
+        case types.GAME_SET_ENDED:
             return {
                 ...state,
                 isEnded: action.ended,
             };
 
-        case types.FETCH_GAME_TRAINING_START:
+        case types.GAME_FETCH_TRAINING_START:
             localStorage.removeItem(storageId);
             return {
                 ...state,
@@ -131,7 +131,7 @@ const gameReducer = (  state = init(),
                 trainingIsLoaded: false,
                 trainingIdToFetch: action.id,
             };
-        case types.FETCH_GAME_TRAINING_SUCCEED:
+        case types.GAME_FETCH_TRAINING_SUCCEED:
             cardsDeck = new CardsDeck(storageId, action.training, state.isDeckFlipped);
             return {
                 ...state,
@@ -140,7 +140,7 @@ const gameReducer = (  state = init(),
                 trainingIdToFetch: null,
                 ...cardsDeckProps(cardsDeck),
             };
-        case types.FETCH_GAME_TRAINING_FAILED:
+        case types.GAME_FETCH_TRAINING_FAILED:
             return {
                 ...state,
                 ...init(),

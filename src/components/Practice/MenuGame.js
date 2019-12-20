@@ -22,10 +22,11 @@ const MenuGame = ({ hide }) => {
     const name = useSelector(state => state.game.name);
     const size = useSelector(state => state.game.fullDeckSize);
     const isDeckFlipped = useSelector(state => state.game.isDeckFlipped);
+    const playSize = useSelector(state => state.game.playSize);
 
     const replayGame = (size) => {
         dispatch({ type: types.APP_SHOW_MENU, show: false });
-        dispatch({ type: types.APP_SET_GAME_ENDED, ended: false });
+        dispatch({ type: types.GAME_SET_ENDED, ended: false });
         dispatch({ type: types.GAME_SET_PLAY_SIZE, size: size });
         dispatch({ type: types.GAME_REPLAY });
     };
@@ -46,7 +47,8 @@ const MenuGame = ({ hide }) => {
                     <SwitchYellow label={t('flip-deck-side')} value="gameFlipSwitch" onChange={flipDeck} startValue={isDeckFlipped}/>
                 </div>
                 <MenuDivider/>
-                <SubMenuReplay playType="practice" sliderTitle={t("cards num to practice")} replayCb={replayGame} size={size} replayMsg={t('replay')}/>
+                <SubMenuReplay playType="practice" sliderTitle={t("cards num to practice")} replayMsg={t('replay')}
+                               replayCb={replayGame} size={size} playSize={playSize}/>
             </div>
             }
         </TopMenu>

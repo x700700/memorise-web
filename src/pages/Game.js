@@ -50,7 +50,7 @@ const Game = (props) => {
         replaceCard(false);
     };
     const replayGame = () => {
-        dispatch({ type: types.APP_SET_GAME_ENDED, ended: false });
+        dispatch({ type: types.GAME_SET_ENDED, ended: false });
         dispatch({ type: types.GAME_REPLAY });
     };
 

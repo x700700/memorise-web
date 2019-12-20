@@ -12,34 +12,35 @@ import {isRtl} from "../../common/utils";
 const MenuExam = ({ hide }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
-    const cardsDeck = useSelector(state => state.app.examCardsDeck);
+    const name = useSelector(state => state.exam.name);
+    const size = useSelector(state => state.exam.fullDeckSize);
+    const isDeckFlipped = useSelector(state => state.exam.isDeckFlipped);
+    const playSize = useSelector(state => state.exam.playSize);
 
     const replayExam = (size) => {
-        cardsDeck.replay(size);
-        dispatch({ type: types.APP_SET_EXAM_CARDSDECK, cardsDeck: cardsDeck });
         dispatch({ type: types.APP_SHOW_MENU, show: false });
-        dispatch({ type: types.APP_SET_EXAM_ENDED, ended: false });
-        dispatch({ type: types.APP_SET_EXAM_DEFAULT_DECK_SIZE, size: size });
+        dispatch({ type: types.EXAM_SET_ENDED, ended: false });
+        dispatch({ type: types.EXAM_SET_PLAY_SIZE, size: size });
+        dispatch({ type: types.EXAM_REPLAY });
     };
     const flipDeck = (flipped) => {
-        cardsDeck.setIsNextDeckFlipped(flipped);
+        dispatch({ type: types.EXAM_FLIP, flip: flipped });
     };
 
     const styleTitle = {
-        direction: cardsDeck && isRtl(cardsDeck.name) ? 'rtl' : 'ltr',
+        direction: name && isRtl(name) ? 'rtl' : 'ltr',
     };
 
-    const size = (cardsDeck && cardsDeck.getPlayDeckSize()) || 0;
-    const isDeckFlipped = (cardsDeck && cardsDeck.getIsDeckFlipped()) || false;
     return (
         <TopMenu hide={hide}>
-            {cardsDeck &&
+            {name &&
             <div className="menu-exam-col">
-                <div className="title" style={styleTitle}>{cardsDeck && cardsDeck.name}</div>
+                <div className="title" style={styleTitle}>{name}</div>
                 <div className="flip-container">
                     <SwitchGreen label={t('flip-exam-side')} value="examFlipSwitch" onChange={flipDeck} startValue={isDeckFlipped}/>
                 </div>
-                <SubMenuReplay playType="exam" sliderTitle={t('questions num for exam')} replayCb={replayExam} size={size} replayMsg={t('reexam')}/>
+                <SubMenuReplay playType="exam" sliderTitle={t('questions num for exam')} replayMsg={t('reexam')}
+                               replayCb={replayExam} size={size} playSize={playSize} />
             </div>
             }
         </TopMenu>

@@ -10,6 +10,7 @@ const appReducer = (  state = {
                           friendErrorMessage: 'Friend was not found',
                           authCheckEnded: false,
                           userName: null,
+                          friendName: null,
                           isSigningIn: false,
                           isSigningUp: false,
                           registeringUserName: null,
@@ -22,19 +23,6 @@ const appReducer = (  state = {
                           isModalOn: false,
                           activeDrawerTrainingId: null,
                           trainingNameIsOnEdit: false,
-
-                          friendName: null,
-
-                          examFriendName: null,
-                          examTrainingId: null,
-                          examTrainingIsFetching: false,
-                          examTrainingIsLoaded: false,
-                          examTraining: null,
-                          examTrainingIdToFetch: null,
-                          examTrainingFetchedId: null,
-                          examCardsDeck: null,
-                          examDefaultDeckSize: consts.play.defaultCardsNum,
-                          isExamEnded: false,
                       },
                       action) => {
 
@@ -42,6 +30,7 @@ const appReducer = (  state = {
 
         // ====================================================================================================
         // ====================================================================================================
+
         case types.APP_AUTH_STARTED:
             return {
                 ...state,
@@ -68,6 +57,8 @@ const appReducer = (  state = {
                 // error: state.authErrorMessage,
                 userName: null,
             };
+
+
         case types.APP_CHECK_AUTH_FAILED:
             const status = (action.e || {}).status;
             const message = ((action.e || {}).data || {}).message || action.e.statusText;
@@ -110,6 +101,8 @@ const appReducer = (  state = {
                 authError: false,
             };
 
+        // ====================================================================================================
+        // ====================================================================================================
 
         case types.APP_SET_FRIEND_NAME:
             if (action.friendName) {
@@ -122,6 +115,9 @@ const appReducer = (  state = {
                 friendName: action.friendName,
                 error: action.error ? state.friendErrorMessage : null,
             };
+
+        // ====================================================================================================
+        // ====================================================================================================
 
         case types.APP_SIGNIN_STARTED:
             localStorage.removeItem(consts.localStorage.tokenId);
@@ -172,6 +168,7 @@ const appReducer = (  state = {
                 error: state.signupErrorMessage,
                 registeredUserName: null,
             };
+
         // ====================================================================================================
         // ====================================================================================================
 
@@ -204,68 +201,6 @@ const appReducer = (  state = {
             return {
                 ...state,
                 trainingNameIsOnEdit: action.edit,
-            };
-
-        // ====================================================================================================
-        // ====================================================================================================
-
-        case types.APP_SET_EXAM_TRAINING_ID:
-            return {
-                ...state,
-                examTrainingId: action.id,
-                examFriendName: action.friendName,
-            };
-        case types.APP_SET_EXAM_CARDSDECK:
-            return {
-                ...state,
-                examCardsDeck: action.cardsDeck,
-            };
-        case types.APP_SET_EXAM_ENDED:
-            return {
-                ...state,
-                isExamEnded: action.ended,
-            };
-        case types.APP_SET_EXAM_DEFAULT_DECK_SIZE:
-            return {
-                ...state,
-                examDefaultDeckSize: action.size,
-            };
-
-        // ====================================================================================================
-        // ====================================================================================================
-
-        case types.APP_RESET_EXAM_TRAINING:
-            return {
-                ...state,
-                examTrainingIsLoaded: false,
-                examTraining: null,
-                examTrainingIdToFetch: null,
-                examCardsDeck: null,
-            };
-
-        case types.FETCH_EXAM_TRAINING_START:
-            return {
-                ...state,
-                examTrainingIsFetching: true,
-                examTrainingIsLoaded: false,
-                examTraining: null,
-                examTrainingIdToFetch: action.id,
-            };
-        case types.FETCH_EXAM_TRAINING_SUCCEED:
-            return {
-                ...state,
-                examTrainingIsFetching: false,
-                examTrainingIsLoaded: true,
-                examTraining: action.training,
-                examTrainingFetchedId: action.training && action.training.id,
-            };
-        case types.FETCH_EXAM_TRAINING_FAILED:
-            return {
-                ...state,
-                examTrainingIsFetching: false,
-                examTrainingIsLoaded: false,
-                examTraining: null,
-                examTrainingFetchedId: null,
             };
 
         // ====================================================================================================

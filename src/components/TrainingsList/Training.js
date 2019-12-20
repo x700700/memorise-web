@@ -7,8 +7,6 @@ import SampleExercise from "./SampleExercise";
 import {useHistory} from "react-router-dom";
 import { isRtl } from "../../common/utils";
 import DrawerButtons from "./DrawerButtons";
-import CardsDeck from "../Practice/cardsDeck";
-import consts from "../../common/consts";
 
 
 const Training = ({ training }) => {
@@ -31,10 +29,10 @@ const Training = ({ training }) => {
         // if (!isLoggedIn) return;
         // logger.warn('Play training - ', training.id);
         if (!training.id.startsWith('__')) {
-            dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: training.id, friendName: friendName || null });
+            dispatch({ type: types.GAME_SET_TRAINING_ID, id: training.id, friendName: friendName || null });
         } else {
             // Offline Game (Multiply Chart)
-            dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: null });
+            dispatch({ type: types.GAME_SET_TRAINING_ID, id: null });
             dispatch({ type: types.GAME_LOAD, training: training })
         }
         history.push('/practice');
@@ -43,13 +41,11 @@ const Training = ({ training }) => {
         // if (!isLoggedIn) return;
         // logger.warn('Exam training - ', training.id);
         if (!training.id.startsWith('__')) {
-            dispatch({ type: types.APP_SET_EXAM_TRAINING_ID, id: training.id, friendName: friendName || null });
+            dispatch({ type: types.EXAM_SET_TRAINING_ID, id: training.id, friendName: friendName || null });
         } else {
             // Offline Exam (Multiply Chart)
-            dispatch({ type: types.APP_SET_EXAM_TRAINING_ID, id: null });
-            const cardsDeck = new CardsDeck(consts.localStorage.examId, training, false);
-            dispatch({ type: types.APP_SET_EXAM_CARDSDECK, cardsDeck: cardsDeck });
-            dispatch({ type: types.APP_SET_EXAM_ENDED, ended: false });
+            dispatch({ type: types.EXAM_SET_TRAINING_ID, id: null });
+            dispatch({ type: types.EXAM_LOAD, training: training })
         }
         history.push('/exam');
     };

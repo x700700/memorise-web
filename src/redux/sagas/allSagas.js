@@ -60,33 +60,33 @@ export function* getEditTraining(action) {
 }
 export function* getGameTraining(action) {
     try {
-        yield put({ type: types.FETCH_GAME_TRAINING_START, id: action.id });
+        yield put({ type: types.GAME_FETCH_TRAINING_START, id: action.id });
         let resp = null;
         if (!action.friendName) {
             resp = yield call(api.getTraining, {Bearer: consts.temp.bearer, id: action.id });
         } else {
             resp = yield call(api.getFriendTraining, {Bearer: consts.temp.bearer, id: action.id, friendName: action.friendName });
         }
-        yield put({ type: types.FETCH_GAME_TRAINING_SUCCEED, training: resp });
-        yield put({ type: types.APP_SET_GAME_TRAINING_ID, id: null });
+        yield put({ type: types.GAME_FETCH_TRAINING_SUCCEED, training: resp });
+        yield put({ type: types.GAME_SET_TRAINING_ID, id: null });
     } catch (e) {
-        yield put({ type: types.FETCH_GAME_TRAINING_FAILED });
+        yield put({ type: types.GAME_FETCH_TRAINING_FAILED });
         yield put({ type: types.APP_CHECK_AUTH_FAILED, e: e });
     }
 }
 export function* getExamTraining(action) {
     try {
-        yield put({ type: types.FETCH_EXAM_TRAINING_START, id: action.id });
+        yield put({ type: types.EXAM_FETCH_TRAINING_START, id: action.id });
         let resp = null;
         if (!action.friendName) {
             resp = yield call(api.getTraining, {Bearer: consts.temp.bearer, id: action.id});
         } else {
             resp = yield call(api.getFriendTraining, {Bearer: consts.temp.bearer, id: action.id, friendName: action.friendName });
         }
-        yield put({ type: types.FETCH_EXAM_TRAINING_SUCCEED, training: resp });
-        yield put({ type: types.APP_SET_EXAM_TRAINING_ID, id: null });
+        yield put({ type: types.EXAM_FETCH_TRAINING_SUCCEED, training: resp });
+        yield put({ type: types.EXAM_SET_TRAINING_ID, id: null });
     } catch (e) {
-        yield put({ type: types.FETCH_EXAM_TRAINING_FAILED });
+        yield put({ type: types.EXAM_FETCH_TRAINING_FAILED });
         yield put({ type: types.APP_CHECK_AUTH_FAILED, e: e });
     }
 }

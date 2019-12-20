@@ -33,12 +33,12 @@ const EditTraining = (props) => {
 
     const play = () => {
         // logger.warn('play training - ', training);
-        dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: training.id });
+        dispatch({ type: types.GAME_SET_TRAINING_ID, id: training.id });
         history.push('/practice');
     };
     const exam = () => {
         // logger.warn('exam training - ', training);
-        dispatch({ type: types.APP_SET_EXAM_TRAINING_ID, id: training.id });
+        dispatch({ type: types.EXAM_SET_TRAINING_ID, id: training.id });
         history.push('/exam');
     };
     const onNameEdit = (edit) => {
@@ -78,8 +78,8 @@ const EditTraining = (props) => {
             // logger.warn('EditTraining mount');
             dispatch({type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.edit});
             dispatch({type: types.APP_SHOW_MENU, show: false});
-            dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: null, friendName: null });
-            dispatch({ type: types.APP_SET_EXAM_TRAINING_ID, id: null, friendName: null });
+            dispatch({ type: types.GAME_SET_TRAINING_ID, id: null, friendName: null });
+            dispatch({ type: types.EXAM_SET_TRAINING_ID, id: null, friendName: null });
         }
         // logger.warn('id <> idToFetch', paramId , idToFetch, idToDelete, training);
         if ((paramId && !training && !isFetching) || (training && paramId && paramId !== training.id)) {

@@ -4,10 +4,8 @@ import logger from "../../common/logger";
 import Slider from "../_Tools/Slider";
 import consts from "../../common/consts";
 import Button from "../_Tools/Button";
-import {useSelector} from "react-redux";
 
-const SubMenuReplay = ({ sliderTitle, replayCb, size, replayMsg }) => {
-    const playSize = useSelector(state => state.game.playSize);
+const SubMenuReplay = ({ sliderTitle, replayCb, size, replayMsg, playSize }) => {
 
     const refSlider = useRef();
 
