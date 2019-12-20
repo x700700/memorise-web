@@ -61,9 +61,12 @@ const Header = (props) => {
         }
     }, [error, clearError]);
 
+    const isNoNoTab = useCallback(() => {
+        return currPage === consts.pageName.trainings || currPage === consts.pageName.edit || currPage === consts.pageName.login;
+    }, [currPage]);
     useEffect(() => {
         if (authError || (!isAuthErrorShown && authCheckEnded && !isLoggedIn)) {
-            if (currPage !== consts.pageName.trainings && currPage !== consts.pageName.edit && currPage !== consts.pageName.login) {
+            if (!isNoNoTab()) {
                 setLogoTooltipMsg(t('press me to login'));
                 refTooltipLogo.current.open();
                 setIsAuthErrorShown(true);
@@ -75,8 +78,10 @@ const Header = (props) => {
             setTimeout(() => {
                 refTooltipLogo.current.close();
             }, 4000);
+        } else if (isNoNoTab()) {
+            refTooltipLogo.current.close();
         }
-    }, [authError, isAuthErrorShown, isWelcomeShown, authCheckEnded, isLoggedIn, userName, currPage, setLogoTooltipMsg, setIsAuthErrorShown, setIsWelcomeShown, t]);
+    }, [authError, isAuthErrorShown, isWelcomeShown, authCheckEnded, isLoggedIn, userName, isNoNoTab, setLogoTooltipMsg, setIsAuthErrorShown, setIsWelcomeShown, t]);
 
     useEffect(() => {
         if (appShowMenu) {

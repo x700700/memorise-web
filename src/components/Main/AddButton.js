@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useCallback, useEffect, useRef} from "react";
 import './AddButton.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router";
@@ -43,13 +43,18 @@ const AddButton = (props) => {
         dispatch(createExercise(editTrainingId));
     };
 
+    const isAddTab = useCallback(() => {
+        return currPage === consts.pageName.trainings || currPage === consts.pageName.edit;
+    }, [currPage]);
     useEffect(() => {
         logger.trace('Add Button mounted');
-        if (authError && (currPage === consts.pageName.trainings || currPage === consts.pageName.edit)) {
+        if (authError && isAddTab()) {
             refTooltip.current.open();
             dispatch({ type: types.APP_RESET_AUTH_ERROR });
+        } else if (!isAddTab()) {
+            refTooltip.current.close();
         }
-    }, [authError, currPage, dispatch]);
+    }, [authError, isAddTab, dispatch]);
 
     const refTooltip = useRef();
     const disableAddBtn = !loggedInUserName || showMenu || isModalOn || trainingNameIsOnEdit;
