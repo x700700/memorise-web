@@ -20,5 +20,5 @@ export default createStore(
     }),
     process.env.NODE_ENV !== 'production' ?
         reduxDevtoolsExtension.composeWithDevTools(applyMiddleware(...middleware, logger)) :
-        applyMiddleware(...middleware, logger)
+        applyMiddleware(...middleware)
 );
