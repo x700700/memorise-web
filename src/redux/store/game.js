@@ -32,14 +32,14 @@ const cardsDeckProps = (cardsDeck, replay = false) => {
             isDeckLoaded: true,
             name: cardsDeck.getName(),
             plays: cardsDeck.getPlays(),
-            playSize: cardsDeck.getGameDeckSize(),
+            playSize: cardsDeck.getPlayDeckSize(),
         };
     }
     return {
         ...basic,
         trainingSize: cardsDeck.getTrainingSize(),
         fullDeckSize: cardsDeck.getFullDeckSize(),
-        playDeckSize: cardsDeck.getGameDeckSize(),
+        playDeckSize: cardsDeck.getPlayDeckSize(),
         deckCurrentSize: cardsDeck.getDeckCurrentSize(),
         cardQ: cardsDeck.topQ(),
         cardA: cardsDeck.topA(),

@@ -107,7 +107,7 @@ const Exam = (props) => {
         }
     }, [dispatch, history]);
 
-    const size = cardsDeck && cardsDeck.getGameDeckSize();
+    const size = cardsDeck && cardsDeck.getPlayDeckSize();
     const rightsNum = cardsDeck && cardsDeck.getRightsNum();
     const curr = cardsDeck && cardsDeck.getDeckCurrentSize();
     const currQ = cardsDeck && cardsDeck.topQ();

@@ -112,7 +112,7 @@ export default class cardsDeck {
 
     getTrainingSize = () => this.trainingSize;
     getFullDeckSize = () => this.initialDeck.length;
-    getGameDeckSize = () => this.playDeckSize;
+    getPlayDeckSize = () => this.playDeckSize;
     getDeckCurrentSize = () => this.currentDeck.length + this.wrongsDeck.length;
     getPlays = () => this.plays;
     getIsDeckFlipped = () => this.isDeckFlipped;
