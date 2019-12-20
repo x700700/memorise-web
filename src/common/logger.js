@@ -3,7 +3,7 @@ class Logger {
     constructor(env) {
         this.env = env;
         this.prod = this.env === 'production';
-        console.debug(`environment=[${this.env}] - is production = `, this.prod);
+        console.debug(`environment = [${this.env}]`);
     }
     trace = (...args) => {
         false && !this.prod && console.debug(...args);

@@ -27,9 +27,9 @@ const Game = (props) => {
     const deckCurrentSize = useSelector(state => state.game.deckCurrentSize);
     const currQ = useSelector(state => state.game.cardQ);
     const currA = useSelector(state => state.game.cardA);
-    const gameEnded = useSelector(state => state.game.isEnded);
     const playsNum = useSelector(state => state.game.plays);
     const playNumber = useSelector(state => state.game.playNumber);
+    const gameEnded = useSelector(state => state.game.isEnded);
 
     const [isFlipped, setIsFlipped] = useState(false);
 

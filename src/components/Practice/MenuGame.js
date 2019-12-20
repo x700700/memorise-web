@@ -44,10 +44,10 @@ const MenuGame = ({ hide }) => {
             <div className="menu-game-col">
                 <div className="title" style={styleTitle}>{name}</div>
                 <div className="flip-container">
-                    <SwitchYellow label={t('flip-deck-side')} value="gameFlipSwitch" onChange={flipDeck} startValue={isDeckFlipped}/>
+                    <SwitchYellow label={t('flip-deck-side')} value={isDeckFlipped} onChange={flipDeck}/>
                 </div>
                 <MenuDivider/>
-                <SubMenuReplay playType="practice" sliderTitle={t("cards num to practice")} replayMsg={t('replay')}
+                <SubMenuReplay sliderTitle={t("cards num to practice")} replayMsg={t('replay')}
                                replayCb={replayGame} size={size} playSize={playSize}/>
             </div>
             }

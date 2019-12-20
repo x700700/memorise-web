@@ -37,9 +37,9 @@ const MenuExam = ({ hide }) => {
             <div className="menu-exam-col">
                 <div className="title" style={styleTitle}>{name}</div>
                 <div className="flip-container">
-                    <SwitchGreen label={t('flip-exam-side')} value="examFlipSwitch" onChange={flipDeck} startValue={isDeckFlipped}/>
+                    <SwitchGreen label={t('flip-exam-side')} value={isDeckFlipped} onChange={flipDeck}/>
                 </div>
-                <SubMenuReplay playType="exam" sliderTitle={t('questions num for exam')} replayMsg={t('reexam')}
+                <SubMenuReplay sliderTitle={t('questions num for exam')} replayMsg={t('reexam')}
                                replayCb={replayExam} size={size} playSize={playSize} />
             </div>
             }

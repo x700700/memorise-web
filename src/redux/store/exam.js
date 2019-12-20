@@ -54,6 +54,7 @@ const cardsDeckProps = (cardsDeck, replay = false) => {
         isExamPageAnswered: cardsDeck.getIsExamPageAnswered(),
         rightsNum: cardsDeck.getRightsNum(),
 
+        isDeckFlipped: cardsDeck.getIsDeckFlipped(),
         isEnded: !cardsDeck.top(),
     };
 };
