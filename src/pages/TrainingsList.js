@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import './TrainingsList.scss';
 import {useDispatch, useSelector} from "react-redux";
+import logger from '../common/logger';
 import * as types from "../redux/actionsTypes";
 import {useHistory} from "react-router-dom";
 import consts from "../common/consts";
@@ -24,12 +25,12 @@ const TrainingsList = (props) => {
         trainingsMap = myTrainingsMap && { ...friendTrainingsMap, ...myTrainingsMap };
     }
     const trainingsList = isLoaded ? trainingsMap && Object.values(trainingsMap) : null;
-    // console.warn('====> ', trainingsList);
+    // logger.warn('====> ', trainingsList);
 
 
     useEffect(() => {
         if (lastNewTrainingId) {
-            // console.warn('new training created - redirecting to it');
+            // logger.warn('new training created - redirecting to it');
             dispatch({ type: types.TRAINING_RESET });
             dispatch({ type: types.TRAININGS_UPDATE_LAST_NEW_TRAINING_ID, id: null });
             history.push(`/trainings/${lastNewTrainingId}/edit`);
@@ -37,8 +38,9 @@ const TrainingsList = (props) => {
     }, [lastNewTrainingId, dispatch, history]);
 
     useEffect(() => {
+        logger.trace('TrainingsList mounted');
         if (currPage !== consts.pageName.trainings) {
-            // console.warn('TrainingsList mount');
+            // logger.warn('TrainingsList mount');
             dispatch({type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.trainings});
             dispatch({type: types.APP_SHOW_MENU, show: false});
         }

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {useDispatch} from "react-redux";
 import './DrawerButtons.scss';
+import {useDispatch} from "react-redux";
 import * as types from '../../redux/actionsTypes';
 import IconButton from "../_Tools/IconButton";
 

@@ -1,6 +1,7 @@
 import React, {useEffect, useRef} from "react";
-import {useDispatch, useSelector} from "react-redux";
 import './Exercise.scss';
+import {useDispatch, useSelector} from "react-redux";
+import logger from "../../common/logger";
 import ModalOkCancel from "../_Tools/ModalOkCancel";
 import TextInput from "../_Tools/TextInput";
 import {useTranslation} from "react-i18next";
@@ -30,7 +31,7 @@ const Exercise = ({ exercise, disable }) => {
         !disable && refModal.current.close(); // causes the Modal not to be openned
     };
     const save = () => {
-        // console.warn('SAVE Exercise - ', refQ.current.value(), refA.current.value());
+        // logger.warn('SAVE Exercise - ', refQ.current.value(), refA.current.value());
         const updatedExercise = {
             q: refQ.current.value(),
             a: refA.current.value(),
@@ -45,7 +46,7 @@ const Exercise = ({ exercise, disable }) => {
 
     useEffect(() => {
         if (lastNewExerciseId && lastNewExerciseId === exercise.id) {
-            // console.warn('new exercise');
+            logger.trace('new exercise');
             dispatch({ type: types.TRAINING_UPDATE_LAST_NEW_EXERCISE_ID, id: null });
             !disable && refModal.current.open();
         }

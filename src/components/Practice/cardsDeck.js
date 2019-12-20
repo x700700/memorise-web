@@ -1,3 +1,4 @@
+import logger from "../../common/logger";
 import * as _ from '../../common/boolidash';
 import consts from "../../common/consts";
 
@@ -6,7 +7,7 @@ export default class cardsDeck {
     constructor(localStorageKey, training, shouldDeckFlipped) {
         if (training) {
             const exercises = training && training.exercises && Object.values(training.exercises);
-            // console.warn('=====> cardsDeck - exercises = ', exercises);
+            // logger.warn('=====> cardsDeck - exercises = ', exercises);
             this.name = training.name;
             this.initialDeck = exercises.filter(x => x.q && x.a);
         } else {
@@ -21,7 +22,7 @@ export default class cardsDeck {
     }
 
     reset = (shouldSaveToStorage, cardsNum) => {
-        // console.warn('cardsDeck reset isExamPageAnswered');
+        // logger.warn('cardsDeck reset isExamPageAnswered');
         if (this.isNextDeckFlipped) this.isDeckFlipped = this.isNextDeckFlipped === 2;
         this.currentDeck = this.initialDeck;
         this.examStartDeck = [...this.currentDeck];
@@ -88,12 +89,12 @@ export default class cardsDeck {
         this.wrongs = mem.wrongs;
 
         if (!this.initialDeck || !Array.isArray(this.initialDeck) || this.initialDeck.length === 0) {
-            console.error('*** local storage might be improper. deleted it. please Refresh page.');
+            logger.error('*** local storage might be improper. deleted it. please Refresh page.');
             localStorage.removeItem(consts.localStorage.examId);
         }
         /*
         if (this.topQAnswers && (!Array.isArray(this.topQAnswers) || this.topQAnswers.length === 0)) {
-            console.error('*** local storage might be improper. deleted it. please Refresh page.');
+            logger.error('*** local storage might be improper. deleted it. please Refresh page.');
             localStorage.removeItem(consts.localStorage.examId);
             this.topQAnswers = [];
         }
@@ -128,7 +129,7 @@ export default class cardsDeck {
     };
     nextCard = (right) => {
         let deckFinished = false;
-        // console.warn('cards lengths ---->', this.currentDeck.length, this.wrongsDeck.length);
+        // logger.warn('cards lengths ---->', this.currentDeck.length, this.wrongsDeck.length);
         if (this.currentDeck.length === 0 && this.wrongsDeck.length === 0) {
             deckFinished = true;
         } else {
@@ -161,7 +162,7 @@ export default class cardsDeck {
     };
 
     setTopQAnswer = (id) => {
-        // console.warn('cardsDeck updating Answer - ', id, this.topQAnswers);
+        // logger.warn('cardsDeck updating Answer - ', id, this.topQAnswers);
         this.topQAnswerId = id;
         const right = this.topQAnswers.find(x => x.rightAnswer);
         this.topQAnswers.forEach((x, i) => {
@@ -203,7 +204,7 @@ export default class cardsDeck {
                 answers = _.uniqBy(answers, x => x.a);
                 answers = _.shuffle(answers).slice(0, 4);
                 answers.unshift(right);
-                // console.warn('=========>', answers);
+                // logger.warn('=========>', answers);
                 answers = _.shuffle(answers);
                 answers = answers.map(x => ({...x, examA: x[a], rightAnswer: x.id && x.id === right.id}));
             }

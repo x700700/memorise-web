@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './ExamTable.scss';
+import logger from "../../common/logger";
 import ExamPage from "./ExamPage";
 
 const ExamTable = ({ size, num, q, answers, nextQuestion, setAnswer, isAnswered, answeredId }) => {
@@ -11,7 +12,8 @@ const ExamTable = ({ size, num, q, answers, nextQuestion, setAnswer, isAnswered,
     const [showPrev, setShowPrev] = useState(false);
 
     useEffect(() => {
-        // console.warn(`===> q=[${q}] <> currQ=[${currQ}] - answers=[${answers && answers.length}] <> currAnswers=[${currAnswers && currAnswers.length}]`);
+        logger.trace('ExamTable update');
+        // logger.warn(`===> q=[${q}] <> currQ=[${currQ}] - answers=[${answers && answers.length}] <> currAnswers=[${currAnswers && currAnswers.length}]`);
         if (!currQ || !currAnswers || (currAnswers && currAnswers.length === 0)) {
             setCurrQ(q);
             q && setCurrAnswers(answers);

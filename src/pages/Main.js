@@ -1,13 +1,14 @@
 import React, {useEffect} from 'react';
+import './Main.scss';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import {useTranslation} from "react-i18next";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { green, red } from '@material-ui/core/colors';
+import logger from '../common/logger';
 import * as types from '../redux/actionsTypes';
 import { appAuth } from '../redux/actions';
-import './Main.scss';
-import Header from '../components/Header';
+import Header from '../components/Main/Header';
 import Game from './Game';
 import Exam from "./Exam";
 import TrainingsList from "./TrainingsList";
@@ -40,11 +41,11 @@ const Main = () => {
 
     useEffect(() => {
         const handleScroll = (e) => {
-            // console.warn('scroling.........');
+            // logger.warn('scroling.........');
             _activeDrawerTrainingId && dispatch({ type: types.APP_SET_ACTIVE_DRAWER_TRAINING, id: null });
         };
 
-        console.warn('App started');
+        logger.warn('App started');
         dispatch(appAuth({
             authErrorMessage: t('err-auth'),
             signinErrorMessage: t('err-signin'),
@@ -59,13 +60,13 @@ const Main = () => {
     }, [dispatch, t]);
 
     useEffect(() => {
-        authCheckStarted && authCheckEnded && loggedInUsername && console.warn(`*** Hello ${loggedInUsername} ***`);
-        authCheckStarted && authCheckEnded && !loggedInUsername && console.warn(`*** Not Signed In ***`);
+        authCheckStarted && authCheckEnded && loggedInUsername && logger.warn('*** Hello', loggedInUsername + ' ***');
+        authCheckStarted && authCheckEnded && !loggedInUsername && logger.warn(`*** Not Signed In ***`);
     }, [loggedInUsername, authCheckEnded, authCheckStarted]);
 
 
     const onBodyClick = (e) => {
-        // console.warn('============>', e.target, e.target.id, e.target.className);
+        // logger.warn('============>', e.target, e.target.id, e.target.className);
         const isActive = e.target.id === 'active' || e.target.className.includes('active');
         if (!isActive && activeDrawerTrainingId) {
             dispatch({ type: types.APP_SET_ACTIVE_DRAWER_TRAINING, id: null });

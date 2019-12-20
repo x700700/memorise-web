@@ -1,7 +1,8 @@
 import React, {useEffect, useRef, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import * as types from '../../redux/actionsTypes';
 import './EditTrainingHeader.scss';
+import {useDispatch, useSelector} from "react-redux";
+import logger from "../../common/logger";
+import * as types from '../../redux/actionsTypes';
 import TextInput from "../_Tools/TextInput";
 import IconButton from "../_Tools/IconButton";
 import {renameTraining} from "../../redux/actions";
@@ -18,7 +19,7 @@ const EditTrainingHeader = ({ id, play, exam, onNameEdit }) => {
 
     const rename = () => {
         const newName = refName.current.value();
-        console.warn('rename - ', newName);
+        // logger.warn('rename - ', newName);
         setNameInputDisabled(true);
         setTimeout(() => setNameInputDisabled(false), 100);
         dispatch(renameTraining(id, newName));
@@ -31,13 +32,13 @@ const EditTrainingHeader = ({ id, play, exam, onNameEdit }) => {
         !nameInputOnEdit && exam();
     };
     const onNameFocus = () => {
-        // console.warn('On name focus');
+        // logger.warn('On name focus');
         setNameInputOnEdit(true);
         onNameEdit(true);
         dispatch({ type: types.APP_SET_TRAINING_NAME_IS_ON_EDIT, edit: true });
     };
     const onNameBlur = (val, enterPressed) => {
-        // console.warn('On name blur - Cancel');
+        // logger.warn('On name blur - Cancel');
         setNameInputOnEdit(false);
         onNameEdit(false);
         dispatch({ type: types.APP_SET_TRAINING_NAME_IS_ON_EDIT, edit: false });
@@ -47,6 +48,7 @@ const EditTrainingHeader = ({ id, play, exam, onNameEdit }) => {
 
     useEffect(() => {
         if (isLoaded && !name) {
+            logger.trace('focus auto focus');
             setShouldAutoFocus(true);
         }
     }, [name, isLoaded]);

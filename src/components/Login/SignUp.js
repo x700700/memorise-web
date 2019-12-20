@@ -1,7 +1,8 @@
 import React, {useEffect, useRef, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
 import './Login.scss';
+import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
+import logger from "../../common/logger";
 import TextInput from "../_Tools/TextInput";
 import Button from "../_Tools/Button";
 import { validateRequired, validateName, validateEmail, validatePassword } from "../../common/utils";
@@ -79,7 +80,7 @@ const SignUp = ({ flipSign }) => {
         const email = refEmail.current.value();
         const name = refName.current.value();
         const pass = refPass.current.value();
-        console.warn('register - ', email, name, pass);
+        // logger.warn('register - ', email, name, pass);
         refPass.current.setValue('');
         refPass2.current.setValue('');
         setOnSignup(true);
@@ -91,11 +92,11 @@ const SignUp = ({ flipSign }) => {
     };
 
     useEffect(() => {
-        // console.warn('watch signup = ', isSigningUp, registeredUsername);
+        logger.trace('watch signup = ', isSigningUp, registeredUsername);
         if (!isSigningUp) {
             setOnSignup(false);
             if (registeredUsername) {
-                console.warn('registered successfully = ', registeredUsername);
+                // logger.warn('registered successfully = ', registeredUsername);
                 refEmail.current.setValue('');
                 refName.current.setValue('');
                 flipSign()

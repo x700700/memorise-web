@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
 import './Login.scss';
+import {useDispatch, useSelector} from "react-redux";
+import logger from "../../common/logger";
 import * as types from '../../redux/actionsTypes';
 import {useTranslation} from "react-i18next";
 import TextInput from "../_Tools/TextInput";
@@ -57,7 +58,7 @@ const SignIn = ({ flipSign }) => {
         if (!isValid) return;
         const name = refName.current.value();
         const pass = refPass.current.value();
-        // console.warn('login - ', name, pass);
+        // logger.warn('login - ', name, pass);
         refPass.current.setValue('');
         setOnSignin(true);
         dispatch({ type: types.TRAININGS_LIST_RESET });
@@ -69,7 +70,7 @@ const SignIn = ({ flipSign }) => {
     };
 
     useEffect(() => {
-        // console.warn('logged in with username = ', loggedInUsername);
+        logger.trace('logged in with username = ', loggedInUsername);
         setOnSignin(false);
         setValid([true, false]);
         if (loggedInUsername) {

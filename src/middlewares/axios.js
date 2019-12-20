@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import logger from "../common/logger";
 import consts from '../common/consts';
 
 const axiosInstance = Axios.create({
@@ -6,7 +7,7 @@ const axiosInstance = Axios.create({
 });
 
 export default function (props, body) {
-    console.log(`<<<<< ${props.method} - ${props.url}`, body);
+    logger.debug(`<<<<< ${props.method} - ${props.url}`, body);
     const jwt = localStorage.getItem(consts.localStorage.tokenId);
     return axiosInstance({
         ...props,
@@ -17,10 +18,10 @@ export default function (props, body) {
         },
     }).then(response => {
         const resp = response.data;
-        console.warn('>>>>>', resp);
+        logger.debug('>>>>>', resp);
         return resp;
     }).catch(e => {
-        console.error('>!!!>', e.response);
+        logger.error('>!!!>', e.response);
         // eslint-disable-next-line no-throw-literal
         throw { ...e.response, message: e.message };
     });

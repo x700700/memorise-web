@@ -4,6 +4,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import { HelpOutline, ErrorOutline, Edit } from '@material-ui/icons';
 import { deepPurple } from '@material-ui/core/colors';
+import logger from "../../common/logger";
 import {isRtl} from "../../common/utils";
 import consts from "../../common/consts";
 
@@ -76,25 +77,26 @@ const TextInput = forwardRef(({ label, type, defaultValue, autoFocus, onEnter, o
         onChange && onChange(text);
     };
     const onKeyPress = (ev) => {
-        // console.warn('********** key pressed', ev.ctrlKey, ev.key);
+        // logger.warn('********** key pressed', ev.ctrlKey, ev.key);
         if (ev.key === 'Enter') {
             onEnter && onEnter();
             onBlur && onBlur(val, true);
         }
     };
     const onMyFocus = (ev) => {
-        // console.warn('FOCUS');
+        // logger.warn('FOCUS');
         setFocused(true);
         onFocus && onFocus();
     };
     const onMyBlur = (ev) => {
-        // console.warn('BLUR');
+        // logger.warn('BLUR');
         setFocused(false);
         onBlur && onBlur(val);
     };
 
     // onMount
     useEffect(() => {
+        logger.trace('TextInput mounted');
         setVal(defaultValue);
     }, [setVal, defaultValue]);
 

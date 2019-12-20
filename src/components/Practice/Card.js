@@ -1,6 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useState, useEffect, useCallback } from 'react';
 import './Card.scss';
 import {useSelector} from "react-redux";
+import logger from "../../common/logger";
 import {isRtl} from "../../common/utils";
 
 const Card = forwardRef(({ q, a, setCardInMove, rotateCb }, ref) => {
@@ -23,7 +24,7 @@ const Card = forwardRef(({ q, a, setCardInMove, rotateCb }, ref) => {
     const showMenu = useSelector(state => state.app.showMenu);
 
     const _rotate = () => {
-        // console.warn(`click ==> showFront=[${showFront}] - showBack=[${showBack}]`);
+        // logger.warn(`click ==> showFront=[${showFront}] - showBack=[${showBack}]`);
         if (!isRotate && !showMenu) {
             setCardInMove(true);
             setIsRotateStarted(true);
@@ -65,6 +66,7 @@ const Card = forwardRef(({ q, a, setCardInMove, rotateCb }, ref) => {
     }, [inSwitch, inFade, nextA, nextQ, setCardMoveEnded]);
 
     useEffect(() => {
+        logger.trace('Card mounted');
         const rotateCard = (side) => {
             if (isRotateStarted) {
                 setIsRotateStarted(false);

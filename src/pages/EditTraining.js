@@ -3,6 +3,7 @@ import './EditTraining.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useHistory} from "react-router-dom";
+import logger from "../common/logger";
 import consts from "../common/consts";
 import * as types from "../redux/actionsTypes";
 import {deleteTraining, getEditTraining} from "../redux/actions";
@@ -31,17 +32,17 @@ const EditTraining = (props) => {
     const [disableExercisesEdit, setDisableExercisesEdit] = useState(false);
 
     const play = () => {
-        console.warn('play training - ', training);
+        // logger.warn('play training - ', training);
         dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: training.id });
         history.push('/practice');
     };
     const exam = () => {
-        console.warn('exam training - ', training);
+        // logger.warn('exam training - ', training);
         dispatch({ type: types.APP_SET_EXAM_TRAINING_ID, id: training.id });
         history.push('/exam');
     };
     const onNameEdit = (edit) => {
-        // console.warn('on name edit - ', edit);
+        // logger.warn('on name edit - ', edit);
         edit && setDisableExercisesEdit(edit);
         !edit && setTimeout(() => setDisableExercisesEdit(edit), 100);
     };
@@ -65,7 +66,7 @@ const EditTraining = (props) => {
 
     useEffect(() => {
         if (!isFetching && !isLoaded && idToFetch && !fetchedId) {
-            console.error('Training was not fetched - redirect to list');
+            logger.error('Training was not fetched - redirect to list');
             dispatch({ type: types.TRAINING_RESET });
             history.push('/trainings');
         }
@@ -74,13 +75,13 @@ const EditTraining = (props) => {
     // const getEditTrainingCb = useCallback((id) => dispatch(getEditTraining(id)), [getEditTraining]);
     useEffect(() => {
         if (currPage !== consts.pageName.edit) {
-            // console.warn('EditTraining mount');
+            // logger.warn('EditTraining mount');
             dispatch({type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.edit});
             dispatch({type: types.APP_SHOW_MENU, show: false});
             dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: null, friendName: null });
             dispatch({ type: types.APP_SET_EXAM_TRAINING_ID, id: null, friendName: null });
         }
-        // console.warn('id <> idToFetch', paramId , idToFetch, idToDelete, training);
+        // logger.warn('id <> idToFetch', paramId , idToFetch, idToDelete, training);
         if ((paramId && !training && !isFetching) || (training && paramId && paramId !== training.id)) {
             paramId !== '-' && paramId !== idToFetch && paramId !== idToDelete && dispatch(getEditTraining(paramId));
         }

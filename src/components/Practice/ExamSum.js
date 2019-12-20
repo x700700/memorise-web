@@ -1,7 +1,8 @@
 import React, {forwardRef, useEffect, useState} from 'react';
+import './ExamSum.scss';
 import {useTranslation} from "react-i18next";
 import Button from "../_Tools/Button";
-import './ExamSum.scss';
+
 
 const ExamSum = forwardRef(({ setStats, cardsNum, rightsNum, replayExam }, ref) => {
     const { t } = useTranslation();

@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
+import './Exam.scss';
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import {useTranslation} from "react-i18next";
+import logger from "../common/logger";
 import * as types from '../redux/actionsTypes';
-import './Exam.scss';
 import consts from "../common/consts";
 import CardsDeck from '../components/Practice/cardsDeck';
 import { loadPlay } from "../common/playUtils";
@@ -58,7 +59,7 @@ const Exam = (props) => {
     useEffect(() => {
         if (cardsDeck) {
             const isAnswered = cardsDeck.getIsExamPageAnswered();
-            // console.warn('**** Exam is updating ***** isAnswered = ', isAnswered);
+            // logger.warn('**** Exam is updating ***** isAnswered = ', isAnswered);
             setIsPageAnswered(isAnswered);
             setTopQAnswerId(cardsDeck.getTopQAnswerId());
             setAnswers(cardsDeck.getTopQAnswers());
@@ -78,7 +79,7 @@ const Exam = (props) => {
     };
     useEffect(() => {
         if (examTraining) {
-            // console.warn('loadExam(examTraining);');
+            // logger.warn('loadExam(examTraining);');
             const newDeck = loadExam(examTraining);
             newDeck && setAnswers(newDeck.getTopQAnswers());
             if (newDeck.getSize() < 3) {
@@ -91,7 +92,7 @@ const Exam = (props) => {
     }, [examTraining, setAnswers]);
 
     useEffect(() => {
-        // console.warn('Exam mount - ', examTrainingId);
+        logger.trace('Exam mount - ', examTrainingId);
         dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.exam });
         dispatch({type: types.APP_SHOW_MENU, show: false});
 
@@ -101,7 +102,7 @@ const Exam = (props) => {
             dispatch({ type: types.APP_SET_EXAM_ENDED, ended: false });
             dispatch(getExamTraining(examTrainingId, examFriendName));
         } else if (!cardsDeck) {
-            // console.warn('loadExam(mock);');
+            // logger.warn('loadExam(mock);');
             loadExam(mockTrainingMultiply.__T001);
         }
     }, [dispatch, history]);

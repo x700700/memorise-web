@@ -1,3 +1,4 @@
+import logger from "../../common/logger";
 import * as types from '../actionsTypes';
 import consts from "../../common/consts";
 
@@ -71,7 +72,7 @@ const appReducer = (  state = {
                 friendName: friendName,
             };
         case types.APP_AUTH_FAILED:
-            console.error('auth failed: ', action.message);
+            logger.error('auth failed: ', action.message);
             return {
                 ...state,
                 authCheckEnded: true,
@@ -82,7 +83,7 @@ const appReducer = (  state = {
             const status = (action.e || {}).status;
             const message = ((action.e || {}).data || {}).message || action.e.statusText;
             if (status === 401 || (message || '').toLowerCase().includes('jwt')) {
-                console.error('auth failure: ', message);
+                logger.error('auth failure: ', message);
                 return {
                     ...state,
                     authCheckEnded: true,
@@ -150,7 +151,7 @@ const appReducer = (  state = {
                 jwt: action.loginResult.token,
             };
         case types.APP_SIGNIN_FAILED:
-            console.error('signin failed: ', action.message);
+            logger.error('signin failed: ', action.message);
             return {
                 ...state,
                 isSigningIn: false,
@@ -175,7 +176,7 @@ const appReducer = (  state = {
                 registeredUserName: action.registerResult.nickName,
             };
         case types.APP_SIGNUP_FAILED:
-            console.error('signup failed: ', action.message);
+            logger.error('signup failed: ', action.message);
             return {
                 ...state,
                 isSigningUp: false,

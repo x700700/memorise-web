@@ -1,17 +1,17 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
+import './Header.scss';
 import {Link, useHistory} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
-import * as types from '../redux/actionsTypes';
-import './Header.scss';
-import logo from '../logo.svg';
-import consts from "../common/consts";
-import Tooltip from '../components/_Tools/Toolip';
-import MenuGame from "./Practice/MenuGame";
-import MenuExam from "./Practice/MenuExam";
 import {useTranslation} from "react-i18next";
+import * as types from '../../redux/actionsTypes';
+import logo from '../../logo.svg';
+import consts from "../../common/consts";
+import Tooltip from '../../components/_Tools/Toolip';
 import AddButton from "./AddButton";
-import MenuEdit from "./EditTraining/MenuEdit";
-import MenuTrainings from "./TrainingsList/MenuTrainings";
+import MenuGame from "../Practice/MenuGame";
+import MenuExam from "../Practice/MenuExam";
+import MenuEdit from "../EditTraining/MenuEdit";
+import MenuTrainings from "../TrainingsList/MenuTrainings";
 
 const Header = (props) => {
     const dispatch = useDispatch();
@@ -105,7 +105,7 @@ const Header = (props) => {
     };
     const styleMenuBtn = {
         pointerEvents: trainingNameIsOnEdit ? 'none' : 'auto',
-        visibility: !isLoggedIn && (currPage === consts.pageName.trainings || currPage === consts.pageName.edit) && 'hidden',
+        visibility: ((!isLoggedIn && (currPage === consts.pageName.trainings || currPage === consts.pageName.edit)) || currPage === consts.pageName.login) && 'hidden',
     };
 
     const refTooltipLogo = useRef();

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import logger from '../common/logger';
 import consts from "../common/consts";
 import * as types from "../redux/actionsTypes";
 import {useDispatch, useSelector} from "react-redux";
@@ -12,7 +13,7 @@ const Login = (props) => {
 
     useEffect(() => {
         if (currPage !== consts.pageName.login) {
-            // console.warn('Login mount');
+            logger.trace('Login mount');
             dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.login });
             dispatch({ type: types.APP_SHOW_MENU, show: false });
             dispatch({ type: types.APP_SET_ERROR, error: null });

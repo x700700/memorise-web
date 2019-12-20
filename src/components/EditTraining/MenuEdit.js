@@ -1,7 +1,6 @@
 import React from 'react';
-import { useDispatch, useSelector } from "react-redux";
 import './MenuEdit.scss';
-// import consts from '../../common/consts';
+import { useDispatch, useSelector } from "react-redux";
 import TopMenu from "../_Tools/TopMenu";
 import {useTranslation} from "react-i18next";
 import * as types from "../../redux/actionsTypes";

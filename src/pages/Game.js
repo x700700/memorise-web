@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
+import './Game.scss';
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import {useTranslation} from "react-i18next";
+import logger from '../common/logger';
 import * as types from '../redux/actionsTypes';
-import './Game.scss';
 import consts from "../common/consts";
 import Card from "../components/Practice/Card";
 import CardsDeck from '../components/Practice/cardsDeck';
@@ -82,7 +83,7 @@ const Game = (props) => {
     }, [gameTraining]);
 
     useEffect(() => {
-        // console.warn('Game mount');
+        logger.trace('Game mount');
         dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.practice });
         dispatch({type: types.APP_SHOW_MENU, show: false});
 

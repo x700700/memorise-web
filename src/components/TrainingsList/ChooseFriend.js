@@ -1,7 +1,8 @@
 import React, {useRef, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
 import './ChooseFriend.scss';
+import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
+import logger from "../../common/logger";
 import TextInput from "../_Tools/TextInput";
 import Button from "../_Tools/Button";
 import {validateName} from "../../common/utils";
@@ -24,7 +25,7 @@ const ChooseFriend = ({ closeModal }) => {
     };
     const playFriend = () => {
         const friendName = refName.current.value();
-        console.warn('play friend - ', friendName);
+        logger.trace('play friend - ', friendName);
         dispatch(getFriendTrainingsList(friendName));
         closeModal();
     };

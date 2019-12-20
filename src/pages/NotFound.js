@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
+import './NotFound.scss'
 import { useDispatch } from "react-redux";
 import * as types from "../redux/actionsTypes";
-import './NotFound.scss'
+
 
 const NotFound = (props) => {
     const dispatch = useDispatch();

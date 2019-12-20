@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
-import { useDispatch, useSelector } from "react-redux";
 import './MenuTrainings.scss';
+import { useDispatch, useSelector } from "react-redux";
 import consts from '../../common/consts';
 import TopMenu from "../_Tools/TopMenu";
 import {useTranslation} from "react-i18next";

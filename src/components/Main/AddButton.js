@@ -1,13 +1,14 @@
 import React, {useEffect, useRef} from "react";
 import './AddButton.scss';
 import {useDispatch, useSelector} from "react-redux";
-import {useTranslation} from "react-i18next";
-import consts from "../common/consts";
-import {createExercise, createTraining} from "../redux/actions";
-import IconButton from "./_Tools/IconButton";
-import * as types from "../redux/actionsTypes";
 import {useHistory} from "react-router";
-import Tooltip from "./_Tools/Toolip";
+import {useTranslation} from "react-i18next";
+import logger from "../../common/logger";
+import consts from "../../common/consts";
+import {createExercise, createTraining} from "../../redux/actions";
+import IconButton from "../_Tools/IconButton";
+import * as types from "../../redux/actionsTypes";
+import Tooltip from "../_Tools/Toolip";
 
 
 const AddButton = (props) => {
@@ -29,20 +30,21 @@ const AddButton = (props) => {
     };
 
     const addTraining = (e) => {
-        // console.warn('Add Training');
+        // logger.warn('Add Training');
         refTooltip.current.close();
         dispatch({ type: types.APP_SET_ACTIVE_DRAWER_TRAINING, id: null });
         window.scrollTo(0, 0);
         dispatch(createTraining());
     };
     const addExercise = (e) => {
-        // console.warn('Add Exercise');
+        // logger.warn('Add Exercise');
         refTooltip.current.close();
         window.scrollTo(0, 0);
         dispatch(createExercise(editTrainingId));
     };
 
     useEffect(() => {
+        logger.trace('Add Button mounted');
         if (authError && (currPage === consts.pageName.trainings || currPage === consts.pageName.edit)) {
             refTooltip.current.open();
             dispatch({ type: types.APP_RESET_AUTH_ERROR });

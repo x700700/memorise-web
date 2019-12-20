@@ -1,6 +1,7 @@
 import React from "react";
-import {useDispatch, useSelector} from "react-redux";
 import './Training.scss'
+import {useDispatch, useSelector} from "react-redux";
+import logger from "../../common/logger";
 import * as types from '../../redux/actionsTypes';
 import SampleExercise from "./SampleExercise";
 import {useHistory} from "react-router-dom";
@@ -20,15 +21,15 @@ const Training = ({ training }) => {
 
     const edit = () => {
         if (!isLoggedIn || activeDrawerTrainingId || friendName) return;
-        console.warn('Edit training - ', training.id);
         if (!training.id.startsWith('__')) {
+            logger.trace('Edit training - ', training.id);
             dispatch({type: types.TRAINING_RESET});
             history.push(`/trainings/${training.id}/edit`)
         }
     };
     const play = () => {
         // if (!isLoggedIn) return;
-        console.warn('Play training - ', training.id);
+        // logger.warn('Play training - ', training.id);
         if (!training.id.startsWith('__')) {
             dispatch({ type: types.APP_SET_GAME_TRAINING_ID, id: training.id, friendName: friendName || null });
         } else {
@@ -42,7 +43,7 @@ const Training = ({ training }) => {
     };
     const exam = () => {
         // if (!isLoggedIn) return;
-        console.warn('Exam training - ', training.id);
+        // logger.warn('Exam training - ', training.id);
         if (!training.id.startsWith('__')) {
             dispatch({ type: types.APP_SET_EXAM_TRAINING_ID, id: training.id, friendName: friendName || null });
         } else {
