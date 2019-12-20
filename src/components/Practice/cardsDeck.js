@@ -24,9 +24,8 @@ export default class cardsDeck {
 
     reset = (shouldSaveToStorage, playSize, shouldDeckFlipped) => {
         this.isDeckFlipped = shouldDeckFlipped;
-        if (this.isNextDeckFlipped) this.isDeckFlipped = this.isNextDeckFlipped === 2;
-        if (shouldDeckFlipped) this.isNextDeckFlipped = 2;
-        logger.trace('this.isDeckFlipped = ', this.isDeckFlipped);
+        this.isNextDeckFlipped = !shouldDeckFlipped ? 1 : 2;
+        // logger.trace(`isDeckFlipped = [${this.isDeckFlipped}]  -  isNextDeckFlipped = [${this.isNextDeckFlipped}]`);
 
         this.currentDeck = this.initialDeck;
         this.examStartDeck = [...this.currentDeck];
@@ -121,9 +120,13 @@ export default class cardsDeck {
     getIsDeckFlipped = () => this.isDeckFlipped;
     getIsNextDeckFlipped = () => this.isNextDeckFlipped === 2;
 
-    replay = (playSize) => {
+    reGame = (playSize) => {
         this.reset(true, playSize, this.isDeckFlipped);
     };
+    reExam = (playSize) => {
+        this.reset(true, playSize, this.isNextDeckFlipped === 2);
+    };
+
     setIsDeckFlipped = (flipped) => {
         this.isDeckFlipped = flipped;
         localStorage.setItem(this.localStorageKey, this.getStorage());

@@ -124,7 +124,7 @@ const examReducer = (  state = init(),
             };
 
         case types.EXAM_REPLAY:
-            state.cardsDeck.replay(state.playSize);
+            state.cardsDeck.reExam(state.playSize);
             return {
                 ...state,
                 ...cardsDeckProps(state.cardsDeck, true),

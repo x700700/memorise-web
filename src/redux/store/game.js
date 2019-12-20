@@ -101,7 +101,7 @@ const gameReducer = (  state = init(),
             };
 
         case types.GAME_REPLAY:
-            state.cardsDeck.replay(state.playSize);
+            state.cardsDeck.reGame(state.playSize);
             return {
                 ...state,
                 ...cardsDeckProps(state.cardsDeck, true),
