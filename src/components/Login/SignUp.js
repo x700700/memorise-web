@@ -60,6 +60,11 @@ const SignUp = ({ flipSign }) => {
         } else {
             setErrPass(null);
             updateValid(3, true);
+
+            if (text === refPass2.current.value()) {
+                setErrPass2(null);
+                updateValid(4, true);
+            }
         }
     };
     const checkPassword2 = (text) => {
@@ -73,6 +78,11 @@ const SignUp = ({ flipSign }) => {
             setErrPass2(null);
             updateValid(4, true);
         }
+    };
+
+    const handleShowPass = (show) => {
+        refPass.current.showPassword(show);
+        refPass2.current.showPassword(show);
     };
 
     const register = () => {
@@ -101,8 +111,8 @@ const SignUp = ({ flipSign }) => {
                 refName.current.setValue('');
                 flipSign()
             } else if (registeringUserName) {
-                setValid([false, false, false, false]);
-                setErrEmail(t('err-signup-short'));
+                setValid([true, true, false, false]);
+                setErrName(t('err-signup-short'));
                 window.scrollTo(0, 0);
             }
         }
@@ -127,21 +137,27 @@ const SignUp = ({ flipSign }) => {
                     <div className="field sign-email">
                         <TextInput ref={refEmail} label={t('email')} defaultValue="" autoFocus={true}
                                    onBlur={checkEmail} onChange={checkEmail} error={errEmail}
+                                   width="13rem"
                         />
                     </div>
                     <div className="field sign-name">
                         <TextInput ref={refName} label={t('nickname')} defaultValue=""
                                    onBlur={checkName} onChange={checkName} error={errName}
+                                   width="13rem"
                         />
                     </div>
                     <div className="field signup-pass">
                         <TextInput ref={refPass} label={t('password')} type="password" defaultValue="" autoFocus={name ? true : false}
                                    onBlur={checkPassword} onChange={checkPassword} error={errPass}
+                                   onShowPassword={handleShowPass}
+                                   width="13rem"
                         />
                     </div>
                     <div className="field signup-pass2">
                         <TextInput ref={refPass2} label={t('password2')} type="password" defaultValue=""
                                    onBlur={checkPassword2} onChange={checkPassword2} error={errPass2}
+                                   onShowPassword={handleShowPass}
+                                   width="13rem"
                         />
                     </div>
                     <div className="sign-btn-container">

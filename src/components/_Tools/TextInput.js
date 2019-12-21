@@ -49,7 +49,11 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const TextInput = forwardRef(({ autoComplete, width, label, type, defaultValue, autoFocus, onEnter, onFocus, onBlur, onChange, noMargin, disabled, error }, ref) => {
+const TextInput = forwardRef(({
+                                  autoComplete, width, label, type, defaultValue, autoFocus,
+                                  onEnter, onFocus, onBlur, onChange, noMargin, disabled, error,
+                                  onShowPassword,
+                              }, ref) => {
     useImperativeHandle(ref, () => ({
         value() {
             return val;
@@ -57,6 +61,9 @@ const TextInput = forwardRef(({ autoComplete, width, label, type, defaultValue, 
         setValue(_val, callOnChange = false) {
             setVal(_val);
             callOnChange && onChange && onChange(_val);
+        },
+        showPassword(show) {
+            setShowPass(show);
         },
     }));
 
@@ -106,6 +113,7 @@ const TextInput = forwardRef(({ autoComplete, width, label, type, defaultValue, 
     const [showPass, setShowPass] = useState(false);
     const handleClickShowPassword = () => {
         setShowPass(!showPass);
+        onShowPassword && onShowPassword(!showPass);
     };
     const handleMouseDownPassword = event => {
         event.preventDefault();
