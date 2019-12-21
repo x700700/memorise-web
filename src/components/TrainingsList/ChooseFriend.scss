@@ -3,9 +3,11 @@
 .choose-friend-container {
     width: fit-content;
     margin: auto;
+    //margin-bottom: .3rem;
 
     .friend-row {
         display: flex;
+        flex-direction: column;
         margin: 1rem 0;
         margin-top: 2rem;
         justify-content: space-between;
@@ -17,8 +19,16 @@
         }
     }
 
-    .cancel-btn-container {
-        width: 50%;
+    .btns-container {
+        width: fit-content;
         margin: auto;
+        transform: translateX(.1rem);
+        margin-top: -1rem;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+
+        .btn {
+        }
     }
 }

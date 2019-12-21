@@ -11,7 +11,6 @@ import Training from "../components/TrainingsList/Training";
 const TrainingsList = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const currPage = useSelector(state => state.app.currentPage);
     const showMenu = useSelector(state => state.app.showMenu);
     const friendName = useSelector(state => state.app.friendName);
     const isFetching = useSelector(state => state.trainings.isFetching);

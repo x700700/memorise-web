@@ -47,16 +47,18 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const TextInput = forwardRef(({ label, type, defaultValue, autoFocus, onEnter, onFocus, onBlur, onChange, noMargin, disabled, error }, ref) => {
+const TextInput = forwardRef(({ autoComplete, width, label, type, defaultValue, autoFocus, onEnter, onFocus, onBlur, onChange, noMargin, disabled, error }, ref) => {
     useImperativeHandle(ref, () => ({
         value() {
             return val;
         },
-        setValue(_val) {
+        setValue(_val, callOnChange = false) {
             setVal(_val);
+            callOnChange && onChange && onChange(_val);
         },
     }));
 
+    const autoCompleteSafeParams = autoComplete || {};
     const classes = useStyles();
     const [val, setVal] = useState(defaultValue);
     const [focused, setFocused] = useState(false);
@@ -65,7 +67,10 @@ const TextInput = forwardRef(({ label, type, defaultValue, autoFocus, onEnter, o
         return isRtl(text) ? {
             direction: 'rtl',
             textAlign: 'right',
-        } : {};
+            width: width,
+        } : {
+            width: width,
+        };
     };
     const [style, setStyle] = useState(rtlStyle(defaultValue));
     const onMyChange = e => {
@@ -109,6 +114,7 @@ const TextInput = forwardRef(({ label, type, defaultValue, autoFocus, onEnter, o
         <div className="text-input">
             <MuiThemeProvider theme={theme}>
                 <TextField
+                    {...autoCompleteSafeParams}
                     value={val}
                     variant={label ? 'outlined' : 'standard'}
                     type={typeName}
@@ -117,6 +123,7 @@ const TextInput = forwardRef(({ label, type, defaultValue, autoFocus, onEnter, o
                     style={style}
                     label={label || ''}
                     size="small"
+                    fullWidth
 
                     error={error && !focused}
                     helperText={error || ''}
@@ -133,8 +140,11 @@ const TextInput = forwardRef(({ label, type, defaultValue, autoFocus, onEnter, o
                         // shrink: true,
                         classes: {},
                     }}
+
                     InputProps={{
                         // maxLength: 15, // Todo - does not work
+                        // type: autoComplete && 'search',
+                        ...autoCompleteSafeParams.InputProps,
                         classes: {
                             input: inputClassName,
                         },
