@@ -1,6 +1,4 @@
 import * as types from '../actionsTypes';
-import logger from "../../common/logger";
-// import mockTraining from '../../mock/training-words1';
 
 const editTrainingReducer = (  state = {
                                    isFetching: false,

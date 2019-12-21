@@ -11,7 +11,7 @@ export const validateEmail = (val) => {
     return validateRequired(val) && /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(val);
 };
 export const validateName = (val) => {
-    return /^[\w-_]{4,}$/.test(val);
+    return /^[\w-_]{5,}$/.test(val);
 };
 export const validatePassword = (val) => {
     return validateRequired(val) && val.trim().length >= 6;

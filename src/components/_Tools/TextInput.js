@@ -123,7 +123,7 @@ const TextInput = forwardRef(({ autoComplete, width, label, type, defaultValue, 
                     style={style}
                     label={label || ''}
                     size="small"
-                    fullWidth
+                    fullWidth={autoComplete && true}
 
                     error={error && !focused}
                     helperText={error || ''}

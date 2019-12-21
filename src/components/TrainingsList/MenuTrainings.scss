@@ -27,6 +27,7 @@
         justify-content: space-between;
         width: fit-content;
         margin: auto;
+        direction: rtl;
 
         @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
             justify-content: initial;

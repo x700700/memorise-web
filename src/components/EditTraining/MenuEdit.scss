@@ -22,6 +22,7 @@
         margin: auto;
         width: fit-content;
         margin-top: 2rem;
+        direction: rtl;
 
         @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
         }

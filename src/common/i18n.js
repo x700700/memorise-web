@@ -119,10 +119,10 @@ i18n.use(LanguageDetector).init({
                 "delete-training-approval": "האם למחוק את האימון על כל תרגיליו?",
                 "of": "מתוך",
 
-                "play friend btn title": "שחק אימונים של חבר",
-                "play friend btn": "שחק אימוני חבר",
-                "play mine btn title": "החבא אימונים של חבר",
-                "play mine btn": "החבא אימוני חבר",
+                "play friend btn title": "תרגל אימונים של חבר",
+                "play friend btn": "חפש חבר",
+                "play mine btn title": "סגור אימונים של חבר",
+                "play mine btn": "סגור",
                 "friend name": "כינוי החבר",
                 "err-friend-not-found": "לא נמצא חבר בשם",
             }

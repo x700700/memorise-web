@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef} from "react";
 import './Exercise.scss';
 import {useDispatch, useSelector} from "react-redux";
 import logger from "../../common/logger";
