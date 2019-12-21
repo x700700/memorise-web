@@ -118,6 +118,11 @@ const SignUp = ({ flipSign }) => {
         }
     }, [isSigningUp, registeringUserName, registeredUsername, setValid, history, setOnSignup, flipSign, t]);
 
+    useEffect(() => {
+        logger.trace('SignUp mounted');
+        setErrName(null);
+    }, [setErrName]);
+
     const styleBox = {
         opacity: onSignup ? 0 : 1,
     };
