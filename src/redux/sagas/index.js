@@ -22,6 +22,7 @@ function* actionWatcher() {
     yield takeLatest(types.saga.createExercise, sagas.createExercise);
     yield takeLatest(types.saga.saveExercise, sagas.saveExercise);
     yield takeLatest(types.saga.deleteExercise, sagas.deleteExercise);
+    yield takeLatest(types.saga.getTranslate, sagas.getTranslate);
 }
 
 

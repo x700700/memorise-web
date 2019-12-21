@@ -116,6 +116,19 @@ export function* signup(action) {
 
 
 
+export function* getTranslate(action) {
+    try {
+        yield put({ type: types.FETCH_TRANSLATE_START, word: action.body.word });
+        const resp = yield call(api.getTranslate, { Bearer: consts.temp.bearer, body: action.body });
+        yield put({ type: types.FETCH_TRANSLATE_SUCCEED, translation: resp });
+    } catch (e) {
+        yield put({ type: types.FETCH_TRANSLATE_FAILED, message: e.message });
+        yield put({ type: types.APP_CHECK_AUTH_FAILED, e: e });
+    }
+}
+
+
+
 export function* createTraining(action) {
     try {
         yield put({ type: types.FETCH_CREATE_TRAINING_START });

@@ -14,6 +14,11 @@ export const auth = ({ bearer }) => {
 };
 
 
+export const getTranslate = ({ bearer, body }) => {
+    return axios({method: 'POST', url: `${consts.urls.api}/service/translate`}, body);
+};
+
+
 
 export const trainingsList = ({ bearer }) => {
     return axios({method: 'GET', url: `${consts.urls.api}/trainings`});

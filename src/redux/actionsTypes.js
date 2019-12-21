@@ -110,6 +110,10 @@ export const FETCH_DELETE_EXERCISE_START = 'exercises.FETCH_DELETE_EXERCISE_STAR
 export const FETCH_DELETE_EXERCISE_SUCCEED = 'exercises.FETCH_DELETE_EXERCISE_SUCCEED';
 export const FETCH_DELETE_EXERCISE_FAILED = 'exercises.FETCH_DELETE_EXERCISE_FAILED';
 
+export const FETCH_TRANSLATE_START = 'exercises.FETCH_TRANSLATE_START';
+export const FETCH_TRANSLATE_SUCCEED = 'exercises.FETCH_TRANSLATE_SUCCEED';
+export const FETCH_TRANSLATE_FAILED = 'exercises.FETCH_TRANSLATE_FAILED';
+
 // ============================================================================================================
 // ============================================================================================================
 
@@ -132,4 +136,5 @@ export const saga = {
     createExercise: 'createExercise',
     saveExercise: 'saveExercise',
     deleteExercise: 'deleteExercise',
+    getTranslate: 'getTranslate',
 };

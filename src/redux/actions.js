@@ -89,3 +89,10 @@ export const deleteExercise = (trainingId, id) => ({
     trainingId: trainingId,
     id: id,
 });
+
+export const getTranslate = (word) => ({
+    type: types.saga.getTranslate,
+    body: {
+        word,
+    },
+});

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import './Exercise.scss';
 import {useDispatch, useSelector} from "react-redux";
 import logger from "../../common/logger";
@@ -6,7 +6,7 @@ import ModalOkCancel from "../_Tools/ModalOkCancel";
 import TextInput from "../_Tools/TextInput";
 import {useTranslation} from "react-i18next";
 import IconButton from "../_Tools/IconButton";
-import {deleteExercise, saveExercise} from '../../redux/actions'
+import {deleteExercise, getTranslate, saveExercise} from '../../redux/actions'
 import * as types from "../../redux/actionsTypes";
 import {isRtl} from "../../common/utils";
 
@@ -19,6 +19,7 @@ const Exercise = ({ exercise, disable }) => {
     const refA = useRef();
 
     const lastNewExerciseId = useSelector(state => state.editTraining.lastNewExerciseId);
+    const translatedWord = useSelector(state => state.editTraining.translatedWord);
 
     /*
     const onModalClose = () => {
@@ -30,6 +31,14 @@ const Exercise = ({ exercise, disable }) => {
     const cancel = () => {
         !disable && refModal.current.close(); // causes the Modal not to be openned
     };
+
+    const translate = (word) => {
+        if (word && word.trim().length > 2) {
+            logger.trace('Translate: ', word);
+            dispatch(getTranslate(word));
+        }
+    };
+
     const save = () => {
         // logger.warn('SAVE Exercise - ', refQ.current.value(), refA.current.value());
         const updatedExercise = {
@@ -43,6 +52,16 @@ const Exercise = ({ exercise, disable }) => {
         dispatch(deleteExercise(exercise.trainingId, exercise.id));
         refModal.current.close();
     };
+
+
+    useEffect(() => {
+        if (refA.current && !refA.current.value() && translatedWord && translatedWord.length < 20) {
+            logger.trace('Put Translated:', translatedWord);
+            const newWord = translatedWord.charAt(0).toUpperCase() + translatedWord.slice(1);
+            refA.current.setValue(newWord);
+        }
+    }, [translatedWord]);
+
 
     useEffect(() => {
         logger.trace('Exercise update');
@@ -78,7 +97,7 @@ const Exercise = ({ exercise, disable }) => {
                         <IconButton size={2} faName="trash-alt" onClick={del}/>
                     </div>
                     <div className="field question">
-                        <TextInput ref={refQ} type="q" defaultValue={exercise.q} autoFocus={true} onEnter={save}/>
+                        <TextInput ref={refQ} type="q" defaultValue={exercise.q} autoFocus={true} onEnter={save} onBlur={translate}/>
                     </div>
                     <div className="field answer">
                         <TextInput ref={refA} type="a" defaultValue={exercise.a} onEnter={save}/>

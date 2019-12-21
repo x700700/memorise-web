@@ -1,4 +1,5 @@
 import * as types from '../actionsTypes';
+import logger from "../../common/logger";
 // import mockTraining from '../../mock/training-words1';
 
 const editTrainingReducer = (  state = {
@@ -14,6 +15,8 @@ const editTrainingReducer = (  state = {
                                    isRenamed: false,
                                    name: null,
                                    nameBeforeEdit: null,
+                                   wordToTranslate: null,
+                                   translatedWord: null,
                                },
                       action) => {
 
@@ -161,6 +164,29 @@ const editTrainingReducer = (  state = {
             return {
                 ...state,
                 isFetching: false,
+            };
+
+
+        case types.FETCH_TRANSLATE_START:
+            return {
+                ...state,
+                isFetching: true,
+                wordToTranslate: action.word,
+                translatedWord: null,
+            };
+        case types.FETCH_TRANSLATE_SUCCEED:
+            return {
+                ...state,
+                isFetching: false,
+                wordToTranslate: null,
+                translatedWord: action.translation.translation,
+            };
+        case types.FETCH_TRANSLATE_FAILED:
+            return {
+                ...state,
+                isFetching: false,
+                wordToTranslate: null,
+                translatedWord: null,
             };
 
         default:
