@@ -18,7 +18,7 @@ const ExamSum = forwardRef(({ setStats, cardsNum, rightsNum, replayExam }, ref) 
         }
     }, [setStats, cardsNum, rightsNum]);
 
-    const score = Math.round(rights / cards * 100);
+    const score = cards > 0 ? Math.round(rights / cards * 100) : 100;
     return (
         <div className="exam-sum-container">
             <div className="sum-col">
