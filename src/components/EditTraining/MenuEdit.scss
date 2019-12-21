@@ -19,10 +19,11 @@
 
     .delete-btn-row {
         display: flex;
-        justify-content: space-between;
+        margin: auto;
+        width: fit-content;
+        margin-top: 2rem;
 
         @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
-            justify-content: initial;
         }
 
         .msg {
@@ -33,7 +34,6 @@
 
         .delete-btn-container {
             width: 7rem;
-            margin: 0 auto;
 
             @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
                 margin: 0;

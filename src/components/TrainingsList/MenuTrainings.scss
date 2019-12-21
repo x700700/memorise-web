@@ -25,11 +25,11 @@
     .friend-btn-row {
         display: flex;
         justify-content: space-between;
+        width: fit-content;
+        margin: auto;
 
         @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
             justify-content: initial;
-            width: fit-content;
-            margin: auto;
         }
 
         .msg {
