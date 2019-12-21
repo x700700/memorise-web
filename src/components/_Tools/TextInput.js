@@ -1,12 +1,14 @@
 import React, {useState, forwardRef, useImperativeHandle, useEffect} from 'react';
 import { createMuiTheme, makeStyles, MuiThemeProvider } from '@material-ui/core/styles';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
-import { HelpOutline, ErrorOutline, Edit } from '@material-ui/icons';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import { HelpOutline, ErrorOutline, Edit, Visibility, VisibilityOff } from '@material-ui/icons';
 import { deepPurple } from '@material-ui/core/colors';
 import logger from "../../common/logger";
 import {isRtl} from "../../common/utils";
 import consts from "../../common/consts";
+import {useTranslation} from "react-i18next";
 
 const theme = createMuiTheme({
         palette: {
@@ -58,6 +60,7 @@ const TextInput = forwardRef(({ autoComplete, width, label, type, defaultValue, 
         },
     }));
 
+    const { t } = useTranslation();
     const autoCompleteSafeParams = autoComplete || {};
     const classes = useStyles();
     const [val, setVal] = useState(defaultValue);
@@ -99,7 +102,16 @@ const TextInput = forwardRef(({ autoComplete, width, label, type, defaultValue, 
         onBlur && onBlur(val);
     };
 
-    // onMount
+
+    const [showPass, setShowPass] = useState(false);
+    const handleClickShowPassword = () => {
+        setShowPass(!showPass);
+    };
+    const handleMouseDownPassword = event => {
+        event.preventDefault();
+    };
+
+
     useEffect(() => {
         logger.trace('TextInput mounted');
         setVal(defaultValue);
@@ -108,7 +120,8 @@ const TextInput = forwardRef(({ autoComplete, width, label, type, defaultValue, 
     const className = noMargin ? classes.margin : classes.noMargin;
     let inputClassName = ['q', 'a'].includes(type) && classes.fontExercise;
     inputClassName = (type === 'training' && classes.fontTraining) || inputClassName;
-    const typeName = ['q', 'a', 'training'].includes(type) ? 'text' : type || 'text';
+    let typeName = ['q', 'a', 'training'].includes(type) ? 'text' : type || 'text';
+    if (type === 'password') typeName = showPass ? 'text' : 'password';
 
     return (
         <div className="text-input">
@@ -134,7 +147,6 @@ const TextInput = forwardRef(({ autoComplete, width, label, type, defaultValue, 
                     onChange={onMyChange}
                     onKeyPress={onKeyPress}
                     disabled={disabled}
-                    // id="input-with-icon"
 
                     InputLabelProps={{
                         // shrink: true,
@@ -161,6 +173,19 @@ const TextInput = forwardRef(({ autoComplete, width, label, type, defaultValue, 
                                 }
                             </InputAdornment>
                         ),
+
+                        endAdornment: type !== 'password' ? null : (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label={t('show pass')}
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                >
+                                    {showPass ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+
                     }}
                 />
             </MuiThemeProvider>

@@ -95,11 +95,13 @@ const SignIn = ({ flipSign }) => {
                     <div className="field sign-name">
                         <TextInput ref={refName} label={t('nickname')} defaultValue={registeredUsername || ''} autoFocus={!registeredUsername}
                                    onBlur={checkName} onChange={checkName} error={errName} onEnter={enterPressed}
+                                   width="13rem"
                         />
                     </div>
                     <div className="field sign-pass">
                         <TextInput ref={refPass} label={t('password')} type="password" defaultValue="" autoFocus={name ? true : false}
                                    onBlur={checkPassword} onChange={checkPassword} error={errPass} onEnter={enterPressed}
+                                   width="13rem"
                         />
                     </div>
                     <div className="sign-btn-container">

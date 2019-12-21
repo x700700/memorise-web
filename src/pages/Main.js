@@ -69,7 +69,7 @@ const Main = () => {
 
     const onBodyClick = (e) => {
         // logger.warn('============>', e.target, e.target.id, e.target.className);
-        const isActive = e.target.id === 'active' || e.target.className.includes('active');
+        const isActive = e.target.id === 'active' || JSON.stringify(e.target.className).includes('active');
         if (!isActive && activeDrawerTrainingId) {
             dispatch({ type: types.APP_SET_ACTIVE_DRAWER_TRAINING, id: null });
         }
