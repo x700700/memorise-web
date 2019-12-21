@@ -3,7 +3,7 @@ import { createMuiTheme, makeStyles, MuiThemeProvider } from '@material-ui/core/
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
-import { HelpOutline, ErrorOutline, Edit, Visibility, VisibilityOff } from '@material-ui/icons';
+import { HelpOutline, ErrorOutline, Edit, Visibility, VisibilityOff, Clear } from '@material-ui/icons';
 import { deepPurple } from '@material-ui/core/colors';
 import logger from "../../common/logger";
 import {isRtl} from "../../common/utils";
@@ -118,6 +118,9 @@ const TextInput = forwardRef(({
     const handleMouseDownPassword = event => {
         event.preventDefault();
     };
+    const clearText = () => {
+        setVal('');
+    };
 
 
     useEffect(() => {
@@ -182,7 +185,7 @@ const TextInput = forwardRef(({
                             </InputAdornment>
                         ),
 
-                        endAdornment: type !== 'password' ? null : (
+                        endAdornment: type === 'password' ? (
                             <InputAdornment position="end">
                                 <IconButton
                                     aria-label={t('show pass')}
@@ -192,8 +195,11 @@ const TextInput = forwardRef(({
                                     {showPass ? <Visibility /> : <VisibilityOff />}
                                 </IconButton>
                             </InputAdornment>
+                        ) : !['q', 'a'].includes(type) ? null : (
+                            <IconButton onClick={clearText}>
+                                <Clear />
+                            </IconButton>
                         ),
-
                     }}
                 />
             </MuiThemeProvider>
