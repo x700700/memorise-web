@@ -33,7 +33,6 @@ const Header = (props) => {
     const [logoTooltipMsg, setLogoTooltipMsg] = useState(t('press me to login'));
 
     const [isAuthErrorShown, setIsAuthErrorShown] = useState(false);
-    const [isWelcomeShown, setIsWelcomeShown] = useState(false);
 
     const editTrainingId = (training && training.id) || '-';
 
@@ -63,6 +62,7 @@ const Header = (props) => {
         }
     }, [error, clearError]);
 
+
     const isNoNoTab = useCallback(() => {
         return currPage === consts.pageName.trainings || currPage === consts.pageName.edit || currPage === consts.pageName.login;
     }, [currPage]);
@@ -74,17 +74,21 @@ const Header = (props) => {
                 refTooltipLogo.current.open();
                 setIsAuthErrorShown(true);
             }
-        } else if (authCheckEnded && isLoggedIn && !isWelcomeShown) {
+        } else if (!userName && isNoNoTab()) {
+            refTooltipLogo.current.close();
+        }
+    }, [authError, isAuthErrorShown, authCheckEnded, isLoggedIn, userName, isNoNoTab, setLogoTooltipMsg, setIsAuthErrorShown, t]);
+
+    useEffect(() => {
+        logger.warn('Header update - user changed - ', userName);
+        if (authCheckEnded && isLoggedIn && userName) {
             setLogoTooltipMsg(`${t('hello')} ${userName}`);
             refTooltipLogo.current.open();
-            setIsWelcomeShown(true);
             setTimeout(() => {
                 refTooltipLogo.current.close();
             }, 4000);
-        } else if (isNoNoTab()) {
-            refTooltipLogo.current.close();
         }
-    }, [authError, isAuthErrorShown, isWelcomeShown, authCheckEnded, isLoggedIn, userName, isNoNoTab, setLogoTooltipMsg, setIsAuthErrorShown, setIsWelcomeShown, t]);
+    }, [authCheckEnded, isLoggedIn, userName, setLogoTooltipMsg, t]);
 
     useEffect(() => {
         logger.trace('Header update - tab changed');
