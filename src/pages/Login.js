@@ -12,7 +12,7 @@ const Login = (props) => {
     const [showSignUp, setShowSignUp] = useState(false);
 
     useEffect(() => {
-        logger.trace('Login mount');
+        logger.trace('Login mounted');
         if (currPage !== consts.pageName.login) {
             dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.login });
             dispatch({ type: types.APP_SHOW_MENU, show: false });

@@ -12,7 +12,7 @@ const GameSum = forwardRef(({ setStats, cardsNum, playsNum, replayGame }, ref) =
     const [plays, setPlays] = useState(0);
 
     useEffect(() => {
-        logger.trace('GameSum mount');
+        logger.trace('GameSum mounted');
         if (setStats) {
             setCards(cardsNum);
             setPlays(playsNum);

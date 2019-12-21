@@ -80,7 +80,7 @@ const Header = (props) => {
     }, [authError, isAuthErrorShown, authCheckEnded, isLoggedIn, userName, isNoNoTab, setLogoTooltipMsg, setIsAuthErrorShown, t]);
 
     useEffect(() => {
-        logger.warn('Header update - user changed - ', userName);
+        logger.trace('Header update - user changed - ', userName);
         if (authCheckEnded && isLoggedIn && userName) {
             setLogoTooltipMsg(`${t('hello')} ${userName}`);
             refTooltipLogo.current.open();
@@ -103,7 +103,7 @@ const Header = (props) => {
     }, [currPage, appShowMenu]);
 
     useEffect(() => {
-        logger.trace('Header mount');
+        logger.trace('Header mounted');
         const menuTransEnded = () => {
             setShowMenu(appShowMenu);
         };

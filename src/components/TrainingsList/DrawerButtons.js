@@ -49,7 +49,7 @@ const DrawerButtons = ({ trainingId, forceClose, size, color, backgroundColor, b
 
     const divAbsoluteId = `drawer-buttons-absolute-${trainingId}`;
     useEffect(() => {
-        logger.trace('DrawerButton mount');
+        logger.trace('DrawerButton mounted');
 
         const drawerClosed = () => {
             setCloseEnded(true);

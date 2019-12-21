@@ -9,7 +9,7 @@ const NotFound = (props) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        logger.trace('NotFound mount');
+        logger.trace('NotFound mounted');
         dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: null });
         dispatch({type: types.APP_SHOW_MENU, show: false})
     }, [dispatch]);

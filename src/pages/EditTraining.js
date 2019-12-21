@@ -77,14 +77,14 @@ const EditTraining = (props) => {
 
     // const getEditTrainingCb = useCallback((id) => dispatch(getEditTraining(id)), [getEditTraining]);
     useEffect(() => {
-        logger.trace('EditTraining loading - ', paramId , isFetching, idToDelete, training && training.id);
+        logger.trace('EditTraining loading data - ', paramId , isFetching, idToDelete, training && training.id);
         if ((paramId && !training && !isFetching) || (training && paramId && paramId !== training.id)) {
             paramId !== '-' && !isFetching && paramId !== idToDelete && dispatch(getEditTraining(paramId));
         }
     }, [dispatch, paramId, idToDelete, training, isFetching]);
 
     useEffect(() => {
-        logger.trace('EditTraining mount');
+        logger.trace('EditTraining mounted');
         dispatch({type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.edit});
         dispatch({type: types.APP_SHOW_MENU, show: false});
         dispatch({ type: types.GAME_SET_TRAINING_ID, id: null, friendName: null });

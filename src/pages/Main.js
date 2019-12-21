@@ -41,7 +41,13 @@ const Main = () => {
     }, [activeDrawerTrainingId]);
 
     useEffect(() => {
-        logger.warn('App started');
+        logger.trace('Main update - auth change');
+        authCheckStarted && authCheckEnded && loggedInUsername && logger.info('*** Hello', loggedInUsername + ' ***');
+        authCheckStarted && authCheckEnded && !loggedInUsername && logger.warn(`*** Not Signed In ***`);
+    }, [loggedInUsername, authCheckEnded, authCheckStarted]);
+
+    useEffect(() => {
+        logger.info('App started');
 
         const handleScroll = (e) => {
             // logger.warn('scroling.........');
@@ -60,13 +66,6 @@ const Main = () => {
             window.addEventListener('scroll', handleScroll, false);
         }
     }, [dispatch, t]);
-
-    useEffect(() => {
-        logger.trace('Main update - auth change');
-        authCheckStarted && authCheckEnded && loggedInUsername && logger.warn('*** Hello', loggedInUsername + ' ***');
-        authCheckStarted && authCheckEnded && !loggedInUsername && logger.warn(`*** Not Signed In ***`);
-    }, [loggedInUsername, authCheckEnded, authCheckStarted]);
-
 
     const onBodyClick = (e) => {
         // logger.warn('============>', e.target, e.target.id, e.target.className);

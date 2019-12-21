@@ -75,7 +75,7 @@ const Game = (props) => {
     }, [playNumber]);
 
     useEffect(() => {
-        logger.trace('Game mount');
+        logger.trace('Game mounted');
         dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.practice });
         dispatch({type: types.APP_SHOW_MENU, show: false});
 

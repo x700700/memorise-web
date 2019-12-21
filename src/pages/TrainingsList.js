@@ -39,19 +39,20 @@ const TrainingsList = (props) => {
     }, [lastNewTrainingId, dispatch, history]);
 
     useEffect(() => {
-        logger.trace('TrainingsList mounted');
-        if (currPage !== consts.pageName.trainings) {
-            // logger.warn('TrainingsList mount');
-            dispatch({type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.trainings});
-            dispatch({type: types.APP_SHOW_MENU, show: false});
-        }
+        logger.trace('TrainingsList loading data');
         if (!isFetching && !myTrainingsMap) {
             dispatch(getTrainingsList());
         }
         if (friendName && !friendTrainingsMap){
             dispatch(getFriendTrainingsList(friendName));
         }
-    }, [dispatch, history, myTrainingsMap, friendName, friendTrainingsMap, isFetching, currPage]);
+    }, [dispatch, myTrainingsMap, friendName, friendTrainingsMap, isFetching]);
+
+    useEffect(() => {
+        logger.trace('TrainingsList mounted');
+        dispatch({type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.trainings});
+        dispatch({type: types.APP_SHOW_MENU, show: false});
+    }, [dispatch]);
 
     return (
         <div className="trainings-list-page">

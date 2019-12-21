@@ -59,7 +59,7 @@ const Exam = (props) => {
     }, [examTrainingIsLoaded, trainingId, playDeckSize, t, dispatch, history]);
 
     useEffect(() => {
-        logger.trace('Exam mount');
+        logger.trace('Exam mounted');
         dispatch({ type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.exam });
         dispatch({type: types.APP_SHOW_MENU, show: false});
 
