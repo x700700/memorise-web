@@ -33,7 +33,7 @@ const Exercise = ({ exercise, disable }) => {
     };
 
     const translate = (word) => {
-        if (word && word.trim().length > 2) {
+        if (word && word.trim().length >= 2) {
             logger.trace('Translate: ', word);
             dispatch(getTranslate(word));
         }
