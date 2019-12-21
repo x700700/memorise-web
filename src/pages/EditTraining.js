@@ -18,7 +18,6 @@ const EditTraining = (props) => {
     const history = useHistory();
     const { t } = useTranslation();
 
-    const currPage = useSelector(state => state.app.currentPage);
     const showMenu = useSelector(state => state.app.showMenu);
     const isFetching = useSelector(state => state.editTraining.isFetching);
     const isLoaded = useSelector(state => state.editTraining.isLoaded);
@@ -33,12 +32,12 @@ const EditTraining = (props) => {
 
     const play = () => {
         // logger.warn('play training - ', training);
-        dispatch({ type: types.GAME_SET_TRAINING_ID, id: training.id });
+        dispatch({ type: types.GAME_SET_TRAINING_ID, id: training.id, friendName: null });
         history.push('/practice');
     };
     const exam = () => {
         // logger.warn('exam training - ', training);
-        dispatch({ type: types.EXAM_SET_TRAINING_ID, id: training.id });
+        dispatch({ type: types.EXAM_SET_TRAINING_ID, id: training.id, friendName: null });
         history.push('/exam');
     };
     const onNameEdit = (edit) => {
@@ -58,7 +57,7 @@ const EditTraining = (props) => {
 
 
     useEffect(() => {
-        logger.trace('EditTraining update - id to delete');
+        logger.trace('EditTraining update - id to delete, open approval modal');
         if (idToDelete) {
             refModal.current.open();
             dispatch({ type: types.TRAINING_SET_DELETE_ID, id: null });
@@ -66,7 +65,7 @@ const EditTraining = (props) => {
     }, [idToDelete, dispatch]);
 
     useEffect(() => {
-        logger.trace('EditTraining update - fetch status');
+        logger.trace('EditTraining update - fetch status, redirect on error');
         if (!isFetching && !isLoaded && idToFetch && !fetchedId) {
             logger.error('Training was not fetched - redirect to list');
             dispatch({ type: types.TRAINING_RESET });
@@ -74,20 +73,23 @@ const EditTraining = (props) => {
         }
     }, [isFetching, isLoaded, idToFetch, fetchedId, history, dispatch]);
 
+
+
     // const getEditTrainingCb = useCallback((id) => dispatch(getEditTraining(id)), [getEditTraining]);
     useEffect(() => {
-        logger.trace('EditTraining mount');
-        if (currPage !== consts.pageName.edit) {
-            dispatch({type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.edit});
-            dispatch({type: types.APP_SHOW_MENU, show: false});
-            dispatch({ type: types.GAME_SET_TRAINING_ID, id: null, friendName: null });
-            dispatch({ type: types.EXAM_SET_TRAINING_ID, id: null, friendName: null });
-        }
-        // logger.warn('id <> idToFetch', paramId , idToFetch, idToDelete, training);
+        logger.trace('EditTraining loading - ', paramId , isFetching, idToDelete, training && training.id);
         if ((paramId && !training && !isFetching) || (training && paramId && paramId !== training.id)) {
-            paramId !== '-' && paramId !== idToFetch && paramId !== idToDelete && dispatch(getEditTraining(paramId));
+            paramId !== '-' && !isFetching && paramId !== idToDelete && dispatch(getEditTraining(paramId));
         }
-    }, [dispatch, history, paramId, idToFetch, idToDelete, training, isFetching, currPage]);
+    }, [dispatch, paramId, idToDelete, training, isFetching]);
+
+    useEffect(() => {
+        logger.trace('EditTraining mount');
+        dispatch({type: types.APP_SET_CURRENT_PAGE, currentPage: consts.pageName.edit});
+        dispatch({type: types.APP_SHOW_MENU, show: false});
+        dispatch({ type: types.GAME_SET_TRAINING_ID, id: null, friendName: null });
+        dispatch({ type: types.EXAM_SET_TRAINING_ID, id: null, friendName: null });
+    }, [dispatch]);
 
     const refModal = useRef();
     return (

@@ -9,11 +9,13 @@ import ExamSum from "../components/Practice/ExamSum";
 import PopUpBox from "../components/_Tools/PopUpBox";
 import ExamTable from "../components/Practice/ExamTable";
 import {getExamTraining} from "../redux/actions";
+import {useTranslation} from "react-i18next";
 
 
 const Exam = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const { t } = useTranslation();
 
     const showMenu = useSelector(state => state.app.showMenu);
     const trainingIdToFetch = useSelector(state => state.exam.trainingIdToFetch);
@@ -22,6 +24,7 @@ const Exam = (props) => {
     const examTrainingIsLoaded = useSelector(state => state.exam.trainingIsLoaded);
     const isDeckLoaded = useSelector(state => state.exam.isDeckLoaded);
 
+    const trainingId = useSelector(state => state.exam.trainingId);
     const playDeckSize = useSelector(state => state.exam.playDeckSize);
     const rightsNum = useSelector(state => state.exam.rightsNum);
     const deckCurrentSize = useSelector(state => state.exam.deckCurrentSize);
@@ -42,6 +45,18 @@ const Exam = (props) => {
         dispatch({ type: types.EXAM_SET_ENDED, ended: false });
         dispatch({ type: types.EXAM_REPLAY });
     };
+
+
+    useEffect(() => {
+        logger.trace('Exam loaded - validaing it -  ', examTrainingIsLoaded, trainingId, playDeckSize);
+        if (examTrainingIsLoaded && trainingId && playDeckSize < 3) {
+            localStorage.removeItem(consts.localStorage.examId);
+            dispatch({ type: types.EXAM_SET_TRAINING_ID, id: null, friendName: null });
+            dispatch({ type: types.APP_SET_ERROR, error: t('err-exam-too-small') });
+            dispatch({ type: types.EXAM_LOAD });
+            history.push(`/trainings/${trainingId || '-'}/edit`);
+        }
+    }, [examTrainingIsLoaded, trainingId, playDeckSize, t, dispatch, history]);
 
     useEffect(() => {
         logger.trace('Exam mount');

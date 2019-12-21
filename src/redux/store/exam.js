@@ -25,6 +25,7 @@ const init = (isDeckFlipped = false, isNextDeckFlipped = false) => ({
     isExamPageAnswered: false,
     rightsNum: 0,
 
+    trainingId: null,
     trainingIdToFetch: null,
     friendName: null,
     trainingIsFetching: false,
@@ -139,6 +140,7 @@ const examReducer = (  state = init(),
                 ...state,
                 trainingIdToFetch: action.id,
                 friendName: action.friendName,
+                trainingIsLoaded: false,
             };
         case types.EXAM_SET_ENDED:
             return {
@@ -161,6 +163,7 @@ const examReducer = (  state = init(),
                 ...state,
                 trainingIsFetching: false,
                 trainingIsLoaded: true,
+                trainingId: state.trainingIdToFetch,
                 trainingIdToFetch: null,
                 ...cardsDeckProps(cardsDeck),
             };

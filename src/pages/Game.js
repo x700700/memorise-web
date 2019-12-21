@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './Game.scss';
 import { useHistory } from "react-router-dom";
+import {useTranslation} from "react-i18next";
 import { useDispatch, useSelector } from 'react-redux'
 import logger from '../common/logger';
 import * as types from '../redux/actionsTypes';
@@ -14,10 +15,12 @@ import { getGameTraining } from "../redux/actions";
 const Game = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const { t } = useTranslation();
     const [cardInMove, setCardInMove] = useState(false);
     const showMenu = useSelector(state => state.app.showMenu);
 
     const trainingIdToFetch = useSelector(state => state.game.trainingIdToFetch);
+    const trainingId = useSelector(state => state.game.trainingId);
     const trainingFriendName = useSelector(state => state.game.friendName);
     const gameTrainingIsFetching = useSelector(state => state.game.trainingIsFetching);
     const gameTrainingIsLoaded = useSelector(state => state.game.trainingIsLoaded);
@@ -54,6 +57,17 @@ const Game = (props) => {
         dispatch({ type: types.GAME_REPLAY });
     };
 
+
+    useEffect(() => {
+        logger.trace('Game loaded - validaing it -  ', gameTrainingIsLoaded, trainingId, playDeckSize);
+        if (gameTrainingIsLoaded && trainingId && playDeckSize < 3) {
+            localStorage.removeItem(consts.localStorage.gameId);
+            dispatch({ type: types.GAME_SET_TRAINING_ID, id: null, friendName: null });
+            dispatch({ type: types.APP_SET_ERROR, error: t('err-game-too-small') });
+            dispatch({ type: types.GAME_LOAD });
+            history.push(`/trainings/${trainingId || '-'}/edit`);
+        }
+    }, [gameTrainingIsLoaded, trainingId, playDeckSize, t, dispatch, history]);
 
     useEffect(() => {
         logger.trace('Game update - replayed #', playNumber);

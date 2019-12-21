@@ -23,6 +23,7 @@ const init = (isDeckFlipped = false) => ({
     friendName: null,
     trainingIsFetching: false,
     trainingIsLoaded: false,
+    trainingId: null,
 });
 const cardsDeckProps = (cardsDeck, replay = false) => {
     let basic = {};
@@ -116,6 +117,7 @@ const gameReducer = (  state = init(),
                 ...state,
                 trainingIdToFetch: action.id,
                 friendName: action.friendName,
+                trainingIsLoaded: false,
             };
         case types.GAME_SET_ENDED:
             return {
@@ -138,6 +140,7 @@ const gameReducer = (  state = init(),
                 ...state,
                 trainingIsFetching: false,
                 trainingIsLoaded: true,
+                trainingId: state.trainingIdToFetch,
                 trainingIdToFetch: null,
                 ...cardsDeckProps(cardsDeck),
             };
