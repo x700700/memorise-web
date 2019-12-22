@@ -43,9 +43,12 @@ const validate = values => {
 
 
 const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
-    <TextField label={label}
-               error={touched && error && true}
-               helperText={touched && error}
+    <TextInput label={label}
+               error={touched && error}
+               defaultValue={custom.registeredUsername || ''}
+               autoFocus={!custom.registeredUsername}
+               width="13rem"
+               onBlur={() => {}} onChange={() => {}} onEnter={() => {}}
                {...input}
                {...custom}
     />
@@ -59,7 +62,7 @@ const SignIn = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
     const isSigningIn = useSelector(state => state.app.isSigningIn);
     const authCheckEnded = useSelector(state => state.app.authCheckEnded);
     const loggedInUsername = useSelector(state => state.app.userName);
-    // const registeredUsername = useSelector(state => state.app.registeredUserName);
+    const registeredUsername = useSelector(state => state.app.registeredUserName);
     const [onSignin, setOnSignin] = useState(false);
 
 
@@ -98,11 +101,13 @@ const SignIn = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
                     <div className="field sign-name">
                         <Field name="nickname" component={renderTextField} label={t('nickname')}
                                variant="outlined"
+                               registeredUsername={registeredUsername}
                         />
                     </div>
                     <div className="field sign-pass">
                         <Field name="password" component={renderTextField} label={t('password')}
                                variant="outlined" type="password"
+                               registeredUsername={registeredUsername}
                         />
                     </div>
                     <div className="sign-btn-container">
