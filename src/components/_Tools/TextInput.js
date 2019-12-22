@@ -53,6 +53,7 @@ const TextInput = forwardRef(({
                                   autoComplete, width, label, type, defaultValue, autoFocus,
                                   onEnter, onFocus, onBlur, onChange, noMargin, disabled, error,
                                   forceShowPassword, onShowPassword,
+                                  name, inputRef,
                               }, ref) => {
     useImperativeHandle(ref, () => ({
         value() {
@@ -143,6 +144,9 @@ const TextInput = forwardRef(({
             <MuiThemeProvider theme={theme}>
                 <TextField
                     {...autoCompleteSafeParams}
+                    name={name}
+                    inputRef={inputRef}
+
                     value={val}
                     variant={label ? 'outlined' : 'standard'}
                     type={typeName}
