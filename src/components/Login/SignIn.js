@@ -1,18 +1,16 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import './Login.scss';
 import i18n from '../../common/i18n';
 import {useDispatch, useSelector} from "react-redux";
 import { Field, reduxForm } from 'redux-form';
-import TextField from '@material-ui/core/TextField';
 import logger from "../../common/logger";
 import * as types from '../../redux/actionsTypes';
 import {useTranslation} from "react-i18next";
 import TextInput from "../_Tools/TextInput";
 import Button from "../_Tools/Button";
-import { validateRequired, validateName, validatePassword } from "../../common/utils";
+import { validateName, validatePassword } from "../../common/utils";
 import { signin } from '../../redux/actions';
 import {useHistory} from "react-router";
-import handleSubmit from "redux-form/lib/handleSubmit";
 
 
 
@@ -45,10 +43,10 @@ const validate = values => {
 const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
     <TextInput label={label}
                error={touched && error}
-               defaultValue={custom.registeredUsername || ''}
-               autoFocus={!custom.registeredUsername}
-               width="13rem"
-               onBlur={() => {}} onChange={() => {}} onEnter={() => {}}
+               defaultValue={custom.defaultValue}
+               autoFocus={custom.autoFocus}
+               width={custom.width}
+               // onBlur={() => {}} onChange={() => {}} onEnter={() => {}}
                {...input}
                {...custom}
     />
@@ -100,14 +98,14 @@ const SignIn = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
                 <form onSubmit={handleSubmit(login)}>
                     <div className="field sign-name">
                         <Field name="nickname" component={renderTextField} label={t('nickname')}
-                               variant="outlined"
-                               registeredUsername={registeredUsername}
+                               variant="outlined" width="13rem"
+                               defaultValue={registeredUsername || ''} autoFocus={!registeredUsername}
                         />
                     </div>
                     <div className="field sign-pass">
-                        <Field name="password" component={renderTextField} label={t('password')}
-                               variant="outlined" type="password"
-                               registeredUsername={registeredUsername}
+                        <Field name="password" component={renderTextField} label={t('password')} type="password"
+                               variant="outlined" width="13rem"
+                               defaultValue=""
                         />
                     </div>
                     <div className="sign-btn-container">
