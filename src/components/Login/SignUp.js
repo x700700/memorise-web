@@ -121,6 +121,7 @@ const SignUp = ({ flipSign }) => {
     useEffect(() => {
         logger.trace('SignUp mounted');
         setErrName(null);
+        // refName.current.setValue('');
     }, [setErrName]);
 
     const styleBox = {
