@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import './Login.scss';
+import i18n from '../../common/i18n';
 import {useDispatch, useSelector} from "react-redux";
 import { Field, reduxForm } from 'redux-form';
 import TextField from '@material-ui/core/TextField';
@@ -28,15 +29,14 @@ const validate = values => {
     const requiredFields = [ 'nickname', 'password' ];
     requiredFields.forEach(field => {
         if (!values[ field ]) {
-            errors[ field ] = 'Required' // t('err-name-required');
+            errors[ field ] = i18n.t('err-name-required');
         }
     });
-    // console.warn('--->', values.nickname);
     if (!validateName(values.nickname)) {
-        errors.nickname = 'name invalid'; // t('err-name-valid');
+        errors.nickname = i18n.t('err-name-valid');
     }
     if (!validatePassword(values.password)) {
-        errors.password = 'pass invalid'; // t('err-pass-valid');
+        errors.password = i18n.t('err-pass-valid');
     }
     return errors;
 };
@@ -64,12 +64,12 @@ const SignIn = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
 
 
     // const refPass = useRef();
+    // https://redux-form.com/8.2.2/examples/submitvalidation/
     const login = (values) => {
         const name = values.nickname;
         const pass = values.password;
         logger.warn('login - ', name, pass);
         // refPass.current.setValue('');
-        /*
         setOnSignin(true);
         dispatch({ type: types.TRAININGS_LIST_RESET });
         dispatch({ type: types.TRAINING_RESET });
@@ -77,7 +77,6 @@ const SignIn = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
             nickName: name,
             password: pass,
         }));
-         */
     };
 
     useEffect(() => {
