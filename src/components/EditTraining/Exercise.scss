@@ -33,7 +33,7 @@
 }
 
 .edit-modal-container {
-
+    position: relative;
     width: 16rem;
     margin: 0 auto;
 
@@ -42,14 +42,25 @@
 
     .delete-btn {
         position: absolute;
-        right: 0;
-        top: 0;
+        right: -3.7rem;
+        top: -3.5rem;
         margin: .5rem;
 
         i {
             color: red;
         }
     }
+    .switch-btn {
+        position: absolute;
+        left: -3.7rem;
+        top: 2.4rem;
+        margin: .5rem;
+
+        i {
+            color: $grey2;
+        }
+    }
+
     .question {
         margin-top: 2rem;
         margin-bottom: 1.5rem;

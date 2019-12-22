@@ -52,6 +52,11 @@ const Exercise = ({ exercise, disable }) => {
         dispatch(deleteExercise(exercise.trainingId, exercise.id));
         refModal.current.close();
     };
+    const switchQA = () => {
+        const foo = refQ.current.value();
+        refQ.current.setValue(refA.current.value());
+        refA.current.setValue(foo);
+    };
 
 
     useEffect(() => {
@@ -95,6 +100,9 @@ const Exercise = ({ exercise, disable }) => {
                 <div className="edit-modal-container">
                     <div className="delete-btn">
                         <IconButton size={2} faName="trash-alt" onClick={del}/>
+                    </div>
+                    <div className="switch-btn">
+                        <IconButton size={1.5} faName="random" onClick={switchQA}/>
                     </div>
                     <div className="field question">
                         <TextInput ref={refQ} type="q" defaultValue={exercise.q} autoFocus={true} onEnter={save} onBlur={translate}/>
