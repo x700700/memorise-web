@@ -50,7 +50,8 @@ const Button = ({ type, text, onClick, disabled }) => {
         <div>
             <ThemeProvider theme={themeButton}>
                 <ColorButton variant="contained" style={style} color={color} size="medium" fullWidth={true} className={classes.margin}
-                             onClick={onClick()} disabled={disabled}
+                             onClick={onClick && onClick()} disabled={disabled}
+                             type={type === 'submit' && 'submit'}
                 >
                     {text}
                 </ColorButton>

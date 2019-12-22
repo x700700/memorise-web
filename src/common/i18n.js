@@ -29,7 +29,7 @@ i18n.use(LanguageDetector).init({
                 "err-signup-email-taken": "The Email is already taken",
                 "err-signup-nick-taken": "The Nick Name is already taken",
                 "err-auth": "Press the user icon to sign in!",
-                "err-signin": "Incorrect nick name or password",
+                "err-signin": "Wrong nick name or password",
                 "err-signup": "Email or Nick name are already in use",
                 "err-signup-short": "Email/Name are taken",
                 "hello": "Hello",
