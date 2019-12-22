@@ -12,6 +12,7 @@ const TrainingsList = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const showMenu = useSelector(state => state.app.showMenu);
+    const isPlayFriend = useSelector(state => state.app.isFriendShared);
     const friendName = useSelector(state => state.app.friendName);
     const isFetching = useSelector(state => state.trainings.isFetching);
     const isLoaded = useSelector(state => state.trainings.isLoaded);
@@ -20,7 +21,7 @@ const TrainingsList = (props) => {
     const myTrainingsMap = useSelector(state => state.trainings.trainingsMap);
     const friendTrainingsMap = useSelector(state => state.friendTrainings.trainingsMap);
     let trainingsMap = myTrainingsMap;
-    if (friendName && friendTrainingsMap) {
+    if (isPlayFriend && friendName && friendTrainingsMap) {
         trainingsMap = myTrainingsMap && { ...friendTrainingsMap, ...myTrainingsMap };
     }
     const trainingsList = isLoaded ? trainingsMap && Object.values(trainingsMap) : null;
@@ -42,10 +43,10 @@ const TrainingsList = (props) => {
         if (!isFetching && !myTrainingsMap) {
             dispatch(getTrainingsList());
         }
-        if (friendName && !friendTrainingsMap){
+        if (isPlayFriend && friendName && !friendTrainingsMap){
             dispatch(getFriendTrainingsList(friendName));
         }
-    }, [dispatch, myTrainingsMap, friendName, friendTrainingsMap, isFetching]);
+    }, [dispatch, myTrainingsMap, isPlayFriend, friendName, friendTrainingsMap, isFetching]);
 
     useEffect(() => {
         logger.trace('TrainingsList mounted');

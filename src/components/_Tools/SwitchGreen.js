@@ -1,4 +1,4 @@
-import React, {forwardRef, useImperativeHandle, useState} from 'react';
+import React, {forwardRef, useEffect, useImperativeHandle, useState} from 'react';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { ColorSwitchGreen } from '../../common/materialUI styles/Switch'
 
@@ -14,6 +14,10 @@ const SwitchGreen = forwardRef(({ label, value, onChange }, ref) => {
         setCheck(value);
         onChange && onChange(value);
     };
+
+    useEffect(() => {
+        setCheck(value || false);
+    }, [value, setCheck]);
 
     return (
         <div>

@@ -2,21 +2,23 @@ import React, {useRef} from "react";
 import './MainBanner.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
+import {useHistory} from "react-router";
 import consts from "../../common/consts";
 import * as types from "../../redux/actionsTypes";
 import logo from "../../logo.svg";
-import Button from "../_Tools/Button";
 import Modal from "../_Tools/Modal";
 import ChooseFriend from "../TrainingsList/ChooseFriend";
-import TopMenu from "../_Tools/TopMenu";
+import SwitchGreen from "../_Tools/SwitchGreen";
 
 
 const MainBanner = (props) => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const { t } = useTranslation();
 
     const showBanner = useSelector(state => state.app.showBanner);
     const userName = useSelector(state => state.app.userName);
+    const isPlayFriend = useSelector(state => state.app.isFriendShared);
 
     const close = () => {
         dispatch({ type: types.APP_SHOW_BANNER, show: false });
@@ -34,13 +36,28 @@ const MainBanner = (props) => {
 
     const closeModal = () => {
         refModal.current.close();
+        dispatch({ type: types.APP_SET_PLAY_FRIEND, play: false });
+        dispatch({ type: types.APP_SHOW_BANNER, show: false });
+    };
+    const resetSwitch = () => {
+        dispatch({ type: types.APP_SET_PLAY_FRIEND, play: false });
+        dispatch({ type: types.APP_SHOW_BANNER, show: false });
     };
 
     const refModal = useRef();
-    const playFriend = () => {
-        dispatch({ type: types.APP_SHOW_MENU, show: false });
-        refModal.current.open();
+    const refSwitch = useRef();
+    const searchFriend = () => {
+        if (!refSwitch.current.check()) {
+            dispatch({type: types.APP_SHOW_MENU, show: false});
+            dispatch({type: types.APP_SET_PLAY_FRIEND, play: true});
+            refModal.current.open();
+        } else {
+            dispatch({type: types.APP_SET_PLAY_FRIEND, play: false});
+            dispatch({type: types.APP_SHOW_BANNER, show: false});
+            history.push('/trainings');
+        }
     };
+
 
     const styleBanner = {
         transform: showBanner ? 'translateX(0)' : 'translateX(100%)',
@@ -67,18 +84,15 @@ const MainBanner = (props) => {
                     </div>
                     }
                     <div className="search-friend">
-                        <div className="friend-btn-row">
-                            <div className="friend-btn-container">
-                                <Button text={t('play friend btn')} onClick={() => playFriend}/>
-                            </div>
-                            <div className="msg">{t("play friend btn title")}</div>
+                        <div className="flip-container">
+                            <SwitchGreen ref={refSwitch} label={t('play friend btn title')} value={isPlayFriend} onChange={searchFriend}/>
                         </div>
                     </div>
                     <div className="about"></div>
                     <div className="footer"></div>
                 </div>
             </div>
-            <Modal ref={refModal} title={t('play friend btn title')} disableBackdropClick={false}>
+            <Modal ref={refModal} title={t('play friend btn title')} disableBackdropClick={false} onClose={resetSwitch}>
                 <ChooseFriend closeModal={closeModal}/>
             </Modal>
         </div>);

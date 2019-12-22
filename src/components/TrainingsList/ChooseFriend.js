@@ -3,7 +3,6 @@ import './ChooseFriend.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router";
 import {useTranslation} from "react-i18next";
-import logger from "../../common/logger";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextInput from "../_Tools/TextInput";
 import Button from "../_Tools/Button";
@@ -31,7 +30,7 @@ const ChooseFriend = ({ closeModal }) => {
             setErrName(null);
         }
     };
-    const playFriend = () => {
+    const isFriendShared = () => {
         const friendName = refName.current.value();
         // logger.warn('play friend - ', friendName);
         dispatch({ type: types.APP_SET_FRIEND_NAME, friendName: null });
@@ -47,6 +46,7 @@ const ChooseFriend = ({ closeModal }) => {
     const onTagsChange = (event, value) => {
         refName.current.setValue(value || '', true);
     };
+
 
     const refName = useRef();
     return (
@@ -70,7 +70,7 @@ const ChooseFriend = ({ closeModal }) => {
             </div>
             <div className="btns-container">
                 <div className="btn">
-                    <Button type="ok" text={t('play friend btn')} disabled={errName && true} onClick={() => playFriend} />
+                    <Button type="ok" text={t('play friend btn')} disabled={errName && true} onClick={() => isFriendShared} />
                 </div>
                 <div className="btn">
                     <Button type="cancel" text={t('cancel')} disabled={false} onClick={() => cancel} />

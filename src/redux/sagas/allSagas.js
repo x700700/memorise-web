@@ -39,10 +39,12 @@ export function* getFriendTrainingsList(action) {
         yield put({ type: types.FETCH_FRIEND_TRAININGS_SUCCEED, trainingsMap: resp });
         const friendName = resp && ((resp[Object.keys(resp)[0]] || {}).info || {}).friendName;
         yield put({ type: types.APP_SET_FRIEND_NAME, friendName: friendName });
+        yield put({ type: types.APP_SET_PLAY_FRIEND, play: true });
     } catch (e) {
         yield put({ type: types.FETCH_FRIEND_TRAININGS_FAILED });
         yield put({ type: types.APP_CHECK_AUTH_FAILED, e: e });
         yield put({ type: types.APP_SET_FRIEND_NAME, friendName: null, error: e });
+        yield put({ type: types.APP_SET_PLAY_FRIEND, play: false });
     }
 }
 
