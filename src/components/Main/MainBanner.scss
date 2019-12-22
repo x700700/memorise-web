@@ -6,7 +6,6 @@
     z-index: 49;
     width: 100%;
     height: 100%;
-    background-color: #ffdddd;
     transition: transform .5s ease-in-out;
 
     .main-banner-header {
@@ -20,10 +19,28 @@
             background-color: $purple1;
             position: relative;
             display: flex;
-            justify-content: space-between;
             height: 3rem;
             padding: 0 .9rem;
             padding-top: .3rem;
+            align-items: center;
+
+            .icon-close {
+                font-size: 1.7rem;
+                margin-left: .5rem;
+                transform: translateY(-5px);
+            }
+        }
+    }
+
+    .banner-body-container {
+        width: 100%;
+        height: 100%;
+        background-color: $purple1;
+
+        .banner-body {
+            margin: .3rem;
+            margin-top: 0;
+            background-color: #fff;
         }
     }
 }
