@@ -3,7 +3,7 @@ import './Login.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router";
 import {useTranslation} from "react-i18next";
-import useForm from "react-hook-form";
+import { useForm } from "react-hook-form";
 import logger from "../../common/logger";
 import * as types from '../../redux/actionsTypes';
 import TextInput from "../_Tools/TextInput";
