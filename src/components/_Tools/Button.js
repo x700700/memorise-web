@@ -51,7 +51,7 @@ const Button = ({ type, text, onClick, disabled }) => {
             <ThemeProvider theme={themeButton}>
                 <ColorButton variant="contained" style={style} color={color} size="medium" fullWidth={true} className={classes.margin}
                              onClick={onClick && onClick()} disabled={disabled}
-                             type={type === 'submit' && 'submit'}
+                             type={type && type === 'submit' ? 'submit' : undefined}
                 >
                     {text}
                 </ColorButton>

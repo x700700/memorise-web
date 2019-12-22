@@ -6,7 +6,7 @@ import { Field, reduxForm } from 'redux-form';
 import logger from "../../common/logger";
 import * as types from '../../redux/actionsTypes';
 import {useTranslation} from "react-i18next";
-import TextInput from "../_Tools/TextInput";
+import { renderTextInput } from './form-fields';
 import Button from "../_Tools/Button";
 import { validateName, validatePassword } from "../../common/utils";
 import { signin } from '../../redux/actions';
@@ -41,16 +41,6 @@ const validate = values => {
 };
 
 
-const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
-    <TextInput label={label}
-               error={(touched && error) || custom.error}
-               width={custom.width}
-               {...input}
-               {...custom}
-    />
-);
-
-
 const SignIn = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
@@ -66,7 +56,6 @@ const SignIn = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
         const name = values.nickname;
         const pass = values.password;
         logger.warn('login - ', name, pass);
-        setPass('');
         dispatch({ type: types.TRAININGS_LIST_RESET });
         dispatch({ type: types.TRAINING_RESET });
         dispatch(signin({
@@ -76,12 +65,14 @@ const SignIn = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
     };
 
     const nameChange = () => {
-        setFormError(null);
+        if (formError) {
+            setFormError(null);
+        }
     };
-    const [pass, setPass] = useState();
     const passChange = () => {
-        setPass(pass);
-        setFormError(null);
+        if (formError) {
+            setFormError(null);
+        }
     };
 
 
@@ -108,16 +99,16 @@ const SignIn = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
 
                 <form onSubmit={handleSubmit(login)}>
                     <div className="field sign-name">
-                        <Field name="nickname" component={renderTextField} label={t('nickname')}
+                        <Field name="nickname" component={renderTextInput} label={t('nickname')}
                                variant="outlined" width="13rem"
                                defaultValue={registeredUsername || ''} autoFocus={!registeredUsername}
-                               error={formError} onChange={nameChange}
+                               formError={formError} onChange={nameChange}
                         />
                     </div>
                     <div className="field sign-pass">
-                        <Field name="password" component={renderTextField} label={t('password')} type="password"
+                        <Field name="password" component={renderTextInput} label={t('password')} type="password"
                                variant="outlined" width="13rem"
-                               defaultValue="" value={pass} onChange={passChange}
+                               defaultValue="" onChange={passChange}
                         />
                     </div>
                     <div className="sign-btn-container">
