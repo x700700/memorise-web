@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import './Login.scss';
+import {useTranslation} from "react-i18next";
 import i18n from '../../common/i18n';
+import {useHistory} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import { Field, reduxForm } from 'redux-form';
 import logger from "../../common/logger";
 import * as types from '../../redux/actionsTypes';
-import {useTranslation} from "react-i18next";
 import { renderTextInput } from './form-fields';
 import Button from "../_Tools/Button";
 import { validateName, validatePassword } from "../../common/utils";
 import { signin } from '../../redux/actions';
-import {useHistory} from "react-router";
 
 /*
 const asyncValidate = async (values, dispatch, props, fieldString) => {
@@ -24,17 +24,17 @@ const asyncValidate = async (values, dispatch, props, fieldString) => {
 const validate = values => {
     const errors = {};
     const requiredFields = [ 'nickname', 'password' ];
-    requiredFields.forEach(field => {
-        if (!values[ field ]) {
-            errors[ field ] = i18n.t('err-name-required');
-        }
-    });
     if (!validateName(values.nickname)) {
         errors.nickname = i18n.t('err-name-valid');
     }
     if (!validatePassword(values.password)) {
         errors.password = i18n.t('err-pass-valid');
     }
+    requiredFields.forEach(field => {
+        if (!values[ field ]) {
+            errors[ field ] = i18n.t('err-name-required');
+        }
+    });
     return errors;
 };
 
@@ -48,12 +48,14 @@ const SignIn = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
     const loggedInUsername = useSelector(state => state.app.userName);
     const justRegisteredUsername = useSelector(state => state.app.registeredUserName);
 
+    const refPass = useRef();
 
     // https://redux-form.com/8.2.2/examples/submitvalidation/
     const login = (values) => {
         const name = values.nickname;
         const pass = values.password;
         logger.warn('login - ', name, pass);
+        refPass.current.setValue('');
         dispatch({ type: types.TRAININGS_LIST_RESET });
         dispatch({ type: types.TRAINING_RESET });
         dispatch(signin({
@@ -111,6 +113,7 @@ const SignIn = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
                         <Field name="password" component={renderTextInput} label={t('password')} type="password"
                                width="13rem"
                                defaultValue="" onChange={fieldChange}
+                               customRef={refPass}
                         />
                     </div>
                     <div className="sign-btn-container">

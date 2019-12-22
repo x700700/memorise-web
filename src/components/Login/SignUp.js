@@ -1,16 +1,15 @@
 import React, {useEffect, useRef, useState} from "react";
 import './Login.scss';
 import {useDispatch, useSelector} from "react-redux";
+import {useHistory} from "react-router";
 import { Field, reduxForm } from 'redux-form';
 import {useTranslation} from "react-i18next";
+import i18n from "../../common/i18n";
 import logger from "../../common/logger";
 import { renderTextInput } from './form-fields';
 import Button from "../_Tools/Button";
 import { validateName, validateEmail, validatePassword } from "../../common/utils";
 import { signup } from '../../redux/actions';
-import {useHistory} from "react-router";
-import i18n from "../../common/i18n";
-
 
 /*
 const asyncValidate = async (values, dispatch, props, fieldString) => {
@@ -24,11 +23,6 @@ const asyncValidate = async (values, dispatch, props, fieldString) => {
 const validate = values => {
     const errors = {};
     const requiredFields = [ 'email', 'nickname', 'password', 'password2' ];
-    requiredFields.forEach(field => {
-        if (!values[ field ]) {
-            errors[ field ] = i18n.t('err-name-required');
-        }
-    });
     if (!validateEmail(values.email)) {
         errors.email = i18n.t('err-email-valid');
     }
@@ -44,6 +38,11 @@ const validate = values => {
     if (values.password !== values.password2) {
         errors.password2 = i18n.t('err-pass2-valid');
     }
+    requiredFields.forEach(field => {
+        if (!values[ field ]) {
+            errors[ field ] = i18n.t('err-name-required');
+        }
+    });
     return errors;
 };
 
@@ -67,6 +66,8 @@ const SignUp = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
         const name = values.nickname;
         const pass = values.password;
         logger.warn('register - ', email, name, pass);
+        refPass.current.setValue('');
+        refPass2.current.setValue('');
         dispatch(signup({
             email: email,
             nickName: name,
@@ -136,7 +137,7 @@ const SignUp = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
                                label={t('password')} type="password" defaultValue=""
                                onShowPassword={handleShowPass} forceShowPassword={showPasswords}
                                width="13rem"
-                               onChange={fieldChange}
+                               onChange={fieldChange} customRef={refPass}
                         />
                     </div>
                     <div className="field signup-pass2">
@@ -144,7 +145,7 @@ const SignUp = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
                                label={t('password2')} type="password" defaultValue=""
                                onShowPassword={handleShowPass} forceShowPassword={showPasswords}
                                width="13rem"
-                               onChange={fieldChange}
+                               onChange={fieldChange} customRef={refPass2}
                         />
                     </div>
                     <div className="sign-btn-container">

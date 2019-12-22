@@ -5,6 +5,7 @@ export const renderTextInput = ({ input, label, meta: { touched, error }, ...cus
     <TextInput label={label}
                error={(touched && error) || custom.formError}
                width={custom.width}
+               ref={custom.customRef}
                {...input}
                {...custom}
     />
