@@ -81,9 +81,17 @@
                 }
             }
         }
-        .logo {
+        .logo-container {
             align-self: center;
-            margin-top: -6px;
+            margin-top: 0px;
+
+            .arrow {
+                font-size: 1.7rem;
+                transform: translate(-3px, -5px);
+                color: $purple1b;
+            }
+            .logo {
+            }
         }
     }
 

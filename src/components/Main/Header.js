@@ -156,7 +156,10 @@ const Header = (props) => {
                     <Link to="/exam"><span className={`btn btn-play ${currPage === consts.pageName.exam ? 'tab-active' : ''}`}><i className="fas fa-grin-beam-sweat"/></span></Link>
                 </div>
                 <Tooltip ref={refTooltipLogo} text={logoTooltipMsg} placement="bottom-end">
-                    <img className="logo" style={styleOnEdit} src={logo} alt="logo" width="32" height="32" onClick={() => logoClick()}/>
+                    <div className="logo-container" style={styleOnEdit} onClick={() => logoClick()}>
+                        <i className={'fas fa-chevron-left arrow'} style={{ visibility: userName ? 'visible' : 'hidden' }}/>
+                        <img className="logo" src={logo} alt="logo" width="32" height="32"/>
+                    </div>
                 </Tooltip>
             </div>
             <div id="top-header-menu" className={`top-menu-box ${appShowMenu ? 'top-menu-pop-down' : ''}`}>
