@@ -16,6 +16,7 @@ export const APP_AUTH_RESET = 'app.APP_AUTH_RESET';
 
 export const APP_SET_CURRENT_PAGE = 'app.APP_SET_CURRENT_PAGE';
 export const APP_SHOW_MENU = 'app.APP_SHOW_MENU';
+export const APP_SHOW_BANNER = 'app.APP_SHOW_BANNER';
 export const APP_SHOW_MODAL = 'app.APP_SHOW_MODAL';
 export const APP_SET_ERROR = 'app.APP_SET_ERROR';
 export const APP_SET_ACTIVE_DRAWER_TRAINING = 'app.APP_SET_ACTIVE_DRAWER_TRAINING';

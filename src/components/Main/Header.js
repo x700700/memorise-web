@@ -3,6 +3,7 @@ import './Header.scss';
 import {Link, useHistory} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import {useTranslation} from "react-i18next";
+import logger from "../../common/logger";
 import * as types from '../../redux/actionsTypes';
 import logo from '../../logo.svg';
 import consts from "../../common/consts";
@@ -12,7 +13,7 @@ import MenuGame from "../Practice/MenuGame";
 import MenuExam from "../Practice/MenuExam";
 import MenuEdit from "../EditTraining/MenuEdit";
 import MenuTrainings from "../TrainingsList/MenuTrainings";
-import logger from "../../common/logger";
+
 
 const Header = (props) => {
     const dispatch = useDispatch();
@@ -45,10 +46,13 @@ const Header = (props) => {
             refTooltipLogo.current.close();
             currPage !== consts.pageName.login && history.push('/login');
         } else {
+            dispatch({ type: types.APP_SHOW_BANNER, show: true });
+            /*
             refTooltipLogo.current.switch();
             setTimeout(() => {
                 refTooltipLogo.current.close();
             }, 3000);
+             */
         }
     };
 
@@ -127,7 +131,7 @@ const Header = (props) => {
     const isMenuBtnDisable = showMenu !== appShowMenu;
     const menuBtnStatusClass = appShowMenu ? 'btn-menu-opened' : '';
     return (
-        <div className="header">
+        <div className="header" style={{ minHeight: `${consts.ui.headerHeight + 2}px` }}>
             <div className="header-row">
                 <div className="header-left" style={styleMenuBtn}>
                     <button onClick={() => menuClicked(!appShowMenu)} className={`btn btn-menu ${isMenuBtnDisable ? 'disable-pointer' : ''}`}><i className={`fas fa-chevron-down ${menuBtnStatusClass}`}/></button>

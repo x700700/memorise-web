@@ -6,6 +6,7 @@ import {useTranslation} from "react-i18next";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { green, red } from '@material-ui/core/colors';
 import logger from '../common/logger';
+import consts from "../common/consts";
 import * as types from '../redux/actionsTypes';
 import { appAuth } from '../redux/actions';
 import Header from '../components/Main/Header';
@@ -15,6 +16,7 @@ import TrainingsList from "./TrainingsList";
 import EditTraining from "./EditTraining";
 import NotFound from "./NotFound";
 import Login from "./Login";
+import MainBanner from "../components/Main/MainBanner";
 
 
 const theme = createMuiTheme({
@@ -32,7 +34,8 @@ const Main = () => {
     const loggedInUsername = useSelector(state => state.app.userName);
     const authCheckStarted = useSelector(state => state.app.authCheckStarted);
     const authCheckEnded = useSelector(state => state.app.authCheckEnded);
-    const isMenuShown = useSelector(state => state.app.showMenu);
+    const showMenu = useSelector(state => state.app.showMenu);
+    const showBanner = useSelector(state => state.app.showBanner);
     const activeDrawerTrainingId = useSelector(state => state.app.activeDrawerTrainingId);
 
     useEffect(() => {
@@ -74,14 +77,15 @@ const Main = () => {
             dispatch({ type: types.APP_SET_ACTIVE_DRAWER_TRAINING, id: null });
         }
 
-        isMenuShown && dispatch({type: types.APP_SHOW_MENU, show: false});
+        showMenu && dispatch({type: types.APP_SHOW_MENU, show: false});
     };
 
     return (
         <MuiThemeProvider theme={theme}>
             <div className="app-main">
-                <div className="header-space-holder" style={{minHeight: '53px'}}></div>
+                <div className="header-space-holder" style={{ minHeight: `${consts.ui.headerHeight}px` }}></div>
                 <Header/>
+                <MainBanner/>
                 <div className="app-body-area" onClick={onBodyClick}>
                     <Switch>
                         <Route exact path="/"><Redirect to="/practice"/></Route>

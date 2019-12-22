@@ -6,6 +6,9 @@ export default {
     env: {
         timeout: 3, // sec
     },
+    ui: {
+        headerHeight: 53,
+    },
     pageName: {
         login: 'login',
         trainings: 'trainings',
