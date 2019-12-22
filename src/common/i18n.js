@@ -57,6 +57,7 @@ i18n.use(LanguageDetector).init({
                 "delete-training-approval": "Delete this Training Including all its Exercises?",
                 "of": "of",
                 "show pass": "Show/Hide Password",
+                "signout": "Sign Out",
 
                 "play friend btn title": "Play A Friend's Trainings",
                 "play friend btn": "Play Friend",
@@ -120,6 +121,7 @@ i18n.use(LanguageDetector).init({
                 "delete-training-approval": "האם למחוק את האימון על כל תרגיליו?",
                 "of": "מתוך",
                 "show pass": "הצג/החבא סיסמא",
+                "signout": "התנתק",
 
                 "play friend btn title": "תרגל אימונים של חבר",
                 "play friend btn": "חפש חבר",

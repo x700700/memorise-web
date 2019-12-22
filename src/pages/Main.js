@@ -35,7 +35,6 @@ const Main = () => {
     const authCheckStarted = useSelector(state => state.app.authCheckStarted);
     const authCheckEnded = useSelector(state => state.app.authCheckEnded);
     const showMenu = useSelector(state => state.app.showMenu);
-    const showBanner = useSelector(state => state.app.showBanner);
     const activeDrawerTrainingId = useSelector(state => state.app.activeDrawerTrainingId);
 
     useEffect(() => {

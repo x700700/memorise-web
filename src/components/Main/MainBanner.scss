@@ -38,9 +38,54 @@
         background-color: $purple1;
 
         .banner-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            direction: rtl;
+
+            font-size: 1.2rem;
             margin: .3rem;
+            padding: .9em;
+            box-sizing: border-box;
             margin-top: 0;
             background-color: #fff;
+            width: 100%;
+            height: 100%;
+
+            .welcome {
+                font-size: 1.3rem;
+                margin-bottom: 3rem;
+
+                .username {
+                    font-weight: 600;
+                }
+                .signout {
+                    font-size: 1rem;
+                    text-decoration: underline;
+                    color: blue;
+                }
+            }
+            .search-friend {
+                .friend-btn-row {
+                    display: flex;
+                    width: 100%;
+
+                    .friend-btn-container {
+                        width: 7rem;
+                        margin: 0 auto;
+                    }
+                    .msg {
+                        align-self: center;
+                        margin: 0 1rem;
+                        font-size: 1rem;
+                        padding: .5rem;
+                    }
+                }
+            }
+
+            .about {}
+            .footer {}
         }
     }
 }

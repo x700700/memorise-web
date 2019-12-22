@@ -1,6 +1,7 @@
 import React, {useRef, useState} from "react";
 import './ChooseFriend.scss';
 import {useDispatch, useSelector} from "react-redux";
+import {useHistory} from "react-router";
 import {useTranslation} from "react-i18next";
 import logger from "../../common/logger";
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -8,6 +9,8 @@ import TextInput from "../_Tools/TextInput";
 import Button from "../_Tools/Button";
 import {validateName} from "../../common/utils";
 import { getFriendTrainingsList } from '../../redux/actions';
+import * as types from "../../redux/actionsTypes";
+
 
 const knownFriendsList = [
     { name: 'English' },
@@ -15,6 +18,7 @@ const knownFriendsList = [
 ];
 
 const ChooseFriend = ({ closeModal }) => {
+    const history = useHistory();
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const userName = useSelector(state => state.app.userName);
@@ -29,9 +33,12 @@ const ChooseFriend = ({ closeModal }) => {
     };
     const playFriend = () => {
         const friendName = refName.current.value();
-        logger.trace('play friend - ', friendName);
+        // logger.warn('play friend - ', friendName);
+        dispatch({ type: types.APP_SET_FRIEND_NAME, friendName: null });
+        dispatch({ type: types.APP_SHOW_BANNER, show: false });
         dispatch(getFriendTrainingsList(friendName));
         closeModal();
+        history.push('/trainings');
     };
     const cancel = () => {
         closeModal();
