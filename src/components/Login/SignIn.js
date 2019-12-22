@@ -12,7 +12,6 @@ import { validateName, validatePassword } from "../../common/utils";
 import { signin } from '../../redux/actions';
 import {useHistory} from "react-router";
 
-
 /*
 const asyncValidate = async (values, dispatch, props, fieldString) => {
     console.warn('======> asyncValidate - ', fieldString, values);
@@ -21,8 +20,7 @@ const asyncValidate = async (values, dispatch, props, fieldString) => {
         throw err;
     }
 };
- */
-
+*/
 const validate = values => {
     const errors = {};
     const requiredFields = [ 'nickname', 'password' ];
@@ -48,7 +46,7 @@ const SignIn = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
     const isSigningIn = useSelector(state => state.app.isSigningIn);
     const appError = useSelector(state => state.app.error);
     const loggedInUsername = useSelector(state => state.app.userName);
-    const registeredUsername = useSelector(state => state.app.registeredUserName);
+    const justRegisteredUsername = useSelector(state => state.app.registeredUserName);
 
 
     // https://redux-form.com/8.2.2/examples/submitvalidation/
@@ -64,12 +62,7 @@ const SignIn = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
         }));
     };
 
-    const nameChange = () => {
-        if (formError) {
-            setFormError(null);
-        }
-    };
-    const passChange = () => {
+    const fieldChange = () => {
         if (formError) {
             setFormError(null);
         }
@@ -90,6 +83,14 @@ const SignIn = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
         }
     }, [isSigningIn, loggedInUsername, history]);
 
+    const [registeredUsername, setRegisteredUsername] = useState();
+    useEffect(() => {
+        if (justRegisteredUsername) {
+            setRegisteredUsername(justRegisteredUsername);
+            dispatch({ type: types.APP_RESET_REGISTERED_USERNAME });
+        }
+    }, [justRegisteredUsername]);
+
     return (
         <div className="sign-container">
             <div className="sign-col">
@@ -99,16 +100,17 @@ const SignIn = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
 
                 <form onSubmit={handleSubmit(login)}>
                     <div className="field sign-name">
-                        <Field name="nickname" component={renderTextInput} label={t('nickname')}
-                               variant="outlined" width="13rem"
+                        <Field name="nickname" component={renderTextInput}
+                               label={t('nickname')}
+                               width="13rem"
                                defaultValue={registeredUsername || ''} autoFocus={!registeredUsername}
-                               formError={formError} onChange={nameChange}
+                               formError={formError} onChange={fieldChange}
                         />
                     </div>
                     <div className="field sign-pass">
                         <Field name="password" component={renderTextInput} label={t('password')} type="password"
-                               variant="outlined" width="13rem"
-                               defaultValue="" onChange={passChange}
+                               width="13rem"
+                               defaultValue="" onChange={fieldChange}
                         />
                     </div>
                     <div className="sign-btn-container">

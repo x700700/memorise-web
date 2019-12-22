@@ -161,6 +161,13 @@ const appReducer = (  state = {
                 userName: null,
             };
 
+
+        case types.APP_RESET_REGISTERED_USERNAME:
+            return {
+                ...state,
+                registeredUserName: null,
+            };
+
         case types.APP_SIGNUP_STARTED:
             localStorage.removeItem(consts.localStorage.tokenId);
             return {

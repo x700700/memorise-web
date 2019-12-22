@@ -1,99 +1,72 @@
 import React, {useEffect, useRef, useState} from "react";
 import './Login.scss';
 import {useDispatch, useSelector} from "react-redux";
+import { Field, reduxForm } from 'redux-form';
 import {useTranslation} from "react-i18next";
 import logger from "../../common/logger";
-import TextInput from "../_Tools/TextInput";
+import { renderTextInput } from './form-fields';
 import Button from "../_Tools/Button";
-import { validateRequired, validateName, validateEmail, validatePassword } from "../../common/utils";
+import { validateName, validateEmail, validatePassword } from "../../common/utils";
 import { signup } from '../../redux/actions';
 import {useHistory} from "react-router";
+import i18n from "../../common/i18n";
 
 
-const SignUp = ({ flipSign }) => {
+/*
+const asyncValidate = async (values, dispatch, props, fieldString) => {
+    console.warn('======> asyncValidate - ', fieldString, values);
+    if (!fieldString && values.firstName === "abc") {
+        const err = { firstName: `Cannot be "abc"` };
+        throw err;
+    }
+};
+*/
+const validate = values => {
+    const errors = {};
+    const requiredFields = [ 'email', 'nickname', 'password', 'password2' ];
+    requiredFields.forEach(field => {
+        if (!values[ field ]) {
+            errors[ field ] = i18n.t('err-name-required');
+        }
+    });
+    if (!validateEmail(values.email)) {
+        errors.email = i18n.t('err-email-valid');
+    }
+    if (!validateName(values.nickname)) {
+        errors.nickname = i18n.t('err-name-valid');
+    }
+    if (!validatePassword(values.password)) {
+        errors.password = i18n.t('err-pass-valid');
+    }
+    if (!validatePassword(values.password2)) {
+        errors.password2 = i18n.t('err-pass-valid');
+    }
+    if (values.password !== values.password2) {
+        errors.password2 = i18n.t('err-pass2-valid');
+    }
+    return errors;
+};
+
+
+const SignUp = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const history = useHistory();
     const isSigningUp = useSelector(state => state.app.isSigningUp);
+    const appError = useSelector(state => state.app.error);
     const registeredUsername = useSelector(state => state.app.registeredUserName);
     const registeringUserName = useSelector(state => state.app.registeringUserName);
-    const [valid, setValid] = useState([false, false, false, false]);
-    const [errName, setErrName] = useState(null);
-    const [errEmail, setErrEmail] = useState(null);
-    const [errPass, setErrPass] = useState(null);
-    const [errPass2, setErrPass2] = useState(null);
-    const [onSignup, setOnSignup] = useState(false);
 
-    const updateValid = (fieldCount, val) => {
-        const updated = valid.map((x,i) => i === fieldCount-1 ? val : x);
-        setValid(updated);
-    };
-
-    const checkName = (text) => {
-        if (!validateRequired(text)) {
-            setErrName(t('err-name-required'));
-            updateValid(1, false);
-        } else if (!validateName(text)) {
-            setErrName(t('err-name-valid'));
-            updateValid(1, false);
-        } else {
-            setErrName(null);
-            updateValid(1, true);
-        }
-    };
-    const checkEmail = (text) => {
-        if (!validateRequired(text)) {
-            setErrEmail(t('err-email-required'));
-            updateValid(2, false);
-        } else if (!validateEmail(text)) {
-            setErrEmail(t('err-email-valid'));
-            updateValid(2, false);
-        } else {
-            setErrEmail(null);
-            updateValid(2, true);
-        }
-    };
-    const checkPassword = (text) => {
-        if (!validatePassword(text)) {
-            setErrPass(t('err-pass-valid'));
-            updateValid(3, false);
-        } else {
-            setErrPass(null);
-            updateValid(3, true);
-
-            if (text === refPass2.current.value()) {
-                setErrPass2(null);
-                updateValid(4, true);
-            }
-        }
-    };
-    const checkPassword2 = (text) => {
-        if (!validateRequired(text)) {
-            setErrPass2(t('err-pass2-required'));
-            updateValid(4, false);
-        } else if (text !== refPass.current.value()) {
-            setErrPass2(t('err-pass2-valid'));
-            updateValid(4, false);
-        } else {
-            setErrPass2(null);
-            updateValid(4, true);
-        }
-    };
-
+    const [showPasswords, setShowPasswords] = useState(false);
     const handleShowPass = (show) => {
-        refPass.current.showPassword(show);
-        refPass2.current.showPassword(show);
+        setShowPasswords(show);
     };
 
-    const register = () => {
-        if (!isValid) return;
-        const email = refEmail.current.value();
-        const name = refName.current.value();
-        const pass = refPass.current.value();
-        // logger.warn('register - ', email, name, pass);
-        refPass.current.setValue('');
-        refPass2.current.setValue('');
-        setOnSignup(true);
+    const register = (values) => {
+        const email = values.email;
+        const name = values.nickname;
+        const pass = values.password;
+        logger.warn('register - ', email, name, pass);
         dispatch(signup({
             email: email,
             nickName: name,
@@ -101,80 +74,94 @@ const SignUp = ({ flipSign }) => {
         }));
     };
 
+    const fieldChange = () => {
+        if (formError) {
+            setFormError(null);
+        }
+    };
+
+
+    const [formError, setFormError] = useState();
     useEffect(() => {
-        logger.trace('Signup update - ', isSigningUp, registeredUsername);
+        if (appError) {
+            setFormError(appError);
+        }
+    }, [appError, setFormError]);
+
+    useEffect(() => {
+        logger.warn('Signup update - ', isSigningUp, registeredUsername);
         if (!isSigningUp) {
-            setOnSignup(false);
             if (registeredUsername) {
                 // logger.warn('registered successfully = ', registeredUsername);
-                refEmail.current.setValue('');
-                refName.current.setValue('');
+                // refEmail.current.setValue('');
+                // refName.current.setValue('');
                 flipSign()
             } else if (registeringUserName) {
-                setValid([true, true, false, false]);
-                setErrName(t('err-signup-short'));
                 window.scrollTo(0, 0);
             }
         }
-    }, [isSigningUp, registeringUserName, registeredUsername, setValid, history, setOnSignup, flipSign, t]);
+    }, [isSigningUp, registeringUserName, registeredUsername, history, flipSign, t]);
 
     useEffect(() => {
         logger.trace('SignUp mounted');
-        setErrName(null);
-        // refName.current.setValue('');
-    }, [setErrName]);
+    }, []);
 
-    const styleBox = {
-        opacity: onSignup ? 0 : 1,
-    };
-    const refName = useRef();
-    const refEmail = useRef();
+
     const refPass = useRef();
     const refPass2 = useRef();
-    const name = refName.current && refName.current.value();
-    const isValid = !onSignup && valid.reduce((x,a) => a = a && x , true);
     return (
         <div className="sign-container">
-            <form style={styleBox}>
-                <div className="sign-col sign-up-box">
-                    <div className="signup-title">
-                        {t('signup-title')}
-                    </div>
+            <div className="sign-col sign-up-box">
+                <div className="signup-title">
+                    {t('signup-title')}
+                </div>
+
+                <form onSubmit={handleSubmit(register)}>
                     <div className="field sign-email">
-                        <TextInput ref={refEmail} label={t('email')} defaultValue="" autoFocus={true}
-                                   onBlur={checkEmail} onChange={checkEmail} error={errEmail}
-                                   width="13rem"
+                        <Field name="email" component={renderTextInput}
+                               label={t('email')} defaultValue="" autoFocus={true}
+                               width="13rem"
+                               formError={formError} onChange={fieldChange}
                         />
                     </div>
                     <div className="field sign-name">
-                        <TextInput ref={refName} label={t('nickname')} defaultValue=""
-                                   onBlur={checkName} onChange={checkName} error={errName}
-                                   width="13rem"
+                        <Field name="nickname" component={renderTextInput}
+                               label={t('nickname')} defaultValue=""
+                               width="13rem"
+                               onChange={fieldChange}
                         />
                     </div>
                     <div className="field signup-pass">
-                        <TextInput ref={refPass} label={t('password')} type="password" defaultValue="" autoFocus={name ? true : false}
-                                   onBlur={checkPassword} onChange={checkPassword} error={errPass}
-                                   onShowPassword={handleShowPass}
-                                   width="13rem"
+                        <Field name="password" ref={refPass} component={renderTextInput}
+                               label={t('password')} type="password" defaultValue=""
+                               onShowPassword={handleShowPass} forceShowPassword={showPasswords}
+                               width="13rem"
+                               onChange={fieldChange}
                         />
                     </div>
                     <div className="field signup-pass2">
-                        <TextInput ref={refPass2} label={t('password2')} type="password" defaultValue=""
-                                   onBlur={checkPassword2} onChange={checkPassword2} error={errPass2}
-                                   onShowPassword={handleShowPass}
-                                   width="13rem"
+                        <Field name="password2" ref={refPass2} component={renderTextInput}
+                               label={t('password2')} type="password" defaultValue=""
+                               onShowPassword={handleShowPass} forceShowPassword={showPasswords}
+                               width="13rem"
+                               onChange={fieldChange}
                         />
                     </div>
                     <div className="sign-btn-container">
-                        <Button type="ok" text={t('signup-btn')} disabled={!isValid} onClick={() => register} />
+                        <Button type="submit" text={t('signup-btn')} disabled={pristine || submitting} />
                     </div>
-                    <div className="signin-signup">
-                        <span>{t('signin?')} </span>
-                        <span className="sign-flip-btn" onClick={flipSign}>{t('signin-btn')}</span>
-                    </div>
+                </form>
+
+                <div className="signin-signup">
+                    <span>{t('signin?')} </span>
+                    <span className="sign-flip-btn" onClick={flipSign}>{t('signin-btn')}</span>
                 </div>
-            </form>
+            </div>
         </div>);
 };
-export default SignUp;
+export default reduxForm({
+    form: 'SignUp',
+    validate,
+    // persistentSubmitErrors: true,
+    // asyncValidate,
+})(SignUp)

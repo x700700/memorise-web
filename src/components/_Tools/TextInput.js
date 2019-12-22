@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
 const TextInput = forwardRef(({
                                   autoComplete, width, label, type, defaultValue, autoFocus,
                                   onEnter, onFocus, onBlur, onChange, noMargin, disabled, error,
-                                  onShowPassword,
+                                  forceShowPassword, onShowPassword,
                               }, ref) => {
     useImperativeHandle(ref, () => ({
         value() {
@@ -122,6 +122,10 @@ const TextInput = forwardRef(({
         setVal('');
     };
 
+
+    useEffect(() => {
+        setShowPass(forceShowPassword);
+    }, [forceShowPassword]);
 
     useEffect(() => {
         logger.trace('TextInput mounted');
