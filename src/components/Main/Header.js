@@ -123,7 +123,7 @@ const Header = (props) => {
     };
     const styleMenuBtn = {
         pointerEvents: trainingNameIsOnEdit ? 'none' : 'auto',
-        visibility: ((!isLoggedIn && (currPage === consts.pageName.trainings || currPage === consts.pageName.edit)) || currPage === consts.pageName.login) && 'hidden',
+        visibility: ((!isLoggedIn && (currPage === consts.pageName.trainings || currPage === consts.pageName.edit)) || currPage === consts.pageName.login || currPage === consts.pageName.trainings) && 'hidden',
     };
 
     const refTooltipLogo = useRef();
@@ -162,7 +162,7 @@ const Header = (props) => {
             </div>
             <div id="top-header-menu" className={`top-menu-box ${appShowMenu ? 'top-menu-pop-down' : ''}`}>
                 <div className="menu-container">
-                    <MenuTrainings hide={timingCurrPage !== consts.pageName.trainings}/>
+                    {/*<MenuTrainings hide={timingCurrPage !== consts.pageName.trainings}/>*/}
                     <MenuEdit hide={timingCurrPage !== consts.pageName.edit}/>
                     <MenuGame hide={timingCurrPage !== consts.pageName.practice}/>
                     <MenuExam hide={timingCurrPage !== consts.pageName.exam}/>
