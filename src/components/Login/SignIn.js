@@ -13,15 +13,16 @@ import { signin } from '../../redux/actions';
 import {useHistory} from "react-router";
 
 
-
 /*
 const asyncValidate = async (values, dispatch, props, fieldString) => {
+    console.warn('======> asyncValidate - ', fieldString, values);
     if (!fieldString && values.firstName === "abc") {
         const err = { firstName: `Cannot be "abc"` };
         throw err;
     }
 };
  */
+
 const validate = values => {
     const errors = {};
     const requiredFields = [ 'nickname', 'password' ];
@@ -42,11 +43,8 @@ const validate = values => {
 
 const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
     <TextInput label={label}
-               error={touched && error}
-               defaultValue={custom.defaultValue}
-               autoFocus={custom.autoFocus}
+               error={(touched && error) || custom.error}
                width={custom.width}
-               // onBlur={() => {}} onChange={() => {}} onEnter={() => {}}
                {...input}
                {...custom}
     />
@@ -58,20 +56,17 @@ const SignIn = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const isSigningIn = useSelector(state => state.app.isSigningIn);
-    const authCheckEnded = useSelector(state => state.app.authCheckEnded);
+    const appError = useSelector(state => state.app.error);
     const loggedInUsername = useSelector(state => state.app.userName);
     const registeredUsername = useSelector(state => state.app.registeredUserName);
-    const [onSignin, setOnSignin] = useState(false);
 
 
-    // const refPass = useRef();
     // https://redux-form.com/8.2.2/examples/submitvalidation/
     const login = (values) => {
         const name = values.nickname;
         const pass = values.password;
         logger.warn('login - ', name, pass);
-        // refPass.current.setValue('');
-        setOnSignin(true);
+        setPass('');
         dispatch({ type: types.TRAININGS_LIST_RESET });
         dispatch({ type: types.TRAINING_RESET });
         dispatch(signin({
@@ -80,13 +75,29 @@ const SignIn = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
         }));
     };
 
+    const nameChange = () => {
+        setFormError(null);
+    };
+    const [pass, setPass] = useState();
+    const passChange = () => {
+        setPass(pass);
+        setFormError(null);
+    };
+
+
+    const [formError, setFormError] = useState();
+    useEffect(() => {
+        if (appError) {
+            setFormError(appError);
+        }
+    }, [appError, setFormError]);
+
     useEffect(() => {
         logger.trace('logged in with username = ', loggedInUsername);
-        setOnSignin(false);
         if (loggedInUsername) {
             history.push('/trainings');
         }
-    }, [isSigningIn, loggedInUsername, history, setOnSignin]);
+    }, [isSigningIn, loggedInUsername, history]);
 
     return (
         <div className="sign-container">
@@ -100,12 +111,13 @@ const SignIn = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
                         <Field name="nickname" component={renderTextField} label={t('nickname')}
                                variant="outlined" width="13rem"
                                defaultValue={registeredUsername || ''} autoFocus={!registeredUsername}
+                               error={formError} onChange={nameChange}
                         />
                     </div>
                     <div className="field sign-pass">
                         <Field name="password" component={renderTextField} label={t('password')} type="password"
                                variant="outlined" width="13rem"
-                               defaultValue=""
+                               defaultValue="" value={pass} onChange={passChange}
                         />
                     </div>
                     <div className="sign-btn-container">
@@ -121,7 +133,8 @@ const SignIn = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
         </div>);
 };
 export default reduxForm({
-    form: 'SignIn',  // a unique identifier for this form
+    form: 'SignIn',
     validate,
+    // persistentSubmitErrors: true,
     // asyncValidate,
 })(SignIn)
