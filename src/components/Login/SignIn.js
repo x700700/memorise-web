@@ -91,7 +91,7 @@ const SignIn = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
             setRegisteredUsername(justRegisteredUsername);
             dispatch({ type: types.APP_RESET_REGISTERED_USERNAME });
         }
-    }, [justRegisteredUsername]);
+    }, [justRegisteredUsername, dispatch]);
 
     return (
         <div className="sign-container">

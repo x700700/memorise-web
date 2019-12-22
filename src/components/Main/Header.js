@@ -12,7 +12,6 @@ import AddButton from "./AddButton";
 import MenuGame from "../Practice/MenuGame";
 import MenuExam from "../Practice/MenuExam";
 import MenuEdit from "../EditTraining/MenuEdit";
-import MenuTrainings from "../TrainingsList/MenuTrainings";
 
 
 const Header = (props) => {
