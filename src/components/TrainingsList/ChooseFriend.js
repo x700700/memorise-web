@@ -60,9 +60,9 @@ const ChooseFriend = ({ closeModal }) => {
                         options={knownFriendsList.map(option => option.name)}
                         onChange={onTagsChange}
                         renderInput={params => (
-                            <TextInput ref={refName} label={t('friend name')} autoFocus={true}
-                                       onChange={checkName} error={errName}
-                                       autoComplete={params} width="14rem"
+                            <TextInput ref={refName} label={t('friend name')} width="14rem" autoFocus={true}
+                                       error={errName} onChange={checkName}
+                                       autoComplete={params}
                             />
                         )}
                     />

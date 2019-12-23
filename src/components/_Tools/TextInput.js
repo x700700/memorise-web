@@ -122,6 +122,7 @@ const TextInput = forwardRef(({
     let typeName = ['q', 'a', 'training'].includes(type) ? 'text' : type || 'text';
     if (type === 'password') typeName = showPass ? 'text' : 'password';
 
+    const inputProps = autoComplete ? {} : { inputProps: {maxLength: 22} };
     return (
         <div className="text-input">
             <MuiThemeProvider theme={muiTheme || themeDefault}>
@@ -152,7 +153,7 @@ const TextInput = forwardRef(({
                         classes: {},
                     }}
 
-                    inputProps={{maxLength: 22}}
+                    {...inputProps}
 
                     InputProps={{
                         // type: autoComplete && 'search',
