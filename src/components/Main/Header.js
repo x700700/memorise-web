@@ -157,7 +157,6 @@ const Header = (props) => {
                 </div>
                 <Tooltip ref={refTooltipLogo} text={logoTooltipMsg} placement="bottom-end">
                     <div className="logo-container" style={styleOnEdit} onClick={() => logoClick()}>
-                        <i className={'fas fa-chevron-left arrow'} style={{ visibility: userName ? 'visible' : 'hidden' }}/>
                         <img className="logo" src={logo} alt="logo" width="32" height="32"/>
                     </div>
                 </Tooltip>
