@@ -34,13 +34,12 @@ const validate = values => {
     }
     if (!validatePassword(values.password2)) {
         errors.password2 = i18n.t('err-pass-valid');
-    }
-    if (values.password !== values.password2) {
+    } else if (values.password !== values.password2) {
         errors.password2 = i18n.t('err-pass2-valid');
     }
     requiredFields.forEach(field => {
         if (!values[ field ]) {
-            errors[ field ] = i18n.t('err-name-required');
+            errors[ field ] = i18n.t('err-requied-field');
         }
     });
     return errors;

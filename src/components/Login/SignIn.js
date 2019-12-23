@@ -32,7 +32,7 @@ const validate = values => {
     }
     requiredFields.forEach(field => {
         if (!values[ field ]) {
-            errors[ field ] = i18n.t('err-name-required');
+            errors[ field ] = i18n.t('err-requied-field');
         }
     });
     return errors;
