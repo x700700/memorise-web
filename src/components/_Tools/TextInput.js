@@ -1,4 +1,5 @@
 import React, {useState, forwardRef, useImperativeHandle, useEffect} from 'react';
+import {useTranslation} from "react-i18next";
 import { createMuiTheme, makeStyles, MuiThemeProvider } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -7,8 +8,7 @@ import { HelpOutline, ErrorOutline, Edit, Visibility, VisibilityOff, Clear } fro
 import { deepPurple } from '@material-ui/core/colors';
 import logger from "../../common/logger";
 import {isRtl} from "../../common/utils";
-import consts from "../../common/consts";
-import {useTranslation} from "react-i18next";
+
 
 const defaultTheme = createMuiTheme({
         palette: {
@@ -33,18 +33,6 @@ const useStyles = makeStyles(theme => ({
         fontSize: '1.1rem',
         fontWeight: 600,
     },
-    inputFocused: {
-        '&$focused': {
-            color: 'red',
-            backgroundColor: 'white',
-        }
-    },
-    focused: {
-        '&$focused': {
-            color: 'red',
-            backgroundColor: 'white',
-        }
-    }
 }));
 
 const TextInput = forwardRef(({
@@ -83,9 +71,7 @@ const TextInput = forwardRef(({
     };
     const [style, setStyle] = useState(rtlStyle(defaultValue));
     const onMyChange = e => {
-        let text = e.target.value;
-        text = text.slice(0, consts.inputProps.exercise.maxLength);
-        e.target.value = text;
+        const  text = e.target.value;
         setVal(text);
         setStyle(rtlStyle(text || defaultValue));
         onChange && onChange(text);
@@ -166,8 +152,9 @@ const TextInput = forwardRef(({
                         classes: {},
                     }}
 
+                    inputProps={{maxLength: 22}}
+
                     InputProps={{
-                        // maxLength: 15, // Todo - does not work
                         // type: autoComplete && 'search',
                         ...autoCompleteSafeParams.InputProps,
                         classes: {
