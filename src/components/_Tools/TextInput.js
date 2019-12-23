@@ -10,7 +10,7 @@ import {isRtl} from "../../common/utils";
 import consts from "../../common/consts";
 import {useTranslation} from "react-i18next";
 
-const theme = createMuiTheme({
+const defaultTheme = createMuiTheme({
         palette: {
             primary: deepPurple,
         },
@@ -20,9 +20,6 @@ const theme = createMuiTheme({
 const useStyles = makeStyles(theme => ({
     margin: {
         margin: theme.spacing(1),
-    },
-    noMargin: {
-        margin: 0,
     },
     iconMargin: {
         margin: '0 .2rem',
@@ -50,8 +47,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const TextInput = forwardRef(({
+                                  inputClass,
                                   autoComplete, width, label, type, defaultValue, autoFocus,
-                                  onEnter, onFocus, onBlur, onChange, noMargin, disabled, error,
+                                  onEnter, onFocus, onBlur, onChange, disabled, error,
                                   forceShowPassword, onShowPassword,
                               }, ref) => {
     useImperativeHandle(ref, () => ({
@@ -132,7 +130,7 @@ const TextInput = forwardRef(({
         setVal(defaultValue);
     }, [setVal, defaultValue]);
 
-    const className = noMargin ? classes.margin : classes.noMargin;
+    const textClassName = inputClass || classes.margin;
     let inputClassName = ['q', 'a'].includes(type) && classes.fontExercise;
     inputClassName = (type === 'training' && classes.fontTraining) || inputClassName;
     let typeName = ['q', 'a', 'training'].includes(type) ? 'text' : type || 'text';
@@ -140,14 +138,14 @@ const TextInput = forwardRef(({
 
     return (
         <div className="text-input">
-            <MuiThemeProvider theme={theme}>
+            <MuiThemeProvider theme={defaultTheme}>
                 <TextField
                     {...autoCompleteSafeParams}
                     value={val}
                     variant={label ? 'outlined' : 'standard'}
                     type={typeName}
                     autoComplete={type === 'password' ? 'current-password' : 'off'}
-                    className={className}
+                    className={textClassName}
                     style={style}
                     label={label || ''}
                     size="small"
