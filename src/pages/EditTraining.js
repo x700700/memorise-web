@@ -10,6 +10,7 @@ import {deleteTraining, getEditTraining} from "../redux/actions";
 import Exercise from "../components/EditTraining/Exercise";
 import EditTrainingHeader from "../components/EditTraining/EditTrainingHeader";
 import ModalOkCancel from "../components/_Tools/ModalOkCancel";
+import { red, purple } from '@material-ui/core/colors';
 
 
 const EditTraining = (props) => {
@@ -114,7 +115,7 @@ const EditTraining = (props) => {
                 </div>
             </div>
             <ModalOkCancel ref={refModal} title={training && training.name}
-                           okMsg={t('delete')} cancelMsg={t('cancel')} cancelType="cancel-delete"
+                           okMsg={t('delete')} cancelMsg={t('cancel')} buttonsColors={[red, purple]}
                            onOk={() => trainingDelete} onCancel={() => cancelDelete}
                            disableBackdropClick={false}
             >

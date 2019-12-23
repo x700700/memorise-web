@@ -2,8 +2,11 @@ import React, {forwardRef, useImperativeHandle, useRef} from "react";
 import './ModalOkCancel.scss';
 import Modal from "./Modal";
 import Button from './Button';
+import {createMuiTheme} from "@material-ui/core/styles";
+import {red, green} from "@material-ui/core/colors";
 
-const ModalOkCancel = forwardRef(({ children, title, okMsg, cancelMsg, onOk, onCancel, cancelType, disableBackdropClick = true }, ref) => {
+
+const ModalOkCancel = forwardRef(({ children, title, okMsg, cancelMsg, onOk, onCancel, buttonsColors, disableBackdropClick = true }, ref) => {
     useImperativeHandle(ref, () => ({
         open() {
             refModal.current.open();
@@ -12,6 +15,13 @@ const ModalOkCancel = forwardRef(({ children, title, okMsg, cancelMsg, onOk, onC
             refModal.current.close();
         },
     }));
+
+    const themeButtons = createMuiTheme({
+        palette: {
+            primary: (buttonsColors && buttonsColors[0]) || green,
+            secondary: (buttonsColors && buttonsColors[1]) || red,
+        },
+    });
 
     const refModal = useRef();
     return (
@@ -22,10 +32,10 @@ const ModalOkCancel = forwardRef(({ children, title, okMsg, cancelMsg, onOk, onC
 
                 <div className="buttons">
                     <div className="button-container">
-                        <Button type={cancelType || 'cancel'} text={cancelMsg} onClick={onCancel} />
+                        <Button type={'cancel'} text={cancelMsg} onClick={onCancel} muiTheme={themeButtons} />
                     </div>
                     <div className="button-container">
-                        <Button type={cancelType ? 'cancel' : 'ok'} text={okMsg} onClick={onOk} />
+                        <Button type={'ok'} text={okMsg} onClick={onOk} muiTheme={themeButtons} />
                     </div>
                 </div>
             </div>

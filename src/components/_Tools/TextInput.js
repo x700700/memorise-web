@@ -10,7 +10,7 @@ import logger from "../../common/logger";
 import {isRtl} from "../../common/utils";
 
 
-const defaultTheme = createMuiTheme({
+const themeDefault = createMuiTheme({
         palette: {
             primary: deepPurple,
         },
@@ -124,7 +124,7 @@ const TextInput = forwardRef(({
 
     return (
         <div className="text-input">
-            <MuiThemeProvider theme={muiTheme || defaultTheme}>
+            <MuiThemeProvider theme={muiTheme || themeDefault}>
                 <TextField
                     {...autoCompleteSafeParams}
                     value={val}
