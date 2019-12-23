@@ -18,8 +18,9 @@ const defaultTheme = createMuiTheme({
 );
 
 const useStyles = makeStyles(theme => ({
-    margin: {
-        margin: theme.spacing(1),
+    root: {
+        margin: theme.margin || '0rem',
+        marginTop: theme.marginTop,
     },
     iconMargin: {
         margin: '0 .2rem',
@@ -47,7 +48,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const TextInput = forwardRef(({
-                                  inputClass,
+                                  muiTheme,
                                   autoComplete, width, label, type, defaultValue, autoFocus,
                                   onEnter, onFocus, onBlur, onChange, disabled, error,
                                   forceShowPassword, onShowPassword,
@@ -130,7 +131,6 @@ const TextInput = forwardRef(({
         setVal(defaultValue);
     }, [setVal, defaultValue]);
 
-    const textClassName = inputClass || classes.margin;
     let inputClassName = ['q', 'a'].includes(type) && classes.fontExercise;
     inputClassName = (type === 'training' && classes.fontTraining) || inputClassName;
     let typeName = ['q', 'a', 'training'].includes(type) ? 'text' : type || 'text';
@@ -138,14 +138,14 @@ const TextInput = forwardRef(({
 
     return (
         <div className="text-input">
-            <MuiThemeProvider theme={defaultTheme}>
+            <MuiThemeProvider theme={muiTheme || defaultTheme}>
                 <TextField
                     {...autoCompleteSafeParams}
                     value={val}
                     variant={label ? 'outlined' : 'standard'}
                     type={typeName}
                     autoComplete={type === 'password' ? 'current-password' : 'off'}
-                    className={textClassName}
+                    className={classes.root}
                     style={style}
                     label={label || ''}
                     size="small"
