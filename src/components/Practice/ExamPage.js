@@ -1,5 +1,6 @@
 import React from 'react';
 import './ExamPage.scss';
+import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import ExamAnswer from "../../components/Practice/ExamAnswer";
 import {isRtl} from "../../common/utils";
@@ -7,6 +8,7 @@ import {isRtl} from "../../common/utils";
 
 const ExamPage = ({ trainingName, size, num, q, answers, nextQuestion, isPrevPage, setAnswer, isAnswered, showPrev }) => {
     const { t } = useTranslation();
+    const examEnded = useSelector(state => state.exam.isEnded);
     const styleQ = {
         direction: isRtl(q) ? 'rtl' : 'ltr',
     };
@@ -20,7 +22,7 @@ const ExamPage = ({ trainingName, size, num, q, answers, nextQuestion, isPrevPag
                     <span>{num} / {size}</span>
                 </div>
                 }
-                <div className="training-name">
+                <div className="training-name" style={{ opacity: examEnded ? 0 : 1}}>
                     {t('exam on')} {trainingName}
                 </div>
                 <div className="exam-col">

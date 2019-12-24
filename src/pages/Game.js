@@ -92,7 +92,7 @@ const Game = (props) => {
             <div className={`game-container ${showMenu && 'disable-pointer'}`}>
                 {!gameTrainingIsFetching && (currQ || gameEnded) ?
                     <div className="game">
-                        <div className="training-name">
+                        <div className="training-name" style={{ opacity: gameEnded ? 0 : 1 }}>
                             {t('practice on')} {fullTrainingName}
                         </div>
 
@@ -103,7 +103,9 @@ const Game = (props) => {
                         </div>
                         }
                         <Card ref={refCard} q={currQ} a={currA} setCardInMove={setCardInMove} rotateCb={rotateCard}/>
-                        <div className={`game-buttons ${cardInMove || gameEnded || showMenu ? 'buttons-disable' : ''}`}>
+                        <div className={`game-buttons ${cardInMove || gameEnded || showMenu ? 'buttons-disable' : ''}`}
+                             style={{ visibility: gameEnded ? 'hidden' : 'visible' }}
+                        >
                             <button onClick={respBad} className={`btn btn-bad ${!isFlipped ? 'disable-result-button' : ''}`}>
                                 <i className="fas fa-times"></i>
                             </button>
