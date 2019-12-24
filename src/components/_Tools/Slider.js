@@ -35,6 +35,7 @@ const Slider = forwardRef(({ color, min, max }, ref) => {
         },
         valueLabel: {
             left: 'calc(-50% + 4px)',
+            fontWeight: 700,
         },
         track: {
             height: 8,
@@ -57,7 +58,8 @@ const Slider = forwardRef(({ color, min, max }, ref) => {
     const classes = useStyles();
     return (
         <div>
-            <MaterialSlider valueLabelDisplay="auto" min={minVal} max={max}
+            <MaterialSlider valueLabelDisplay="auto"
+                            min={minVal} max={max}
                             value={val} onChange={valueChanged}
                             classes={{
                                 root: classes.root,
