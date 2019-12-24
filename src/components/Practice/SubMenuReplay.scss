@@ -23,10 +23,16 @@
         margin-top: -1rem;
     }
 
-    .replay-btn {
-        width: 50%;
-        margin: 0 auto;
-        margin-top: 3rem;
+    .replay-btn-container {
+        margin-top: 2rem;
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+
+        .replay-btn {
+            width: 12rem;
+            align-self: flex-end;
+        }
     }
 
     .exam-flip {

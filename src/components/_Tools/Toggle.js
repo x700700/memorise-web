@@ -28,18 +28,10 @@ const Toggle = forwardRef(({ muiTheme, label, color, value, onChange }, ref) => 
             '&$checked + $track': {
                 backgroundColor: _color[500],
             },
-            // padding: 4,
-            // transform: 'translateY(.7px)',
         },
-        /*
         root: {
-            width: 50,
-            height: 26,
-            padding: 0,
-            margin: theme.spacing(1.5),
-            marginLeft: 0,
+            marginLeft: '-.5rem',
         },
-         */
         checked: {},
         track: {
             border: `.5px solid ${_color[500]}`,

@@ -65,18 +65,12 @@
         .btns-container {
             flex-grow: 1;
             display: flex;
+            justify-content: center;
 
             .btns-replay {
-                width: 50%;
-                margin: 1rem auto;
-                display: flex;
-                align-items: flex-end;
-                justify-content: center;
-
-                @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
-                and (min-aspect-ratio: 13/9) {
-                    //margin-top: 3%;
-                }
+                width: 12rem;
+                align-self: flex-end;
+                margin-bottom: 1rem;
             }
         }
     }

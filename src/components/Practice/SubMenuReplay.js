@@ -34,8 +34,10 @@ const SubMenuReplay = ({ sliderTitle, replayCb, size, replayMsg, playSize, exam 
                 <Toggle label={t('flip-exam-side')} value={isNextDeckFlipped} onChange={flipDeck}/>
             </div>
             }
-            <div className="replay-btn">
-                <Button text={replayMsg} onClick={() => replay} />
+            <div className="replay-btn-container">
+                <div className="replay-btn">
+                    <Button text={replayMsg} onClick={() => replay} />
+                </div>
             </div>
         </div>
     );
