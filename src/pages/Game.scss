@@ -12,6 +12,11 @@
         padding: .3rem;
     }
 
+    @media only screen and (min-device-width: $width-ipad-pro-min) and (max-device-width: $width-ipad-pro-max)
+    and (orientation : portrait) {
+        height: 60%;
+    }
+
     .game-container {
         height: 100%;
         position: relative;

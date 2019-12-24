@@ -27,6 +27,11 @@
                 margin-left: -29%;
             }
 
+            @media only screen and (min-device-width: $width-ipad-pro-min) and (max-device-width: $width-ipad-pro-max)
+            and (orientation : portrait) {
+                height: 47vh;
+            }
+
             .card {
                 > p {
                     max-width: 80%;
