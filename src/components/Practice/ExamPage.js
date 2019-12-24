@@ -1,9 +1,12 @@
 import React from 'react';
 import './ExamPage.scss';
+import {useTranslation} from "react-i18next";
 import ExamAnswer from "../../components/Practice/ExamAnswer";
 import {isRtl} from "../../common/utils";
 
-const ExamPage = ({ size, num, q, answers, nextQuestion, isPrevPage, setAnswer, isAnswered, showPrev }) => {
+
+const ExamPage = ({ trainingName, size, num, q, answers, nextQuestion, isPrevPage, setAnswer, isAnswered, showPrev }) => {
+    const { t } = useTranslation();
     const styleQ = {
         direction: isRtl(q) ? 'rtl' : 'ltr',
     };
@@ -17,6 +20,9 @@ const ExamPage = ({ size, num, q, answers, nextQuestion, isPrevPage, setAnswer, 
                     <span>{num} / {size}</span>
                 </div>
                 }
+                <div className="training-name">
+                    {t('exam in')} {trainingName}
+                </div>
                 <div className="exam-col">
                     <div className="question">
                         <div style={styleQ}>{q}</div>

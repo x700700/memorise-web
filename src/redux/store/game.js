@@ -24,6 +24,7 @@ const init = (isDeckFlipped = false) => ({
     trainingIsFetching: false,
     trainingIsLoaded: false,
     trainingId: null,
+    fullName: null,
 });
 const cardsDeckProps = (cardsDeck, replay = false) => {
     let basic = {};
@@ -32,6 +33,7 @@ const cardsDeckProps = (cardsDeck, replay = false) => {
             cardsDeck: cardsDeck,
             isDeckLoaded: true,
             name: cardsDeck.getName(),
+            fullName: cardsDeck.getFullname(),
             plays: cardsDeck.getPlays(),
             playSize: cardsDeck.getPlayDeckSize(),
         };
@@ -91,7 +93,7 @@ const gameReducer = (  state = init(),
             };
 
         case types.GAME_LOAD:
-            cardsDeck = loadCardsDeck(storageId, state.cardsDeck, action.training, state.isDeckFlipped);
+            cardsDeck = loadCardsDeck(storageId, state.cardsDeck, null, action.training, state.isDeckFlipped);
             return {
                 ...state,
                 ...cardsDeckProps(cardsDeck),
@@ -130,12 +132,14 @@ const gameReducer = (  state = init(),
             return {
                 ...state,
                 ...init(state.isDeckFlipped),
+                name: state.name,
+                friendName: state.friendName,
                 trainingIsFetching: true,
                 trainingIsLoaded: false,
                 trainingIdToFetch: action.id,
             };
         case types.GAME_FETCH_TRAINING_SUCCEED:
-            cardsDeck = new CardsDeck(storageId, action.training, state.isDeckFlipped);
+            cardsDeck = new CardsDeck(storageId, state.friendName, action.training, state.isDeckFlipped);
             return {
                 ...state,
                 trainingIsFetching: false,

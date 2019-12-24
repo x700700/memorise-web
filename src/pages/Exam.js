@@ -25,6 +25,7 @@ const Exam = (props) => {
     const isDeckLoaded = useSelector(state => state.exam.isDeckLoaded);
 
     const trainingId = useSelector(state => state.exam.trainingId);
+    const fullTrainingName = useSelector(state => state.exam.fullName);
     const playDeckSize = useSelector(state => state.exam.playDeckSize);
     const rightsNum = useSelector(state => state.exam.rightsNum);
     const deckCurrentSize = useSelector(state => state.exam.deckCurrentSize);
@@ -75,7 +76,9 @@ const Exam = (props) => {
             <div className={`exam-container ${showMenu ? 'disable-pointer' : ''}`}>
                 {!examTrainingIsFetching && (currQ || examEnded) ?
                     <div className="exam">
-                        <ExamTable size={playDeckSize} num={playDeckSize - deckCurrentSize + 1} q={currQ} answers={answers}
+                        <ExamTable trainingName={fullTrainingName}
+                                   size={playDeckSize} num={playDeckSize - deckCurrentSize + 1}
+                                   q={currQ} answers={answers}
                                    isAnswered={isPageAnswered} answeredId={topQAnswerId}
                                    nextQuestion={nextQuestion} setAnswer={setAnswer}/>
                     </div> : trainingIdToFetch && !examTrainingIsFetching && !examTrainingIsLoaded &&
@@ -84,7 +87,8 @@ const Exam = (props) => {
                 }
             </div>
             <PopUpBox show={examEnded}>
-                <ExamSum setStats={examEnded} cardsNum={playDeckSize} rightsNum={rightsNum} replayExam={() => replayExam}/>
+                <ExamSum trainingName={fullTrainingName}
+                         setStats={examEnded} cardsNum={playDeckSize} rightsNum={rightsNum} replayExam={() => replayExam}/>
             </PopUpBox>
         </div>
     );

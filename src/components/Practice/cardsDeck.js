@@ -4,12 +4,13 @@ import consts from "../../common/consts";
 
 export default class cardsDeck {
 
-    constructor(localStorageKey, training, shouldDeckFlipped, playSize = consts.play.defaultCardsNum) {
+    constructor(localStorageKey, friendName, training, shouldDeckFlipped, playSize = consts.play.defaultCardsNum) {
         logger.trace('CardsDeck ctor - shouldDeckFlipped = ', shouldDeckFlipped);
         if (training) {
             const exercises = training && training.exercises && Object.values(training.exercises);
             // logger.warn('=====> cardsDeck - exercises = ', exercises);
             this.name = training.name;
+            this.fullName = friendName ? `${friendName} - ${this.name}` : this.name;
             this.trainingSize = exercises.length;
             this.initialDeck = exercises.filter(x => x.q && x.a);
         } else {
@@ -53,6 +54,7 @@ export default class cardsDeck {
         const mem = {
             localStorageKey: this.localStorageKey,
             name: this.name,
+            fullName: this.fullName,
             initialDeck: this.initialDeck,
             examStartDeck: this.examStartDeck,
             currentDeck: this.currentDeck,
@@ -75,6 +77,7 @@ export default class cardsDeck {
         const mem = JSON.parse(storage);
         this.localStorageKey = mem.localStorageKey;
         this.name = mem.name;
+        this.fullName = mem.fullName;
         this.initialDeck = mem.initialDeck;
         this.examStartDeck = mem.examStartDeck;
         this.currentDeck = mem.currentDeck;
@@ -104,6 +107,7 @@ export default class cardsDeck {
     };
 
     getName = () => this.name;
+    getFullname = () => this.fullName;
     top = () => this.currentDeck[0] || null;
     topQ = () => !this.isDeckFlipped ? (this.currentDeck[0] || {}).q : (this.currentDeck[0] || {}).a || '';
     topA = () => !this.isDeckFlipped ? (this.currentDeck[0] || {}).a : (this.currentDeck[0] || {}).q || '';

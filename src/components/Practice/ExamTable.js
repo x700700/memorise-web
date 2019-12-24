@@ -3,7 +3,7 @@ import './ExamTable.scss';
 import logger from "../../common/logger";
 import ExamPage from "./ExamPage";
 
-const ExamTable = ({ size, num, q, answers, nextQuestion, setAnswer, isAnswered, answeredId }) => {
+const ExamTable = ({ trainingName, size, num, q, answers, nextQuestion, setAnswer, isAnswered, answeredId }) => {
     const [prevNum, setPrevNum] = useState();
     const [prevQ, setPrevQ] = useState();
     const [prevAnswers, setPrevAnswers] = useState();
@@ -41,10 +41,10 @@ const ExamTable = ({ size, num, q, answers, nextQuestion, setAnswer, isAnswered,
     return (
         <div className="exam-table">
             <div id="exam-previous-paper" className={`exam-previous-paper-container ${showPrev ? 'prev-show' : ''}`}>
-                <ExamPage size={size} num={prevNum} q={prevQ} answers={prevAnswers} nextQuestion={nextQuestion}
+                <ExamPage trainingName={trainingName} size={size} num={prevNum} q={prevQ} answers={prevAnswers} nextQuestion={nextQuestion}
                           isPrevPage={true} isAnswered={isAnswered} showPrev={showPrev}/>
             </div>
-            <ExamPage size={size} num={num} q={currQ} answers={currAnswers} nextQuestion={nextQuestion}
+            <ExamPage trainingName={trainingName} size={size} num={num} q={currQ} answers={currAnswers} nextQuestion={nextQuestion}
                       setAnswer={setAnswer} isAnswered={isAnswered} answeredId={answeredId}/>
         </div>
     );

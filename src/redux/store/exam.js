@@ -30,6 +30,7 @@ const init = (isDeckFlipped = false, isNextDeckFlipped = false) => ({
     friendName: null,
     trainingIsFetching: false,
     trainingIsLoaded: false,
+    fullName: null,
 });
 const cardsDeckProps = (cardsDeck, replay = false) => {
     let basic = {};
@@ -38,6 +39,7 @@ const cardsDeckProps = (cardsDeck, replay = false) => {
             cardsDeck: cardsDeck,
             isDeckLoaded: true,
             name: cardsDeck.getName(),
+            fullName: cardsDeck.getFullname(),
             plays: cardsDeck.getPlays(),
             playSize: cardsDeck.getPlayDeckSize(),
         };
@@ -114,7 +116,7 @@ const examReducer = (  state = init(),
             };
 
         case types.EXAM_LOAD:
-            cardsDeck = loadCardsDeck(storageId, state.cardsDeck, action.training, state.isNextDeckFlipped);
+            cardsDeck = loadCardsDeck(storageId, state.cardsDeck, null, action.training, state.isNextDeckFlipped);
             return {
                 ...state,
                 ...cardsDeckProps(cardsDeck),
@@ -153,12 +155,14 @@ const examReducer = (  state = init(),
             return {
                 ...state,
                 ...init(state.isDeckFlipped, state.isNextDeckFlipped),
+                name: state.name,
+                friendName: state.friendName,
                 trainingIsFetching: true,
                 trainingIsLoaded: false,
                 trainingIdToFetch: action.id,
             };
         case types.EXAM_FETCH_TRAINING_SUCCEED:
-            cardsDeck = new CardsDeck(storageId, action.training, state.isNextDeckFlipped);
+            cardsDeck = new CardsDeck(storageId, state.friendName, action.training, state.isNextDeckFlipped);
             return {
                 ...state,
                 trainingIsFetching: false,
