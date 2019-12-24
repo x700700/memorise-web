@@ -9,7 +9,12 @@ import logo from "../../logo.svg";
 import Modal from "../_Tools/Modal";
 import ChooseFriend from "../TrainingsList/ChooseFriend";
 import Toggle from "../_Tools/Toggle";
+import {ThemeProvider} from "@material-ui/core/styles";
 
+const themeModal = {
+    width: '80%',
+    height: 235,
+};
 
 const MainBanner = (props) => {
     const dispatch = useDispatch();
@@ -92,9 +97,11 @@ const MainBanner = (props) => {
                     <div className="footer"></div>
                 </div>
             </div>
-            <Modal ref={refModal} title={t('play friend btn title')} disableBackdropClick={false} onClose={resetSwitch}>
-                <ChooseFriend closeModal={closeModal}/>
-            </Modal>
+            <ThemeProvider theme={themeModal}>
+                <Modal ref={refModal} title={t('play friend btn title')} disableBackdropClick={false} onClose={resetSwitch}>
+                    <ChooseFriend closeModal={closeModal}/>
+                </Modal>
+            </ThemeProvider>
         </div>);
 };
 export default MainBanner;

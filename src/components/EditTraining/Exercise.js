@@ -9,7 +9,12 @@ import IconButton from "../_Tools/IconButton";
 import {deleteExercise, getTranslate, saveExercise} from '../../redux/actions'
 import * as types from "../../redux/actionsTypes";
 import {isRtl} from "../../common/utils";
+import {ThemeProvider} from "@material-ui/core/styles";
 
+const themeModal = {
+    width: '80%',
+    height: 235,
+};
 
 const Exercise = ({ exercise, disable }) => {
     const { t } = useTranslation();
@@ -93,25 +98,27 @@ const Exercise = ({ exercise, disable }) => {
                 <div className="exercise question" style={styleQ}>{exercise.q}</div>
                 <div className="exercise answer" style={styleA}>{exercise.a}</div>
             </div>
-            <ModalOkCancel ref={refModal} title={t("edit exercise")}
-                           okMsg={t('save')} cancelMsg={t('cancel')}
-                           onOk={() => save} onCancel={() => cancel}
-            >
-                <div className="edit-modal-container">
-                    <div className="delete-btn">
-                        <IconButton size={2} faName="trash-alt" onClick={del}/>
+            <ThemeProvider theme={themeModal}>
+                <ModalOkCancel ref={refModal} title={t("edit exercise")}
+                               okMsg={t('save')} cancelMsg={t('cancel')}
+                               onOk={() => save} onCancel={() => cancel}
+                >
+                    <div className="edit-modal-container">
+                        <div className="delete-btn">
+                            <IconButton size={2} faName="trash-alt" onClick={del}/>
+                        </div>
+                        <div className="switch-btn">
+                            <IconButton size={1.5} faName="random" onClick={switchQA}/>
+                        </div>
+                        <div className="field question">
+                            <TextInput ref={refQ} type="q" defaultValue={exercise.q} autoFocus={true} onEnter={save} onBlur={translate}/>
+                        </div>
+                        <div className="field answer">
+                            <TextInput ref={refA} type="a" defaultValue={exercise.a} onEnter={save}/>
+                        </div>
                     </div>
-                    <div className="switch-btn">
-                        <IconButton size={1.5} faName="random" onClick={switchQA}/>
-                    </div>
-                    <div className="field question">
-                        <TextInput ref={refQ} type="q" defaultValue={exercise.q} autoFocus={true} onEnter={save} onBlur={translate}/>
-                    </div>
-                    <div className="field answer">
-                        <TextInput ref={refA} type="a" defaultValue={exercise.a} onEnter={save}/>
-                    </div>
-                </div>
-            </ModalOkCancel>
+                </ModalOkCancel>
+            </ThemeProvider>
         </div>);
 };
 export default Exercise;

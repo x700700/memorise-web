@@ -1,10 +1,10 @@
 import React, {forwardRef, useImperativeHandle} from "react";
 import MaterialTooltip from '@material-ui/core/Tooltip';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 
-const HtmlTooltip = withStyles(theme => ({
+const useStyles = makeStyles(theme => ({
     tooltip: {
         backgroundColor: '#ddd',
         color: '#220066',
@@ -14,7 +14,7 @@ const HtmlTooltip = withStyles(theme => ({
         direction: 'rtl',
         // maxWidth: 220,
     },
-}))(MaterialTooltip);
+}));
 
 const Tooltip = forwardRef(({ children, text, placement }, ref) => {
     useImperativeHandle(ref, () => ({
@@ -34,10 +34,14 @@ const Tooltip = forwardRef(({ children, text, placement }, ref) => {
         setOpen(false);
     };
 
+    const classes = useStyles();
     return (
         <ClickAwayListener onClickAway={handleTooltipClose}>
-            <HtmlTooltip
+            <MaterialTooltip
                 arrow
+                classes={{
+                    tooltip: classes.tooltip,
+                }}
                 PopperProps={{
                     disablePortal: true,
                 }}
@@ -50,7 +54,7 @@ const Tooltip = forwardRef(({ children, text, placement }, ref) => {
                 placement={placement}
             >
                 {children}
-            </HtmlTooltip>
+            </MaterialTooltip>
         </ClickAwayListener>);
 });
 export default Tooltip;

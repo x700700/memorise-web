@@ -8,8 +8,8 @@ import MaterialModal from '@material-ui/core/Modal';
 const useStyles = makeStyles(theme => ({
     paper: {
         position: 'absolute',
-        width: '80%',
-        height: 235,
+        width:  theme.width || '80%',
+        height: theme.height || 235,
         backgroundColor: '#eee6ff', // deepPurple[50], // theme.palette.background.paper,
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
