@@ -20,6 +20,9 @@
                     width: 45%;
                     margin: 0 auto;
                 }
+                > div:last-child {
+                    margin: 0 2.5%;
+                }
             }
             @media only screen and (min-device-width: $width-ipad-min) and (max-device-width: $width-ipad-max)
             and (orientation : portrait) {
@@ -29,6 +32,9 @@
                 > div {
                     width: 45%;
                     margin: 0 auto;
+                }
+                > div:last-child {
+                    margin: 0 2.5%;
                 }
             }
         }
