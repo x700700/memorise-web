@@ -53,12 +53,13 @@
                     text-overflow: ellipsis;
                     overflow: hidden;
                     margin: 0 auto;
-                    min-height: 52px;
+                    min-height: fit-content;
                 }
             }
 
             .next-btn-container {
                 align-self: center;
+                margin-bottom: .5rem;
                 opacity: 1;
                 transition: opacity .5s ease-in-out .4s;
 

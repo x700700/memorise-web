@@ -9,9 +9,20 @@
 
     @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
         width: 480px;
-        height: fit-content;
+        height: 87%;
         margin: .3rem auto;
         padding: .3rem;
+    }
+    @media only screen and (min-device-width: $width-ipad-min) and (max-device-width: $width-ipad-max)
+    and (orientation : portrait) {
+        width: 480px;
+        height: 87%;
+        margin: .3rem auto;
+        padding: .3rem;
+    }
+    @media only screen and (min-device-width: $width-ipad-pro-min) and (max-device-width: $width-ipad-pro-max)
+    and (orientation : portrait) {
+        height: 61%;
     }
 
     .exam-container {
@@ -24,7 +35,7 @@
             padding-top: 0.3rem;
 
             @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
-                height: 480px;
+                height: 95%;
             }
             @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max) {
                 flex-grow: 1;
