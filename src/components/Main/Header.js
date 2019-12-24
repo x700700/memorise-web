@@ -29,6 +29,7 @@ const Header = (props) => {
     const trainingNameIsOnEdit = useSelector(state => state.app.trainingNameIsOnEdit);
     const [timingCurrPage, setTimingCurrPage] = useState(currPage);
     const appShowMenu = useSelector(state => state.app.showMenu);
+    const appShowBanner = useSelector(state => state.app.showBanner);
     const [showMenu, setShowMenu] = useState(appShowMenu);
     const [logoTooltipMsg, setLogoTooltipMsg] = useState(t('press me to login'));
 
@@ -39,19 +40,15 @@ const Header = (props) => {
     const menuClicked = (show) => {
         dispatch({ type: types.APP_SHOW_MENU, show: show });
     };
-
+    const tabsClicked = () => {
+        dispatch({ type: types.APP_SHOW_BANNER, show: false });
+    };
     const logoClick = () => {
         if (!userName) {
             refTooltipLogo.current.close();
             currPage !== consts.pageName.login && history.push('/login');
         } else {
-            dispatch({ type: types.APP_SHOW_BANNER, show: true });
-            /*
-            refTooltipLogo.current.switch();
-            setTimeout(() => {
-                refTooltipLogo.current.close();
-            }, 3000);
-             */
+            dispatch({ type: types.APP_SHOW_BANNER, show: !appShowBanner });
         }
     };
 
@@ -122,7 +119,7 @@ const Header = (props) => {
     };
     const styleMenuBtn = {
         pointerEvents: trainingNameIsOnEdit ? 'none' : 'auto',
-        visibility: ((!isLoggedIn && (currPage === consts.pageName.trainings || currPage === consts.pageName.edit)) || currPage === consts.pageName.login || currPage === consts.pageName.trainings) && 'hidden',
+        visibility: ((!isLoggedIn && (currPage === consts.pageName.trainings || currPage === consts.pageName.edit)) || appShowBanner || currPage === consts.pageName.login || currPage === consts.pageName.trainings) && 'hidden',
     };
 
     const refTooltipLogo = useRef();
@@ -135,7 +132,7 @@ const Header = (props) => {
                 <div className="header-left" style={styleMenuBtn}>
                     <button onClick={() => menuClicked(!appShowMenu)} className={`btn btn-menu ${isMenuBtnDisable ? 'disable-pointer' : ''}`}><i className={`fas fa-chevron-down ${menuBtnStatusClass}`}/></button>
                 </div>
-                <div className="tabs" style={styleOnEdit}>
+                <div className="tabs" style={styleOnEdit} onClick={tabsClicked}>
                     <Link to="/trainings">
                         <span className={`btn ${currPage === consts.pageName.trainings ? 'tab-active' : ''}`}><i className="fas fa-book-open"/></span>
                     </Link>
@@ -156,7 +153,7 @@ const Header = (props) => {
                     <Link to="/exam"><span className={`btn btn-play ${currPage === consts.pageName.exam ? 'tab-active' : ''}`}><i className="fas fa-grin-beam-sweat"/></span></Link>
                 </div>
                 <Tooltip ref={refTooltipLogo} text={logoTooltipMsg} placement="bottom-end">
-                    <div className="logo-container" style={styleOnEdit} onClick={() => logoClick()}>
+                    <div className="logo-container" style={styleOnEdit} onClick={logoClick}>
                         <img className="logo" src={logo} alt="logo" width="32" height="32"/>
                     </div>
                 </Tooltip>

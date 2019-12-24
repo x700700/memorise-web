@@ -5,7 +5,6 @@ import {useTranslation} from "react-i18next";
 import {useHistory} from "react-router";
 import consts from "../../common/consts";
 import * as types from "../../redux/actionsTypes";
-import logo from "../../logo.svg";
 import Modal from "../_Tools/Modal";
 import ChooseFriend from "../TrainingsList/ChooseFriend";
 import Toggle from "../_Tools/Toggle";
@@ -65,21 +64,16 @@ const MainBanner = (props) => {
 
 
     const styleBanner = {
+        top: `${consts.ui.headerHeight}px`,
         transform: showBanner ? 'translateX(0)' : 'translateX(100%)',
     };
 
     return (
         <div className="main-banner" style={styleBanner}>
-            <div className="main-banner-header-space-holder" style={{ minHeight: `${consts.ui.headerHeight}px` }}></div>
-            <div className="main-banner-header" style={{ minHeight: `${consts.ui.headerHeight + 2}px` }}>
-                <div className="banner-header-row">
-                    <div className="header-buttons" onClick={close}>
-                        <img className="logo" src={logo} alt="logo" width="32" height="32" />
-                        <i className='fas fa-chevron-right icon-close'/>
-                    </div>
-                </div>
-            </div>
             <div className="banner-body-container">
+                <div className="banner-close-btn-absolute">
+                    <button onClick={close} className="btn"><i className="fas fa-times"></i></button>
+                </div>
                 <div className="banner-body" style={{ height: `calc(100% - ${consts.ui.headerHeight + 10}px)` }}>
                     {userName &&
                     <div className="welcome">
