@@ -8,7 +8,7 @@ import * as types from "../../redux/actionsTypes";
 import logo from "../../logo.svg";
 import Modal from "../_Tools/Modal";
 import ChooseFriend from "../TrainingsList/ChooseFriend";
-import SwitchGreen from "../_Tools/SwitchGreen";
+import Toggle from "../_Tools/Toggle";
 
 
 const MainBanner = (props) => {
@@ -85,7 +85,7 @@ const MainBanner = (props) => {
                     }
                     <div className="search-friend">
                         <div className="flip-container">
-                            <SwitchGreen ref={refSwitch} label={t('play friend btn title')} value={isPlayFriend} onChange={searchFriend}/>
+                            <Toggle ref={refSwitch} label={t('play friend btn title')} value={isPlayFriend} onChange={searchFriend}/>
                         </div>
                     </div>
                     <div className="about"></div>

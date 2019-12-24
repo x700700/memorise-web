@@ -5,8 +5,10 @@ import TopMenu from "../_Tools/TopMenu";
 import {useTranslation} from "react-i18next";
 import * as types from "../../redux/actionsTypes";
 import SubMenuReplay from "./SubMenuReplay";
-import SwitchYellow from "../_Tools/SwitchYellow";
+import Toggle from "../_Tools/Toggle";
+import {yellow} from "@material-ui/core/colors";
 import {isRtl} from "../../common/utils";
+
 
 const MenuDivider = () => {
     return (
@@ -44,7 +46,7 @@ const MenuGame = ({ hide }) => {
             <div className="menu-game-col">
                 <div className="title" style={styleTitle}>{name}</div>
                 <div className="flip-container">
-                    <SwitchYellow label={t('flip-deck-side')} value={isDeckFlipped} onChange={flipDeck}/>
+                    <Toggle color={yellow} label={t('flip-deck-side')} value={isDeckFlipped} onChange={flipDeck}/>
                 </div>
                 <MenuDivider/>
                 <SubMenuReplay sliderTitle={t("cards num to practice")} replayMsg={t('replay')}
