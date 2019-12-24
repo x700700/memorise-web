@@ -65,7 +65,7 @@ const Exercise = ({ exercise, disable }) => {
 
 
     useEffect(() => {
-        if (refA.current && !refA.current.value() && translatedWord && translatedWord.length < 20) {
+        if (refA.current && !refA.current.value() && refQ.current && refQ.current.value() && translatedWord && translatedWord.length < 20) {
             logger.trace('Put Translated:', translatedWord);
             const newWord = translatedWord.charAt(0).toUpperCase() + translatedWord.slice(1);
             refA.current.setValue(newWord);
