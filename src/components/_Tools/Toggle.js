@@ -63,6 +63,7 @@ const Toggle = forwardRef(({ muiTheme, label, color, value, onChange }, ref) => 
                 <FormControlLabel
                     control={
                         <MaterialSwitch color="primary"
+                                        checked={check} onChange={handleChange}
                                         classes={{
                                             root: classes.root,
                                             switchBase: classes.switchBase,
@@ -70,7 +71,7 @@ const Toggle = forwardRef(({ muiTheme, label, color, value, onChange }, ref) => 
                                             track: classes.track,
                                             checked: classes.checked,
                                         }}
-                                        checked={check} onChange={handleChange}/>
+                        />
                     }
                     label={label}
                     // labelPlacement="start"
