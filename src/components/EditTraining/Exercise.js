@@ -1,15 +1,15 @@
 import React, {useEffect, useRef} from "react";
 import './Exercise.scss';
 import {useDispatch, useSelector} from "react-redux";
+import {useTranslation} from "react-i18next";
 import logger from "../../common/logger";
+import {ThemeProvider} from "@material-ui/core/styles";
 import ModalOkCancel from "../_Tools/ModalOkCancel";
 import TextInput from "../_Tools/TextInput";
-import {useTranslation} from "react-i18next";
 import IconButton from "../_Tools/IconButton";
 import {deleteExercise, getTranslate, saveExercise} from '../../redux/actions'
 import * as types from "../../redux/actionsTypes";
 import {isRtl} from "../../common/utils";
-import {ThemeProvider} from "@material-ui/core/styles";
 
 const themeModal = {
     width: '80%',
@@ -38,7 +38,7 @@ const Exercise = ({ exercise, disable }) => {
     };
 
     const translate = (word) => {
-        if (word && word.trim().length >= 2) {
+        if (word && word.trim().length >= 2 && !refA.current.value()) {
             logger.trace('Translate: ', word);
             dispatch(getTranslate(word));
         }
@@ -111,10 +111,10 @@ const Exercise = ({ exercise, disable }) => {
                             <IconButton size={1.5} faName="random" onClick={switchQA}/>
                         </div>
                         <div className="field question">
-                            <TextInput ref={refQ} type="q" defaultValue={exercise.q} autoFocus={true} onEnter={save} onBlur={translate}/>
+                            <TextInput ref={refQ} type="q" defaultValue={exercise.q} autoFocus={true} onEnter={translate} onBlur={translate}/>
                         </div>
                         <div className="field answer">
-                            <TextInput ref={refA} type="a" defaultValue={exercise.a} onEnter={save}/>
+                            <TextInput ref={refA} type="a" defaultValue={exercise.a} onEnter={() => refModal.current.setOkFocused()}/>
                         </div>
                     </div>
                 </ModalOkCancel>

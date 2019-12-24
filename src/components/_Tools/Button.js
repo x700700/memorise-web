@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {forwardRef, useImperativeHandle, useRef} from 'react';
 import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import MaterialButton from '@material-ui/core/Button';
 import {purple, red} from '@material-ui/core/colors';
@@ -14,7 +14,12 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Button = ({ color, muiTheme, type, text, onClick, disabled }) => {
+const Button = forwardRef(({ color, muiTheme, type, text, onClick, disabled }, ref) => {
+    useImperativeHandle(ref, () => ({
+        focus() {
+            refBtn.current.focus();
+        },
+    }));
 
     const themeDefault = createMuiTheme({
         palette: {
@@ -27,12 +32,14 @@ const Button = ({ color, muiTheme, type, text, onClick, disabled }) => {
         },
     });
 
+    const refBtn = useRef();
     const classes = useStyles();
     const buttonType = !color && type && type.startsWith('cancel') ? 'secondary' : 'primary';
     return (
         <div>
             <ThemeProvider theme={muiTheme || themeDefault}>
-                <MaterialButton variant="contained" color={buttonType} size="medium" fullWidth={true}
+                <MaterialButton ref={refBtn}
+                                variant="contained" color={buttonType} size="medium" fullWidth={true}
                                 className={classes.root}
                                 onClick={onClick && onClick()} disabled={disabled}
                                 type={type && type === 'submit' ? 'submit' : undefined}
@@ -43,5 +50,5 @@ const Button = ({ color, muiTheme, type, text, onClick, disabled }) => {
         </div>
     );
 
-};
+});
 export default Button;

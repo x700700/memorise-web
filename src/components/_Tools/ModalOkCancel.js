@@ -12,9 +12,13 @@ const ModalOkCancel = forwardRef(({ children, title, okMsg, cancelMsg, onOk, onC
         close() {
             refModal.current.close();
         },
+        setOkFocused() {
+            refOk.current.focus();
+        },
     }));
 
     const refModal = useRef();
+    const refOk = useRef();
     return (
         <Modal ref={refModal} title={title} disableBackdropClick={disableBackdropClick}>
             <div className="modal-ok-cancel-container">
@@ -26,7 +30,7 @@ const ModalOkCancel = forwardRef(({ children, title, okMsg, cancelMsg, onOk, onC
                         <Button color={buttonsColors && buttonsColors[0]} type="cancel" text={cancelMsg} onClick={onCancel} />
                     </div>
                     <div className="button-container">
-                        <Button color={buttonsColors && buttonsColors[1]} type="delete" text={okMsg} onClick={onOk} />
+                        <Button ref={refOk} color={buttonsColors && buttonsColors[1]} type="delete" text={okMsg} onClick={onOk} />
                     </div>
                 </div>
             </div>
