@@ -17,8 +17,18 @@
                 flex-wrap: wrap;
 
                 > div {
-                    width: 27.7rem;
-                    margin: 0 1rem;
+                    width: 45%;
+                    margin: 0 auto;
+                }
+            }
+            @media only screen and (min-device-width: $width-ipad-min) and (max-device-width: $width-ipad-max)
+            and (orientation : portrait) {
+                flex-direction: row;
+                flex-wrap: wrap;
+
+                > div {
+                    width: 45%;
+                    margin: 0 auto;
                 }
             }
         }
