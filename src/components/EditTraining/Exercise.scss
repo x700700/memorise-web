@@ -37,7 +37,7 @@
     width: 16rem;
     margin: 0 auto;
 
-    @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+    @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
     }
 
     .delete-btn {

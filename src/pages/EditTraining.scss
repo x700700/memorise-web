@@ -44,8 +44,8 @@
                 and (min-aspect-ratio: 13/9) {
                     width: 25%;
                 }
-                @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
-                    width: 11.4rem;
+                @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
+                    width: 12.4rem;
                 }
                 @media only screen and (min-device-width: $width-ipad-min) and (max-device-width: $width-ipad-max)
                 and (orientation : portrait) {

@@ -12,7 +12,7 @@
             flex-direction: column;
             margin-bottom: 6rem;
 
-            @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+            @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
                 flex-direction: row;
                 flex-wrap: wrap;
 

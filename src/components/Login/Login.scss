@@ -3,7 +3,7 @@
 .sign-container {
     margin: .5rem;
 
-    @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+    @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
         width: 40rem;
         margin: .5rem auto;
     }

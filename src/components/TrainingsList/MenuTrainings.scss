@@ -31,7 +31,7 @@
         margin: auto;
         direction: rtl;
 
-        @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+        @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
             justify-content: initial;
         }
 
@@ -45,7 +45,7 @@
             width: 7rem;
             margin: 0 auto;
 
-            @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+            @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
                 margin: 0;
             }
         }

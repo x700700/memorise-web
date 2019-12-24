@@ -7,7 +7,7 @@
     position: relative;
     overflow-y: hidden;
 
-    @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+    @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
         width: 480px;
         height: fit-content;
         margin: .3rem auto;
@@ -23,7 +23,7 @@
             text-align: center;
             padding-top: 0.3rem;
 
-            @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+            @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
                 height: 480px;
             }
             @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max) {

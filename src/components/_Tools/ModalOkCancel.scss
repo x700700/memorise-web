@@ -9,7 +9,7 @@
         margin: auto;
         margin-top: 1rem;
 
-        @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+        @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
             width: 70%;
         }
         @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)

@@ -24,7 +24,7 @@
         margin-top: 2rem;
         direction: rtl;
 
-        @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+        @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
         }
 
         .msg {
@@ -36,7 +36,7 @@
         .delete-btn-container {
             width: 7rem;
 
-            @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+            @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
                 margin: 0;
             }
         }
