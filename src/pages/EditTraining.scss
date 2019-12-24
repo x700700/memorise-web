@@ -45,7 +45,15 @@
                     width: 25%;
                 }
                 @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
-                    width: 11rem;
+                    width: 11.4rem;
+                }
+                @media only screen and (min-device-width: $width-ipad-min) and (max-device-width: $width-ipad-max)
+                and (orientation : portrait) {
+                    width: 25%;
+                }
+                @media only screen and (min-device-width: $width-ipad-min) and (max-device-width: $width-ipad-max)
+                and (orientation : landscape) {
+                    width: 12.1rem;
                 }
             }
         }
