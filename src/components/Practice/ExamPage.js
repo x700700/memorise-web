@@ -21,7 +21,7 @@ const ExamPage = ({ trainingName, size, num, q, answers, nextQuestion, isPrevPag
                 </div>
                 }
                 <div className="training-name">
-                    {t('exam in')} {trainingName}
+                    {t('exam on')} {trainingName}
                 </div>
                 <div className="exam-col">
                     <div className="question">

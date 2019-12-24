@@ -21,6 +21,7 @@ const Game = (props) => {
 
     const trainingIdToFetch = useSelector(state => state.game.trainingIdToFetch);
     const trainingId = useSelector(state => state.game.trainingId);
+    const fullTrainingName = useSelector(state => state.game.fullName);
     const trainingFriendName = useSelector(state => state.game.friendName);
     const gameTrainingIsFetching = useSelector(state => state.game.trainingIsFetching);
     const gameTrainingIsLoaded = useSelector(state => state.game.trainingIsLoaded);
@@ -91,6 +92,10 @@ const Game = (props) => {
             <div className={`game-container ${showMenu && 'disable-pointer'}`}>
                 {!gameTrainingIsFetching && (currQ || gameEnded) ?
                     <div className="game">
+                        <div className="training-name">
+                            {t('practice on')} {fullTrainingName}
+                        </div>
+
                         {currQ &&
                         <div className="cards-left">
                             <span><i className="fas fa-arrow-down"/></span>

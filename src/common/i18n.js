@@ -58,7 +58,8 @@ i18n.use(LanguageDetector).init({
                 "of": "of",
                 "show pass": "Show/Hide Password",
                 "signout": "Sign Out",
-                "exam in": "Exam on: ",
+                "exam on": "Exam on: ",
+                "practice on": "Memorize",
 
                 "play friend btn title": "Play A Friend's Trainings",
                 "play friend btn": "Play Friend",
@@ -123,7 +124,8 @@ i18n.use(LanguageDetector).init({
                 "of": "מתוך",
                 "show pass": "הצג/החבא סיסמא",
                 "signout": "התנתק",
-                "exam in": "בחינה ב-",
+                "exam on": "בחינה ב-",
+                "practice on": "שינון",
 
                 "play friend btn title": "תרגל אימונים של חבר",
                 "play friend btn": "חפש חבר",
