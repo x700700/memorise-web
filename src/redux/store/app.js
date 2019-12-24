@@ -209,6 +209,7 @@ const appReducer = (  state = {
             return {
                 ...state,
                 showBanner: action.show,
+                showMenu: false,
             };
         case types.APP_SHOW_MODAL:
             return {
