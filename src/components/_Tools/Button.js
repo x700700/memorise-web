@@ -1,14 +1,8 @@
 import React from 'react';
 import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import MaterialButton from '@material-ui/core/Button';
-import { green, red } from '@material-ui/core/colors';
+import {purple, red} from '@material-ui/core/colors';
 
-const themeDefault = createMuiTheme({
-    palette: {
-        primary: green,
-        secondary: red,
-    },
-});
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -20,13 +14,25 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Button = ({ muiTheme, type, text, onClick, disabled }) => {
+const Button = ({ color, muiTheme, type, text, onClick, disabled }) => {
+
+    const themeDefault = createMuiTheme({
+        palette: {
+            primary: color || {
+                main: purple[400],
+            },
+            secondary: {
+                main: red[400],
+            },
+        },
+    });
+
     const classes = useStyles();
-    const color = type && type.startsWith('cancel') ? 'secondary' : 'primary';
+    const buttonType = !color && type && type.startsWith('cancel') ? 'secondary' : 'primary';
     return (
         <div>
             <ThemeProvider theme={muiTheme || themeDefault}>
-                <MaterialButton variant="contained" color={color} size="medium" fullWidth={true}
+                <MaterialButton variant="contained" color={buttonType} size="medium" fullWidth={true}
                                 className={classes.root}
                                 onClick={onClick && onClick()} disabled={disabled}
                                 type={type && type === 'submit' ? 'submit' : undefined}

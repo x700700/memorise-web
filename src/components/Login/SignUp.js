@@ -10,6 +10,7 @@ import { renderTextInput } from './form-fields';
 import Button from "../_Tools/Button";
 import { validateName, validateEmail, validatePassword } from "../../common/utils";
 import { signup } from '../../redux/actions';
+import {orange} from "@material-ui/core/colors";
 
 /*
 const asyncValidate = async (values, dispatch, props, fieldString) => {
@@ -148,7 +149,7 @@ const SignUp = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
                         />
                     </div>
                     <div className="sign-btn-container">
-                        <Button type="submit" text={t('signup-btn')} disabled={pristine || submitting} />
+                        <Button color={orange} type="submit" text={t('signup-btn')} disabled={pristine || submitting} />
                     </div>
                 </form>
 

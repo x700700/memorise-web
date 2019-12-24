@@ -115,7 +115,7 @@ const EditTraining = (props) => {
                 </div>
             </div>
             <ModalOkCancel ref={refModal} title={training && training.name}
-                           okMsg={t('delete')} cancelMsg={t('cancel')} buttonsColors={[red, purple]}
+                           okMsg={t('delete')} cancelMsg={t('cancel')} buttonsColors={[purple, red]}
                            onOk={() => trainingDelete} onCancel={() => cancelDelete}
                            disableBackdropClick={false}
             >
