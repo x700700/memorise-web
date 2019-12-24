@@ -5,7 +5,6 @@ import TopMenu from "../_Tools/TopMenu";
 import {useTranslation} from "react-i18next";
 import * as types from "../../redux/actionsTypes";
 import SubMenuReplay from "./SubMenuReplay";
-import Toggle from "../_Tools/Toggle";
 import {isRtl} from "../../common/utils";
 
 
@@ -36,11 +35,10 @@ const MenuExam = ({ hide }) => {
             {name &&
             <div className="menu-exam-col">
                 <div className="title" style={styleTitle}>{name}</div>
-                <div className="flip-container">
-                    <Toggle label={t('flip-exam-side')} value={isNextDeckFlipped} onChange={flipDeck}/>
-                </div>
                 <SubMenuReplay sliderTitle={t('questions num for exam')} replayMsg={t('reexam')}
-                               replayCb={replayExam} size={size} playSize={playSize} />
+                               replayCb={replayExam} size={size} playSize={playSize}
+                               exam={{ isNextDeckFlipped, flipDeck }}
+                />
             </div>
             }
         </TopMenu>
