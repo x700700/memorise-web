@@ -30,24 +30,18 @@
         .exam-score-pie {
             justify-content: center;
             display: flex;
+            width: 70%;
+            height: 70%;
+            align-self: center;
+            margin-top: -3rem;
 
+            @media (min-device-width: $width-desktop-min) and (min-height: $height-desktop-min) {
+                margin-top: -2rem;
+            }
             @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
             and (min-aspect-ratio: 13/9) {
-                transform: scale(.5);
-                margin-top: -3rem;
-            }
-        }
-
-        .btns-container {
-            flex-grow: 1;
-            margin-top: -40px;
-            display: flex;
-            justify-content: center;
-
-            .btns-replay {
-                width: 12rem;
-                align-self: flex-end;
-                margin-bottom: 1rem;
+                transform: scale(.7);
+                margin-top: -1rem;
             }
         }
     }

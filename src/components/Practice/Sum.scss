@@ -1,0 +1,18 @@
+@import "../../common/colors";
+
+.play-sum-btns-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+
+    .btns-replay {
+        width: 12rem;
+        align-self: flex-end;
+        margin-bottom: 1rem;
+
+        @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
+        and (min-aspect-ratio: 13/9) {
+            margin-bottom: .1rem;
+        }
+    }
+}

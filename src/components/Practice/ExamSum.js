@@ -1,5 +1,6 @@
 import React, {forwardRef, useEffect, useState} from 'react';
 import './ExamSum.scss';
+import './Sum.scss';
 import {useTranslation} from "react-i18next";
 import Button from "../_Tools/Button";
 import logger from "../../common/logger";
@@ -33,7 +34,7 @@ const ExamSum = forwardRef(({ setStats, cardsNum, rightsNum, replayExam }, ref) 
                         </div>
                     </div>
                 </div>
-                <div className="btns-container">
+                <div className="play-sum-btns-container">
                     <div className="btns-replay">
                         <Button text={t('reexam')} onClick={replayExam} />
                     </div>

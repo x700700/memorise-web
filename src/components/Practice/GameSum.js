@@ -1,5 +1,6 @@
 import React, {forwardRef, useEffect, useState} from 'react';
 import './GameSum.scss';
+import './Sum.scss';
 import {useTranslation} from "react-i18next";
 import logger from "../../common/logger";
 import Button from "../_Tools/Button";
@@ -29,10 +30,10 @@ const GameSum = forwardRef(({ setStats, cardsNum, playsNum, replayGame }, ref) =
                     {/*<div className="stats-misses">{plays - cards} {t("misses")}</div>*/}
                 </div>
                 <div className="exam-score-pie">
-                    <PieChart width="250px" height="250px" colors={["#272", "#822"]} legend={false}
+                    <PieChart width="100%" height="100%" colors={["#272", "#822"]} legend={false}
                               data={[["Rights", rights], ["Wrongs", wrongs]]} />
                 </div>
-                <div className="btns-container">
+                <div className="play-sum-btns-container">
                     <div className="btns-replay">
                         <Button text={t('replay')} onClick={replayGame} />
                     </div>

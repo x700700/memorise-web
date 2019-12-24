@@ -27,14 +27,14 @@
             .exam-score {
                 position: relative;
                 color: $grey6;
-                margin-top: 1rem;
+                margin-top: -1rem;
                 font-size: 32px;
                 font-weight: 500;
 
                 @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
                 and (min-aspect-ratio: 13/9) {
                     transform: scale(.5);
-                    margin-top: -3.5rem;
+                    margin-top: -4rem;
                 }
 
                 .score-val-container {
@@ -60,17 +60,6 @@
                         border: rgba(0, 0, 0, .25) 5px solid;
                     }
                 }
-            }
-        }
-        .btns-container {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-
-            .btns-replay {
-                width: 12rem;
-                align-self: flex-end;
-                margin-bottom: 1rem;
             }
         }
     }
