@@ -33,7 +33,7 @@
 
             .training-name {
                 position: absolute;
-                z-index: 49;
+                z-index: 19;
                 right: 0;
                 width: 15rem;
                 max-height: 1.2rem;
@@ -46,7 +46,13 @@
                 color: $grey2;
                 font-size: .9rem;
                 padding: .1rem;
-                margin: .1rem .6rem;
+                margin: .1rem 1.2rem;
+
+                @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
+                and (min-aspect-ratio: 13/9) {
+                    right: 4rem;
+                    width: 11rem;
+                }
             }
 
             .cards-left {

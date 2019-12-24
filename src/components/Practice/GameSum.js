@@ -7,7 +7,7 @@ import Button from "../_Tools/Button";
 import { PieChart } from 'react-chartkick';
 import 'chart.js'
 
-const GameSum = forwardRef(({ setStats, cardsNum, playsNum, replayGame }, ref) => {
+const GameSum = forwardRef(({ trainingName, setStats, cardsNum, playsNum, replayGame }, ref) => {
     const { t } = useTranslation();
     const [cards, setCards] = useState(0);
     const [plays, setPlays] = useState(0);
@@ -25,6 +25,10 @@ const GameSum = forwardRef(({ setStats, cardsNum, playsNum, replayGame }, ref) =
     return (
         <div className="game-sum-container">
             <div className="sum-col">
+                <div className="training-name">
+                    {trainingName}
+                </div>
+
                 <div className="stats">
                     <div>{cards} {t("cards played")}</div>
                     {/*<div className="stats-misses">{plays - cards} {t("misses")}</div>*/}

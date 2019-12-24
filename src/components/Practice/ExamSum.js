@@ -6,7 +6,7 @@ import Button from "../_Tools/Button";
 import logger from "../../common/logger";
 
 
-const ExamSum = forwardRef(({ setStats, cardsNum, rightsNum, replayExam }, ref) => {
+const ExamSum = forwardRef(({ trainingName, setStats, cardsNum, rightsNum, replayExam }, ref) => {
     const { t } = useTranslation();
     const [cards, setCards] = useState(0);
     const [rights, setRights] = useState(0);
@@ -23,6 +23,10 @@ const ExamSum = forwardRef(({ setStats, cardsNum, rightsNum, replayExam }, ref) 
     return (
         <div className="exam-sum-container">
             <div className="sum-col">
+                <div className="training-name">
+                    {trainingName}
+                </div>
+
                 <div className="stats">
                     <p>{rights} {t('of')} {cards} {t("questions answered right")}</p>
                     <br/>

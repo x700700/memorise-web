@@ -117,7 +117,8 @@ const Game = (props) => {
                     </div>
                 }
                 <PopUpBox show={gameEnded}>
-                    <GameSum setStats={gameEnded} cardsNum={playDeckSize} playsNum={playsNum} replayGame={() => replayGame}/>
+                    <GameSum trainingName={fullTrainingName}
+                             setStats={gameEnded} cardsNum={playDeckSize} playsNum={playsNum} replayGame={() => replayGame}/>
                 </PopUpBox>
             </div>
         </div>
