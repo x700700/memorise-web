@@ -9,7 +9,7 @@
         border: $grey1 1px solid;
         color: $grey2;
 
-        @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
+        @media only screen and (min-device-width: $width-mobile-min) and (max-device-width: $width-mobile-max)
         and (min-aspect-ratio: 13/9) {
             min-height: 220px;
         }

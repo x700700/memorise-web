@@ -10,7 +10,7 @@
         overflow-x: hidden;
         position: relative;
 
-        @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
+        @media only screen and (min-device-width: $width-mobile-min) and (max-device-width: $width-mobile-max)
         and (min-aspect-ratio: 13/9) {
             height: 100%;
         }
@@ -20,7 +20,7 @@
             height: 70vh;
             position: relative;
 
-            @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
+            @media only screen and (min-device-width: $width-mobile-min) and (max-device-width: $width-mobile-max)
             and (min-aspect-ratio: 13/9) {
                 height: 100%;
                 width: 66%;
@@ -90,7 +90,7 @@
             transform: translateX(0);
             transition: transform 0.5s ease-in-out, opacity 0.3s linear;
 
-            @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
+            @media only screen and (min-device-width: $width-mobile-min) and (max-device-width: $width-mobile-max)
             and (min-aspect-ratio: 13/9) {
                 transform: translateX(22%);
             }

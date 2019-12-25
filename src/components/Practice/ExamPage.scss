@@ -101,7 +101,7 @@
                     display: flex;
                     flex-direction: column;
 
-                    @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
+                    @media only screen and (min-device-width: $width-mobile-min) and (max-device-width: $width-mobile-max)
                     and (min-aspect-ratio: 13/9) {
                         flex-direction: row;
                         flex-wrap: wrap;
@@ -111,7 +111,7 @@
                     .each-answer-container {
                         flex-grow: 1;
 
-                        @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
+                        @media only screen and (min-device-width: $width-mobile-min) and (max-device-width: $width-mobile-max)
                         and (min-aspect-ratio: 13/9) {
                             min-width: 12rem;
                             max-width: 12rem;
