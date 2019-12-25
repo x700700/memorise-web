@@ -4,13 +4,13 @@ import './IconButton.scss';
 const IconButton = ({ faName, size, hide, onClick, color, backgroundColor, iconId, isBorder, isDrawer }) => {
 
     const styleBox = {
-        backgroundColor: isDrawer && `#${backgroundColor}`,
+        backgroundColor: isDrawer && backgroundColor,
     };
     const styleIcon = {
         fontSize: `${size}rem`,
         fontWeight: '300',
-        color: `#${color}`,
-        backgroundColor: !isDrawer && `#${backgroundColor}`,
+        color: color,
+        backgroundColor: !isDrawer && backgroundColor,
     };
 
     return (

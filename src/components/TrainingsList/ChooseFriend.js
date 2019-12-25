@@ -29,10 +29,8 @@ const ChooseFriend = ({ closeModal }) => {
             setErrName(null);
         }
     };
-    const isFriendShared = () => {
+    const openFriend = () => {
         const friendName = refName.current.value();
-        // logger.warn('play friend - ', friendName);
-        dispatch({ type: types.APP_SET_FRIEND_NAME, friendName: null });
         dispatch({ type: types.APP_SHOW_BANNER, show: false });
         dispatch(getFriendTrainingsList(friendName));
         closeModal();
@@ -61,7 +59,7 @@ const ChooseFriend = ({ closeModal }) => {
             </div>
             <div className="btns-container">
                 <div className="btn">
-                    <Button type="ok" text={t('play friend btn')} disabled={errName && true} onClick={() => isFriendShared} />
+                    <Button type="ok" text={t('play friend btn')} disabled={errName && true} onClick={() => openFriend} />
                 </div>
                 <div className="btn">
                     <Button type="cancel" text={t('cancel')} disabled={false} onClick={() => cancel} />

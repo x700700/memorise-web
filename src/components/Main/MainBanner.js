@@ -3,12 +3,14 @@ import './MainBanner.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useHistory} from "react-router";
+import {ThemeProvider} from "@material-ui/core/styles";
 import consts from "../../common/consts";
 import * as types from "../../redux/actionsTypes";
 import Modal from "../_Tools/Modal";
 import ChooseFriend from "../TrainingsList/ChooseFriend";
-import Toggle from "../_Tools/Toggle";
-import {ThemeProvider} from "@material-ui/core/styles";
+import IconButton from "../_Tools/IconButton";
+import {deepOrange, purple} from "@material-ui/core/colors";
+
 
 const themeModal = {
     width: '80%',
@@ -22,7 +24,8 @@ const MainBanner = (props) => {
 
     const showBanner = useSelector(state => state.app.showBanner);
     const userName = useSelector(state => state.app.userName);
-    const isPlayFriend = useSelector(state => state.app.isFriendShared);
+    const friendName = useSelector(state => state.app.friendName);
+    const isPlayFriend = friendName && true;
 
     const close = () => {
         dispatch({ type: types.APP_SHOW_BANNER, show: false });
@@ -40,27 +43,24 @@ const MainBanner = (props) => {
 
     const closeModal = () => {
         refModal.current.close();
-        dispatch({ type: types.APP_SET_PLAY_FRIEND, play: false });
         dispatch({ type: types.APP_SHOW_BANNER, show: false });
     };
     const resetSwitch = () => {
-        dispatch({ type: types.APP_SET_PLAY_FRIEND, play: false });
         dispatch({ type: types.APP_SHOW_BANNER, show: false });
         history.push('/trainings');
     };
 
     const refModal = useRef();
-    const refSwitch = useRef();
     const searchFriend = () => {
-        history.push('/trainings');
         dispatch({ type: types.APP_SHOW_BANNER, show: false });
-        if (!refSwitch.current.check()) {
-            dispatch({type: types.APP_SHOW_MENU, show: false});
-            dispatch({type: types.APP_SET_PLAY_FRIEND, play: true});
-            refModal.current.open();
-        } else {
-            dispatch({type: types.APP_SET_PLAY_FRIEND, play: false});
-        }
+        dispatch({ type: types.APP_SHOW_MENU, show: false });
+        refModal.current.open();
+        history.push('/trainings');
+    };
+    const stopFriend = () => {
+        dispatch({ type: types.APP_SHOW_BANNER, show: false });
+        dispatch({ type: types.APP_SET_FRIEND_NAME, friendName: null });
+        history.push('/trainings');
     };
 
 
@@ -84,8 +84,26 @@ const MainBanner = (props) => {
                     </div>
                     }
                     <div className="search-friend">
-                        <div className="flip-container">
-                            <Toggle ref={refSwitch} label={t('play friend btn title')} value={isPlayFriend} onChange={searchFriend}/>
+                        <div className="friend-setup-container">
+                            {!isPlayFriend ?
+                                <span className="title">{t('play friend btn title off')}</span> :
+
+                                <span className="title">
+                                    <span>{t('play friend btn title on')} </span>
+                                    <span className="friend-name">{friendName && friendName.slice(0,15)}</span>
+                                </span>
+                            }
+                            <div className="buttons">
+                                {isPlayFriend &&
+                                <div className="btn">
+                                    <IconButton size={2} faName="times-circle" backgroundColor={deepOrange[400]}
+                                                color={deepOrange[50]} onClick={stopFriend}/>
+                                </div>
+                                }
+                                <div className="btn">
+                                    <IconButton size={2} faName="search" backgroundColor={purple[400]} color={purple[50]} onClick={searchFriend}/>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="about"></div>

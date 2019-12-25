@@ -55,19 +55,28 @@
                 }
             }
             .search-friend {
-                .friend-btn-row {
+                margin-top: 1rem;
+
+                .friend-setup-container {
+                    font-size: 1rem;
                     display: flex;
+                    align-items: center;
                     width: 100%;
 
-                    .friend-btn-container {
-                        width: 7rem;
-                        margin: 0 auto;
+                    .title {
+                        margin-left: 1rem;
+
+                        .friend-name {
+                            font-size: 115%;
+                            font-weight: 600;
+                        }
                     }
-                    .msg {
-                        align-self: center;
-                        margin: 0 1rem;
-                        font-size: 1rem;
-                        padding: .5rem;
+                    .buttons {
+                        display: flex;
+
+                        .btn {
+                            margin-left: .3rem;
+                        }
                     }
                 }
             }

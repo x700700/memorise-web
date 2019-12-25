@@ -10,7 +10,6 @@ const appReducer = (  state = {
                           friendErrorMessage: 'Friend was not found',
                           authCheckEnded: false,
                           userName: null,
-                          isFriendShared: false,
                           friendName: null,
                           isSigningIn: false,
                           isSigningUp: false,
@@ -44,14 +43,12 @@ const appReducer = (  state = {
                 friendErrorMessage: action.friendErrorMessage || state.friendErrorMessage,
             };
         case types.APP_AUTH_SUCCEED:
-            const mem = localStorage.getItem(consts.localStorage.friendId);
-            const { isFriendShared, friendName } = (mem && JSON.parse(mem)) || {};
+            const friendName = localStorage.getItem(consts.localStorage.friendId);
             return {
                 ...state,
                 authCheckEnded: true,
                 userName: action.name,
                 friendName: friendName,
-                isFriendShared: isFriendShared,
             };
         case types.APP_AUTH_FAILED:
             logger.error('auth failed: ', action.message);
@@ -97,7 +94,6 @@ const appReducer = (  state = {
                 error: null,
                 authError: false,
                 friendName: null,
-                isFriendShared: false,
             };
 
         case types.APP_RESET_AUTH_ERROR:
@@ -109,20 +105,9 @@ const appReducer = (  state = {
         // ====================================================================================================
         // ====================================================================================================
 
-        case types.APP_SET_PLAY_FRIEND:
-            if (action.play) {
-                localStorage.setItem(consts.localStorage.friendId, JSON.stringify({ friendName: state.friendName, isFriendShared: action.play }));
-            } else {
-                localStorage.removeItem(consts.localStorage.friendId);
-            }
-            return {
-                ...state,
-                isFriendShared: action.play,
-            };
-
         case types.APP_SET_FRIEND_NAME:
             if (action.friendName) {
-                localStorage.setItem(consts.localStorage.friendId, JSON.stringify({ friendName: action.friendName, isFriendShared: state.isFriendShared }));
+                localStorage.setItem(consts.localStorage.friendId, action.friendName);
             } else {
                 localStorage.removeItem(consts.localStorage.friendId);
             }

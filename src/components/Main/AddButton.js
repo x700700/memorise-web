@@ -64,13 +64,13 @@ const AddButton = (props) => {
                 <div className="btn-container">
                     <IconButton size={3} faName="user" onClick={login}
                                 hide={!authCheckEnded || loggedInUserName || [consts.pageName.practice, consts.pageName.exam, consts.pageName.login].includes(currPage)}
-                                color="ffe6ff" backgroundColor="ff4ddd"
+                                color="#ffe6ff" backgroundColor="#ff4ddd"
                     />
                     <IconButton size={3} faName="plus" onClick={addTraining} hide={disableAddBtn || currPage !== consts.pageName.trainings}
-                                color="f5eaf7" backgroundColor="4a148c"
+                                color="#f5eaf7" backgroundColor="#4a148c"
                     />
                     <IconButton size={3} faName="plus" onClick={addExercise} hide={disableAddBtn || currPage !== consts.pageName.edit}
-                                color="f5eaf7" backgroundColor="4a148c"
+                                color="#f5eaf7" backgroundColor="#4a148c"
                     />
                 </div>
             </Tooltip>

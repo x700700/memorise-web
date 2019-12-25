@@ -61,7 +61,9 @@ i18n.use(LanguageDetector).init({
                 "exam on": "Exam on: ",
                 "practice on": "Memorize",
 
-                "play friend btn title": "Play A Friend's Trainings",
+                "play friend btn title": "Search A Friend's Trainings",
+                "play friend btn title off": "Open Friend Trainings",
+                "play friend btn title on": "Showing Trainings of Friend - ",
                 "play friend btn": "Play Friend",
                 "play mine btn title": "Hide Friend Trainings",
                 "play mine btn": "Hide Friend",
@@ -127,7 +129,9 @@ i18n.use(LanguageDetector).init({
                 "exam on": "בחינה ב-",
                 "practice on": "שינון",
 
-                "play friend btn title": "תרגל אימונים של חבר",
+                "play friend btn title": "חפש אימונים של חבר",
+                "play friend btn title off": "פתח אימונים של חבר",
+                "play friend btn title on": "מציג אימונים של החבר -",
                 "play friend btn": "חפש חבר",
                 "play mine btn title": "סגור אימונים של חבר",
                 "play mine btn": "סגור",
