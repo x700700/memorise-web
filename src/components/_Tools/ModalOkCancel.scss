@@ -2,6 +2,8 @@
 
 .modal-ok-cancel-container {
     direction: ltr;
+    width: min-content;
+    margin: 0 auto;
 
     .buttons {
         display: flex;
@@ -9,12 +11,13 @@
         margin: auto;
         margin-top: 1rem;
 
+        width: 125%;
+        margin-left: -15.5%;
+
         @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
-            width: 70%;
         }
         @media only screen and (min-device-width: 320px) and (max-device-width: $width-mobile-max)
         and (min-aspect-ratio: 13/9) {
-            width: 80%;
         }
 
         .button-container {
