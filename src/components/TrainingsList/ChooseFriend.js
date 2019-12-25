@@ -3,12 +3,11 @@ import './ChooseFriend.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router";
 import {useTranslation} from "react-i18next";
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import TextInput from "../_Tools/TextInput";
 import Button from "../_Tools/Button";
 import {validateName} from "../../common/utils";
 import { getFriendTrainingsList } from '../../redux/actions';
 import * as types from "../../redux/actionsTypes";
+import DropDown from "../_Tools/DropDown";
 
 
 const knownFriendsList = [
@@ -53,18 +52,10 @@ const ChooseFriend = ({ closeModal }) => {
         <div className="choose-friend-container">
             <div className="friend-row">
                 <div className="field friend-name">
-                    <Autocomplete
-                        freeSolo
-                        id="choose-friend-autocomplete"
-                        // disableClearable
-                        options={knownFriendsList.map(option => option.name)}
-                        onChange={onTagsChange}
-                        renderInput={params => (
-                            <TextInput ref={refName} label={t('friend name')} width="14rem" autoFocus={true}
-                                       error={errName} onChange={checkName}
-                                       autoComplete={params}
-                            />
-                        )}
+                    <DropDown id="choose-friend-autocomplete" options={knownFriendsList} onChoose={onTagsChange}
+                              width="14rem" autoFocus={true}
+                              refInput={refName} label={t('friend name')}
+                              error={errName} onChange={checkName}
                     />
                 </div>
             </div>
