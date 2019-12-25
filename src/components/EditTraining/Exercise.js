@@ -25,6 +25,7 @@ const Exercise = ({ exercise, disable }) => {
 
     const lastNewExerciseId = useSelector(state => state.editTraining.lastNewExerciseId);
     const translatedWord = useSelector(state => state.editTraining.translatedWord);
+    const [currentAnswer, setCurrentAnswer] = useState(exercise.a);
 
     /*
     const onModalClose = () => {
@@ -65,6 +66,7 @@ const Exercise = ({ exercise, disable }) => {
         const foo = refQ.current.value();
         refQ.current.setValue(refA.current.value());
         refA.current.setValue(foo);
+        setCurrentAnswer(foo);
     };
 
 
@@ -73,8 +75,9 @@ const Exercise = ({ exercise, disable }) => {
             logger.trace('Put Translated:', translatedWord);
             const newWord = translatedWord.charAt(0).toUpperCase() + translatedWord.slice(1);
             refA.current.setValue(newWord);
+            setCurrentAnswer(newWord);
         }
-    }, [translatedWord]);
+    }, [translatedWord, setCurrentAnswer]);
 
 
     useEffect(() => {
@@ -96,7 +99,6 @@ const Exercise = ({ exercise, disable }) => {
         direction: isRtl(exercise.a) ? 'rtl' : 'ltr',
     };
 
-    const [currentAnswer, setCurrentAnswer] = useState(exercise.a);
     const answerChange = (a) => {
         setCurrentAnswer(a);
     };
