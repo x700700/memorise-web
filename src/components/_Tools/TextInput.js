@@ -194,10 +194,14 @@ const TextInput = forwardRef(({
                                     {showPass ? <Visibility /> : <VisibilityOff />}
                                 </IconButton>
                             </InputAdornment>
-                        ) : !['q', 'a'].includes(type) ? null : (
+                        ) : ['q', 'a'].includes(type) ? (
                             <IconButton onClick={clearText}>
                                 <Clear />
                             </IconButton>
+                        ) : !autoComplete ? null : (
+                            <React.Fragment>
+                                {autoComplete.InputProps.endAdornment}
+                            </React.Fragment>
                         ),
                     }}
                 />

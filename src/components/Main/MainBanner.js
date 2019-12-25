@@ -46,19 +46,20 @@ const MainBanner = (props) => {
     const resetSwitch = () => {
         dispatch({ type: types.APP_SET_PLAY_FRIEND, play: false });
         dispatch({ type: types.APP_SHOW_BANNER, show: false });
+        history.push('/trainings');
     };
 
     const refModal = useRef();
     const refSwitch = useRef();
     const searchFriend = () => {
+        history.push('/trainings');
+        dispatch({ type: types.APP_SHOW_BANNER, show: false });
         if (!refSwitch.current.check()) {
             dispatch({type: types.APP_SHOW_MENU, show: false});
             dispatch({type: types.APP_SET_PLAY_FRIEND, play: true});
             refModal.current.open();
         } else {
             dispatch({type: types.APP_SET_PLAY_FRIEND, play: false});
-            dispatch({type: types.APP_SHOW_BANNER, show: false});
-            history.push('/trainings');
         }
     };
 

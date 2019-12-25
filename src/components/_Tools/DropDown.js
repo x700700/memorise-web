@@ -4,7 +4,7 @@ import TextInput from "./TextInput";
 
 const DropDown = forwardRef(({
                                  id, label, width,
-                                 options, onChoose,
+                                 options, freeSolo, onChoose,
                                  refInput, autoFocus, error, onChange
                              }, ref) => {
         useImperativeHandle(ref, () => ({
@@ -12,7 +12,7 @@ const DropDown = forwardRef(({
 
         return (
         <Autocomplete
-            freeSolo
+            freeSolo={freeSolo}
             id={id}
             options={options.map(option => option.name)}
             onChange={onChoose}

@@ -52,7 +52,7 @@ const ChooseFriend = ({ closeModal }) => {
         <div className="choose-friend-container">
             <div className="friend-row">
                 <div className="field friend-name">
-                    <DropDown id="choose-friend-autocomplete" options={knownFriendsList} onChoose={onTagsChange}
+                    <DropDown id="choose-friend-autocomplete" options={knownFriendsList} freeSolo onChoose={onTagsChange}
                               width="14rem" autoFocus={true}
                               refInput={refName} label={t('friend name')}
                               error={errName} onChange={checkName}
