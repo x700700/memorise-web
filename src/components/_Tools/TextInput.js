@@ -5,7 +5,7 @@ import consts from "../../common/consts";
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
-import { HelpOutline, ErrorOutline, Edit, Visibility, VisibilityOff, Clear } from '@material-ui/icons';
+import { Visibility, VisibilityOff, Clear } from '@material-ui/icons';
 import { deepPurple } from '@material-ui/core/colors';
 import logger from "../../common/logger";
 import {isRtl} from "../../common/utils";

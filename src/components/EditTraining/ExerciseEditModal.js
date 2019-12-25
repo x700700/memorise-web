@@ -26,10 +26,14 @@ const ExerciseEditModal = ({ modalRef, exercise, disable }) => {
     const refA = useRef();
 
     const translatedWord = useSelector(state => state.editTraining.translatedWord);
-    const [currentAnswer, setCurrentAnswer] = useState(exercise.a);
+    const [currentQ, setCurrentQ] = useState(exercise.q);
+    const [currentA, setCurrentA] = useState(exercise.a);
 
+    const questionChange = (q) => {
+        setCurrentQ(q);
+    };
     const answerChange = (a) => {
-        setCurrentAnswer(a);
+        setCurrentA(a);
     };
     const translate = () => {
         const word = refQ.current.value();
@@ -40,15 +44,18 @@ const ExerciseEditModal = ({ modalRef, exercise, disable }) => {
         }
     };
     const switchQA = () => {
-        const foo = refQ.current.value();
+        const temp = refQ.current.value();
+        setCurrentQ(refA.current.value());
+        setCurrentA(temp);
         refQ.current.setValue(refA.current.value());
-        refA.current.setValue(foo);
-        setCurrentAnswer(foo);
+        refA.current.setValue(temp);
+
     };
 
     const cancel = () => {
         !disable && modalRef.current.close(); // causes the Modal not to be openned
-        setCurrentAnswer(exercise.a);
+        setCurrentQ(exercise.q);
+        setCurrentA(exercise.a);
     };
     const save = () => {
         // logger.warn('SAVE Exercise - ', refQ.current.value(), refA.current.value());
@@ -57,7 +64,8 @@ const ExerciseEditModal = ({ modalRef, exercise, disable }) => {
             a: refA.current.value(),
         };
         dispatch(saveExercise(exercise.trainingId, exercise.id, updatedExercise));
-        setCurrentAnswer(updatedExercise.a);
+        setCurrentQ(updatedExercise.q);
+        setCurrentA(updatedExercise.a);
         modalRef.current.close(); // causes the Modal not to be openned
     };
     const del = () => {
@@ -70,9 +78,9 @@ const ExerciseEditModal = ({ modalRef, exercise, disable }) => {
         if (refA.current && !refA.current.value() && refQ.current && refQ.current.value() && translatedWord && translatedWord.length < 20) {
             logger.trace('Put Translated:', translatedWord);
             refA.current.setValue(translatedWord);
-            setCurrentAnswer(translatedWord);
+            setCurrentA(translatedWord);
         }
-    }, [translatedWord, setCurrentAnswer]);
+    }, [translatedWord, setCurrentA]);
 
     return (
         <ThemeProvider theme={themeModal}>
@@ -88,7 +96,7 @@ const ExerciseEditModal = ({ modalRef, exercise, disable }) => {
                         <div className="switch-qa">
                             <IconButton size={1.5} faName="random" onClick={switchQA}/>
                         </div>
-                        <div className="paste-translate" style={{ display: currentAnswer ? 'none' : 'flex' }} onClick={translate}>
+                        <div className="paste-translate" style={{ display: !currentQ || currentA ? 'none' : 'flex' }} onClick={translate}>
                             <div className="arrow">
                                 <IconButton size={1.5} faName="long-arrow-alt-down" />
                             </div>
@@ -99,7 +107,7 @@ const ExerciseEditModal = ({ modalRef, exercise, disable }) => {
                         <div className="field question">
                             <TextInput ref={refQ} defaultValue={exercise.q} autoFocus={true}
                                        clearTextIcon={true} startInputAdornment={<HelpOutline/>}
-                                       onEnter={() => refA.current.focus()} />
+                                       onChange={questionChange} onEnter={() => refA.current.focus()} />
                         </div>
                         <div className="field answer">
                             <TextInput ref={refA} defaultValue={exercise.a}
