@@ -8,6 +8,7 @@ export default {
     },
     ui: {
         headerHeight: 53,
+        inputMaxLength: 35,
     },
     pageName: {
         login: 'login',

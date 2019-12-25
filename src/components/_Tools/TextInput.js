@@ -1,6 +1,7 @@
 import React, {useState, forwardRef, useImperativeHandle, useEffect} from 'react';
 import {useTranslation} from "react-i18next";
 import { createMuiTheme, makeStyles, MuiThemeProvider } from '@material-ui/core/styles';
+import consts from "../../common/consts";
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
@@ -122,7 +123,7 @@ const TextInput = forwardRef(({
     let typeName = ['q', 'a', 'training'].includes(type) ? 'text' : type || 'text';
     if (type === 'password') typeName = showPass ? 'text' : 'password';
 
-    const inputProps = autoComplete ? {} : { inputProps: {maxLength: 22} };
+    const inputProps = autoComplete ? {} : { inputProps: { maxLength: consts.ui.inputMaxLength } };
     return (
         <div className="text-input">
             <MuiThemeProvider theme={muiTheme || themeDefault}>
