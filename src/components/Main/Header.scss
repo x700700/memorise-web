@@ -58,6 +58,14 @@
             margin-top: .4rem;
             margin-left: -.4rem;
 
+            .separator {
+                background-color: $purple6;
+                width: 1px;
+                height: 58%;
+                display: inline-block;
+                transform: translate(-2px, 18%);
+            }
+
             .btn {
                 margin: 0 .7rem;
                 i {
