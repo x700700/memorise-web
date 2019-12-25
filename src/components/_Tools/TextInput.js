@@ -53,6 +53,10 @@ const TextInput = forwardRef(({
         showPassword(show) {
             setShowPass(show);
         },
+        focus() {
+            setFocused(true);
+            inputRef.current.focus();
+        },
     }));
 
     const { t } = useTranslation();
@@ -123,12 +127,14 @@ const TextInput = forwardRef(({
     let typeName = ['q', 'a', 'training'].includes(type) ? 'text' : type || 'text';
     if (type === 'password') typeName = showPass ? 'text' : 'password';
 
+    const inputRef = React.useRef();
     const inputProps = autoComplete ? {} : { inputProps: { maxLength: consts.ui.inputMaxLength } };
     return (
         <div className="text-input">
             <MuiThemeProvider theme={muiTheme || themeDefault}>
                 <TextField
                     {...autoCompleteSafeParams}
+                    inputRef={inputRef}
                     value={val}
                     variant={label ? 'outlined' : 'standard'}
                     type={typeName}

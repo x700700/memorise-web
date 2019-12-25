@@ -37,8 +37,10 @@ const Exercise = ({ exercise, disable }) => {
         !disable && refModal.current.close(); // causes the Modal not to be openned
     };
 
-    const translate = (word) => {
-        if (word && word.trim().length >= 2 && !refA.current.value()) {
+    const translate = () => {
+        const word = refQ.current.value();
+        const answer = refA.current.value();
+        if (word && word.trim().length >= 2 && !answer) {
             logger.trace('Translate: ', word);
             dispatch(getTranslate(word));
         }
@@ -107,11 +109,16 @@ const Exercise = ({ exercise, disable }) => {
                         <div className="delete-btn">
                             <IconButton size={2} faName="trash-alt" onClick={del}/>
                         </div>
-                        <div className="switch-btn">
-                            <IconButton size={1.5} faName="random" onClick={switchQA}/>
+                        <div className="switch-btns">
+                            <div className="switch-qa">
+                                <IconButton size={1.5} faName="random" onClick={switchQA}/>
+                            </div>
+                            <div className="paste-translate">
+                                <IconButton size={1.5} faName="language" onClick={translate}/>
+                            </div>
                         </div>
                         <div className="field question">
-                            <TextInput ref={refQ} type="q" defaultValue={exercise.q} autoFocus={true} onEnter={translate} onBlur={translate}/>
+                            <TextInput ref={refQ} type="q" defaultValue={exercise.q} autoFocus={true} onEnter={() => refA.current.focus()} />
                         </div>
                         <div className="field answer">
                             <TextInput ref={refA} type="a" defaultValue={exercise.a} onEnter={() => refModal.current.setOkFocused()}/>

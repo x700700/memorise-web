@@ -50,11 +50,13 @@
             color: red;
         }
     }
-    .switch-btn {
+    .switch-btns {
         position: absolute;
-        left: -3.7rem;
-        top: 2.4rem;
-        margin: .5rem;
+        display: flex;
+        width: 130%;
+        justify-content: space-between;
+        margin-left: -15.5%;
+        top: 2.9rem;
 
         i {
             color: $grey2;
