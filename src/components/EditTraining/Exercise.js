@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import './Exercise.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
@@ -35,6 +35,7 @@ const Exercise = ({ exercise, disable }) => {
     };
     const cancel = () => {
         !disable && refModal.current.close(); // causes the Modal not to be openned
+        setCurrentAnswer(exercise.a);
     };
 
     const translate = () => {
@@ -53,6 +54,7 @@ const Exercise = ({ exercise, disable }) => {
             a: refA.current.value(),
         };
         dispatch(saveExercise(exercise.trainingId, exercise.id, updatedExercise));
+        setCurrentAnswer(updatedExercise.a);
         refModal.current.close(); // causes the Modal not to be openned
     };
     const del = () => {
@@ -94,6 +96,10 @@ const Exercise = ({ exercise, disable }) => {
         direction: isRtl(exercise.a) ? 'rtl' : 'ltr',
     };
 
+    const [currentAnswer, setCurrentAnswer] = useState(exercise.a);
+    const answerChange = (a) => {
+        setCurrentAnswer(a);
+    };
     return (
         <div className="edit-training-exercise-container" style={styleContainer}>
             <div className="exercise-col" onClick={edit}>
@@ -113,15 +119,18 @@ const Exercise = ({ exercise, disable }) => {
                             <div className="switch-qa">
                                 <IconButton size={1.5} faName="random" onClick={switchQA}/>
                             </div>
-                            <div className="paste-translate">
-                                <IconButton size={1.5} faName="language" onClick={translate}/>
+                            <div className="paste-translate" style={{ display: currentAnswer ? 'none' : 'flex' }} onClick={translate}>
+                                <div className="arrow">
+                                    <IconButton size={1.5} faName="long-arrow-alt-down" />
+                                </div>
+                                <IconButton size={1.5} faName="language" />
                             </div>
                         </div>
                         <div className="field question">
                             <TextInput ref={refQ} type="q" defaultValue={exercise.q} autoFocus={true} onEnter={() => refA.current.focus()} />
                         </div>
                         <div className="field answer">
-                            <TextInput ref={refA} type="a" defaultValue={exercise.a} onEnter={() => refModal.current.setOkFocused()}/>
+                            <TextInput ref={refA} type="a" defaultValue={exercise.a} onChange={answerChange} onEnter={() => refModal.current.setOkFocused()}/>
                         </div>
                     </div>
                 </ModalOkCancel>

@@ -110,6 +110,7 @@ const TextInput = forwardRef(({
     };
     const clearText = () => {
         setVal('');
+        onChange && onChange('');
     };
 
 

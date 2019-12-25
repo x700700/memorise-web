@@ -53,10 +53,18 @@
     .switch-btns {
         position: absolute;
         display: flex;
-        width: 130%;
+        width: 133%;
         justify-content: space-between;
-        margin-left: -15.5%;
+        margin-left: -13.5%;
         top: 2.9rem;
+
+        .paste-translate {
+            display: flex;
+
+            .arrow {
+                margin-right: -1.1rem;
+            }
+        }
 
         i {
             color: $grey2;
