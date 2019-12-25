@@ -22,23 +22,18 @@ const useStyles = makeStyles(theme => ({
     root: {
         margin: theme.margin || '0rem',
         marginTop: theme.marginTop,
+        fontSize: theme.fontSize || '1rem',
+        fontWeight: theme.fontWeight || 400,
     },
     iconMargin: {
         margin: '0 .2rem',
     },
-    fontExercise: {
-        fontSize: '1.5rem',
-        fontWeight: 600,
-    },
-    fontTraining: {
-        fontSize: '1.1rem',
-        fontWeight: 600,
-    },
 }));
 
 const TextInput = forwardRef(({
-                                  muiTheme,
+                                  muiTheme, startInputAdornment,
                                   autoComplete, width, label, type, defaultValue, autoFocus,
+                                  clearTextIcon,
                                   onEnter, onFocus, onBlur, onChange, disabled, error,
                                   forceShowPassword, onShowPassword,
                               }, ref) => {
@@ -124,9 +119,7 @@ const TextInput = forwardRef(({
         setVal(defaultValue);
     }, [setVal, defaultValue]);
 
-    let inputClassName = ['q', 'a'].includes(type) && classes.fontExercise;
-    inputClassName = (type === 'training' && classes.fontTraining) || inputClassName;
-    let typeName = ['q', 'a', 'training'].includes(type) ? 'text' : type || 'text';
+    let typeName = type || 'text';
     if (type === 'password') typeName = showPass ? 'text' : 'password';
 
     const inputRef = React.useRef();
@@ -168,22 +161,13 @@ const TextInput = forwardRef(({
                         // type: autoComplete && 'search',
                         ...autoCompleteSafeParams.InputProps,
                         classes: {
-                            input: inputClassName,
+                            input: classes.root,
                         },
-                        startAdornment: label ? null : (
+                        startAdornment: !startInputAdornment ? null : (
                             <InputAdornment position="start" className={classes.iconMargin}>
-                                {type === 'q' &&
-                                <HelpOutline/>
-                                }
-                                {type === 'a' &&
-                                <ErrorOutline/>
-                                }
-                                {type === 'training' &&
-                                <Edit/>
-                                }
+                                {startInputAdornment}
                             </InputAdornment>
                         ),
-
                         endAdornment: type === 'password' ? (
                             <InputAdornment position="end">
                                 <IconButton
@@ -194,7 +178,7 @@ const TextInput = forwardRef(({
                                     {showPass ? <Visibility /> : <VisibilityOff />}
                                 </IconButton>
                             </InputAdornment>
-                        ) : ['q', 'a'].includes(type) ? (
+                        ) : clearTextIcon ? (
                             <IconButton onClick={clearText}>
                                 <Clear />
                             </IconButton>

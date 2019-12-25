@@ -7,20 +7,15 @@ import TextInput from "../_Tools/TextInput";
 import {ThemeProvider} from '@material-ui/core/styles';
 import IconButton from "../_Tools/IconButton";
 import {renameTraining} from "../../redux/actions";
+import {Edit} from "@material-ui/icons";
 
 
 const themeName = {
     margin: '0px',
-    marginTop: '.5rem',
+    marginTop: '.25rem',
+    fontSize: '1.1rem',
+    fontWeight: 600,
 };
-/*
-const muiThemeName = createMuiTheme({
-        palette: {
-            primary: orange,
-        },
-    },
-);
- */
 
 const EditTrainingHeader = ({ id, play, exam, onNameEdit }) => {
     const dispatch = useDispatch();
@@ -82,7 +77,8 @@ const EditTrainingHeader = ({ id, play, exam, onNameEdit }) => {
                     <ThemeProvider theme={themeName}>
                         <TextInput ref={refName}
                                    // muiTheme={muiThemeName}
-                                   type="training" defaultValue={name} autoFocus={shouldAutoFocus}
+                                   startInputAdornment={<Edit/>}
+                                   defaultValue={name} autoFocus={shouldAutoFocus}
                                    onEnter={rename} onFocus={onNameFocus} onBlur={onNameBlur}
                                    disabled={!isLoggedIn || nameInputDisabled}
                         />

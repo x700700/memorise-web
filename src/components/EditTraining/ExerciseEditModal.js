@@ -8,10 +8,15 @@ import ModalOkCancel from "../_Tools/ModalOkCancel";
 import TextInput from "../_Tools/TextInput";
 import IconButton from "../_Tools/IconButton";
 import {deleteExercise, getTranslate, saveExercise} from '../../redux/actions'
+import {ErrorOutline, HelpOutline} from "@material-ui/icons";
 
 const themeModal = {
     width: '80%',
     height: 235,
+};
+const themeQA = {
+    fontSize: '1.5rem',
+    fontWeight: 600,
 };
 
 const ExerciseEditModal = ({ modalRef, exercise, disable }) => {
@@ -90,12 +95,18 @@ const ExerciseEditModal = ({ modalRef, exercise, disable }) => {
                             <IconButton size={1.5} faName="language" />
                         </div>
                     </div>
-                    <div className="field question">
-                        <TextInput ref={refQ} type="q" defaultValue={exercise.q} autoFocus={true} onEnter={() => refA.current.focus()} />
-                    </div>
-                    <div className="field answer">
-                        <TextInput ref={refA} type="a" defaultValue={exercise.a} onChange={answerChange} onEnter={() => modalRef.current.setOkFocused()}/>
-                    </div>
+                    <ThemeProvider theme={themeQA}>
+                        <div className="field question">
+                            <TextInput ref={refQ} defaultValue={exercise.q} autoFocus={true}
+                                       clearTextIcon={true} startInputAdornment={<HelpOutline/>}
+                                       onEnter={() => refA.current.focus()} />
+                        </div>
+                        <div className="field answer">
+                            <TextInput ref={refA} defaultValue={exercise.a}
+                                       clearTextIcon={true} startInputAdornment={<ErrorOutline/>}
+                                       onChange={answerChange} onEnter={() => modalRef.current.setOkFocused()}/>
+                        </div>
+                    </ThemeProvider>
                 </div>
             </ModalOkCancel>
         </ThemeProvider>);
