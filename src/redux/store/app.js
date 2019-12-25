@@ -210,6 +210,7 @@ const appReducer = (  state = {
                 ...state,
                 showBanner: action.show,
                 showMenu: false,
+                activeDrawerTrainingId: null,
             };
         case types.APP_SHOW_MODAL:
             return {
