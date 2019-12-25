@@ -5,9 +5,9 @@ import {useHistory} from "react-router";
 import {useTranslation} from "react-i18next";
 import logger from "../../common/logger";
 import consts from "../../common/consts";
+import * as types from "../../redux/actionsTypes";
 import {createExercise, createTraining} from "../../redux/actions";
 import IconButton from "../_Tools/IconButton";
-import * as types from "../../redux/actionsTypes";
 import Tooltip from "../_Tools/Toolip";
 
 
@@ -67,10 +67,10 @@ const AddButton = (props) => {
                                 color="ffe6ff" backgroundColor="ff4ddd"
                     />
                     <IconButton size={3} faName="plus" onClick={addTraining} hide={disableAddBtn || currPage !== consts.pageName.trainings}
-                                color="eee6ff" backgroundColor="884dff"
+                                color="f5eaf7" backgroundColor="4a148c"
                     />
                     <IconButton size={3} faName="plus" onClick={addExercise} hide={disableAddBtn || currPage !== consts.pageName.edit}
-                                color="eee6ff" backgroundColor="884dff"
+                                color="f5eaf7" backgroundColor="4a148c"
                     />
                 </div>
             </Tooltip>
