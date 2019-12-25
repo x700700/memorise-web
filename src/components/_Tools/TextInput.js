@@ -49,6 +49,7 @@ const TextInput = forwardRef(({
         setValue(_val, callOnChange = false) {
             setVal(_val);
             callOnChange && onChange && onChange(_val);
+            _val && setStyle(rtlStyle(_val));
         },
         showPassword(show) {
             setShowPass(show);
