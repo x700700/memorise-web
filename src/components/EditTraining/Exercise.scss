@@ -4,8 +4,6 @@
     margin: 1rem 1rem;
     border: $grey2 .5px solid;
     padding: .2rem;
-    //min-width: 100px;
-    //max-width: 100px;
 
     .exercise-col {
         text-align: left;
@@ -29,50 +27,5 @@
         .answer {
             background-color: rgba(0,0,0,.1);
         }
-    }
-}
-
-.edit-modal-container {
-    position: relative;
-    width: 16rem;
-    margin: 0 auto;
-
-    @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
-    }
-
-    .delete-btn {
-        position: absolute;
-        right: -3.7rem;
-        top: -4rem;
-        margin: .5rem;
-
-        i {
-            color: red;
-        }
-    }
-    .switch-btns {
-        position: absolute;
-        display: flex;
-        width: 133%;
-        justify-content: space-between;
-        margin-left: -13.5%;
-        top: 2.9rem;
-
-        .paste-translate {
-            display: flex;
-
-            .arrow {
-                margin-right: -1.1rem;
-            }
-        }
-
-        i {
-            color: $grey2;
-        }
-    }
-
-    .question {
-        margin-top: 2rem;
-        margin-bottom: 1.5rem;
     }
 }
