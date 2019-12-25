@@ -3,19 +3,12 @@ import './MainBanner.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useHistory} from "react-router";
-import {ThemeProvider} from "@material-ui/core/styles";
 import consts from "../../common/consts";
 import * as types from "../../redux/actionsTypes";
-import Modal from "../_Tools/Modal";
-import ChooseFriend from "../TrainingsList/ChooseFriend";
+import ChooseFriendModal from "../TrainingsList/ChooseFriendModal";
 import IconButton from "../_Tools/IconButton";
 import {deepOrange, purple} from "@material-ui/core/colors";
 
-
-const themeModal = {
-    width: '80%',
-    height: 235,
-};
 
 const MainBanner = (props) => {
     const dispatch = useDispatch();
@@ -110,11 +103,8 @@ const MainBanner = (props) => {
                     <div className="footer"></div>
                 </div>
             </div>
-            <ThemeProvider theme={themeModal}>
-                <Modal ref={refModal} title={t('play friend btn title')} disableBackdropClick={false} onClose={resetSwitch}>
-                    <ChooseFriend closeModal={closeModal}/>
-                </Modal>
-            </ThemeProvider>
+
+            <ChooseFriendModal modalRef={refModal} closeModal={closeModal} onClose={resetSwitch}/>
         </div>);
 };
 export default MainBanner;
