@@ -1,4 +1,5 @@
 import * as types from '../actionsTypes';
+import {captializeWords} from "../../common/utils";
 
 const editTrainingReducer = (  state = {
                                    isFetching: false,
@@ -173,11 +174,12 @@ const editTrainingReducer = (  state = {
                 translatedWord: null,
             };
         case types.FETCH_TRANSLATE_SUCCEED:
+            const word = captializeWords(action.translation.translation);
             return {
                 ...state,
                 isFetching: false,
                 wordToTranslate: null,
-                translatedWord: action.translation.translation,
+                translatedWord: word,
             };
         case types.FETCH_TRANSLATE_FAILED:
             return {
