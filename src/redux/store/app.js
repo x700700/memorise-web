@@ -43,7 +43,11 @@ const appReducer = (  state = {
                 friendErrorMessage: action.friendErrorMessage || state.friendErrorMessage,
             };
         case types.APP_AUTH_SUCCEED:
-            const friendName = localStorage.getItem(consts.localStorage.friendId);
+            let friendName = localStorage.getItem(consts.localStorage.friendId);
+            if (friendName && friendName.includes('{')) {
+                friendName = null;
+                localStorage.removeItem(consts.localStorage.friendId);
+            }
             return {
                 ...state,
                 authCheckEnded: true,
