@@ -8,7 +8,7 @@
 }
 
 button {
-    @media only screen and (min-device-width: $width-mobile-min) and (max-device-width: $width-mobile-max) {
+    @media #{$mobile} {
         cursor: auto;
     }
 }

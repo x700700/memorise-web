@@ -10,8 +10,7 @@
         align-self: flex-end;
         margin-bottom: 1rem;
 
-        @media only screen and (min-device-width: $width-mobile-min) and (max-device-width: $width-mobile-max)
-        and (min-aspect-ratio: 13/9) {
+        @media #{$mobile} and #{$landscape} {
             margin-bottom: .1rem;
         }
     }

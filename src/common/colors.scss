@@ -34,3 +34,11 @@ $width-ipad-pro-max: 2048px;
 $width-mobile-min: 320px;
 $width-mobile-max: 1280px;
 $height-desktop-min: 640px;
+
+
+$mobile: "only screen and (min-device-width: #{$width-mobile-min}) and (max-device-width: #{$width-mobile-max})";
+$landscape: "(min-aspect-ratio: 13/9)";
+
+$desktop: "(min-device-width: #{$width-desktop-min}) and (min-device-height: #{$height-desktop-min})";
+$ipad: "only screen and (min-device-width: #{$width-ipad-min}) and (max-device-width: #{$width-ipad-max})";
+$ipad-pro: "only screen and (min-device-width: #{$width-ipad-pro-min}) and (max-device-width: #{$width-ipad-pro-max})";

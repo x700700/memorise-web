@@ -31,7 +31,7 @@
         margin: auto;
         direction: rtl;
 
-        @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
+        @media #{$desktop} {
             justify-content: initial;
         }
 
@@ -45,7 +45,7 @@
             width: 7rem;
             margin: 0 auto;
 
-            @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
+            @media #{$desktop} {
                 margin: 0;
             }
         }

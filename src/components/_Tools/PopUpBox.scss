@@ -14,8 +14,7 @@
     transform: translateY(150%);
     transition: transform .5s ease-in-out;
 
-    @media only screen and (min-device-width: $width-mobile-min) and (max-device-width: $width-mobile-max)
-    and (min-aspect-ratio: 13/9) {
+    @media #{$mobile} and #{$landscape} {
         height: 75%;
     }
 }

@@ -10,8 +10,7 @@
         overflow-x: hidden;
         position: relative;
 
-        @media only screen and (min-device-width: $width-mobile-min) and (max-device-width: $width-mobile-max)
-        and (min-aspect-ratio: 13/9) {
+        @media #{$mobile} and #{$landscape} {
             height: 100%;
         }
 
@@ -20,15 +19,13 @@
             height: 70vh;
             position: relative;
 
-            @media only screen and (min-device-width: $width-mobile-min) and (max-device-width: $width-mobile-max)
-            and (min-aspect-ratio: 13/9) {
+            @media #{$mobile} and #{$landscape} {
                 height: 100%;
                 width: 66%;
                 margin-left: -29%;
             }
 
-            @media only screen and (min-device-width: $width-ipad-pro-min) and (max-device-width: $width-ipad-pro-max)
-            and (orientation : portrait) {
+            @media #{$ipad-pro} and (orientation: portrait) {
                 height: 47vh;
             }
 
@@ -90,8 +87,7 @@
             transform: translateX(0);
             transition: transform 0.5s ease-in-out, opacity 0.3s linear;
 
-            @media only screen and (min-device-width: $width-mobile-min) and (max-device-width: $width-mobile-max)
-            and (min-aspect-ratio: 13/9) {
+            @media #{$mobile} and #{$landscape} {
                 transform: translateX(22%);
             }
         }

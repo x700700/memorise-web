@@ -12,7 +12,7 @@
             flex-direction: column;
             margin-bottom: 6rem;
 
-            @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
+            @media #{$desktop} {
                 flex-direction: row;
                 flex-wrap: wrap;
 
@@ -24,8 +24,7 @@
                     margin: 0 2.5%;
                 }
             }
-            @media only screen and (min-device-width: $width-ipad-min) and (max-device-width: $width-ipad-max)
-            and (orientation : portrait) {
+            @media #{$ipad} and (orientation: portrait) {
                 flex-direction: row;
                 flex-wrap: wrap;
 

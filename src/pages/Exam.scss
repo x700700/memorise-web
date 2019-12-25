@@ -7,21 +7,19 @@
     position: relative;
     overflow-y: hidden;
 
-    @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
+    @media #{$desktop} {
         width: 480px;
         height: 87%;
         margin: .3rem auto;
         padding: .3rem;
     }
-    @media only screen and (min-device-width: $width-ipad-min) and (max-device-width: $width-ipad-max)
-    and (orientation : portrait) {
+    @media #{$ipad} and (orientation: portrait) {
         width: 480px;
         height: 87%;
         margin: .3rem auto;
         padding: .3rem;
     }
-    @media only screen and (min-device-width: $width-ipad-pro-min) and (max-device-width: $width-ipad-pro-max)
-    and (orientation : portrait) {
+    @media #{$ipad-pro} and (orientation: portrait) {
         height: 61%;
     }
 
@@ -34,14 +32,13 @@
             text-align: center;
             padding-top: 0.3rem;
 
-            @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
+            @media #{$desktop} {
                 height: 95%;
             }
-            @media only screen and (min-device-width: $width-mobile-min) and (max-device-width: $width-mobile-max) {
+            @media #{$mobile} {
                 flex-grow: 1;
             }
-            @media only screen and (min-device-width: $width-mobile-min) and (max-device-width: $width-mobile-max)
-            and (min-aspect-ratio: 13/9) {
+            @media #{$mobile} and #{$landscape} {
                 height: 87%;
             }
         }

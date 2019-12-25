@@ -14,10 +14,9 @@
         width: 125%;
         margin-left: -15.5%;
 
-        @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
+        @media #{$desktop} {
         }
-        @media only screen and (min-device-width: $width-mobile-min) and (max-device-width: $width-mobile-max)
-        and (min-aspect-ratio: 13/9) {
+        @media #{$mobile} and #{$landscape} {
         }
 
         .button-container {

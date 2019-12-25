@@ -5,15 +5,14 @@
     background-color: $grey8blueMask;
     border: $grey4 2px solid;
 
-    @media (min-device-width: $width-desktop-min) and (min-device-height: $height-desktop-min) {
+    @media #{$desktop} {
         width: 480px;
         height: 87%;
         margin: .3rem auto;
         padding: .3rem;
     }
 
-    @media only screen and (min-device-width: $width-ipad-pro-min) and (max-device-width: $width-ipad-pro-max)
-    and (orientation : portrait) {
+    @media #{$ipad-pro} and (orientation: portrait) {
         height: 60%;
     }
 
@@ -27,11 +26,10 @@
             text-align: center;
             padding-top: 0.3rem;
 
-            @media only screen and (min-device-width: $width-mobile-min) and (max-device-width: $width-mobile-max) {
+            @media #{$mobile} {
                 flex-grow: 1;
             }
-            @media only screen and (min-device-width: $width-mobile-min) and (max-device-width: $width-mobile-max)
-            and (min-aspect-ratio: 13/9) {
+            @media #{$mobile} and #{$landscape} {
                 height: 80%;
                 display: flex;
             }
@@ -53,8 +51,7 @@
                 padding: .1rem;
                 margin: .1rem 1.2rem;
 
-                @media only screen and (min-device-width: $width-mobile-min) and (max-device-width: $width-mobile-max)
-                and (min-aspect-ratio: 13/9) {
+                @media #{$mobile} and #{$landscape} {
                     right: 4rem;
                     width: 11rem;
                 }
@@ -79,8 +76,7 @@
                 display: flex;
                 justify-content: space-between;
 
-                @media only screen and (min-device-width: $width-mobile-min) and (max-device-width: $width-mobile-max)
-                and (min-aspect-ratio: 13/9) {
+                @media #{$mobile} and #{$landscape} {
                     flex-direction: column-reverse;
                 }
 
