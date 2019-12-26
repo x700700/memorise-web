@@ -82,6 +82,12 @@ const ExerciseEditModal = ({ modalRef, exercise, disable }) => {
         }
     }, [translatedWord, setCurrentA]);
 
+    useEffect(() => {
+        logger.trace('A modal created for a new Exercise');
+        setCurrentQ(exercise.q);
+        setCurrentA(exercise.a)
+    }, [exercise, setCurrentQ, setCurrentA]);
+
     return (
         <ThemeProvider theme={themeModal}>
             <ModalOkCancel ref={modalRef} title={t("edit exercise")}
