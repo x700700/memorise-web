@@ -26,19 +26,24 @@ $purple7: #f5f0ff;
 $purple10: #f5eaf7;
 
 
-$width-desktop-min: 813px;
-$width-ipad-min: 768px;
-$width-ipad-pro-min: 1024px;
-$width-ipad-max: 1024px;
-$width-ipad-pro-max: 2048px;
 $width-mobile-min: 320px;
-$width-mobile-max: 1280px;
+$width-mobile-max: 1023px;
+
+$width-desktop-min: 813px;
 $height-desktop-min: 640px;
 
+$width-ipad-min: 768px;
+$width-ipad-max: 1024px;
 
-$mobile: "only screen and (min-device-width: #{$width-mobile-min}) and (max-device-width: #{$width-mobile-max})";
-$landscape: "(min-aspect-ratio: 13/9)";
+$width-ipad-pro-min: 1024px;
+$width-ipad-pro-max: 1366px;
 
-$desktop: "(min-device-width: #{$width-desktop-min}) and (min-device-height: #{$height-desktop-min})";
-$ipad: "only screen and (min-device-width: #{$width-ipad-min}) and (max-device-width: #{$width-ipad-max})";
-$ipad-pro: "only screen and (min-device-width: #{$width-ipad-pro-min}) and (max-device-width: #{$width-ipad-pro-max})";
+
+$mobile: "screen and (min-device-width: #{$width-mobile-min}) and (max-device-width: #{$width-mobile-max})";
+$landscape: "(orientation: landscape)"; // "(min-aspect-ratio: 13/9)";
+
+$desktop: " screen and (min-device-width: #{$width-desktop-min}) and (min-device-height: #{$height-desktop-min})";
+$desktop-shorten-screen: "screen and (min-aspect-ratio: 13/9)";
+
+$ipad: "screen and (min-device-width: #{$width-ipad-min}) and (max-device-width: #{$width-ipad-max})";
+$ipad-pro: "screen and (min-device-width: #{$width-ipad-pro-min}) and (max-device-width: #{$width-ipad-pro-max})";
