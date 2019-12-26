@@ -32,6 +32,7 @@ const MainBanner = (props) => {
         dispatch({ type: types.TRAINING_RESET });
         dispatch({ type: types.APP_SHOW_MENU, show: false });
         close();
+        history.push('/trainings');
     };
 
     const closeModal = () => {

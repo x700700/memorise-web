@@ -1,28 +1,30 @@
 import { takeLatest, all } from 'redux-saga/effects';
-import * as sagas from './allSagas';
+import * as sagasApp from './sagasApp';
+import * as sagasTrainings from './sagasTrainings';
+import * as sagasExerciseEdit from './sagasExerciseEdit';
 import * as types from '../actionsTypes';
 
 
 function* actionWatcher() {
-    yield takeLatest(types.saga.signin, sagas.signin);
-    yield takeLatest(types.saga.signup, sagas.signup);
-    yield takeLatest(types.saga.auth, sagas.auth);
+    yield takeLatest(types.saga.signin, sagasApp.signin);
+    yield takeLatest(types.saga.signup, sagasApp.signup);
+    yield takeLatest(types.saga.auth, sagasApp.auth);
 
-    yield takeLatest(types.saga.getFriendTrainingsList, sagas.getFriendTrainingsList);
+    yield takeLatest(types.saga.getTrainingsList, sagasTrainings.getTrainingsList);
+    yield takeLatest(types.saga.getFriendTrainingsList, sagasTrainings.getFriendTrainingsList);
 
-    yield takeLatest(types.saga.getTrainingsList, sagas.getTrainingsList);
-    yield takeLatest(types.saga.getEditTraining, sagas.getEditTraining);
-    yield takeLatest(types.saga.getGameTraining, sagas.getGameTraining);
-    yield takeLatest(types.saga.getExamTraining, sagas.getExamTraining);
+    yield takeLatest(types.saga.getEditTraining, sagasTrainings.getEditTraining);
+    yield takeLatest(types.saga.getGameTraining, sagasTrainings.getGameTraining);
+    yield takeLatest(types.saga.getExamTraining, sagasTrainings.getExamTraining);
 
-    yield takeLatest(types.saga.createTraining, sagas.createTraining);
-    yield takeLatest(types.saga.renameTraining, sagas.renameTraining);
-    yield takeLatest(types.saga.deleteTraining, sagas.deleteTraining);
+    yield takeLatest(types.saga.createTraining, sagasTrainings.createTraining);
+    yield takeLatest(types.saga.renameTraining, sagasTrainings.renameTraining);
+    yield takeLatest(types.saga.deleteTraining, sagasTrainings.deleteTraining);
 
-    yield takeLatest(types.saga.createExercise, sagas.createExercise);
-    yield takeLatest(types.saga.saveExercise, sagas.saveExercise);
-    yield takeLatest(types.saga.deleteExercise, sagas.deleteExercise);
-    yield takeLatest(types.saga.getTranslate, sagas.getTranslate);
+    yield takeLatest(types.saga.createExercise, sagasExerciseEdit.createExercise);
+    yield takeLatest(types.saga.saveExercise, sagasExerciseEdit.saveExercise);
+    yield takeLatest(types.saga.deleteExercise, sagasExerciseEdit.deleteExercise);
+    yield takeLatest(types.saga.getTranslate, sagasExerciseEdit.getTranslate);
 }
 
 
