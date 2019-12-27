@@ -87,6 +87,7 @@ const TextInput = forwardRef(({
         if (ev.key === 'Enter') {
             onEnter && onEnter();
             onBlur && onBlur(val, true);
+            inputRef.current.blur();
         }
     };
     const onMyFocus = (ev) => {

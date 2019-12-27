@@ -107,7 +107,7 @@ const EditTrainingHeader = ({ id, play, exam, onNameEdit }) => {
             </div>
                 <div className="search-row">
                     <ThemeProvider theme={themeSearch}>
-                        <TextInput variant="standard" width="20rem"
+                        <TextInput variant="standard" width="14.5rem"
                                    clearTextIcon={true} focusWhenClear={false} startInputAdornment={<Search/>}
                                    onDelayedChange={doSearch} defaultValue={search}
                         />
