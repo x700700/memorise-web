@@ -4,7 +4,7 @@
     height: 100%;
 
     .app-body-area {
-        height: calc(100% - 3.3rem);
+        height: $body-minus-header;
         display: flex;
         flex-direction: column;
     }

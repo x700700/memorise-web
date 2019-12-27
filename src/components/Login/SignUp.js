@@ -149,7 +149,7 @@ const SignUp = ({ flipSign, pristine, reset, submitting, handleSubmit }) => {
                         />
                     </div>
                     <div className="sign-btn-container">
-                        <Button color={orange} type="submit" text={t('signup-btn')} disabled={pristine || submitting} />
+                        <Button color={orange} type="submit" text={t('signup-btn')} disabled={pristine || submitting || isSigningUp} />
                     </div>
                 </form>
 
