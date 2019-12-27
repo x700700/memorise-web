@@ -5,8 +5,9 @@
     .header-col {
         .header-1st-row {
             display: flex;
+            flex-direction: row-reverse;
             justify-content: space-between;
-            padding: 0 .5rem;
+            padding: 0 1rem;
             background-color: $purple5;
 
             .name {
@@ -30,7 +31,7 @@
         .search-row {
             padding: 0 .5rem;
             display: flex;
-            justify-content: flex-end;
+            //justify-content: flex-end;
         }
     }
 }
