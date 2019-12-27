@@ -12,6 +12,7 @@ export default function (props, body) {
     return axiosInstance({
         ...props,
         data: body,
+        // withCredentials: true, // For Cookie passport
         headers: {
             'Authorization': jwt ? `Bearer ${jwt}` : '',
             'Content-Type': 'application/json',

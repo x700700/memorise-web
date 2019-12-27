@@ -6,13 +6,13 @@ import * as types from '../../redux/actionsTypes';
 import SampleExercise from "./SampleExercise";
 import {useHistory} from "react-router-dom";
 import { isRtl } from "../../common/utils";
-import DrawerButtons from "./DrawerButtons";
+import DrawerButtons from "../_Tools/DrawerButtons";
 
 
 const Training = ({ training }) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const isLoggedIn = useSelector(state => state.app.userName) && true;
+    const isLoggedIn = !!useSelector(state => state.app.userName);
     const activeDrawerTrainingId = useSelector(state => state.app.activeDrawerTrainingId);
 
     const sampleExercise = (training && training.sampleExercise) || {q: '', a: ''};

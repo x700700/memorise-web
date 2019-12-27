@@ -18,7 +18,7 @@ const MainBanner = (props) => {
     const showBanner = useSelector(state => state.app.showBanner);
     const userName = useSelector(state => state.app.userName);
     const friendName = useSelector(state => state.app.friendName);
-    const isPlayFriend = friendName && true;
+    const isPlayFriend = !!friendName;
 
     const close = () => {
         dispatch({ type: types.APP_SHOW_BANNER, show: false });

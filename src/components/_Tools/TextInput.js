@@ -1,5 +1,6 @@
-import React, {useState, forwardRef, useImperativeHandle, useEffect} from 'react';
+import React, {useRef, useState, forwardRef, useImperativeHandle, useEffect} from 'react';
 import {useTranslation} from "react-i18next";
+import { throttle } from "throttle-debounce";
 import { createMuiTheme, makeStyles, MuiThemeProvider } from '@material-ui/core/styles';
 import consts from "../../common/consts";
 import TextField from '@material-ui/core/TextField';
@@ -32,9 +33,9 @@ const useStyles = makeStyles(theme => ({
 
 const TextInput = forwardRef(({
                                   muiTheme, startInputAdornment,
-                                  autoComplete, width, label, type, defaultValue, autoFocus,
-                                  clearTextIcon,
-                                  onEnter, onFocus, onBlur, onChange, disabled, error,
+                                  autoComplete, width, label, variant, type, defaultValue = '', autoFocus,
+                                  clearTextIcon, focusWhenClear = true,
+                                  onEnter, onFocus, onBlur, onChange, onDelayedChange, disabled, error,
                                   forceShowPassword, onShowPassword,
                               }, ref) => {
     useImperativeHandle(ref, () => ({
@@ -70,12 +71,15 @@ const TextInput = forwardRef(({
             width: width,
         };
     };
+
+    const throttled = useRef(throttle(700, (newValue) => onDelayedChange && onDelayedChange(newValue)));
     const [style, setStyle] = useState(rtlStyle(defaultValue));
     const onMyChange = e => {
         const  text = e.target.value;
         setVal(text);
         setStyle(rtlStyle(text || defaultValue));
         onChange && onChange(text);
+        throttled.current(text);
     };
     const onKeyPress = (ev) => {
         // logger.warn('********** key pressed', ev.ctrlKey, ev.key);
@@ -107,6 +111,8 @@ const TextInput = forwardRef(({
     const clearText = () => {
         setVal('');
         onChange && onChange('');
+        throttled.current(null);
+        focusWhenClear && inputRef && inputRef.current.focus();
     };
 
 
@@ -122,7 +128,7 @@ const TextInput = forwardRef(({
     let typeName = type || 'text';
     if (type === 'password') typeName = showPass ? 'text' : 'password';
 
-    const inputRef = React.useRef();
+    const inputRef = useRef();
     const inputProps = autoComplete ? {} : { inputProps: { maxLength: consts.ui.inputMaxLength } };
     return (
         <div className="text-input">
@@ -131,14 +137,14 @@ const TextInput = forwardRef(({
                     {...autoCompleteSafeParams}
                     inputRef={inputRef}
                     value={val}
-                    variant={label ? 'outlined' : 'standard'}
+                    variant={label && !variant ? 'outlined' : variant || 'standard'}
                     type={typeName}
                     autoComplete={type === 'password' ? 'current-password' : 'off'}
                     className={classes.root}
                     style={style}
                     label={label || ''}
                     size="small"
-                    fullWidth={autoComplete && true}
+                    fullWidth={!!autoComplete}
 
                     error={error && !focused}
                     helperText={error || ''}

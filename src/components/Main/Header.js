@@ -21,7 +21,7 @@ const Header = (props) => {
     const authCheckEnded = useSelector(state => state.app.authCheckEnded);
     const authError = useSelector(state => state.app.authError);
     const userName = useSelector(state => state.app.userName);
-    const isLoggedIn = userName && true;
+    const isLoggedIn = !!userName;
     const currPage = useSelector(state => state.app.currentPage);
     const error = useSelector(state => state.app.error);
     const editedTrainingId = useSelector(state => state.editTraining.idToFetch);

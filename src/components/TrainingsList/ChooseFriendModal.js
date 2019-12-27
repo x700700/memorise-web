@@ -68,7 +68,7 @@ const ChooseFriendModal = ({ modalRef, closeModal, onClose }) => {
                     </div>
                     <div className="btns-container">
                         <div className="btn">
-                            <Button type="ok" text={t('play friend btn')} disabled={errName && true} onClick={() => openFriend} />
+                            <Button type="ok" text={t('play friend btn')} disabled={!!errName} onClick={() => openFriend} />
                         </div>
                         <div className="btn">
                             <Button type="cancel" text={t('cancel')} disabled={false} onClick={() => cancel} />

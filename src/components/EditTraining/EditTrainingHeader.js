@@ -19,7 +19,7 @@ const themeName = {
 
 const EditTrainingHeader = ({ id, play, exam, onNameEdit }) => {
     const dispatch = useDispatch();
-    const isLoggedIn = useSelector(state => state.app.userName) && true;
+    const isLoggedIn = !!useSelector(state => state.app.userName);
     const isLoaded = useSelector(state => state.editTraining.isLoaded);
     const name = useSelector(state => state.editTraining.name);
     const [nameInputDisabled, setNameInputDisabled] = useState(false);

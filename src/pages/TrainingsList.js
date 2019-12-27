@@ -13,7 +13,7 @@ const TrainingsList = (props) => {
     const history = useHistory();
     const showMenu = useSelector(state => state.app.showMenu);
     const friendName = useSelector(state => state.app.friendName);
-    const isPlayFriend = friendName && true;
+    const isPlayFriend = !!friendName;
     const isFetching = useSelector(state => state.trainings.isFetching);
     const isLoaded = useSelector(state => state.trainings.isLoaded);
     const lastNewTrainingId = useSelector(state => state.trainings.lastNewTrainingId);
