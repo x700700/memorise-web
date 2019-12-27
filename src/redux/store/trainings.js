@@ -1,5 +1,5 @@
-import * as _ from '../../common/boolidash';
 import * as types from '../actionsTypes';
+import * as _ from '../../common/boolidash';
 import mockMultiplyTraining from '../../mock/training-multiply'
 
 const trainingsReducer = (  state = {
@@ -7,6 +7,7 @@ const trainingsReducer = (  state = {
                                 isLoaded: false,
                                 trainingsMap: null,
                                 lastNewTrainingId: null,
+                                search: '',
                             },
                       action) => {
 
@@ -106,6 +107,23 @@ const trainingsReducer = (  state = {
             return {
                 ...state,
                 isFetching: false,
+            };
+
+
+        case types.TRAININGS_LIST_SET_SEARCH:
+            let trainingsMap = state.trainingsMap;
+            if (action.search) {
+                trainingsMap = _.keyBy(Object.values(trainingsMap || {}).map(x => ({
+                    ...x,
+                    filtered: !(x.name || '').toLowerCase().includes(action.search.toLowerCase()),
+                })), 'id');
+            } else {
+                trainingsMap = _.keyBy(Object.values(trainingsMap || {}).map(x => ({ ...x, filtered: false })), 'id');
+            }
+            return {
+                ...state,
+                search: action.search || '',
+                trainingsMap: trainingsMap,
             };
 
         default:

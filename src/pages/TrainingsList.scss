@@ -7,6 +7,26 @@
     .trainings-list-container {
         margin: .3rem;
 
+        .trainings-list-header {
+            position: fixed;
+            z-index: 9;
+            background-color: white;
+            width: 103%;
+            height: 4rem;
+            margin-top: -5px;
+            margin-left: -15px; // due to Material TextInput
+
+            .search-row {
+                margin-left: 1rem;
+                padding: 0 .5rem;
+                display: flex;
+                //justify-content: flex-end;
+            }
+        }
+        .search-row-placeholder {
+            height: 3.5rem;
+        }
+
         .trainings-list-col {
             display: flex;
             flex-direction: column;

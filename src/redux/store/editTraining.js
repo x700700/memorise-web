@@ -50,7 +50,7 @@ const editTrainingReducer = (  state = {
                 exercises = _.keyBy(Object.values(exercises || {}).map(x => ({
                     ...x,
                     filtered:   !(x.q || '').toLowerCase().includes(action.search.toLowerCase()) &&
-                                !(x.a || '').toLowerCase().includes(action.search.toLowerCase())
+                                !(x.a || '').toLowerCase().includes(action.search.toLowerCase()),
                 })), 'id');
             } else {
                 exercises = _.keyBy(Object.values(exercises || {}).map(x => ({ ...x, filtered: false })), 'id');
