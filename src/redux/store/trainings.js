@@ -8,6 +8,10 @@ const trainingsReducer = (  state = {
                                 trainingsMap: null,
                                 lastNewTrainingId: null,
                                 search: '',
+
+                                isFetchingFriend: false,
+                                isFriendLoaded: false,
+                                friendTrainingsMap: null,
                             },
                       action) => {
 
@@ -68,6 +72,38 @@ const trainingsReducer = (  state = {
             };
 
 
+        case types.FRIEND_TRAININGS_LIST_RESET:
+            return {
+                ...state,
+                isFriendLoaded: false,
+                friendTrainingsMap: null,
+            };
+
+
+        case types.FETCH_FRIEND_TRAININGS_START:
+            return {
+                ...state,
+                isFetchingFriend: true,
+                isFriendLoaded: false,
+                friendTrainingsMap: null,
+            };
+        case types.FETCH_FRIEND_TRAININGS_SUCCEED:
+            return {
+                ...state,
+                isFetchingFriend: false,
+                isFriendLoaded: true,
+                friendTrainingsMap: action.trainingsMap,
+            };
+        case types.FETCH_FRIEND_TRAININGS_FAILED:
+            return {
+                ...state,
+                isFetchingFriend: false,
+                friendTrainingsMap: null,
+                isFriendLoaded: true,
+            };
+
+
+
         case types.FETCH_CREATE_TRAINING_START:
             return {
                 ...state,
@@ -112,18 +148,25 @@ const trainingsReducer = (  state = {
 
         case types.TRAININGS_LIST_SET_SEARCH:
             let trainingsMap = state.trainingsMap;
+            let friendTrainingsMap = state.friendTrainingsMap;
             if (action.search) {
                 trainingsMap = _.keyBy(Object.values(trainingsMap || {}).map(x => ({
                     ...x,
                     filtered: !(x.name || '').toLowerCase().includes(action.search.toLowerCase()),
                 })), 'id');
+                friendTrainingsMap = _.keyBy(Object.values(friendTrainingsMap || {}).map(x => ({
+                    ...x,
+                    filtered: !(x.name || '').toLowerCase().includes(action.search.toLowerCase()),
+                })), 'id');
             } else {
                 trainingsMap = _.keyBy(Object.values(trainingsMap || {}).map(x => ({ ...x, filtered: false })), 'id');
+                friendTrainingsMap = _.keyBy(Object.values(friendTrainingsMap || {}).map(x => ({ ...x, filtered: false })), 'id');
             }
             return {
                 ...state,
                 search: action.search || '',
                 trainingsMap: trainingsMap,
+                friendTrainingsMap: friendTrainingsMap,
             };
 
         default:

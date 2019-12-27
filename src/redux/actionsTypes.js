@@ -60,10 +60,10 @@ export const EXAM_SET_PLAY_SIZE = 'exam.EXAM_SET_PLAY_SIZE';
 // ============================================================================================================
 // ============================================================================================================
 
-export const FRIEND_TRAININGS_LIST_RESET = 'friendTrainings.FRIEND_TRAININGS_LIST_RESET';
-export const FETCH_FRIEND_TRAININGS_START = 'friendTrainings.FETCH_FRIEND_TRAININGS_START';
-export const FETCH_FRIEND_TRAININGS_SUCCEED = 'friendTrainings.FETCH_FRIEND_TRAININGS_SUCCEED';
-export const FETCH_FRIEND_TRAININGS_FAILED = 'friendTrainings.FETCH_FRIEND_TRAININGS_FAILED';
+export const FRIEND_TRAININGS_LIST_RESET = 'trainings.FRIEND_TRAININGS_LIST_RESET';
+export const FETCH_FRIEND_TRAININGS_START = 'trainings.FETCH_FRIEND_TRAININGS_START';
+export const FETCH_FRIEND_TRAININGS_SUCCEED = 'trainings.FETCH_FRIEND_TRAININGS_SUCCEED';
+export const FETCH_FRIEND_TRAININGS_FAILED = 'trainings.FETCH_FRIEND_TRAININGS_FAILED';
 
 // ============================================================================================================
 // ============================================================================================================

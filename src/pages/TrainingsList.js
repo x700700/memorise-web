@@ -29,7 +29,7 @@ const TrainingsList = (props) => {
     const search = useSelector(state => state.trainings.search);
 
     const myTrainingsMap = useSelector(state => state.trainings.trainingsMap);
-    const friendTrainingsMap = useSelector(state => state.friendTrainings.trainingsMap);
+    const friendTrainingsMap = useSelector(state => state.trainings.friendTrainingsMap);
     let trainingsMap = myTrainingsMap;
     if (isPlayFriend && friendName && friendTrainingsMap) {
         trainingsMap = myTrainingsMap && { ...friendTrainingsMap, ...myTrainingsMap };
