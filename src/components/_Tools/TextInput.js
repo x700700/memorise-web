@@ -42,7 +42,8 @@ const TextInput = forwardRef(({
         value() {
             return val;
         },
-        setValue(_val, callOnChange = false) {
+        setValue(__val, callOnChange = false) {
+            const _val = __val || '';
             setVal(_val);
             callOnChange && onChange && onChange(_val);
             _val && setStyle(rtlStyle(_val));
@@ -75,7 +76,7 @@ const TextInput = forwardRef(({
     const throttled = useRef(throttle(700, (newValue) => onDelayedChange && onDelayedChange(newValue)));
     const [style, setStyle] = useState(rtlStyle(defaultValue));
     const onMyChange = e => {
-        const  text = e.target.value;
+        const  text = e.target.value || '';
         setVal(text);
         setStyle(rtlStyle(text || defaultValue));
         onChange && onChange(text);
@@ -122,7 +123,7 @@ const TextInput = forwardRef(({
 
     useEffect(() => {
         logger.trace('TextInput mounted');
-        setVal(defaultValue);
+        setVal(defaultValue || '');
     }, [setVal, defaultValue]);
 
     let typeName = type || 'text';

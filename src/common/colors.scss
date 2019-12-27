@@ -44,7 +44,7 @@ $width-ipad-pro-max: 1366px;
 
 
 $mobile: "screen and (min-device-width: #{$width-mobile-min}) and (max-device-width: #{$width-mobile-max})";
-$landscape: "(orientation: landscape)"; // "(min-aspect-ratio: 13/9)";
+$landscape: "(min-aspect-ratio: 13/9)"; // And not 'landscape' because of the mobile 'keyboard'
 
 $desktop: " screen and (min-device-width: #{$width-desktop-min}) and (min-device-height: #{$height-desktop-min})";
 $desktop-shorten-screen: "screen and (min-aspect-ratio: 13/9)";

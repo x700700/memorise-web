@@ -1,4 +1,5 @@
 import * as types from '../actionsTypes';
+import * as _ from '../../common/boolidash';
 import {captializeWords} from "../../common/utils";
 
 const editTrainingReducer = (  state = {
@@ -9,6 +10,7 @@ const editTrainingReducer = (  state = {
                                    training: null,
                                    lastNewExerciseId: null,
                                    idToDelete: null,
+                                   search: '',
 
                                    isRenaming: false,
                                    isRenamed: false,
@@ -41,6 +43,25 @@ const editTrainingReducer = (  state = {
             return {
                 ...state,
                 idToDelete: action.id,
+            };
+        case types.TRAINING_SET_SEARCH:
+            let exercises = (state.training || {}).exercises || {};
+            if (action.search) {
+                exercises = _.keyBy(Object.values(exercises || {}).map(x => ({
+                    ...x,
+                    filtered:   !(x.q || '').toLowerCase().includes(action.search.toLowerCase()) &&
+                                !(x.a || '').toLowerCase().includes(action.search.toLowerCase())
+                })), 'id');
+            } else {
+                exercises = _.keyBy(Object.values(exercises || {}).map(x => ({ ...x, filtered: false })), 'id');
+            }
+            return {
+                ...state,
+                search: action.search || '',
+                training: {
+                    ...state.training,
+                    exercises: exercises,
+                },
             };
 
 

@@ -80,7 +80,10 @@ const EditTraining = (props) => {
     useEffect(() => {
         logger.trace('EditTraining loading data - ', paramId , isFetching, idToDelete, training && training.id);
         if ((paramId && !training && !isFetching) || (training && paramId && paramId !== training.id)) {
-            paramId !== '-' && !isFetching && paramId !== idToDelete && dispatch(getEditTraining(paramId));
+            if (paramId !== '-' && !isFetching && paramId !== idToDelete) {
+                dispatch({ type: types.TRAINING_SET_SEARCH, search: '' });
+                dispatch(getEditTraining(paramId));
+            }
         }
     }, [dispatch, paramId, idToDelete, training, isFetching]);
 
@@ -108,6 +111,7 @@ const EditTraining = (props) => {
                 <div className="edit-training-flex">
                     {exercisesList && exercisesList.map((x,i) => {
                         return (
+                            !x.filtered &&
                             <div key={`edit-training-exercise-${i}`} className="exercise-container">
                                 <Exercise exercise={x} disable={showMenu || disableExercisesEdit}/>
                             </div>);
