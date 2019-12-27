@@ -26,6 +26,12 @@ const Training = ({ training }) => {
             history.push(`/trainings/${training.id}/edit`)
         }
     };
+    const condPlay = () => {
+        console.warn('hey');
+        if (!activeDrawerTrainingId) {
+            play();
+        }
+    };
     const play = () => {
         // if (!isLoggedIn) return;
         // logger.warn('Play training - ', training.id);
@@ -82,7 +88,7 @@ const Training = ({ training }) => {
                     </div>
                 </div>
                 <div className="training-row">
-                    <TextBox fontSize="1.2rem" maxHeight="81px" width="45%" styleText={styleName} onClick={!activeDrawerTrainingId ? play : () => {}}>
+                    <TextBox fontSize="1.2rem" maxHeight="81px" width="45%" styleText={styleName} onClick={() => condPlay}>
                         {friendName &&
                         <span>
                             <span className="friend-name">{friendName}</span>

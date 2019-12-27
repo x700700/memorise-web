@@ -1,7 +1,7 @@
 import React from "react";
 import './TextBox.scss';
 
-const TextBox = ({ children, text, styleText, fontSize, fontWeight, maxHeight, width }) => {
+const TextBox = ({ children, text, styleText, fontSize, fontWeight, maxHeight, width, onClick }) => {
     const styleContainer = {
         maxHeight: maxHeight,
         fontSize: fontSize,
@@ -11,7 +11,7 @@ const TextBox = ({ children, text, styleText, fontSize, fontWeight, maxHeight, w
     };
 
     return (
-        <div className="text-box-container" style={styleContainer}>
+        <div className="text-box-container" style={styleContainer} onClick={onClick && onClick()}>
             <div className="text" style={styleText}>
                 {text ? text : children}
             </div>
