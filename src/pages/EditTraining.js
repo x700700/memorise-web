@@ -83,6 +83,7 @@ const EditTraining = (props) => {
             if (paramId !== '-' && !isFetching && paramId !== idToDelete) {
                 dispatch({ type: types.TRAINING_SET_SEARCH, search: '' });
                 dispatch(getEditTraining(paramId));
+                window.scrollTo(0,0);
             }
         }
     }, [dispatch, paramId, idToDelete, training, isFetching]);
@@ -102,7 +103,7 @@ const EditTraining = (props) => {
                 <div className="header-container">
                     <div className="header-box">
                         {training &&
-                        <EditTrainingHeader id={training.id} onNameEdit={onNameEdit} play={play} exam={exam}
+                        <EditTrainingHeader id={training.id} training={training} onNameEdit={onNameEdit} play={play} exam={exam}
                         />
                         }
                     </div>

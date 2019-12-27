@@ -42,6 +42,7 @@ const TrainingsList = (props) => {
         logger.trace('TrainingsList loading data - friendName = ', friendName);
         if (!isFetching && !myTrainingsMap) {
             dispatch(getTrainingsList());
+            window.scrollTo(0,0);
         }
         if (isPlayFriend && friendName && !friendTrainingsMap){
             dispatch(getFriendTrainingsList(friendName));

@@ -22,7 +22,7 @@ const themeSearch = {
     fontWeight: 600,
 };
 
-const EditTrainingHeader = ({ id, play, exam, onNameEdit }) => {
+const EditTrainingHeader = ({ id, play, exam, onNameEdit, training }) => {
     const dispatch = useDispatch();
     const isLoggedIn = !!useSelector(state => state.app.userName);
     const isLoaded = useSelector(state => state.editTraining.isLoaded);
@@ -84,30 +84,31 @@ const EditTrainingHeader = ({ id, play, exam, onNameEdit }) => {
     };
 
     const refName = useRef();
+    const exercisesNum = Object.values(training.exercises).length;
     return (
         <div className="edit-training-header-container">
             {isLoaded && (name || shouldAutoFocus) &&
             <div className="header-col">
                 <div className="header-1st-row">
-                <div className="field name">
-                    <ThemeProvider theme={themeName}>
-                        <TextInput ref={refName}
-                                   // muiTheme={muiThemeName}
-                                   startInputAdornment={<Edit/>}
-                                   defaultValue={name} autoFocus={shouldAutoFocus}
-                                   onEnter={rename} onFocus={onNameFocus} onBlur={onNameBlur}
-                                   disabled={!isLoggedIn || nameInputDisabled}
-                        />
-                    </ThemeProvider>
+                    <div className="field name">
+                        <ThemeProvider theme={themeName}>
+                            <TextInput ref={refName}
+                                       // muiTheme={muiThemeName}
+                                       startInputAdornment={<Edit/>}
+                                       defaultValue={name} autoFocus={shouldAutoFocus}
+                                       onEnter={rename} onFocus={onNameFocus} onBlur={onNameBlur}
+                                       disabled={!isLoggedIn || nameInputDisabled}
+                            />
+                        </ThemeProvider>
+                    </div>
+                    <div className="edit-training-buttons" style={styleOnEdit}>
+                        <IconButton size={2} faName="copy" onClick={_play}/>
+                        <IconButton size={2} faName="grin-beam-sweat" onClick={_exam}/>
+                    </div>
                 </div>
-                <div className="edit-training-buttons" style={styleOnEdit}>
-                    <IconButton size={2} faName="copy" onClick={_play}/>
-                    <IconButton size={2} faName="grin-beam-sweat" onClick={_exam}/>
-                </div>
-            </div>
-                <div className="search-row">
+                <div className="search-row" style={{ display: exercisesNum === 0 && 'none' }}>
                     <ThemeProvider theme={themeSearch}>
-                        <TextInput variant="standard" width="14.5rem"
+                        <TextInput variant="standard" width="13.7rem"
                                    clearTextIcon={true} focusWhenClear={false} startInputAdornment={<Search/>}
                                    onDelayedChange={doSearch} defaultValue={search}
                         />
