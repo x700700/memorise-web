@@ -7,6 +7,7 @@ import SampleExercise from "./SampleExercise";
 import {useHistory} from "react-router-dom";
 import { isRtl } from "../../common/utils";
 import DrawerButtons from "../_Tools/DrawerButtons";
+import TextBox from "../_Tools/TextBox";
 
 
 const Training = ({ training }) => {
@@ -61,18 +62,15 @@ const Training = ({ training }) => {
         },
     ];
 
-    const rtlName = text => {
-        return isRtl(text) ? {
-            direction: 'rtl',
-            textAlign: 'right',
-        } : {};
-    };
-
     const friendName = training.info.friendName;
     const disableEdit = friendName || training.id.startsWith('__');
 
     const styleContainer = {
         backgroundColor: friendName && '#eee6ff',
+    };
+    const styleName = {
+        direction: isRtl(training.name) && 'rtl',
+        textAlign: isRtl(training.name) && 'right',
     };
 
     return (
@@ -84,17 +82,15 @@ const Training = ({ training }) => {
                     </div>
                 </div>
                 <div className="training-row">
-                    <div className="name-container" onClick={!activeDrawerTrainingId ? play : () => {}}>
-                        <div className="name" style={rtlName(training.name)}>
-                            {friendName &&
-                            <span>
-                                <span className="friend-name">{friendName}</span>
-                                <span> - </span>
-                            </span>
-                            }
-                            {training.name}
-                        </div>
-                    </div>
+                    <TextBox fontSize="1.2rem" maxHeight="81px" width="45%" styleText={styleName} onClick={!activeDrawerTrainingId ? play : () => {}}>
+                        {friendName &&
+                        <span>
+                            <span className="friend-name">{friendName}</span>
+                            <span> - </span>
+                        </span>
+                        }
+                        {training.name}
+                    </TextBox>
                     <div className="sample-exercises-container" onClick={edit}>
                         <div className="exercises-row">
                             {sampleExercise &&

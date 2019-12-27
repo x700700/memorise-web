@@ -32,32 +32,15 @@
             flex-wrap: nowrap;
             justify-content: space-between;
 
-            .name-container {
-                max-height: 81px;
-                overflow: hidden;
+            .friend-name {
+                background-color: $grey7;
+                border-radius: 5px;
+                color: $purple1;
+                padding: 3px;
+                font-weight: 700;
 
-                font-size: 18px;
-                flex-grow: 1;
-                min-width: 45%;
-                max-width: 45%;
-                text-align: left;
-
-                .name {
-                    padding: .3rem;
-                    max-height: 83%;
-                    overflow: hidden;
-
-                    .friend-name {
-                        background-color: $grey7;
-                        border-radius: 5px;
-                        color: $purple1;
-                        padding: 3px;
-                        font-weight: 700;
-
-                        &:after {
-                            margin-left: .5rem;
-                        }
-                    }
+                &:after {
+                    margin-left: .5rem;
                 }
             }
 

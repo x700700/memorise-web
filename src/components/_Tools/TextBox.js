@@ -1,7 +1,7 @@
 import React from "react";
 import './TextBox.scss';
 
-const TextBox = ({ text, fontSize, fontWeight, maxHeight, width }) => {
+const TextBox = ({ children, text, styleText, fontSize, fontWeight, maxHeight, width }) => {
     const styleContainer = {
         maxHeight: maxHeight,
         fontSize: fontSize,
@@ -12,8 +12,8 @@ const TextBox = ({ text, fontSize, fontWeight, maxHeight, width }) => {
 
     return (
         <div className="text-box-container" style={styleContainer}>
-            <div className="text">
-                {text}
+            <div className="text" style={styleText}>
+                {text ? text : children}
             </div>
         </div>);
 };
