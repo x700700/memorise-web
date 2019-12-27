@@ -24,6 +24,7 @@ const appReducer = (  state = {
                           isModalOn: false,
                           activeDrawerTrainingId: null,
                           trainingNameIsOnEdit: false,
+                          isSearchOn: false,
                       },
                       action) => {
 
@@ -220,6 +221,11 @@ const appReducer = (  state = {
             return {
                 ...state,
                 trainingNameIsOnEdit: action.edit,
+            };
+        case types.APP_SET_ON_SEARCH:
+            return {
+                ...state,
+                isSearchOn: action.on,
             };
 
         // ====================================================================================================

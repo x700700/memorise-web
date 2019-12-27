@@ -20,6 +20,7 @@ const EditTraining = (props) => {
     const { t } = useTranslation();
 
     const showMenu = useSelector(state => state.app.showMenu);
+    const isSearchOn = useSelector(state => state.app.isSearchOn);
     const isFetching = useSelector(state => state.editTraining.isFetching);
     const isLoaded = useSelector(state => state.editTraining.isLoaded);
     const training = useSelector(state => state.editTraining.training);
@@ -109,12 +110,12 @@ const EditTraining = (props) => {
                     </div>
                     <div className="header-place-holder"/>
                 </div>
-                <div className="edit-training-flex">
+                <div className="edit-training-flex" style={{ pointerEvents: (showMenu || isSearchOn || disableExercisesEdit) && 'none' }}>
                     {exercisesList && exercisesList.map((x,i) => {
                         return (
                             !x.filtered &&
                             <div key={`edit-training-exercise-${i}`} className="exercise-container">
-                                <Exercise exercise={x} disable={showMenu || disableExercisesEdit}/>
+                                <Exercise exercise={x}/>
                             </div>);
                     })}
                 </div>

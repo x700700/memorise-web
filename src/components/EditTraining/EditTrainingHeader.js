@@ -68,6 +68,9 @@ const EditTrainingHeader = ({ id, play, exam, onNameEdit, training }) => {
             window.scrollTo(0, 0);
         }
     };
+    const setSearchMode = (on) => {
+        dispatch({ type: types.APP_SET_ON_SEARCH, on: on });
+    };
 
 
     useEffect(() => {
@@ -111,6 +114,7 @@ const EditTrainingHeader = ({ id, play, exam, onNameEdit, training }) => {
                         <TextInput variant="standard" width="13.7rem"
                                    clearTextIcon={true} focusWhenClear={false} startInputAdornment={<Search/>}
                                    onDelayedChange={doSearch} defaultValue={search}
+                                   onFocus={() => setSearchMode(true)} onBlur={() => setSearchMode(false)}
                         />
                     </ThemeProvider>
                 </div>

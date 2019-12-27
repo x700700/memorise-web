@@ -23,6 +23,7 @@ export const APP_SHOW_MODAL = 'app.APP_SHOW_MODAL';
 export const APP_SET_ERROR = 'app.APP_SET_ERROR';
 export const APP_SET_ACTIVE_DRAWER_TRAINING = 'app.APP_SET_ACTIVE_DRAWER_TRAINING';
 export const APP_SET_TRAINING_NAME_IS_ON_EDIT = 'app.APP_SET_TRAINING_NAME_IS_ON_EDIT';
+export const APP_SET_ON_SEARCH = 'app.APP_SET_ON_SEARCH';
 export const APP_SET_FRIEND_NAME = 'app.APP_SET_FRIEND_NAME';
 
 // ============================================================================================================

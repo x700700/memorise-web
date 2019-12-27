@@ -22,6 +22,7 @@ const AddButton = (props) => {
     const showMenu = useSelector(state => state.app.showMenu);
     const isModalOn = useSelector(state => state.app.isModalOn);
     const trainingNameIsOnEdit = useSelector(state => state.app.trainingNameIsOnEdit);
+    const isSearchOn = useSelector(state => state.app.isSearchOn);
     const editTrainingId = useSelector(state => state.editTraining.fetchedId);
 
     const login = (e) => {
@@ -57,7 +58,7 @@ const AddButton = (props) => {
     }, [authError, isAddTab, dispatch]);
 
     const refTooltip = useRef();
-    const disableAddBtn = !loggedInUserName || showMenu || isModalOn || trainingNameIsOnEdit;
+    const disableAddBtn = !loggedInUserName || showMenu || isModalOn || trainingNameIsOnEdit || isSearchOn;
     return (
         <div className="add-button-container">
             <Tooltip ref={refTooltip} text={t('press me to login')} placement="left">
